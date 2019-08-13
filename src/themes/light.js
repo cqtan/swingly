@@ -18,7 +18,7 @@ export default {
   },
   background: {
     back: "#fff",
-    front: "#fafafa"
+    front: "#fff"
   }
 
 }
