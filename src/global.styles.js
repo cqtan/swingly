@@ -1,6 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+  html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+  }
+
   body {
     font-family: 'Lato', 'Roboto', 'Arial', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -13,7 +18,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    font-size: 30px;
     border: none;
   }
 
@@ -30,5 +34,9 @@ export const GlobalStyle = createGlobalStyle`
   *::before,
   *::after {
       box-sizing: inherit;
+  }
+
+  *:focus {
+    outline: 0;
   }
 `;

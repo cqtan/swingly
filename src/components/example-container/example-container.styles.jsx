@@ -17,6 +17,7 @@ export const ButtonContainer = styled.div`
     props.theme.shadows[0]
   };
   border-radius: 5px;
+  transition: all .2s ease-out;
 `;
 ButtonContainer.displayName = 'ButtonContainer';
 
@@ -27,7 +28,7 @@ export const Button = styled.button`
   padding: 15px;
   border-radius: 5px;
   box-shadow: ${props => props.theme.shadows[2]};
-  transition: all .1s ease-in;
+  transition: all .2s ease-out;
   :hover {
     box-shadow: ${props => props.theme.shadows[8]};
   }

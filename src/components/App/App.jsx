@@ -7,6 +7,7 @@ import darkTheme from '../../themes/dark';
 import lightTheme from '../../themes/light';
 import theme from '../../themes/theme';
 import { GlobalStyle } from '../../global.styles';
+import Header from '../layout/header/header.component';
 
 export const App = (props) => {
   const { themeMode } = props;
@@ -15,6 +16,7 @@ export const App = (props) => {
       <>
         <GlobalStyle />
         <Background />
+        <Header />
         <ExampleContainer />
       </>
     </ThemeProvider>
