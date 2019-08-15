@@ -5,12 +5,13 @@ import Background from '../UI/Background/background.component';
 import { ThemeProvider } from 'styled-components';
 import darkTheme from '../../themes/dark';
 import lightTheme from '../../themes/light';
+import theme from '../../themes/theme';
 import { GlobalStyle } from '../../global.styles';
 
 export const App = (props) => {
   const { themeMode } = props;
   return (
-    <ThemeProvider theme={themeMode.darkMode ? darkTheme : lightTheme}>
+    <ThemeProvider theme={themeMode.darkMode ? theme(darkTheme) : theme(lightTheme)}>
       <>
         <GlobalStyle />
         <Background />
