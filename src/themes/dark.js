@@ -1,4 +1,5 @@
 export default {
+  type: 'dark',
   palette: {
     text: {
       primary: "#fff",
@@ -7,8 +8,10 @@ export default {
     }
   },
   background: {
-    back: "#424242",
-    front: "#303030"
+    back: "#121212",
+    front: "#3F3F3F",
+    front2: '#494949',
+
   }
 
 }

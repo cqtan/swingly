@@ -1,4 +1,5 @@
 export default {
+  type: 'light',
   palette: {
     text: {
       primary: "rgba(0, 0, 0, 0.87)",
@@ -8,6 +9,7 @@ export default {
   },
   background: {
     back: "#fff",
-    front: "#fff"
+    front: "#fff",
+    front2: '#fff',
   }
 }

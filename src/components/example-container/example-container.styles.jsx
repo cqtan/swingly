@@ -7,18 +7,29 @@ export const ButtonContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: ${props => props.theme.background.back};
+  background-color: ${props => props.theme.background.front};
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid ${props => props.theme.palette.text.primary};
+  box-shadow: ${props => 
+    props.theme.type === 'light' ?
+    props.theme.shadows[2] :
+    props.theme.shadows[0]
+  };
+  border-radius: 5px;
 `;
 ButtonContainer.displayName = 'ButtonContainer';
 
 
 export const Button = styled.button`
-  background-color: ${props => props.theme.background.front};
+  background-color: ${props => props.theme.background.front2};
   color: ${props => props.theme.palette.primary.main};
   padding: 15px;
+  border-radius: 5px;
+  box-shadow: ${props => props.theme.shadows[2]};
+  transition: all .1s ease-in;
+  :hover {
+    box-shadow: ${props => props.theme.shadows[8]};
+  }
 `;
 Button.displayName = 'Button';
