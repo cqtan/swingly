@@ -1,13 +1,17 @@
 import React from 'react';
 import {
-  HeaderContainer,
+  HeaderContainer, 
+  Logo,
 } from './header.styles';
+import Button from '../../ui/button/button.component';
 
 const Header = (props) => {
   return (
     <>
       <HeaderContainer>
-        Hi
+        <Button>Button</Button>
+        <Logo>Logo</Logo>
+        <Button>Button</Button>
       </HeaderContainer>
     </>
   );

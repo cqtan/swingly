@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  ButtonContainer,
-  Button
+  ExampleButtonContainer,
+  ExampleButton
 } from './example-container.styles';
 import { toggleTheme } from '../../redux/theme-mode/theme-mode.actions';
 
@@ -11,9 +11,9 @@ const ExampleContainer = (props) => {
 
   return (
     <>
-      <ButtonContainer>
-        <Button onClick={toggleTheme}>Touch Me!</Button>
-      </ButtonContainer>
+      <ExampleButtonContainer>
+        <ExampleButton onClick={toggleTheme}>Touch Me!</ExampleButton>
+      </ExampleButtonContainer>
     </>
   );
 }

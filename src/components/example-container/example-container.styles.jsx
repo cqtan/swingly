@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ButtonContainer = styled.div`
+export const ExampleButtonContainer = styled.div`
   width: 300px;
   height: 200px;
   position: absolute;
@@ -19,10 +19,10 @@ export const ButtonContainer = styled.div`
   border-radius: 5px;
   transition: all .2s ease-out;
 `;
-ButtonContainer.displayName = 'ButtonContainer';
+ExampleButtonContainer.displayName = 'ExampleButtonContainer';
 
 
-export const Button = styled.button`
+export const ExampleButton = styled.button`
   background-color: ${props => props.theme.background.front2};
   color: ${props => props.theme.palette.primary.main};
   padding: 15px;
@@ -33,4 +33,4 @@ export const Button = styled.button`
     box-shadow: ${props => props.theme.shadows[8]};
   }
 `;
-Button.displayName = 'Button';
+ExampleButton.displayName = 'ExampleButton';
