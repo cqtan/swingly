@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ExampleContainer from '../ExampleContainer/example-container.component';
-import Background from '../UI/Background/background.component';
+import ExampleContainer from '../example-container/example-container.component';
+import Background from '../ui/background/background.component';
 import { ThemeProvider } from 'styled-components';
 import darkTheme from '../../themes/dark';
 import lightTheme from '../../themes/light';

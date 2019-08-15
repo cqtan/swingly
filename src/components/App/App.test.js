@@ -1,6 +1,6 @@
-import React from 'react';
+import React from './node_modules/react';
 import { App } from './App';
-import { shallow } from 'enzyme';
+import { shallow } from './node_modules/enzyme';
 
 describe('App component', () => {
   let wrapper;
