@@ -4,15 +4,17 @@ import {
   Logo,
 } from './header.styles';
 import Button from '../../ui/button/button.component';
+import Sidebar from './sidebar/sidebar.component';
 
 const Header = (props) => {
   return (
     <>
       <HeaderContainer>
-        <Button primary>Button</Button>
+        <Button primary>Nav</Button>
         <Logo>Logo</Logo>
-        <Button secondary>Button</Button>
+        <Button secondary>Login</Button>
       </HeaderContainer>
+      <Sidebar />
     </>
   );
 }

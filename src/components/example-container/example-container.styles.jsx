@@ -22,15 +22,15 @@ export const ExampleButtonContainer = styled.div`
 ExampleButtonContainer.displayName = 'ExampleButtonContainer';
 
 
-export const ExampleButton = styled.button`
-  background-color: ${props => props.theme.background.front2};
-  color: ${props => props.theme.palette.primary.main};
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: ${props => props.theme.shadows[2]};
-  transition: all .2s ease-out;
-  :hover {
-    box-shadow: ${props => props.theme.shadows[8]};
-  }
-`;
-ExampleButton.displayName = 'ExampleButton';
+// export const ExampleButton = styled.button`
+//   background-color: ${props => props.theme.background.front2};
+//   color: ${props => props.theme.palette.primary.main};
+//   padding: 15px;
+//   border-radius: 5px;
+//   box-shadow: ${props => props.theme.shadows[2]};
+//   transition: all .2s ease-out;
+//   :hover {
+//     box-shadow: ${props => props.theme.shadows[8]};
+//   }
+// `;
+// ExampleButton.displayName = 'ExampleButton';

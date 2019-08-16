@@ -16,17 +16,18 @@ export const CustomButton = styled.button`
   text-align: center;
   justify-content: center;
   align-items: center;
-  padding: ${({ theme }) =>  theme.spacing(1)};
-  margin: ${({ theme }) =>  theme.spacing(1)};
-  border-radius: 0.5rem;
+  padding: ${props => props.theme.spacing(1)};
+  margin: ${props => props.theme.spacing(1)};
+  border-radius: ${props => props.circle ? `50%` : `0.5rem`};
   background-color: ${chooseColor};
-  box-shadow: ${({ theme }) => theme.shadows[2]};
+  box-shadow: ${props => props.theme.shadows[2]};
   cursor: pointer;
-  ${({ theme }) =>  theme.typo.button};
+  ${props => props.theme.typo.button};
   transition: all .2s ease-out;
 
   :hover {
     box-shadow: ${({ theme }) => theme.shadows[8]};
+    filter: brightness(90%);
   }
 
   :active {

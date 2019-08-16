@@ -20,9 +20,9 @@ export const App = (props) => {
         <Background />
         <Header />
         <Switch>
-          <Route path="/" exact component={ExampleContainer} />
+          <Route path="/hi" exact render={() => <ExampleContainer hi/>} />
+          <Route path="/" component={ExampleContainer} />
         </Switch>
-        {/* <ExampleContainer /> */}
       </>
     </ThemeProvider>
   );
