@@ -7,18 +7,18 @@ export const LinkContainer = styled(Link)`
   border-radius: 0;
   padding: 1.5rem;
   font-size: 2rem;
+  color: ${props => props.theme.palette.primary.main};
   background-color: ${props => {
     console.log('props: ', props);
     const { primary, secondary } = props;
     if (primary) return props.theme.palette.primary.main;
     else if (secondary) return props.theme.palette.secondary.main;
-    else return props.theme.palette.grey[5];
+    else return 'transparent';
   }};
-  outline: 1px solid grey;
   transition: all .2s ease-out;
 
   :hover {
-    filter: brightness(90%);
+    background-color: ${props => props.theme.palette.grey[3]};
   }
 `;
 LinkContainer.displayName = LinkContainer;

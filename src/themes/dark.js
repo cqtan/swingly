@@ -9,7 +9,7 @@ export default {
   },
   background: {
     back: "#212121",
-    front: "#333",
-    front2: '#616161',
+    front: "#373737",
+    front2: '#4d4d4d',
   }
 }

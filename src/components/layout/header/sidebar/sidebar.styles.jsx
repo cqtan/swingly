@@ -9,10 +9,11 @@ export const SidebarContainer = styled.div`
   left: 0;
   min-width: 30rem;
   height: 100vh;
-  background-color: lightblue;
+  background-color: ${props => props.theme.palette.grey[2]};
   text-align: center;
   justify-content: flex-start;
   flex-direction: column;
+  z-index: 400;
 `;
 SidebarContainer.displayName = SidebarContainer;
 
