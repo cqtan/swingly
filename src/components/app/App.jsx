@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ExampleContainer from '../example-container/example-container.component';
-import Background from '../ui/background/background.component';
 import { ThemeProvider } from 'styled-components';
+import { Route, Switch } from 'react-router-dom';
+
+import { GlobalStyle } from '../../global.styles';
 import darkTheme from '../../themes/dark';
 import lightTheme from '../../themes/light';
 import theme from '../../themes/theme';
-import { GlobalStyle } from '../../global.styles';
+import ExampleContainer from '../example-container/example-container.component';
+import Background from '../ui/background/background.component';
 import Header from '../layout/header/header.component';
 
 export const App = (props) => {
@@ -17,7 +19,10 @@ export const App = (props) => {
         <GlobalStyle />
         <Background />
         <Header />
-        <ExampleContainer />
+        <Switch>
+          <Route path="/" exact component={ExampleContainer} />
+        </Switch>
+        {/* <ExampleContainer /> */}
       </>
     </ThemeProvider>
   );

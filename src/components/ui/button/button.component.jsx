@@ -7,7 +7,7 @@ const Button = (props) => {
   const { children, onClick } = props;
   return (
     <>
-      <CustomButton onClick={onClick}>
+      <CustomButton onClick={onClick} {...props}>
         {children}
       </CustomButton>
     </>

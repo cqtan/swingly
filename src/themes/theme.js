@@ -11,8 +11,10 @@ export default (mode) => ({
       main: "#2196F3",
       dark: "#1976D2",
     },
+    grey: {
+      5: '#e0e0e0'
+    },
     ...mode.palette,
-
   },
   background: {
     ...mode.background,
@@ -68,6 +70,12 @@ export default (mode) => ({
       letterSpacing: '0.03333em',
     }
 
+  },
+  buttons: {
+    disabled: {
+      color: "rgba(255, 255, 255, 0.26)",
+      backgroundColor: "rgba(255, 255, 255, 0.12)",
+    }
   },
   spacing: (multiplier) => (`${10 * multiplier}px`),
 });

@@ -9,9 +9,9 @@ const Header = (props) => {
   return (
     <>
       <HeaderContainer>
-        <Button>Button</Button>
+        <Button primary>Button</Button>
         <Logo>Logo</Logo>
-        <Button>Button</Button>
+        <Button secondary>Button</Button>
       </HeaderContainer>
     </>
   );
