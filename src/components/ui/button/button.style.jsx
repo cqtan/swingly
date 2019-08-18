@@ -11,21 +11,8 @@ const chooseColor = props => {
   }
 }
 
-export const CustomButton = styled.button`
-  display: flex;
-  width: ${props => props.stretch ? `100%` : `auto`};
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  padding: ${props => props.theme.spacing(1)};
-  margin: ${props => props.theme.spacing(1)};
-  border-radius: ${props => props.circle ? `50%` : `0.5rem`};
-  background-color: ${chooseColor};
-  box-shadow: ${props => props.bordered ? props.theme.shadows[2] : props.theme.shadows[0]};
-  cursor: pointer;
-  ${props => props.theme.typo.button};
-  transition: all .2s ease-out;
-
+const defaultButton = css`
+  box-shadow: ${props => props.theme.shadows[2]};
   :hover {
     box-shadow: ${({ theme }) => theme.shadows[8]};
     filter: brightness(90%);
@@ -34,6 +21,28 @@ export const CustomButton = styled.button`
   :active {
     box-shadow: ${({ theme }) => theme.shadows[4]};
   }
+`;
+
+const flatButton = css`
+  :hover {
+    background-color: ${props => props.theme.background.highlight};
+  }
+`;
+
+export const CustomButton = styled.button`
+  display: flex;
+  width: ${props => props.stretch ? `100%` : `auto`};
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: ${props => props.theme.spacing(1)};
+  margin: ${props => props.theme.spacing(1)};
+  border-radius: 0.5rem;
+  background-color: ${chooseColor};
+  cursor: pointer;
+  ${props => props.theme.typo.button};
+  transition: all .2s ease-out;
+  ${props => props.flat ? flatButton : defaultButton};
 `;
 CustomButton.displayName = 'CustomButton';
 

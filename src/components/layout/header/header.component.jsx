@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
-  HeaderContainer, 
+  HeaderContainer,
+  HeaderButtons,
   Logo,
 } from './header.styles';
 import Button from '../../ui/button/button.component';
@@ -12,9 +13,9 @@ const Header = (props) => {
   return (
     <>
       <HeaderContainer>
-        <Button primary onClick={() => setSideOpen(true)}>Nav</Button>
+        <HeaderButtons onClick={() => setSideOpen(true)} flat>Nav</HeaderButtons>
         <Logo>Logo</Logo>
-        <Button secondary>Login</Button>
+        <HeaderButtons secondary>Login</HeaderButtons>
       </HeaderContainer>
       <Sidebar sideOpen={sideOpen} setSideOpen={setSideOpen} />
     </>

@@ -14,6 +14,11 @@ export const SidebarContainer = styled.div`
   flex-direction: column;
   z-index: 400;
   transition: left .2s ease-out .1s;
+
+  button:last-of-type {
+    margin-top: auto;
+    border-top: 1px solid ${props => props.theme.palette.text.secondary};
+  }
 `;
 SidebarContainer.displayName = 'SidebarContainer';
 
@@ -32,11 +37,13 @@ export const SidebarButton = styled(Button)`
   ${props => props.theme.typo.body};
   border-radius: 0;
   color: ${props => props.theme.palette.text.primary};
-  :hover {
-    background-color: ${props => props.theme.palette.grey[3]};
-    box-shadow: none;
-    filter: none;
+  @media(hover: hover) {
+    :hover {
+      background-color: ${props => props.theme.background.highlight};
+      box-shadow: none
+    }
   }
   transition: all .2s ease-out;
+  text-transform: none;
 `;
 SidebarButton.displayName = 'SidebarButton';
