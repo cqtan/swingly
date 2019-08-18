@@ -9,13 +9,13 @@ export const LinkContainer = styled(Link)`
   font-size: 2rem;
   color: ${props => props.theme.palette.primary.main};
   background-color: ${props => {
-    console.log('props: ', props);
     const { primary, secondary } = props;
     if (primary) return props.theme.palette.primary.main;
     else if (secondary) return props.theme.palette.secondary.main;
     else return 'transparent';
   }};
-  transition: all .2s ease-out;
+  transition: color .2s ease-out, 
+              background-color .2s ease-out;
 
   :hover {
     background-color: ${props => props.theme.palette.grey[3]};

@@ -7,7 +7,7 @@ export const ExampleButtonContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: ${props => props.theme.background.front};
+  background-color: ${props => props.theme.background.layer2};
   display: flex;
   align-items: center;
   justify-content: center;

@@ -8,8 +8,8 @@ export default {
     }
   },
   background: {
-    back: "#fff",
-    front: "#fff",
-    front2: '#fff',
+    layer1: "#fff",
+    layer2: "#fff",
+    layer3: '#fff',
   }
 }

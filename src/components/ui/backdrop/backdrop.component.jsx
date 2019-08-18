@@ -4,9 +4,11 @@ import {
 } from './backdrop.styles'
 
 const Backdrop = (props) => {
+  const { onClick, isOpen } = props;
+
   return (
     <>
-      <BackdropContainer />
+      <BackdropContainer onClick={onClick} isOpen={isOpen} />
     </>
   );
 }

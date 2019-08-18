@@ -6,7 +6,7 @@ export const BackgroundSurface = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: ${props => props.theme.background.back};
-  transition: all .2s ease-out;
+  background-color: ${props => props.theme.background.layer1};
+  transition: background-color .2s ease-out;
 `;
 BackgroundSurface.displayName = 'BackgroundSurface';

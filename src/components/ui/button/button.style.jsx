@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const chooseColor = props => {
   const { primary, secondary, theme } = props;
@@ -6,13 +6,14 @@ const chooseColor = props => {
     return theme.palette.primary.main;
   } else if (secondary) {
     return theme.palette.secondary.main;
-  } else {
-    return theme.palette.grey[5];
+  } else{
+    return `transparent`;
   }
 }
 
 export const CustomButton = styled.button`
   display: flex;
+  width: ${props => props.stretch ? `100%` : `auto`};
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -20,7 +21,7 @@ export const CustomButton = styled.button`
   margin: ${props => props.theme.spacing(1)};
   border-radius: ${props => props.circle ? `50%` : `0.5rem`};
   background-color: ${chooseColor};
-  box-shadow: ${props => props.theme.shadows[2]};
+  box-shadow: ${props => props.bordered ? props.theme.shadows[2] : props.theme.shadows[0]};
   cursor: pointer;
   ${props => props.theme.typo.button};
   transition: all .2s ease-out;

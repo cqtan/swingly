@@ -55,26 +55,26 @@ export default (mode) => ({
     },
     subtitle: {
       fontWeight: 400,
-      fontSize: '1rem',
+      fontSize: '1.2rem',
       lineHeight: 1.75,
       letterSpacing: '0.00938em',
     },
     body: {
       fontWeight: 400,
-      fontSize: '1rem',
+      fontSize: '1.5rem',
       lineHeight: 1.5,
       letterSpacing: '0.00938em',
     },
     button: {
       fontWeight: 500,
-      fontSize: '0.875rem',
+      fontSize: '1.5rem',
       lineHeight: 1.75,
       letterSpacing: '0.02857em',
       textTransform: 'uppercase',
     },
     caption: {
       fontWeight: 400,
-      fontSize: '0.75rem',
+      fontSize: '1rem',
       lineHeight: 1.66,
       letterSpacing: '0.03333em',
     }
