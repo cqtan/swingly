@@ -9,6 +9,19 @@ import { persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './redux/root-reducer';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { 
+  faBars,
+  faSyncAlt,
+  faUserCircle,
+  faHome,
+  faCalendar,
+  faCalendarDay,
+  faCalendarWeek,
+  faEllipsisV,
+  faCalendarPlus,
+  faHatWizard
+} from '@fortawesome/free-solid-svg-icons';
 
 export default (props) => {
   const { children, initialState = {} } = props;
@@ -25,6 +38,19 @@ export default (props) => {
   );
 
   const persistor = persistStore(store);
+
+  library.add(
+    faBars,
+    faSyncAlt,
+    faUserCircle,
+    faHome,
+    faCalendar,
+    faCalendarDay,
+    faCalendarWeek,
+    faEllipsisV,
+    faCalendarPlus,
+    faHatWizard
+  );
 
   return (
     <Provider store={store}>

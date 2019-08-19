@@ -8,6 +8,7 @@ export const SidebarContainer = styled.div`
   left: ${props => props.sideOpen ? 0 : `-30rem`};
   min-width: 22rem;
   height: 100vh;
+  box-shadow: ${props => props.theme.shadows[4]};
   background-color: ${props => props.theme.background.layer1};
   text-align: center;
   justify-content: flex-start;
@@ -23,7 +24,7 @@ export const SidebarContainer = styled.div`
 SidebarContainer.displayName = 'SidebarContainer';
 
 export const SidebarHeader = styled.div`
-  height: 7rem;
+  height: 6rem;
   color: ${props => props.theme.palette.text.secondary};
   ${props => props.theme.typo.h3};
   padding: 1.5rem;
