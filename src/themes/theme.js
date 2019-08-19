@@ -53,6 +53,18 @@ export default (mode) => ({
       lineHeight: 1.04,
       letterSpacing: '0em',
     },
+    h4: { 
+      fontWeight: 400,
+      fontSize: '2.5rem',
+      lineHeight: 1.17,
+      letterSpacing: '0em',
+    },
+    h5: { 
+      fontWeight: 400,
+      fontSize: '1.9rem',
+      lineHeight: 1.33,
+      letterSpacing: '0em',
+    },
     subtitle: {
       fontWeight: 400,
       fontSize: '1.2rem',

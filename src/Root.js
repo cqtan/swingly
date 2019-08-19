@@ -20,7 +20,10 @@ import {
   faCalendarWeek,
   faEllipsisV,
   faCalendarPlus,
-  faHatWizard
+  faHatWizard,
+  faMoon,
+  faSun
+
 } from '@fortawesome/free-solid-svg-icons';
 
 export default (props) => {
@@ -49,7 +52,9 @@ export default (props) => {
     faCalendarWeek,
     faEllipsisV,
     faCalendarPlus,
-    faHatWizard
+    faHatWizard,
+    faMoon,
+    faSun
   );
 
   return (
