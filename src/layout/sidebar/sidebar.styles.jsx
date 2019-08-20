@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Button from '../../../components/ui/button/button.component';
+import Button from '../../ui/button/button.component';
 
 export const SidebarContainer = styled.div`
   position: absolute;

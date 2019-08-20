@@ -4,7 +4,7 @@ import {
   ExampleButtonContainer
 } from './example-container.styles';
 import { toggleTheme } from '../../redux/theme-mode/theme-mode.actions';
-import Button from '../ui/button/button.component';
+import Button from '../../ui/button/button.component';
 
 const ExampleContainer = (props) => {
   const { toggleTheme, hi } = props;

@@ -99,4 +99,15 @@ export default (mode) => ({
     }
   },
   spacing: (multiplier) => (`${10 * multiplier}px`),
+  mixins: {
+    absCentered: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+    },
+    defaultBorderRadius: {
+      borderRadius: '5px',
+    }
+  }
 });

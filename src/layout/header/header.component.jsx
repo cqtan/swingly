@@ -5,7 +5,7 @@ import {
   Logo,
 } from './header.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Sidebar from './sidebar/sidebar.component';
+import Sidebar from '../sidebar/sidebar.component';
 
 const Header = (props) => {
   const [sideOpen, setSideOpen] = useState(false);  
