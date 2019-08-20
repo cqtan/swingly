@@ -6,8 +6,8 @@ import {
 } from './sidebar.styles';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Backdrop from '../../../ui/backdrop/backdrop.component';
-import { toggleTheme } from '../../../../redux/theme-mode/theme-mode.actions';
+import Backdrop from '../../../components/ui/backdrop/backdrop.component';
+import { toggleTheme } from '../../../redux/theme-mode/theme-mode.actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Sidebar = (props) => {

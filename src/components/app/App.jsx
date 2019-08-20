@@ -9,7 +9,7 @@ import lightTheme from '../../themes/light';
 import theme from '../../themes/theme';
 import ExampleContainer from '../example-container/example-container.component';
 import Background from '../ui/background/background.component';
-import Header from '../layout/header/header.component';
+import Header from '../../layout/header/header.component';
 
 export const App = (props) => {
   const { themeMode } = props;
