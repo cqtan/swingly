@@ -6,6 +6,8 @@ import {
   SignInButtons,
 } from './sign-in.styles'
 import TextField from '../../ui/form-elements/text-field/text-field.component';
+import { signInWithGoogle } from '../../firebase/firebase.utils';
+
 
 const SignIn = (props) => {
   const { emailValue, passwordValue } = props;
@@ -18,7 +20,10 @@ const SignIn = (props) => {
         <TextField label='Password' type='password' value={emailValue} />
         <SignInButtonContainer>
           <SignInButtons stretch>Email</SignInButtons>
-          <SignInButtons stretch isGoogleSignin>Google</SignInButtons>
+          <SignInButtons stretch isGoogleSignin
+            onClick={() => signInWithGoogle()}>
+            Google
+          </SignInButtons>
         </SignInButtonContainer>
       </SignInContainer>
     </>

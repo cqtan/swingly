@@ -16,7 +16,7 @@ const Header = (props) => {
         <HeaderButtons onClick={() => setSideOpen(true)} flat>
           <FontAwesomeIcon icon='bars' />
         </HeaderButtons>
-        <Logo flat to='/'>Swingly</Logo>
+        <Logo to='/'>Swingly</Logo>
         <HeaderButtons flat>
          <FontAwesomeIcon icon='user-circle' size='2x' />
         </HeaderButtons>

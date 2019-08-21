@@ -20,15 +20,15 @@ const Sidebar = (props) => {
       <Backdrop onClick={() => setSideOpen(false)} isOpen={sideOpen}/>
       <SidebarContainer sideOpen={sideOpen}>
         <SidebarHeader>Navigation</SidebarHeader>
-        <SidebarButton onClick={() => setSideOpen(false)} as={Link} strech to='/'>
+        <SidebarButton onClick={() => setSideOpen(false)} as={Link} to='/'>
           <FontAwesomeIcon icon='home' />
           Home
         </SidebarButton>
-        <SidebarButton onClick={() => setSideOpen(false)} as={Link} strech to='/hi'>
+        <SidebarButton onClick={() => setSideOpen(false)} as={Link} to='/hi'>
           <FontAwesomeIcon icon='hat-wizard' />
           Hi
         </SidebarButton>
-        <SidebarButton onClick={() => setSideOpen(false)} as={Link} strech to='/'>
+        <SidebarButton onClick={() => setSideOpen(false)} as={Link} to='/'>
           <FontAwesomeIcon icon='hat-wizard' />
           Nope
         </SidebarButton>
