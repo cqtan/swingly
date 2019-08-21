@@ -1,14 +1,18 @@
 import styled from 'styled-components';
 import Button from '../../ui/button/button.component';
+import { animateFadeIn } from '../../themes/animations';
 
 export const SignInContainer = styled.div`
   ${props => props.theme.mixins.absCentered};
   ${props => props.theme.mixins.defaultBorderRadius};
+  z-index: 500;
   min-width: 30rem;
   min-height: 30rem;
   background-color: ${props => props.theme.background.layer2};
   box-shadow: ${props => props.theme.shadows[4]};
   padding: ${props => props.theme.spacing(2)};
+  transition: all .2s ease-out .1s;
+  ${animateFadeIn}
 `;
 SignInContainer.displayName = 'SignInContainer';
 

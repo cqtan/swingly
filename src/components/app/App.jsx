@@ -10,7 +10,6 @@ import theme from '../../themes/theme';
 import ExampleContainer from '../example-container/example-container.component';
 import Background from '../../ui/background/background.component';
 import Header from '../../layout/header/header.component';
-import SignIn from '../sign-in/sign-in.component';
 
 export const App = (props) => {
   const { themeMode } = props;
@@ -22,7 +21,7 @@ export const App = (props) => {
         <Header />
         <Switch>
           <Route path="/hi" exact render={() => <ExampleContainer hi/>} />
-          <Route path="/" component={SignIn} />
+          <Route path="/" component={ExampleContainer} />
         </Switch>
       </>
     </ThemeProvider>

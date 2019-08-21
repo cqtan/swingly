@@ -11,24 +11,24 @@ import { toggleTheme } from '../../redux/theme-mode/theme-mode.actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Sidebar = (props) => {
-  const { sideOpen, setSideOpen, toggleTheme, themeMode } = props;
+  const { isOpen, setOpen, toggleTheme, themeMode } = props;
   const toggleThemeIcon = themeMode.darkMode ? <FontAwesomeIcon icon='sun' /> : <FontAwesomeIcon icon='moon' />;
   const toggleThemeText = themeMode.darkMode ? 'Light Mode' : 'Dark Mode';
 
   return (
     <>
-      <Backdrop onClick={() => setSideOpen(false)} isOpen={sideOpen}/>
-      <SidebarContainer sideOpen={sideOpen}>
+      <Backdrop onClick={() => setOpen(false)} isOpen={isOpen}/>
+      <SidebarContainer isOpen={isOpen}>
         <SidebarHeader>Navigation</SidebarHeader>
-        <SidebarButton onClick={() => setSideOpen(false)} as={Link} to='/'>
+        <SidebarButton onClick={() => setOpen(false)} as={Link} to='/'>
           <FontAwesomeIcon icon='home' />
           Home
         </SidebarButton>
-        <SidebarButton onClick={() => setSideOpen(false)} as={Link} to='/hi'>
+        <SidebarButton onClick={() => setOpen(false)} as={Link} to='/hi'>
           <FontAwesomeIcon icon='hat-wizard' />
           Hi
         </SidebarButton>
-        <SidebarButton onClick={() => setSideOpen(false)} as={Link} to='/'>
+        <SidebarButton onClick={() => setOpen(false)} as={Link} to='/'>
           <FontAwesomeIcon icon='hat-wizard' />
           Nope
         </SidebarButton>

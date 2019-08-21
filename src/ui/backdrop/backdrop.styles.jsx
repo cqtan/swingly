@@ -8,7 +8,8 @@ export const BackdropContainer = styled.button`
   width: 100vw;
   height: 100vh;
   z-index: ${props => props.isOpen ? 300 : -300};
-  background-color: ${props => props.isOpen ? `rgba(0, 0, 0, 0.3)` : `rgba(0, 0, 0, 0)`} ;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: ${props => props.isOpen ? 1 : 0} ;
   transition: background-color .5s ease-out;
 `;
 BackdropContainer.displayName = BackdropContainer;

@@ -5,7 +5,7 @@ export const SidebarContainer = styled.div`
   position: absolute;
   display: flex;
   top: 0;
-  left: ${props => props.sideOpen ? 0 : `-30rem`};
+  left: ${props => props.isOpen ? 0 : `-30rem`};
   min-width: 18rem;
   height: 100vh;
   box-shadow: ${props => props.theme.shadows[4]};
