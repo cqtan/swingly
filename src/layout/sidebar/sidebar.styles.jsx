@@ -9,7 +9,7 @@ export const SidebarContainer = styled.div`
   min-width: 18rem;
   height: 100vh;
   box-shadow: ${props => props.theme.shadows[4]};
-  background-color: ${props => props.theme.background.layer1};
+  background-color: ${props => props.theme.background.layer2};
   text-align: center;
   flex-direction: column;
   z-index: 400;
@@ -43,7 +43,7 @@ export const SidebarButton = styled(Button)`
   align-items: center;
   margin: 0;
   padding: 1.5rem;
-  ${props => props.theme.typo.body};
+  ${props => props.theme.typo.button};
   border-radius: 0;
   color: ${props => props.theme.palette.text.primary};
   @media(hover: hover) {

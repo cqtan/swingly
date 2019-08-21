@@ -82,7 +82,6 @@ export default (mode) => ({
       fontSize: '1.5rem',
       lineHeight: 1.75,
       letterSpacing: '0.02857em',
-      textTransform: 'uppercase',
     },
     caption: {
       fontWeight: 400,

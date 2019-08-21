@@ -13,6 +13,7 @@ const chooseColor = props => {
 
 const defaultButton = css`
   box-shadow: ${props => props.theme.shadows[2]};
+  border-radius: 0.5rem;
   :hover {
     box-shadow: ${({ theme }) => theme.shadows[8]};
     filter: brightness(90%);
@@ -24,6 +25,7 @@ const defaultButton = css`
 `;
 
 const flatButton = css`
+  border-radius: 0;
   :hover {
     background-color: ${props => props.theme.background.highlight};
   }
@@ -37,7 +39,6 @@ export const CustomButton = styled.button`
   align-items: center;
   padding: ${props => props.theme.spacing(1)};
   margin: ${props => props.theme.spacing(1)};
-  border-radius: 0.5rem;
   background-color: ${chooseColor};
   cursor: pointer;
   ${props => props.theme.typo.button};

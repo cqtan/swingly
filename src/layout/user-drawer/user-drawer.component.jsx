@@ -1,7 +1,9 @@
 import React from 'react';
 import {
   UserDrawerContainer,
+  DrawerButton,
 } from './user-drawer.styles'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Backdrop from '../../ui/backdrop/backdrop.component';
 
 const UserDrawer = (props) => {
@@ -10,8 +12,16 @@ const UserDrawer = (props) => {
   return (
     <>
       <Backdrop onClick={() => setOpen(false)} isOpen={isOpen}/>
-      <UserDrawerContainer isOpen>
-        hi
+      <UserDrawerContainer isOpen={isOpen}>
+        <DrawerButton flat>
+          <FontAwesomeIcon icon='user-circle' />
+          Profile
+        </DrawerButton>
+        <hr />
+        <DrawerButton flat>
+          <FontAwesomeIcon icon='sign-out-alt' />
+          Signout
+        </DrawerButton>
       </UserDrawerContainer>
     </>
   );

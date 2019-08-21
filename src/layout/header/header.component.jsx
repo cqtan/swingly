@@ -15,7 +15,7 @@ const Header = (props) => {
   const [signInOpen, setSignInOpen] = useState(false);  
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const { currentUser } = props;
+  const { user } = props;
 
   return (
     <>
@@ -24,12 +24,12 @@ const Header = (props) => {
           <FontAwesomeIcon icon='bars' />
         </HeaderButtons>
         <Logo to='/'>Swingly</Logo>
-        <HeaderButtons flat onClick={() => currentUser.user ? setDrawerOpen(!drawerOpen) : setSignInOpen(!signInOpen)}>
+        <HeaderButtons flat onClick={() => user.currentUser ? setDrawerOpen(!drawerOpen) : setSignInOpen(!signInOpen)}>
          <FontAwesomeIcon icon='user-circle' size='2x' />
         </HeaderButtons>
       </HeaderContainer>
       <Sidebar isOpen={sideOpen} setOpen={setSideOpen} />
-      { currentUser.user ? 
+      { user.currentUser ? 
         <UserDrawer isOpen={drawerOpen} setOpen={setDrawerOpen} /> :
         <SignIn isOpen={signInOpen} setOpen={setSignInOpen} />
       }
@@ -40,7 +40,7 @@ const Header = (props) => {
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.user
+  user: state.user
 });
 
 export default connect(mapStateToProps)(Header);
