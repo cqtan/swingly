@@ -10,6 +10,6 @@ export const BackdropContainer = styled.button`
   z-index: ${props => props.isOpen ? 300 : -300};
   background-color: rgba(0, 0, 0, 0.3);
   opacity: ${props => props.isOpen ? 1 : 0} ;
-  transition: background-color .5s ease-out;
+  transition: opacity .4s ease-out;
 `;
 BackdropContainer.displayName = BackdropContainer;

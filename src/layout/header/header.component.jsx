@@ -20,17 +20,20 @@ const Header = (props) => {
   return (
     <>
       <HeaderContainer>
-        <HeaderButtons onClick={() => setSideOpen(true)} flat>
+        <HeaderButtons onClick={() => setSideOpen(!sideOpen)} flat>
           <FontAwesomeIcon icon='bars' />
         </HeaderButtons>
         <Logo to='/'>Swingly</Logo>
-        <HeaderButtons flat onClick={() => currentUser.user ? setDrawerOpen(true) : setSignInOpen(true)}>
+        <HeaderButtons flat onClick={() => currentUser.user ? setDrawerOpen(!drawerOpen) : setSignInOpen(!signInOpen)}>
          <FontAwesomeIcon icon='user-circle' size='2x' />
         </HeaderButtons>
       </HeaderContainer>
       <Sidebar isOpen={sideOpen} setOpen={setSideOpen} />
-      { currentUser.user && <UserDrawer isOpen={drawerOpen} setOpen={setDrawerOpen} /> }
-      { signInOpen && <SignIn isOpen={signInOpen} setOpen={setSignInOpen}/>}
+      { currentUser.user ? 
+        <UserDrawer isOpen={drawerOpen} setOpen={setDrawerOpen} /> :
+        <SignIn isOpen={signInOpen} setOpen={setSignInOpen} />
+      }
+      {/* { signInOpen && <SignIn isOpen={signInOpen} setOpen={setSignInOpen}/>} */}
       {/* <SignIn isOpen={signInOpen} setOpen={setSignInOpen}/> */}
     </>
   );

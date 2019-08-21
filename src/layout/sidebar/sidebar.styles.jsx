@@ -13,7 +13,8 @@ export const SidebarContainer = styled.div`
   text-align: center;
   flex-direction: column;
   z-index: 400;
-  transition: left .2s ease-out .1s;
+  opacity: ${props => props.isOpen ? 1 : 0};
+  transition: all .2s ease-in-out .1s;
 
   button:last-of-type {
     width: auto;
