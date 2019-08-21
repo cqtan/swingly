@@ -6,7 +6,7 @@ import {
   SignInButtons,
 } from './sign-in.styles'
 import TextField from '../../ui/form-elements/text-field/text-field.component';
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { signInWithGithub } from '../../firebase/firebase.utils';
 import Backdrop from '../../ui/backdrop/backdrop.component';
 
 
@@ -23,8 +23,8 @@ const SignIn = (props) => {
         <SignInButtonContainer>
           <SignInButtons stretch>Email</SignInButtons>
           <SignInButtons stretch isGoogleSignin
-            onClick={() => signInWithGoogle()}>
-            Google
+            onClick={() => signInWithGithub()}>
+            Github
           </SignInButtons>
         </SignInButtonContainer>
       </SignInContainer>

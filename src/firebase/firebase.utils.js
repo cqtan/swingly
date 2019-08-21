@@ -50,11 +50,11 @@ export const firestore = firebase.firestore();
 
 // Only for GoogleAuth:
 // Make sure to enable Sign-in methods for Google on your account
-export const googleProvider = new firebase.auth.GoogleAuthProvider();
+export const githubProvider = new firebase.auth.GithubAuthProvider();
 
 // Always promt popup on sign up/in.
 // Possible error onClick (restricted_client): Change name of consent screen.
-googleProvider.setCustomParameters({ prompt: 'select_account' });
-export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
+githubProvider.setCustomParameters({ prompt: 'select_account' });
+export const signInWithGithub = () => auth.signInWithPopup(githubProvider);
 
 export default firebase;

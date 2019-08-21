@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
@@ -10,9 +10,26 @@ import theme from '../../themes/theme';
 import ExampleContainer from '../example-container/example-container.component';
 import Background from '../../ui/background/background.component';
 import Header from '../../layout/header/header.component';
+import { setCurrentUser } from '../../redux/user/user.actions';
+import { auth } from '../../firebase/firebase.utils.js';
 
 export const App = (props) => {
-  const { themeMode } = props;
+  const { themeMode, setCurrentUser } = props;
+
+  useEffect(() => {
+    let unsubscribe = auth.onAuthStateChanged(async userAuth => {
+      console.log("userAuth: ", userAuth);
+      
+      if (userAuth){
+        setCurrentUser(userAuth);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    }
+  }, [setCurrentUser]);
+
   return (
     <ThemeProvider theme={themeMode.darkMode ? theme(darkTheme) : theme(lightTheme)}>
       <>
@@ -32,4 +49,8 @@ const mapStateToProps = (state) => ({
   themeMode: state.themeMode
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+  setCurrentUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

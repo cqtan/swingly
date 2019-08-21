@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import { persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+// import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './redux/root-reducer';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { 
@@ -38,7 +38,7 @@ export default (props) => {
   const store = createStore(
     rootReducer,
     initialState,
-    composeWithDevTools(applyMiddleware(...middlewares)),
+    applyMiddleware(...middlewares),
   );
 
   const persistor = persistStore(store);
