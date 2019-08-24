@@ -3,11 +3,13 @@ import {
   UserDrawerContainer,
   DrawerButton,
 } from './user-drawer.styles'
+import { connect } from 'react-redux';
+import { signOut } from '../../redux/user/user.actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Backdrop from '../../ui/backdrop/backdrop.component';
 
 const UserDrawer = (props) => {
-  const { isOpen, setOpen } = props;
+  const { isOpen, setOpen, signOut } = props;
 
   return (
     <>
@@ -18,7 +20,7 @@ const UserDrawer = (props) => {
           Profile
         </DrawerButton>
         <hr />
-        <DrawerButton flat>
+        <DrawerButton flat onClick={() => signOut()}>
           <FontAwesomeIcon icon='sign-out-alt' />
           Signout
         </DrawerButton>
@@ -27,4 +29,8 @@ const UserDrawer = (props) => {
   );
 }
 
-export default UserDrawer;
+const mapDispatchToProps = {
+  signOut
+}
+
+export default connect(null, mapDispatchToProps)(UserDrawer);

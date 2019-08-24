@@ -1,15 +1,16 @@
 import { UserActionTypes } from './user.types';
-import { createUserProfileDocument } from '../../firebase/firebase.utils';
+import { createUserProfileDocument, getCurrentUser } from '../../firebase/firebase.utils';
+import { auth } from '../../firebase/firebase.utils';
 
 // export const setCurrentUser = user => ({
 //   type: UserActionTypes.SET_CURRENT_USER,
 //   payload: user
 // });
 
-export const setCurrentUser = (userAuth) => async dispatch => {
+export const setCurrentUser = () => async dispatch => {
   try {
-    // const userAuth = await getCurrentUser();
-    // if (!userAuth) return;
+    const userAuth = await getCurrentUser();
+    if (!userAuth) return;
 
     console.log('userAuth: ', userAuth);
     
@@ -25,6 +26,18 @@ export const setCurrentUser = (userAuth) => async dispatch => {
   } catch (error) {
     dispatch({
       type: UserActionTypes.SET_CURRENT_USER_FAILED,
+      payload: error
+    });
+  }
+}
+
+export const signOut = () => async dispatch => {
+  try {
+    await auth.signOut();
+    dispatch({type: UserActionTypes.SIGNOUT_SUCCESS});
+  } catch (error) {
+    dispatch({
+      type: UserActionTypes.SIGNOUT_FAILED,
       payload: error
     });
   }

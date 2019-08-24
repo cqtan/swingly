@@ -11,24 +11,30 @@ import ExampleContainer from '../example-container/example-container.component';
 import Background from '../../ui/background/background.component';
 import Header from '../../layout/header/header.component';
 import { setCurrentUser } from '../../redux/user/user.actions';
-import { auth } from '../../firebase/firebase.utils.js';
+// import { auth } from '../../firebase/firebase.utils.js';
 
 export const App = (props) => {
   const { themeMode, setCurrentUser } = props;
 
-  useEffect(() => {
-    let unsubscribe = auth.onAuthStateChanged(async userAuth => {
-      console.log("userAuth: ", userAuth);
+  // useEffect(() => {
+  //   let unsubscribe = auth.onAuthStateChanged(async userAuth => {
+  //     console.log("userAuth: ", userAuth);
       
-      if (userAuth){
-        setCurrentUser(userAuth);
-      }
-    });
+  //     if (userAuth){
+  //       setCurrentUser(userAuth);
+  //     }
+  //   });
 
-    return () => {
-      unsubscribe();
-    }
-  }, [setCurrentUser]);
+  //   return () => {
+  //     unsubscribe();
+  //   }
+  // }, [setCurrentUser]);
+
+  useEffect(() => {
+    setCurrentUser();
+    console.log('called');
+    
+  });
 
   return (
     <ThemeProvider theme={themeMode.darkMode ? theme(darkTheme) : theme(lightTheme)}>
