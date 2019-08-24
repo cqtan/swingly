@@ -26,16 +26,20 @@ export const SignInButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
-  > button:first-of-type {
-    margin-right: 1rem;
+  button:first-of-type {
+    margin-left: 0;
+  }
+
+  button:last-of-type {
+    margin-right: 0;
   }
 `;
 SignInButtonContainer.displayName = 'SignInButtonContainer';
 
 export const SignInButtons = styled(Button)`
-  margin: 2rem 0 1rem 0;
+  padding: ${props => props.theme.spacing(1)} ${props => props.theme.spacing(2)};
   ${props => props.theme.typo.button};
-  background-color: ${props => props.isGoogleSignin ? props.theme.palette.secondary.main : props.theme.palette.primary.main}; 
+  background-color: ${props => props.isSigninProvider ? props.theme.palette.secondary.main : props.theme.palette.primary.main}; 
 `;
 SignInButtons.displayName = 'SignInButtons';
 

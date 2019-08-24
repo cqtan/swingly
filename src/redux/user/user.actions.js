@@ -1,23 +1,31 @@
 import { UserActionTypes } from './user.types';
-import { createUserProfileDocument, getCurrentUser } from '../../firebase/firebase.utils';
+import { 
+  createUserProfileDocument, 
+  getCurrentUser,
+  signInWithGithub,
+  signInWithGoogle,
+} from '../../firebase/firebase.utils';
 import { auth } from '../../firebase/firebase.utils';
 
-// export const setCurrentUser = user => ({
-//   type: UserActionTypes.SET_CURRENT_USER,
-//   payload: user
-// });
+const getUserWithProvider = async (signInMethod) => {
+  switch(signInMethod) {
+    case 'google':
+      return await signInWithGoogle();
+    case 'github':
+      return await signInWithGithub();
+    default:
+      console.log('Invalid provider!');
+      return;
+  }
+}
 
 export const setCurrentUser = () => async dispatch => {
   try {
     const userAuth = await getCurrentUser();
-    if (!userAuth) return;
+    if (!userAuth) return;    
 
-    console.log('userAuth: ', userAuth);
-    
     const userRef = await createUserProfileDocument(userAuth);
     const userSnapshot = await userRef.get();
-
-    console.log('snap: ', userSnapshot);
 
     dispatch({
       type: UserActionTypes.SET_CURRENT_USER_SUCCESS,
@@ -26,6 +34,24 @@ export const setCurrentUser = () => async dispatch => {
   } catch (error) {
     dispatch({
       type: UserActionTypes.SET_CURRENT_USER_FAILED,
+      payload: error
+    });
+  }
+}
+
+export const signInWithProvider = (signInMethod) => async dispatch => {
+  try {
+    const { user } = await getUserWithProvider(signInMethod);
+    const userRef = await createUserProfileDocument(user);
+    const userSnapshot = await userRef.get();
+
+    dispatch({
+      type: UserActionTypes.SIGNIN_SUCCESS,
+      payload: userSnapshot.data()
+    });
+  } catch (error) {
+    dispatch({
+      type: UserActionTypes.SIGNIN_FAILED,
       payload: error
     });
   }

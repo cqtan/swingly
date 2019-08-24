@@ -4,14 +4,16 @@ import {
   SignInTitle,
   SignInButtonContainer,
   SignInButtons,
-} from './sign-in.styles'
+} from './sign-in.styles';
+import { connect } from 'react-redux';
 import TextField from '../../ui/form-elements/text-field/text-field.component';
-import { signInWithGithub } from '../../firebase/firebase.utils';
+// import { signInWithGithub, signInWithGoogle } from '../../firebase/firebase.utils';
 import Backdrop from '../../ui/backdrop/backdrop.component';
+import { signInWithProvider } from '../../redux/user/user.actions';
 
 
 const SignIn = (props) => {
-  const { isOpen, setOpen, emailValue, passwordValue } = props;
+  const { isOpen, setOpen, emailValue, passwordValue, signInWithProvider } = props;
 
   return (
     <>
@@ -22,9 +24,13 @@ const SignIn = (props) => {
         <TextField label='Password' type='password' value={emailValue} />
         <SignInButtonContainer>
           <SignInButtons stretch>Email</SignInButtons>
-          <SignInButtons stretch isGoogleSignin
-            onClick={() => signInWithGithub()}>
+          <SignInButtons stretch isSigninProvider
+            onClick={() => signInWithProvider('github')}>
             Github
+          </SignInButtons>
+          <SignInButtons stretch isSigninProvider
+            onClick={() => signInWithProvider('google')}>
+            Google
           </SignInButtons>
         </SignInButtonContainer>
       </SignInContainer>
@@ -32,4 +38,8 @@ const SignIn = (props) => {
   );
 }
 
-export default SignIn;
+const mapDispatchToProps = {
+  signInWithProvider
+}
+
+export default connect(null, mapDispatchToProps)(SignIn);

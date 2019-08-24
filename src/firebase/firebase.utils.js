@@ -17,6 +17,7 @@ firebase.initializeApp(config);
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
   const userRef = firestore.doc(`users/${userAuth.uid}`);
+  
   const snapShot = await userRef.get();
 
   if (!snapShot.exists) {
@@ -51,10 +52,14 @@ export const firestore = firebase.firestore();
 // Only for GoogleAuth:
 // Make sure to enable Sign-in methods for Google on your account
 export const githubProvider = new firebase.auth.GithubAuthProvider();
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 // Always promt popup on sign up/in.
 // Possible error onClick (restricted_client): Change name of consent screen.
 githubProvider.setCustomParameters({ prompt: 'select_account' });
+googleProvider.setCustomParameters({ prompt: 'select_account' });
 export const signInWithGithub = () => auth.signInWithPopup(githubProvider);
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
+
 
 export default firebase;
