@@ -28,5 +28,9 @@ export const DrawerButton = styled(Button)`
   justify-content: flex-start;
   margin: ${props => props.theme.spacing(1)} 0;
   color: ${props => props.theme.palette.text.secondary};
+
+  & > a {
+    color: ${props => props.theme.palette.text.secondary};
+  }
 `;
 DrawerButton.displayName = 'DrawerButtons';

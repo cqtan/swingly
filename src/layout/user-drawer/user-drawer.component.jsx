@@ -4,6 +4,7 @@ import {
   DrawerButton,
 } from './user-drawer.styles'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { signOut } from '../../redux/user/user.actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Backdrop from '../../ui/backdrop/backdrop.component';
@@ -17,7 +18,7 @@ const UserDrawer = (props) => {
       <UserDrawerContainer isOpen={isOpen}>
         <DrawerButton flat>
           <FontAwesomeIcon icon='user-circle' />
-          Profile
+          <Link to='/profile'>Profile</Link>
         </DrawerButton>
         <hr />
         <DrawerButton flat onClick={() => signOut()}>
