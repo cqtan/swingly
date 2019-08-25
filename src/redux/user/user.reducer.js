@@ -3,16 +3,23 @@ import { UserActionTypes } from './user.types';
 const INITIAL_STATE = {
   currentUser: null,
   error: null,
+  loading: false
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
+    case UserActionTypes.USER_LOADING:
+      return {
+        ...state,
+        loading: true
+      }
     case UserActionTypes.SET_CURRENT_USER_SUCCESS:
     case UserActionTypes.SIGNIN_SUCCESS:
       return {
         ...state,
         currentUser: action.payload,
-        error: null
+        error: null,
+        loading: false
       };
     case UserActionTypes.SIGNOUT_SUCCESS:
       return {
@@ -25,7 +32,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.SIGNOUT_FAILED:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        loading: false
       };
     default:
       return state;

@@ -21,6 +21,8 @@ const getUserWithProvider = async (signInMethod) => {
 
 export const setCurrentUser = () => async dispatch => {
   try {
+    dispatch({ type: UserActionTypes.USER_LOADING });
+
     const userAuth = await getCurrentUser();
     if (!userAuth) return;    
 
@@ -41,6 +43,8 @@ export const setCurrentUser = () => async dispatch => {
 
 export const signInWithProvider = (signInMethod) => async dispatch => {
   try {
+    dispatch({ type: UserActionTypes.USER_LOADING });
+
     const { user } = await getUserWithProvider(signInMethod);
     const userRef = await createUserProfileDocument(user);
     const userSnapshot = await userRef.get();
