@@ -11,6 +11,14 @@ export default (mode) => ({
       main: "#2196F3",
       dark: "#1976D2",
     },
+    error: {
+      light: "#D8000C",
+      dark: "#FFD2D2"
+    },
+    warning: {
+      light: "#9F6000",
+      dark: "#FEEFB3"
+    },
     grey: {
       0: "0b0b0b",
       1: "#212121",

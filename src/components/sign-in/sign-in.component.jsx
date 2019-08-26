@@ -13,7 +13,12 @@ import { signInWithProvider } from '../../redux/user/user.actions';
 
 
 const SignIn = (props) => {
-  const { isOpen, setOpen, emailValue, passwordValue, signInWithProvider } = props;
+  const { isOpen, setOpen, openSignUp ,emailValue, passwordValue, signInWithProvider } = props;
+
+  const handleOpenSignUp = () => {
+    setOpen(false);
+    openSignUp(true);
+  }
 
   return (
     <>
@@ -31,6 +36,9 @@ const SignIn = (props) => {
           <SignInButtons stretch isSigninProvider
             onClick={() => signInWithProvider('google')}>
             Google
+          </SignInButtons>
+          <SignInButtons onClick={handleOpenSignUp}>
+            Register
           </SignInButtons>
         </SignInButtonContainer>
       </SignInContainer>

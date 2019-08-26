@@ -24,6 +24,7 @@ SignInTitle.displayName = 'SignInTitle';
 
 export const SignInButtonContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 
   button:first-of-type {

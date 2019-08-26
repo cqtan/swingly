@@ -48,3 +48,9 @@ export const TextFieldInput = styled.input`
   }
 `;
 TextFieldContainer.displayName = 'TextFieldContainer';
+
+export const HelperText = styled.div`
+  
+`;
+HelperText.displayName = 'HelperText';
+
