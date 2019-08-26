@@ -2,7 +2,10 @@ import styled, { css } from 'styled-components';
 
 const shrinkLabel = css`
   top: -1.5rem;
-  color: ${props => props.theme.palette.primary.main};
+  color: ${props => props.error ? 
+    props.theme.palette.error.dark : 
+    props.theme.palette.primary.main
+  };
   font-size: ${props => props.theme.typo.subtitle};
 `;
 
@@ -16,7 +19,10 @@ export const TextFieldLabel = styled.label`
   position: absolute;
   top: 1rem;
   ${props => props.theme.typo.body};
-  color: ${props => props.theme.palette.text.secondary};
+  color: ${props => props.error ? 
+    props.theme.palette.error.dark : 
+    props.theme.palette.text.secondary
+  };
   transition: all .2s ease-out;
   pointer-events: none;
 
@@ -29,9 +35,12 @@ export const TextFieldInput = styled.input`
   width: 100%;
   font-size: 1.8rem;
   display: block;
-  margin: 2.5rem 0;
+  margin: 2.5rem 0 0.2rem 0;
   border: none;
-  border-bottom: 1px solid ${props => props.theme.palette.text.primary};
+  border-bottom: 1px solid ${props => props.error ? 
+    props.theme.palette.error.dark : 
+    props.theme.palette.text.primary
+  };
   color: ${props => props.theme.palette.text.primary};
   padding: 1rem 0;
   letter-spacing: ${props => props.type === 'password' && `0.3rem`};
@@ -50,7 +59,9 @@ export const TextFieldInput = styled.input`
 TextFieldContainer.displayName = 'TextFieldContainer';
 
 export const HelperText = styled.div`
-  
+  width: 100%;
+  ${props => props.theme.typo.subtitle};
+  color: ${props => props.theme.palette.error.dark};
 `;
 HelperText.displayName = 'HelperText';
 

@@ -12,7 +12,6 @@ import Profile from '../../pages/profile/profile.component';
 import Background from '../../ui/background/background.component';
 import Header from '../../layout/header/header.component';
 import { setCurrentUser } from '../../redux/user/user.actions';
-import SignUp from '../sign-up/sign-up.component';
 
 export const App = (props) => {
   const { themeMode, setCurrentUser } = props;
@@ -30,9 +29,7 @@ export const App = (props) => {
         <Switch>
           <Route path="/hi" exact render={() => <ExampleContainer hi/>} />
           <Route path="/profile" exact component={Profile} />
-          {/* <Route path="/" component={ExampleContainer} /> */}
-          <Route path="/" render={() => <SignUp isOpen={true} />} />
-
+          <Route path="/" component={ExampleContainer} />
         </Switch>
       </>
     </ThemeProvider>

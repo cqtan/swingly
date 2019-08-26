@@ -12,12 +12,12 @@ export default (mode) => ({
       dark: "#1976D2",
     },
     error: {
-      light: "#D8000C",
-      dark: "#FFD2D2"
+      light: "#FFD2D2",
+      dark: "#D8000C",
     },
     warning: {
-      light: "#9F6000",
-      dark: "#FEEFB3"
+      light: "#FEEFB3",
+      dark: "#9F6000",
     },
     grey: {
       0: "0b0b0b",

@@ -2,15 +2,17 @@ import React from 'react';
 import {
   TextFieldContainer,
   TextFieldLabel,
-  TextFieldInput
+  TextFieldInput,
+  HelperText
 } from './text-field.styles'
 
 const TextField = (props) => {
-  const { label, ...otherProps } = props;
+  const { label, helperText, ...otherProps } = props;
   return (
     <TextFieldContainer>
       <TextFieldInput {...otherProps} />
       <TextFieldLabel>{label}</TextFieldLabel>
+      <HelperText>{helperText}</HelperText>
     </TextFieldContainer>
   );
 }
