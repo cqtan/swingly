@@ -37,6 +37,7 @@ export const TextFieldInput = styled.input`
   display: block;
   margin: 2.5rem 0 0.2rem 0;
   border: none;
+  border-radius: 0px;
   border-bottom: 1px solid ${props => props.error ? 
     props.theme.palette.error.dark : 
     props.theme.palette.text.primary

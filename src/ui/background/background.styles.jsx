@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const BackgroundSurface = styled.div`
   min-height: 100vh;
   min-width: 100vw;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: -100;
