@@ -8,7 +8,6 @@ import {
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import SignUpForm from './sign-up-form/sign-up-form.component';
-import Backdrop from '../../ui/backdrop/backdrop.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SignUp = (props) => {
@@ -46,7 +45,7 @@ const SignUp = (props) => {
 
   return (
     <>
-      <Backdrop onClick={() => setOpen(false)} isOpen={isOpen}/>
+      {/* <Backdrop onClick={() => setOpen(false)} isOpen={isOpen}/> */}
       <SignUpContainer isOpen={isOpen}>
         <SignUpTitle>Register</SignUpTitle>
         <Formik

@@ -10,6 +10,7 @@ import Sidebar from '../sidebar/sidebar.component';
 import UserDrawer from '../user-drawer/user-drawer.component';
 import SignIn from '../../components/sign-in/sign-in.component';
 import SignUp from '../../components/sign-up/sign-up.component';
+import Backdrop from '../../ui/backdrop/backdrop.component';
 
 const Header = (props) => {
   const [sideOpen, setSideOpen] = useState(false);
@@ -40,6 +41,7 @@ const Header = (props) => {
         </HeaderButtons>
       </HeaderContainer>
       <Sidebar isOpen={sideOpen} setOpen={setSideOpen} />
+      <Backdrop onClick={() => handlePopupToggle()} isOpen={signInOpen || signUpOpen}/>
       { user.currentUser ? 
         <UserDrawer isOpen={drawerOpen} setOpen={setDrawerOpen} /> :
         <>

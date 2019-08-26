@@ -8,7 +8,6 @@ import {
 } from './sign-in.styles';
 import { connect } from 'react-redux';
 import TextField from '../../ui/form-elements/text-field/text-field.component';
-import Backdrop from '../../ui/backdrop/backdrop.component';
 import { signInWithProvider } from '../../redux/user/user.actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -26,7 +25,7 @@ const SignIn = (props) => {
 
   return (
     <>
-      <Backdrop onClick={() => setOpen(false)} isOpen={isOpen}/>
+      {/* <Backdrop onClick={() => setOpen(false)} isOpen={isOpen}/> */}
       <SignInContainer isOpen={isOpen}>
         <SignInTitle>Login</SignInTitle>
         <TextField label='Email Address' type='text' value={passwordValue} />
