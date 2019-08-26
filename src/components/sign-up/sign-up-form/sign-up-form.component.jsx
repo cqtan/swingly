@@ -1,13 +1,13 @@
 import React from 'react';
 import {
   SignUpFormContainer,
+  SignUpButtonContainer,
+  SignUpButton
 } from './sign-up-form.styles'
 import { Form } from 'formik';
 import TextField from '../../../ui/form-elements/text-field/text-field.component';
-import Button from '../../../ui/button/button.component';
 
 const SignUpForm = (props) => {
-  console.log('formikBag: ', props);
   const {
     values,
     errors,
@@ -18,7 +18,6 @@ const SignUpForm = (props) => {
     setFieldTouched
   } = props;
   
-
   const onChange = (inputLabel, event) => {
     event.persist();
     handleChange(event);
@@ -68,16 +67,18 @@ const SignUpForm = (props) => {
           helperText={touched.confirmPassword ? errors.confirmPassword : ''}
           error={touched.confirmPassword && Boolean(errors.confirmPassword)}
         />
-        <Button
-          type='submit'
-          disabled={!isValid}>
-          Submit
-        </Button>
-        <Button 
-          type='button'
-          onClick={handleReset}>          
-          Reset
-        </Button>
+        <SignUpButtonContainer>
+          <SignUpButton
+            type='submit'
+            disabled={!isValid}>
+            Submit
+          </SignUpButton>
+          <SignUpButton 
+            type='button'
+            onClick={handleReset}>          
+            Reset
+          </SignUpButton>
+        </SignUpButtonContainer>
       </Form>
     </SignUpFormContainer>
   );

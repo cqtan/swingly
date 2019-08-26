@@ -26,21 +26,26 @@ export const SignInButtonContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-
-  button:first-of-type {
-    margin-left: 0;
-  }
-
-  button:last-of-type {
-    margin-right: 0;
-  }
 `;
 SignInButtonContainer.displayName = 'SignInButtonContainer';
 
-export const SignInButtons = styled(Button)`
+export const SignInButton = styled(Button)`
+  min-width: 12rem;
+  margin: 1rem 0;
   padding: ${props => props.theme.spacing(1)} ${props => props.theme.spacing(2)};
   ${props => props.theme.typo.button};
-  background-color: ${props => props.isSigninProvider ? props.theme.palette.secondary.main : props.theme.palette.primary.main}; 
-`;
-SignInButtons.displayName = 'SignInButtons';
 
+  & > svg {
+    font-size: 2rem;
+    margin-right: 1rem;
+  }
+`;
+SignInButton.displayName = 'SignInButton';
+
+export const DividerText = styled.div`
+  width: 100%;
+  text-align: center;
+  color: ${props => props.theme.palette.text.secondary};
+  ${props => props.theme.typo.subtitle};
+`;
+DividerText.displayName = 'DividerText';

@@ -12,8 +12,8 @@ export default (mode) => ({
       dark: "#1976D2",
     },
     error: {
-      light: "#FFD2D2",
-      dark: "#D8000C",
+      light: "#e57373",
+      dark: "#f44336",
     },
     warning: {
       light: "#FEEFB3",
@@ -101,8 +101,8 @@ export default (mode) => ({
   },
   buttons: {
     disabled: {
-      color: "rgba(255, 255, 255, 0.26)",
-      backgroundColor: "rgba(255, 255, 255, 0.12)",
+      text: "rgba(255, 255, 255, 0.26)",
+      bg: "rgba(255, 255, 255, 0.12)",
     }
   },
   spacing: (multiplier) => (`${10 * multiplier}px`),

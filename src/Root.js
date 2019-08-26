@@ -16,6 +16,7 @@ import {
   faUserCircle,
   faEdit,
   faSignOutAlt,
+  faSignInAlt,
   faHome,
   faCalendar,
   faCalendarDay,
@@ -24,8 +25,8 @@ import {
   faCalendarPlus,
   faHatWizard,
   faMoon,
-  faSun
-
+  faSun,
+  faChevronLeft
 } from '@fortawesome/free-solid-svg-icons';
 
 export default (props) => {
@@ -50,6 +51,7 @@ export default (props) => {
     faUserCircle,
     faEdit,
     faSignOutAlt,
+    faSignInAlt,
     faHome,
     faCalendar,
     faCalendarDay,
@@ -58,7 +60,8 @@ export default (props) => {
     faCalendarPlus,
     faHatWizard,
     faMoon,
-    faSun
+    faSun,
+    faChevronLeft
   );
 
   return (

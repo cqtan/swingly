@@ -1,13 +1,15 @@
 import styled, { css } from 'styled-components';
 
 const chooseColor = props => {
-  const { primary, secondary, theme } = props;
-  if (primary) {
-    return theme.palette.primary.main;
+  const { secondary, disabled, transparent, theme } = props;
+  if (disabled) {
+    return theme.buttons.disabled.bg;
+  } else if (transparent) {
+    return `transparent`;
   } else if (secondary) {
     return theme.palette.secondary.main;
-  } else{
-    return `transparent`;
+  } else {
+    return theme.palette.primary.main;
   }
 }
 
@@ -15,8 +17,8 @@ const defaultButton = css`
   box-shadow: ${props => props.theme.shadows[2]};
   border-radius: 0.5rem;
   :hover {
-    box-shadow: ${({ theme }) => theme.shadows[8]};
-    filter: brightness(90%);
+    box-shadow: ${props => !props.disabled && props.theme.shadows[8]};
+    filter: ${props => !props.disabled && `brightness(105%)`};
   }
 
   :active {

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { 
-  SignInButtonContainer,
-  SignInTitle
+  SignInButtonContainer, SignInButton
 } from '../../sign-in/sign-in.styles';
 
 export const SignUpFormContainer = styled.div`
@@ -10,11 +9,12 @@ export const SignUpFormContainer = styled.div`
 SignUpFormContainer.displayName = 'SignUpFormContainer';
 
 export const SignUpButtonContainer = styled(SignInButtonContainer)`
-  
+
 `;
 SignUpButtonContainer.displayName = 'SignUpButtonContainer';
 
-export const SignUpTitle = styled(SignInTitle)`
+
+export const SignUpButton = styled(SignInButton)`
 
 `;
-SignUpTitle.displayName = 'SignUpTitle';
+SignUpButton.displayName = 'SignUpButton';

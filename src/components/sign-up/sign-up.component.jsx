@@ -1,19 +1,20 @@
 import React from 'react';
 import {
   SignUpContainer,
-  SignUpButtonConatiner
+  SignUpButtonConatiner,
+  SignUpButton,
+  SignUpTitle
 } from './sign-up.styles'
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import SignUpForm from './sign-up-form/sign-up-form.component';
-import Button from '../../ui/button/button.component';
 import Backdrop from '../../ui/backdrop/backdrop.component';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SignUp = (props) => {
-
   const { isOpen, setOpen, openSignIn } = props;
 
-  const onSubmit = (values, formikBag) => {
+  const onSubmit = (values) => {
     console.log('submit: ', values);
   }
 
@@ -47,6 +48,7 @@ const SignUp = (props) => {
     <>
       <Backdrop onClick={() => setOpen(false)} isOpen={isOpen}/>
       <SignUpContainer isOpen={isOpen}>
+        <SignUpTitle>Register</SignUpTitle>
         <Formik
          initialValues={initialValues}
          validationSchema={validationSchema}
@@ -54,7 +56,10 @@ const SignUp = (props) => {
          onSubmit={onSubmit}
         />
         <SignUpButtonConatiner>
-          <Button onClick={handleOpenSignIn}>Back</Button>
+          <SignUpButton onClick={handleOpenSignIn}>
+            <FontAwesomeIcon icon='chevron-left' />
+            Back
+          </SignUpButton>
         </SignUpButtonConatiner>
       </SignUpContainer>
     </>
