@@ -27,7 +27,6 @@ const SignUp = (props) => {
     email: '',
     password: '',
     confirmPassword: '',
-    description: ''
   }
 
   const validationSchema = Yup.object().shape({
@@ -39,8 +38,6 @@ const SignUp = (props) => {
       .min(8, 'Password must contain at least 8 characters'),
     confirmPassword: Yup.string().required()
       .oneOf([Yup.ref('password')], 'Passwords must match'),
-    description: Yup.string().notRequired()
-      .max(256, 'Max length reached'),
   });
 
   return (
