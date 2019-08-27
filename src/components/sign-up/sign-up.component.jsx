@@ -5,16 +5,19 @@ import {
   SignUpButton,
   SignUpTitle
 } from './sign-up.styles'
+import { connect } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import SignUpForm from './sign-up-form/sign-up-form.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { signUp } from '../../redux/user/user.actions';
 
 const SignUp = (props) => {
-  const { isOpen, setOpen, openSignIn } = props;
+  const { isOpen, setOpen, openSignIn, signUp } = props;
 
   const onSubmit = (values) => {
     console.log('submit: ', values);
+    signUp(values);
   }
 
   const handleOpenSignIn = () => {
@@ -42,7 +45,6 @@ const SignUp = (props) => {
 
   return (
     <>
-      {/* <Backdrop onClick={() => setOpen(false)} isOpen={isOpen}/> */}
       <SignUpContainer isOpen={isOpen}>
         <SignUpTitle>Register</SignUpTitle>
         <Formik
@@ -62,4 +64,8 @@ const SignUp = (props) => {
   );
 }
 
-export default SignUp;
+const mapDispatchToProps = {
+  signUp
+}
+
+export default connect(null, mapDispatchToProps)(SignUp);

@@ -25,7 +25,6 @@ const SignIn = (props) => {
 
   return (
     <>
-      {/* <Backdrop onClick={() => setOpen(false)} isOpen={isOpen}/> */}
       <SignInContainer isOpen={isOpen}>
         <SignInTitle>Login</SignInTitle>
         <TextField label='Email Address' type='text' value={passwordValue} />
@@ -48,7 +47,6 @@ const SignIn = (props) => {
             <FontAwesomeIcon icon={faGooglePlus} />
             Google
           </SignInButton>
-          
         </SignInButtonContainer>
       </SignInContainer>
     </>

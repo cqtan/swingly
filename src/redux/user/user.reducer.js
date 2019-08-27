@@ -3,7 +3,8 @@ import { UserActionTypes } from './user.types';
 const INITIAL_STATE = {
   currentUser: null,
   error: null,
-  loading: false
+  loading: false,
+  data: null,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -26,6 +27,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         currentUser: null,
         error: null
+      };
+    case UserActionTypes.SIGNUP_SUCCESS:
+    case UserActionTypes.SIGNUP_FAILED:
+      return {
+        ...state,
+        data: action.payload
       };
     case UserActionTypes.SET_CURRENT_USER_FAILED:
     case UserActionTypes.SIGNIN_FAILED:

@@ -5,7 +5,7 @@ import {
   signInWithGithub,
   signInWithGoogle,
 } from '../../firebase/firebase.utils';
-import { auth } from '../../firebase/firebase.utils';
+import { auth, firestore } from '../../firebase/firebase.utils';
 
 const getUserWithProvider = async (signInMethod) => {
   switch(signInMethod) {
@@ -69,6 +69,52 @@ export const signOut = () => async dispatch => {
     dispatch({
       type: UserActionTypes.SIGNOUT_FAILED,
       payload: error
+    });
+  }
+}
+
+export const signUp = values => async dispatch => {
+  // Check if user exists already
+  const usersSnap = await firestore.collection('users').get();
+  let userExists = null;
+  if (usersSnap) {
+    usersSnap.forEach(doc => {
+      if (doc.data().email === values.email)
+        userExists = doc.data();
+    });
+  }
+
+  if (!userExists) {
+    const { user } = await auth.createUserWithEmailAndPassword(
+      values.email,
+      values.password
+    );
+
+    const newUserDocRef = firestore.collection('users').doc();
+    try {
+      const { username, email, password } = values;
+      const createdAt = new Date();
+      await newUserDocRef.set({
+        createdAt,
+        displayName: username,
+        email,
+        password
+      });
+
+      dispatch({
+        type: UserActionTypes.SIGNUP_SUCCESS,
+        payload: user
+      });
+    } catch {
+      dispatch({ 
+        type: UserActionTypes.SIGNUP_FAILED,
+        payload: 'User with given email already exists!'
+      });
+    }
+  } else {
+    dispatch({ 
+      type: UserActionTypes.SIGNUP_FAILED,
+      payload: 'User with given email already exists!'
     });
   }
 }
