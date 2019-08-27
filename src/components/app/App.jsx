@@ -11,10 +11,11 @@ import ExampleContainer from '../../pages/example-container/example-container.co
 import Profile from '../../pages/profile/profile.component';
 import Background from '../../ui/background/background.component';
 import Header from '../../layout/header/header.component';
+import Snackbar from '../../ui/snackbar/snackbar.component';
 import { setCurrentUser } from '../../redux/user/user.actions';
 
 export const App = (props) => {
-  const { themeMode, setCurrentUser } = props;
+  const { themeMode, setCurrentUser, snackbar } = props;
 
   useEffect(() => {
     setCurrentUser();    
@@ -26,6 +27,12 @@ export const App = (props) => {
         <GlobalStyle />
         <Background />
         <Header />
+        <Snackbar
+          duration={5000} 
+          type={snackbar.type}
+          text={snackbar.text}
+          isOpen={snackbar.isOpen}
+        />
         <Switch>
           <Route path="/hi" exact render={() => <ExampleContainer hi/>} />
           <Route path="/profile" exact component={Profile} />
@@ -37,7 +44,8 @@ export const App = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  themeMode: state.themeMode
+  themeMode: state.themeMode,
+  snackbar: state.snackbar
 });
 
 const mapDispatchToProps = {

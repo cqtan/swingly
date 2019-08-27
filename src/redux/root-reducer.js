@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 
 import themeModeReducer from './theme-mode/theme-mode.reducer';
 import userReducer from './user/user.reducer';
+import snackbarReducer from './snackbar/snackbar.reducer';
 
 const persistConfig = {
   key: 'root',
@@ -13,6 +14,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   themeMode: themeModeReducer,
+  snackbar: snackbarReducer,
   user: userReducer
 });
 

@@ -5,10 +5,12 @@ import {
   SnackText, 
   SnackIcon
 } from './snackbar.styles'
+import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { closeSnackbar } from '../../redux/snackbar/snackbar.actions';
 
 const Snackbar = (props) => {
-  const { type, text } = props;
+  const { type, text, isOpen, duration, closeSnackbar } = props;
 
   const getIconType = (type) => {
     switch(type) {
@@ -25,19 +27,29 @@ const Snackbar = (props) => {
     }
   }
 
+  if (duration) {
+    setTimeout(() => {
+      closeSnackbar();
+    }, duration);
+  }
+
   return (
     <>
-      <SnackbarContainer type={type}>
+      <SnackbarContainer type={type} isOpen={isOpen}>
         <SnackIcon>
           <FontAwesomeIcon icon={getIconType(type)} />
         </SnackIcon>
         <SnackText>{text}</SnackText>
         <SnackButton transparent flat>
-          <FontAwesomeIcon icon='times' />
+          <FontAwesomeIcon icon='times' onClick={closeSnackbar}/>
         </SnackButton>
       </SnackbarContainer>
     </>
   );
 }
 
-export default Snackbar;
+const mapDispatchToProps = dispatch => ({
+  closeSnackbar: () => dispatch(closeSnackbar())
+});
+
+export default connect(null, mapDispatchToProps)(Snackbar);

@@ -6,6 +6,7 @@ import {
   signInWithGoogle,
 } from '../../firebase/firebase.utils';
 import { auth, firestore } from '../../firebase/firebase.utils';
+import { openSnackbar } from '../snackbar/snackbar.actions';
 
 const getUserWithProvider = async (signInMethod) => {
   switch(signInMethod) {
@@ -133,11 +134,15 @@ export const signInWithEmail = values => async dispatch => {
       type: UserActionTypes.SIGNIN_SUCCESS,
       payload: userSnap.data()
     });
+
+    dispatch(openSnackbar('success', 'You have been successfully signed in!'));
   } catch (error) {
     dispatch({
       type: UserActionTypes.SIGNIN_FAILED,
       payload: error
     });
+
+    dispatch(openSnackbar('error', 'Incorrect email or password! Please try again.'));
   }
 
 }

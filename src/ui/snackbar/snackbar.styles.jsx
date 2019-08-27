@@ -29,8 +29,10 @@ export const SnackbarContainer = styled.div`
   align-items: center;
   background-color: ${selectColor};
   bottom: 5rem;
-  z-index: 700;
   ${props => props.theme.mixins.defaultBorderRadius};
+  opacity: ${props => props.isOpen ? 100 : 0};
+  z-index: ${props => props.isOpen ? 700 : -100};
+  transition: opacity .2s ease-in 0.5s;
 `;
 SnackbarContainer.displayName = 'SnackbarContainer';
 
