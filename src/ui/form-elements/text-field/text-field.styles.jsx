@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 const shrinkLabel = css`
   top: -1.5rem;
   color: ${props => props.error ? 
-    props.theme.palette.error.dark : 
+    props.theme.palette.error : 
     props.theme.palette.primary.main
   };
   font-size: ${props => props.theme.typo.subtitle};
@@ -20,7 +20,7 @@ export const TextFieldLabel = styled.label`
   top: 1rem;
   ${props => props.theme.typo.body};
   color: ${props => props.error ? 
-    props.theme.palette.error.dark : 
+    props.theme.palette.error : 
     props.theme.palette.text.secondary
   };
   transition: all .2s ease-out;
@@ -39,7 +39,7 @@ export const TextFieldInput = styled.input`
   border: none;
   border-radius: 0px;
   border-bottom: 1px solid ${props => props.error ? 
-    props.theme.palette.error.dark : 
+    props.theme.palette.error : 
     props.theme.palette.text.primary
   };
   color: ${props => props.theme.palette.text.primary};
@@ -62,7 +62,7 @@ TextFieldContainer.displayName = 'TextFieldContainer';
 export const HelperText = styled.div`
   width: 100%;
   ${props => props.theme.typo.subtitle};
-  color: ${props => props.theme.palette.error.dark};
+  color: ${props => props.theme.palette.error};
 `;
 HelperText.displayName = 'HelperText';
 

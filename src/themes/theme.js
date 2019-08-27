@@ -11,14 +11,10 @@ export default (mode) => ({
       main: "#2196F3",
       dark: "#1976D2",
     },
-    error: {
-      light: "#e57373",
-      dark: "#f44336",
-    },
-    warning: {
-      light: "#FEEFB3",
-      dark: "#9F6000",
-    },
+    error: "#d32f2f",
+    warning: "#ffa000",
+    info: "#90caf9",
+    success: "#43a047",
     grey: {
       0: "0b0b0b",
       1: "#212121",

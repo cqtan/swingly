@@ -68,6 +68,7 @@ const SignUpForm = (props) => {
         <TextField
           name='confirmPassword'
           label='Confirm Password'
+          type='password'
           onChange={(e) => onChange('confirmPassword', e)}
           onBlur={(e) => onBlur('confirmPassword', e)}
           value={values.confirmPassword}

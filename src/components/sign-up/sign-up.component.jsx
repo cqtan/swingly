@@ -15,7 +15,6 @@ import { signUp } from '../../redux/user/user.actions';
 const SignUp = (props) => {
   const { isOpen, setOpen, openSignIn, signUp } = props;
 
-  
   const handleOpenSignIn = () => {
     setOpen(false);
     openSignIn(true);

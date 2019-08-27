@@ -26,7 +26,12 @@ import {
   faHatWizard,
   faMoon,
   faSun,
-  faChevronLeft
+  faChevronLeft,
+  faTimes,
+  faInfoCircle,
+  faExclamationTriangle,
+  faExclamationCircle,
+  faCheckCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 export default (props) => {
@@ -61,7 +66,12 @@ export default (props) => {
     faHatWizard,
     faMoon,
     faSun,
-    faChevronLeft
+    faChevronLeft,
+    faTimes,
+    faInfoCircle,
+    faExclamationTriangle,
+    faExclamationCircle,
+    faCheckCircle
   );
 
   return (
