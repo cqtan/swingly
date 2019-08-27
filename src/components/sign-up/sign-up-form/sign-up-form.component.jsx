@@ -15,7 +15,8 @@ const SignUpForm = (props) => {
     isValid,
     handleReset,
     handleChange,
-    setFieldTouched
+    setFieldTouched,
+    onSubmit
   } = props;
   
   const onChange = (inputLabel, event) => {
@@ -26,6 +27,11 @@ const SignUpForm = (props) => {
 
   const onBlur = (inputLabel, event) => {
     setFieldTouched(inputLabel, true, true);
+  }
+
+  const handleSubmit = () => {
+    handleReset();
+    onSubmit(values);
   }
 
   return (
@@ -52,6 +58,7 @@ const SignUpForm = (props) => {
         <TextField
           name='password'
           label='Password'
+          type='password'
           onChange={(e) => onChange('password', e)}
           onBlur={(e) => onBlur('password', e)}
           value={values.password}
@@ -70,6 +77,7 @@ const SignUpForm = (props) => {
         <SignUpButtonContainer>
           <SignUpButton
             type='submit'
+            onClick={handleSubmit}
             disabled={!isValid}>
             Submit
           </SignUpButton>

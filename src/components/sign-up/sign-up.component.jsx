@@ -15,14 +15,16 @@ import { signUp } from '../../redux/user/user.actions';
 const SignUp = (props) => {
   const { isOpen, setOpen, openSignIn, signUp } = props;
 
-  const onSubmit = (values) => {
-    console.log('submit: ', values);
-    signUp(values);
-  }
-
+  
   const handleOpenSignIn = () => {
     setOpen(false);
     openSignIn(true);
+  }
+  
+  const onSubmit = (values) => {
+    console.log('submit: ', values);
+    signUp(values);
+    handleOpenSignIn();
   }
 
   const initialValues = {
@@ -50,8 +52,7 @@ const SignUp = (props) => {
         <Formik
          initialValues={initialValues}
          validationSchema={validationSchema}
-         render={(formikBag) => <SignUpForm {...formikBag} />}
-         onSubmit={onSubmit}
+         render={(formikBag) => <SignUpForm {...formikBag} onSubmit={onSubmit} />}
         />
         <SignUpButtonConatiner>
           <SignUpButton onClick={handleOpenSignIn}>
