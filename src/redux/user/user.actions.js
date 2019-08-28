@@ -25,7 +25,10 @@ export const setCurrentUser = () => async dispatch => {
     dispatch({ type: UserActionTypes.USER_LOADING });
 
     const userAuth = await getCurrentUser();
-    if (!userAuth) return;    
+    if (!userAuth) {
+      dispatch({ type: UserActionTypes.USER_NOT_LOADING });
+      return
+    };    
 
     const userRef = await createUserProfileDocument(userAuth);
     const userSnapshot = await userRef.get();
@@ -54,11 +57,15 @@ export const signInWithProvider = (signInMethod) => async dispatch => {
       type: UserActionTypes.SIGNIN_SUCCESS,
       payload: userSnapshot.data()
     });
+
+    dispatch(openSnackbar('success', 'You have been successfully signed in!'));
   } catch (error) {
     dispatch({
       type: UserActionTypes.SIGNIN_FAILED,
       payload: error
     });
+
+    dispatch(openSnackbar('error', 'Sign in failed!'));
   }
 }
 
@@ -66,11 +73,15 @@ export const signOut = () => async dispatch => {
   try {
     await auth.signOut();
     dispatch({type: UserActionTypes.SIGNOUT_SUCCESS});
+
+    dispatch(openSnackbar('success', 'You have been successfully signed out!'));
   } catch (error) {
     dispatch({
       type: UserActionTypes.SIGNOUT_FAILED,
       payload: error
     });
+
+    dispatch(openSnackbar('error', 'Sign out failed!'));
   }
 }
 
@@ -105,18 +116,24 @@ export const signUp = values => async dispatch => {
         });
   
         await auth.signOut();
+
+        dispatch(openSnackbar('success', 'Sign up success!'));
       }
     } catch (error) {
       dispatch({ 
         type: UserActionTypes.SIGNUP_FAILED,
         payload: error
       });
+
+      dispatch(openSnackbar('error', 'Sign up failed!'));
     }
   } else {
     dispatch({ 
       type: UserActionTypes.SIGNUP_FAILED,
       payload: 'User with given email already exists!'
     });
+
+    dispatch(openSnackbar('error', 'User with given email already exists!'));
   }
 }
 
@@ -144,5 +161,4 @@ export const signInWithEmail = values => async dispatch => {
 
     dispatch(openSnackbar('error', 'Incorrect email or password! Please try again.'));
   }
-
 }
