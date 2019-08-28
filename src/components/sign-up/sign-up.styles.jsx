@@ -11,9 +11,9 @@ export const SignUpButton = styled(FormButton)`
 `;
 SignUpButton.displayName = 'SignUpButton';
 
-export const SignUpButtonConatiner = styled.div`
+export const ButtonConatainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 `;
-SignUpButtonConatiner.displayName = 'SignUpButtonConatiner';
+ButtonConatainer.displayName = 'ButtonConatainer';

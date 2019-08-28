@@ -1,7 +1,7 @@
 import React from "react";
 import {
   SignUpContainer,
-  SignUpButtonConatiner,
+  ButtonConatainer,
   SignUpButton,
 } from "./sign-up.styles";
 import { connect } from "react-redux";
@@ -58,12 +58,12 @@ const SignUp = props => {
         validationSchema={validationSchema}
         render={formikBag => <SignUpForm {...formikBag} onSubmit={onSubmit} />}
       />
-      <SignUpButtonConatiner>
+      <ButtonConatainer>
         <SignUpButton onClick={handleOpenSignIn}>
           <FontAwesomeIcon icon="chevron-left" />
           Back
         </SignUpButton>
-      </SignUpButtonConatiner>
+      </ButtonConatainer>
     </SignUpContainer>
   );
 };

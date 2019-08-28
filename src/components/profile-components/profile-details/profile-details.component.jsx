@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ProfileDetailsContainer,
   ProfileTitle,
@@ -10,17 +10,26 @@ import {
 } from './profile-details.styles'
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ProfileEdit from '../../profile-edit/profile-edit.component';
 
 const ProfileDetails = (props) => {
   const { user } = props;
   const { currentUser } = user;
 
+  const [editFormOpen, setEditFormOpen] = useState(false);
+
   return (
     <>
+      <ProfileEdit
+        isOpen={editFormOpen} 
+        onClose={() => setEditFormOpen(false)} 
+      />
       <ProfileDetailsContainer>
         <ProfileTitle>
           Details
-          <ProfileButton transparent flat><FontAwesomeIcon icon='edit' /></ProfileButton>
+          <ProfileButton transparent flat onClick={() => setEditFormOpen(true)}>
+            <FontAwesomeIcon icon='edit' />
+          </ProfileButton>
         </ProfileTitle>
         <ProfileRow>
           <ProfileLabel>Username</ProfileLabel>

@@ -1,20 +1,20 @@
 import styled from 'styled-components';
-import { 
-  SignInButtonContainer, SignInButton
-} from '../../sign-in/sign-in.styles';
+import FormButton from '../../../ui/form-elements/form-button/form-button.component';
 
 export const SignUpFormContainer = styled.div`
 
 `;
 SignUpFormContainer.displayName = 'SignUpFormContainer';
 
-export const SignUpButtonContainer = styled(SignInButtonContainer)`
-
+export const ButtonConatainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;
-SignUpButtonContainer.displayName = 'SignUpButtonContainer';
+ButtonConatainer.displayName = 'ButtonConatainer';
 
 
-export const SignUpButton = styled(SignInButton)`
+export const SignUpButton = styled(FormButton)`
 
 `;
 SignUpButton.displayName = 'SignUpButton';

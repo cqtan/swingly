@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   SignUpFormContainer,
-  SignUpButtonContainer,
+  ButtonConatainer,
   SignUpButton
 } from './sign-up-form.styles'
 import { Form } from 'formik';
@@ -75,7 +75,7 @@ const SignUpForm = (props) => {
           helperText={touched.confirmPassword ? errors.confirmPassword : ''}
           error={touched.confirmPassword && Boolean(errors.confirmPassword)}
         />
-        <SignUpButtonContainer>
+        <ButtonConatainer>
           <SignUpButton
             type='submit'
             onClick={handleSubmit}
@@ -87,7 +87,7 @@ const SignUpForm = (props) => {
             onClick={handleReset}>          
             Reset
           </SignUpButton>
-        </SignUpButtonContainer>
+        </ButtonConatainer>
       </Form>
     </SignUpFormContainer>
   );
