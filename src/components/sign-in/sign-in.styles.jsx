@@ -1,5 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Button from '../../ui/button/button.component';
+import { fadeInOut } from '../../themes/animations';
+
+const animate = css`
+  ${props => fadeInOut(props.transName, 'left')};
+`
 
 export const SignInContainer = styled.div`
   ${props => props.theme.mixins.absCentered};
@@ -9,11 +14,15 @@ export const SignInContainer = styled.div`
   background-color: ${props => props.theme.background.layer2};
   box-shadow: ${props => props.theme.shadows[4]};
   padding: ${props => props.theme.spacing(2)};
-  z-index: ${props => props.isOpen ? 500 : -500 }; 
-  opacity: ${props => props.isOpen ? 1 : 0};
+  z-index: 500; 
   transition: all .2s ease-out .1s;
 `;
 SignInContainer.displayName = 'SignInContainer';
+
+export const SignInContainerAnimated = styled(SignInContainer)`
+  ${animate};
+`;
+SignInContainerAnimated.displayName = 'SignInContainerAnimated';
 
 export const SignInTitle = styled.div`
   ${props => props.theme.typo.h4};

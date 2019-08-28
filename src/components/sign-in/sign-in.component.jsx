@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import {
-  SignInContainer,
+  SignInContainerAnimated,
   SignInTitle,
   SignInButtonContainer,
   SignInButton,
   DividerText,
 } from './sign-in.styles';
 import { connect } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 import TextField from '../../ui/form-elements/text-field/text-field.component';
 import { 
   signInWithProvider,
@@ -52,40 +53,47 @@ const SignIn = (props) => {
 
   return (
     <>
-      <SignInContainer isOpen={isOpen}>
-        <SignInTitle>Login</SignInTitle>
-        <TextField 
-          label='Email Address'
-          type='text'
-          value={formFields.email}
-          onChange={(e) => onChange('email', e)}
-        />
-        <TextField 
-          label='Password'
-          type='password'
-          value={formFields.password} 
-          onChange={(e) => onChange('password', e)}
-        />
-        <SignInButtonContainer>
-          <SignInButton onClick={onLogin}>
-            Login
-          </SignInButton>
-          <SignInButton onClick={handleOpenSignUp}>
-            Register
-          </SignInButton>
-          <DividerText>or sign in with</DividerText>
-          <SignInButton stretch isSigninProvider
-            onClick={() => signInWithProvider('github')}>
-            <FontAwesomeIcon icon={faGithub} />
-            Github
-          </SignInButton>
-          <SignInButton stretch isSigninProvider
-            onClick={() => signInWithProvider('google')}>
-            <FontAwesomeIcon icon={faGooglePlus} />
-            Google
-          </SignInButton>
-        </SignInButtonContainer>
-      </SignInContainer>
+      <CSSTransition
+        in={isOpen}
+        classNames='sign-in'
+        timeout={300}
+        unmountOnExit>
+        <SignInContainerAnimated transName='sign-in'>
+          <SignInTitle>Login</SignInTitle>
+          <TextField 
+            label='Email Address'
+            type='text'
+            value={formFields.email}
+            onChange={(e) => onChange('email', e)}
+          />
+          <TextField 
+            label='Password'
+            type='password'
+            value={formFields.password} 
+            onChange={(e) => onChange('password', e)}
+          />
+          <SignInButtonContainer>
+            <SignInButton onClick={onLogin}>
+              Login
+            </SignInButton>
+            <SignInButton onClick={handleOpenSignUp}>
+              Register
+            </SignInButton>
+            <DividerText>or sign in with</DividerText>
+            <SignInButton stretch isSigninProvider
+              onClick={() => signInWithProvider('github')}>
+              <FontAwesomeIcon icon={faGithub} />
+              Github
+            </SignInButton>
+            <SignInButton stretch isSigninProvider
+              onClick={() => signInWithProvider('google')}>
+              <FontAwesomeIcon icon={faGooglePlus} />
+              Google
+            </SignInButton>
+          </SignInButtonContainer>
+        </SignInContainerAnimated>
+
+      </CSSTransition>
     </>
   );
 }

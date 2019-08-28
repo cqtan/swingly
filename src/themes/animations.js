@@ -19,24 +19,24 @@ export const animateFadeIn = css`
   animation: ${fadeIn} .2s ease-out;
 `;
 
-export const fadeInOut = (direction) => css`
-  &.example-enter {
+export const fadeInOut = (transName, direction) => css`
+  &.${transName}-enter {
     opacity: 0;
     ${direction}: 0%;
   }
 
-  &.example-enter-active {
+  &.${transName}-enter-active {
     opacity: 1;
     ${direction}: 50%;
     transition: all 0.3s ease-out;
   }
 
-  &.example-exit {
+  &.${transName}-exit {
     opacity: 1;
     ${direction}: 50%;
   }
 
-  &.example-exit-active {
+  &.${transName}-exit-active {
     opacity: 0;
     ${direction}: 0%;
     transition: all 0.3s ease-out;

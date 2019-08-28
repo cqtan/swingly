@@ -10,6 +10,7 @@ import { CSSTransition } from 'react-transition-group';
 
 const ExampleContainer = (props) => {
   const { toggleTheme, hi } = props;
+
   const [isOpen, setOpen] = useState(false);
 
   return (
@@ -19,12 +20,10 @@ const ExampleContainer = (props) => {
         classNames='example'
         timeout={300}
         unmountOnExit>
-          
-          <ExampleButtonContainer>
-            { hi && <h2>Hello!</h2> }
-            <Button primary onClick={toggleTheme}>Touch Me!</Button>
-          </ExampleButtonContainer>
-          
+        <ExampleButtonContainer transName='example'>
+          { hi && <h2>Hello!</h2> }
+          <Button primary onClick={toggleTheme}>Touch Me!</Button>
+        </ExampleButtonContainer>
       </CSSTransition>
       <ExampleButton primary onClick={() => setOpen(!isOpen)}>Toggle</ExampleButton>
     </>

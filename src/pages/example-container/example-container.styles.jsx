@@ -20,7 +20,7 @@ export const ExampleButtonContainer = styled.div`
   };
   border-radius: 5px;
 
-  ${() => fadeInOut('left')}
+  ${props => fadeInOut(props.transName,'left')};
 `;
 ExampleButtonContainer.displayName = 'ExampleButtonContainer';
 

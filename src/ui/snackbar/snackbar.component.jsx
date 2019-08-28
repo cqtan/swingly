@@ -8,6 +8,7 @@ import {
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { closeSnackbar } from '../../redux/snackbar/snackbar.actions';
+import { CSSTransition } from 'react-transition-group';
 
 const Snackbar = (props) => {
   const { type, text, isOpen, duration, closeSnackbar } = props;
@@ -27,7 +28,7 @@ const Snackbar = (props) => {
     }
   }
 
-  if (duration) {
+  if (duration && isOpen) {
     setTimeout(() => {
       closeSnackbar();
     }, duration);
@@ -35,15 +36,22 @@ const Snackbar = (props) => {
 
   return (
     <>
-      <SnackbarContainer type={type} isOpen={isOpen}>
-        <SnackIcon>
-          <FontAwesomeIcon icon={getIconType(type)} />
-        </SnackIcon>
-        <SnackText>{text}</SnackText>
-        <SnackButton transparent flat>
-          <FontAwesomeIcon icon='times' onClick={closeSnackbar}/>
-        </SnackButton>
-      </SnackbarContainer>
+      <p></p>
+      <CSSTransition
+        in={isOpen}
+        classNames='snackbar'
+        timeout={300}
+        unmountOnExit>
+        <SnackbarContainer type={type} transName='snackbar'>
+          <SnackIcon>
+            <FontAwesomeIcon icon={getIconType(type)} />
+          </SnackIcon>
+          <SnackText>{text}</SnackText>
+          <SnackButton transparent flat>
+            <FontAwesomeIcon icon='times' onClick={closeSnackbar}/>
+          </SnackButton>
+        </SnackbarContainer>
+      </CSSTransition>
     </>
   );
 }

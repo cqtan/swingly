@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { fadeInOut } from '../../themes/animations';
 
 export const BackdropContainer = styled.button`
   position: fixed;
@@ -6,9 +7,9 @@ export const BackdropContainer = styled.button`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: ${props => props.isOpen ? 400 : -400};
+  z-index: 400;
   background-color: rgba(0, 0, 0, 0.3);
-  opacity: ${props => props.isOpen ? 1 : 0} ;
-  transition: opacity .4s ease-out;
+  transition: all .4s ease-out;
+  ${props => fadeInOut(props.transName)};
 `;
 BackdropContainer.displayName = BackdropContainer;

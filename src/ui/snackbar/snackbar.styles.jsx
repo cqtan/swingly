@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Button from '../button/button.component';
+import { fadeInOut } from '../../themes/animations';
 
 const selectColor = (props) => {
   const { type, theme } = props;
@@ -30,9 +31,10 @@ export const SnackbarContainer = styled.div`
   background-color: ${selectColor};
   bottom: 5rem;
   ${props => props.theme.mixins.defaultBorderRadius};
-  opacity: ${props => props.isOpen ? 100 : 0};
-  z-index: ${props => props.isOpen ? 700 : -100};
-  transition: opacity .2s ease-in 0.5s;
+  z-index: 700;
+  transition: all 1s ease-in 0.5s;
+
+  ${props => fadeInOut(props.transName, 'left')};
 `;
 SnackbarContainer.displayName = 'SnackbarContainer';
 

@@ -11,6 +11,7 @@ import { Formik } from 'formik';
 import SignUpForm from './sign-up-form/sign-up-form.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { signUp } from '../../redux/user/user.actions';
+import { CSSTransition } from 'react-transition-group';
 
 const SignUp = (props) => {
   const { isOpen, setOpen, openSignIn, signUp } = props;
@@ -46,20 +47,26 @@ const SignUp = (props) => {
 
   return (
     <>
-      <SignUpContainer isOpen={isOpen}>
-        <SignUpTitle>Register</SignUpTitle>
-        <Formik
-         initialValues={initialValues}
-         validationSchema={validationSchema}
-         render={(formikBag) => <SignUpForm {...formikBag} onSubmit={onSubmit} />}
-        />
-        <SignUpButtonConatiner>
-          <SignUpButton onClick={handleOpenSignIn}>
-            <FontAwesomeIcon icon='chevron-left' />
-            Back
-          </SignUpButton>
-        </SignUpButtonConatiner>
-      </SignUpContainer>
+      <CSSTransition
+        in={isOpen}
+        classNames='sign-up'
+        timeout={300}
+        unmountOnExit>
+        <SignUpContainer transName='sign-up'>
+          <SignUpTitle>Register</SignUpTitle>
+          <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          render={(formikBag) => <SignUpForm {...formikBag} onSubmit={onSubmit} />}
+          />
+          <SignUpButtonConatiner>
+            <SignUpButton onClick={handleOpenSignIn}>
+              <FontAwesomeIcon icon='chevron-left' />
+              Back
+            </SignUpButton>
+          </SignUpButtonConatiner>
+        </SignUpContainer>
+      </CSSTransition>
     </>
   );
 }
