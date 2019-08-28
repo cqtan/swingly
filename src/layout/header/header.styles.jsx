@@ -40,3 +40,12 @@ export const Logo = styled(Link)`
   text-transform: none;
   ${({ theme }) => theme.typo.h3 };
 `;
+
+export const HeaderProfile = styled.img`
+  border: 2px solid ${props => props.theme.palette.text.primary};
+  border-radius: 50%;
+  object-fit: cover;
+  width: 3rem;
+  height: 3rem;
+`;
+HeaderProfile.displayName = 'HeaderProfile';

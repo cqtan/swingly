@@ -1,36 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
-  SignInContainerAnimated,
-  SignInTitle,
+  SignInContainer,
   SignInButtonContainer,
   SignInButton,
-  DividerText,
-} from './sign-in.styles';
-import { connect } from 'react-redux';
-import { CSSTransition } from 'react-transition-group';
-import TextField from '../../ui/form-elements/text-field/text-field.component';
-import { 
+  DividerText
+} from "./sign-in.styles";
+import { connect } from "react-redux";
+import TextField from "../../ui/form-elements/text-field/text-field.component";
+import {
   signInWithProvider,
   signInWithEmail
-} from '../../redux/user/user.actions';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faGithub,
-  faGooglePlus
-} from '@fortawesome/free-brands-svg-icons';
+} from "../../redux/user/user.actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faGooglePlus } from "@fortawesome/free-brands-svg-icons";
 
-const SignIn = (props) => {
-  const { isOpen, setOpen, openSignUp, signInWithProvider, signInWithEmail } = props;
+const SignIn = props => {
+  const {
+    isOpen,
+    setOpen,
+    openSignUp,
+    signInWithProvider,
+    signInWithEmail
+  } = props;
 
   const [formFields, setFormFields] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: ""
   });
 
   const handleOpenSignUp = () => {
     setOpen(false);
     openSignUp(true);
-  }
+  };
 
   const onChange = (inputLabel, event) => {
     event.persist();
@@ -38,69 +39,71 @@ const SignIn = (props) => {
       ...formFields,
       [inputLabel]: event.target.value
     });
-  }
+  };
 
   const onLogin = () => {
     signInWithEmail(formFields);
 
     setFormFields({
-      email: '',
-      password: ''
+      email: "",
+      password: ""
     });
 
     setOpen(false);
-  }
+  };
 
   return (
     <>
-      <CSSTransition
-        in={isOpen}
-        classNames='sign-in'
-        timeout={300}
-        unmountOnExit>
-        <SignInContainerAnimated transName='sign-in'>
-          <SignInTitle>Login</SignInTitle>
-          <TextField 
-            label='Email Address'
-            type='text'
-            value={formFields.email}
-            onChange={(e) => onChange('email', e)}
-          />
-          <TextField 
-            label='Password'
-            type='password'
-            value={formFields.password} 
-            onChange={(e) => onChange('password', e)}
-          />
-          <SignInButtonContainer>
-            <SignInButton onClick={onLogin}>
-              Login
-            </SignInButton>
-            <SignInButton onClick={handleOpenSignUp}>
-              Register
-            </SignInButton>
-            <DividerText>or sign in with</DividerText>
-            <SignInButton stretch isSigninProvider
-              onClick={() => signInWithProvider('github')}>
-              <FontAwesomeIcon icon={faGithub} />
-              Github
-            </SignInButton>
-            <SignInButton stretch isSigninProvider
-              onClick={() => signInWithProvider('google')}>
-              <FontAwesomeIcon icon={faGooglePlus} />
-              Google
-            </SignInButton>
-          </SignInButtonContainer>
-        </SignInContainerAnimated>
-
-      </CSSTransition>
+      <SignInContainer
+        isOpen={isOpen}
+        direction="left"
+        transName="sign-in"
+        title='Login'
+      >
+        <TextField
+          label="Email Address"
+          type="text"
+          value={formFields.email}
+          onChange={e => onChange("email", e)}
+        />
+        <TextField
+          label="Password"
+          type="password"
+          value={formFields.password}
+          onChange={e => onChange("password", e)}
+        />
+        <SignInButtonContainer>
+          <SignInButton onClick={onLogin}>Login</SignInButton>
+          <SignInButton onClick={handleOpenSignUp}>Register</SignInButton>
+          <DividerText>or sign in with</DividerText>
+          <SignInButton
+            stretch
+            isSigninProvider
+            onClick={() => signInWithProvider("github")}
+          >
+            <FontAwesomeIcon icon={faGithub} />
+            Github
+          </SignInButton>
+          <SignInButton
+            stretch
+            isSigninProvider
+            onClick={() => signInWithProvider("google")}
+          >
+            <FontAwesomeIcon icon={faGooglePlus} />
+            Google
+          </SignInButton>
+        </SignInButtonContainer>
+      </SignInContainer>
     </>
   );
-}
+};
 
 const mapDispatchToProps = {
   signInWithProvider,
   signInWithEmail
-}
+};
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignIn);

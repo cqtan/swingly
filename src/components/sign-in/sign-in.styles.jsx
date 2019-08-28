@@ -1,35 +1,11 @@
-import styled, { css } from 'styled-components';
-import Button from '../../ui/button/button.component';
-import { fadeInOut } from '../../themes/animations';
+import styled from 'styled-components';
+import Modal from '../../ui/modal/modal.component';
+import FormButton from '../../ui/form-elements/form-button/form-button.component';
 
-const animate = css`
-  ${props => fadeInOut(props.transName, 'left')};
-`
+export const SignInContainer = styled(Modal)`
 
-export const SignInContainer = styled.div`
-  ${props => props.theme.mixins.absCentered};
-  ${props => props.theme.mixins.defaultBorderRadius};
-  min-width: 30rem;
-  min-height: 30rem;
-  background-color: ${props => props.theme.background.layer2};
-  box-shadow: ${props => props.theme.shadows[4]};
-  padding: ${props => props.theme.spacing(2)};
-  z-index: 500; 
-  transition: all .2s ease-out .1s;
 `;
 SignInContainer.displayName = 'SignInContainer';
-
-export const SignInContainerAnimated = styled(SignInContainer)`
-  ${animate};
-`;
-SignInContainerAnimated.displayName = 'SignInContainerAnimated';
-
-export const SignInTitle = styled.div`
-  ${props => props.theme.typo.h4};
-  text-align: center;
-  color: ${props => props.theme.palette.primary.main};
-`;
-SignInTitle.displayName = 'SignInTitle';
 
 export const SignInButtonContainer = styled.div`
   display: flex;
@@ -38,16 +14,8 @@ export const SignInButtonContainer = styled.div`
 `;
 SignInButtonContainer.displayName = 'SignInButtonContainer';
 
-export const SignInButton = styled(Button)`
-  min-width: 12rem;
-  margin: 1rem 0;
-  padding: ${props => props.theme.spacing(1)} ${props => props.theme.spacing(2)};
-  ${props => props.theme.typo.button};
+export const SignInButton = styled(FormButton)`
 
-  & > svg {
-    font-size: 2rem;
-    margin-right: 1rem;
-  }
 `;
 SignInButton.displayName = 'SignInButton';
 

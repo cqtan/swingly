@@ -1,32 +1,19 @@
-import styled, { css } from 'styled-components';
-import { 
-  SignInContainer, 
-  SignInButtonContainer,
-  SignInTitle,
-  SignInButton
-} from '../sign-in/sign-in.styles';
-import { fadeInOut } from '../../themes/animations';
+import styled from 'styled-components';
+import Modal from '../../ui/modal/modal.component';
+import FormButton from '../../ui/form-elements/form-button/form-button.component';
 
-const animate = css`
-  ${props => fadeInOut(props.transName, 'left')};
-`;
-
-export const SignUpTitle = styled(SignInTitle)`
-
-`;
-SignUpTitle.displayName = 'SignUpTitle';
-
-export const SignUpContainer = styled(SignInContainer)`
-  ${animate};
+export const SignUpContainer = styled(Modal)`
 `;
 SignUpContainer.displayName = 'SignUpContainer';
 
-export const SignUpButton = styled(SignInButton)`
+export const SignUpButton = styled(FormButton)`
 
 `;
 SignUpButton.displayName = 'SignUpButton';
 
-export const SignUpButtonConatiner = styled(SignInButtonContainer)`
-
+export const SignUpButtonConatiner = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;
 SignUpButtonConatiner.displayName = 'SignUpButtonConatiner';

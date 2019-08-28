@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   HeaderContainer,
   HeaderButtons,
+  HeaderProfile,
   Logo,
 } from './header.styles';
 import { connect } from 'react-redux';
@@ -37,7 +38,10 @@ const Header = (props) => {
         </HeaderButtons>
         <Logo to='/'>Swingly</Logo>
         <HeaderButtons flat onClick={() => user.currentUser ? setDrawerOpen(!drawerOpen) : handlePopupToggle()}>
-         <FontAwesomeIcon icon='user-circle' size='2x' />
+          { user.currentUser ? 
+            <HeaderProfile src='http://lorempixel.com/400/200/cats' /> :
+            <FontAwesomeIcon icon='user-circle' size='2x' />
+          }
         </HeaderButtons>
       </HeaderContainer>
       <Sidebar isOpen={sideOpen} setOpen={setSideOpen} />

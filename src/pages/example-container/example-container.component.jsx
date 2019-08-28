@@ -5,6 +5,7 @@ import {
   ExampleBgLogo
 } from './example-container.styles';
 import { CSSTransition } from 'react-transition-group';
+import ProfileEdit from '../../components/profile-edit/profile-edit.component';
 
 const ExampleContainer = (props) => {
   const [isOpen, setOpen] = useState(true);
@@ -22,6 +23,7 @@ const ExampleContainer = (props) => {
           </ExampleBgLogo>
         </ExampleBgLogoContainer>
       </CSSTransition>
+      <ProfileEdit />
       <ExampleButton primary onClick={() => setOpen(!isOpen)}>Toggle</ExampleButton>
     </>
   );
