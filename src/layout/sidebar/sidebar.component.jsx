@@ -32,7 +32,7 @@ const Sidebar = (props) => {
           <FontAwesomeIcon icon='hat-wizard' />
           Nope
         </SidebarButton>
-        <SidebarButton onClick={() => toggleTheme()} flat>
+        <SidebarButton onClick={() => toggleTheme()} transparent flat>
           {toggleThemeIcon}{toggleThemeText}
         </SidebarButton>
       </SidebarContainer>

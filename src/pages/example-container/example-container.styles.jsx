@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import Button from '../../ui/button/button.component';
+import { fadeInOut } from '../../themes/animations';
 
 export const ExampleButtonContainer = styled.div`
   width: 300px;
@@ -17,7 +19,14 @@ export const ExampleButtonContainer = styled.div`
     props.theme.shadows[0]
   };
   border-radius: 5px;
-  transition: all .2s ease-out;
+
+  ${() => fadeInOut('left')}
 `;
 ExampleButtonContainer.displayName = 'ExampleButtonContainer';
+
+export const ExampleButton = styled(Button)`
+  margin-top: 10rem;
+  margin-left: 10rem;
+`;
+ExampleButton.displayName = 'ExampleButton';
 

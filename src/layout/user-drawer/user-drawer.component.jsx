@@ -28,12 +28,12 @@ const UserDrawer = (props) => {
     <>
       <Backdrop onClick={() => setOpen(false)} isOpen={isOpen}/>
       <UserDrawerContainer isOpen={isOpen}>
-        <DrawerButton flat onClick={() => handleLink('/profile')}>
+        <DrawerButton transparent flat onClick={() => handleLink('/profile')}>
           <FontAwesomeIcon icon='user-circle' />
           Profile
         </DrawerButton>
         <hr />
-        <DrawerButton flat onClick={handleSignOut}>
+        <DrawerButton transparent flat onClick={handleSignOut}>
           <FontAwesomeIcon icon='sign-out-alt' />
           Signout
         </DrawerButton>
