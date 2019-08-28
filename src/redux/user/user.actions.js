@@ -106,7 +106,7 @@ export const signUp = values => async dispatch => {
       if (user) {
         const userAuth = await getCurrentUser();
         const userRef = await createUserProfileDocument(userAuth, { 
-          displayName: values.username 
+          username: values.username 
         });
   
         const userSnapshot = await userRef.get();
@@ -161,4 +161,49 @@ export const signInWithEmail = values => async dispatch => {
 
     dispatch(openSnackbar('error', 'Incorrect email or password! Please try again.'));
   }
+}
+
+export const editUser = (values, currentUser) => async dispatch => {
+  let newValues = {};
+  if (values.username !== currentUser.username) {
+    newValues.username = values.username;
+  }
+
+  if (values.description !== currentUser.description) {
+    newValues.description = values.description;
+  }
+
+  if (Object.keys(newValues).length !== 0) {
+    console.log('new values!! ', newValues);
+    
+    const userRef = firestore.doc(`users/${currentUser.id}`);
+    const userSnap = await userRef.get();
+
+    console.log('Snap? ', userSnap);
+    
+
+    if (userSnap.exists) {
+      try {
+        console.log('Snap exists!');
+        
+        const batch = firestore.batch();
+        Object.entries(newValues).forEach(([key, val]) => {
+          batch.update(userRef, {
+            [key]: val
+          })
+        });
+        await batch.commit();
+
+        // TODO: DISPATCH EDIT_SUCCESS HERE
+        
+        dispatch(openSnackbar('success', 'Edit successful!'));
+      } catch (error) {
+        dispatch(openSnackbar('error', 'Edit failed! User snapshot does not exist!'));
+      }
+    }
+  } else {
+    dispatch(openSnackbar('error', 'Edit failed!'));
+  }
+  
+
 }

@@ -10,18 +10,21 @@ import * as Yup from 'yup';
 import ProfileEditFrom from './profile-edit-form/profile-edit-form.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Backdrop from '../../ui/backdrop/backdrop.component';
+import { editUser } from '../../redux/user/user.actions';
 
 const ProfileEdit = (props) => {
-  const { isOpen, onClose, user } = props; 
+  const { isOpen, onClose, user, editUser } = props; 
   const { currentUser } = user;
 
   const onSubmit = values => {
     console.log('edit vals: ', values); 
+    console.log('current user: ', currentUser); 
+    editUser(values, currentUser);
   }
 
   const initialValues = {
-    username: currentUser ? currentUser.displayName : '',
-    description: ''
+    username: currentUser ? currentUser.username : '',
+    description: currentUser.description ? currentUser.description : ''
   }
 
   const validationSchema = Yup.object().shape({
@@ -63,6 +66,8 @@ const mapStateToProps = (state) => ({
   user: state.user
 });
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  editUser: editUser
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileEdit);

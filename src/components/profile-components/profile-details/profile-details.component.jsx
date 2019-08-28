@@ -33,7 +33,7 @@ const ProfileDetails = (props) => {
         </ProfileTitle>
         <ProfileRow>
           <ProfileLabel>Username</ProfileLabel>
-          <ProfileData>{currentUser.displayName}</ProfileData>
+          <ProfileData>{currentUser.username}</ProfileData>
         </ProfileRow>
         <ProfileRow>
           <ProfileLabel>Email</ProfileLabel>
