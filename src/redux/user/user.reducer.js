@@ -3,7 +3,7 @@ import { UserActionTypes } from './user.types';
 const INITIAL_STATE = {
   currentUser: null,
   error: null,
-  loading: false,
+  isLoading: false,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -11,12 +11,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.USER_LOADING:
       return {
         ...state,
-        loading: true
+        isLoading: true
       }
     case UserActionTypes.USER_NOT_LOADING:
       return {
         ...state,
-        loading: false
+        isLoading: false
       };
     case UserActionTypes.SET_CURRENT_USER_SUCCESS:
     case UserActionTypes.SIGNIN_SUCCESS:
@@ -24,7 +24,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         currentUser: action.payload,
         error: null,
-        loading: false
+        isLoading: false
       };
     case UserActionTypes.SIGNUP_SUCCESS:
     case UserActionTypes.SIGNOUT_SUCCESS:
@@ -51,7 +51,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         error: action.payload,
-        loading: false
+        isLoading: false
       };
     default:
       return state;
