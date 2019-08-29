@@ -128,11 +128,7 @@ export const signUp = values => async dispatch => {
       dispatch(openSnackbar('error', 'Sign up failed!'));
     }
   } else {
-    dispatch({ 
-      type: UserActionTypes.SIGNUP_FAILED,
-      payload: 'User with given email already exists!'
-    });
-
+    dispatch({ type: UserActionTypes.SIGNUP_FAILED });
     dispatch(openSnackbar('error', 'User with given email already exists!'));
   }
 }
@@ -173,19 +169,12 @@ export const editUser = (values, currentUser) => async dispatch => {
     newValues.description = values.description;
   }
 
-  if (Object.keys(newValues).length !== 0) {
-    console.log('new values!! ', newValues);
-    
+  if (Object.keys(newValues).length !== 0) {    
     const userRef = firestore.doc(`users/${currentUser.id}`);
     const userSnap = await userRef.get();
 
-    console.log('Snap? ', userSnap);
-    
-
     if (userSnap.exists) {
-      try {
-        console.log('Snap exists!');
-        
+      try {        
         const batch = firestore.batch();
         Object.entries(newValues).forEach(([key, val]) => {
           batch.update(userRef, {
@@ -194,16 +183,22 @@ export const editUser = (values, currentUser) => async dispatch => {
         });
         await batch.commit();
 
-        // TODO: DISPATCH EDIT_SUCCESS HERE
-        
+        dispatch({
+          type: UserActionTypes.EDIT_SUCCESS,
+          payload: newValues
+        });
+
         dispatch(openSnackbar('success', 'Edit successful!'));
       } catch (error) {
+        dispatch({ 
+          type: UserActionTypes.EDIT_FAILED,
+          payload: error
+        });
         dispatch(openSnackbar('error', 'Edit failed! User snapshot does not exist!'));
       }
     }
   } else {
     dispatch(openSnackbar('error', 'Edit failed!'));
   }
-  
-
 }
+

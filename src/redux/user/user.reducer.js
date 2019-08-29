@@ -4,7 +4,6 @@ const INITIAL_STATE = {
   currentUser: null,
   error: null,
   loading: false,
-  data: null,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -27,21 +26,28 @@ const userReducer = (state = INITIAL_STATE, action) => {
         error: null,
         loading: false
       };
+    case UserActionTypes.SIGNUP_SUCCESS:
     case UserActionTypes.SIGNOUT_SUCCESS:
+    case UserActionTypes.DELETE_SUCCESS:
       return {
         ...state,
         currentUser: null,
         error: null
       };
-    case UserActionTypes.SIGNUP_SUCCESS:
-    case UserActionTypes.SIGNUP_FAILED:
+    case UserActionTypes.EDIT_SUCCESS:
       return {
         ...state,
-        data: action.payload
+        currentUser: {
+          ...state.currentUser,
+          ...action.payload
+        }
       };
+    case UserActionTypes.SIGNUP_FAILED:
     case UserActionTypes.SET_CURRENT_USER_FAILED:
     case UserActionTypes.SIGNIN_FAILED:
     case UserActionTypes.SIGNOUT_FAILED:
+    case UserActionTypes.EDIT_FAILED:
+    case UserActionTypes.DELETE_FAILED:
       return {
         ...state,
         error: action.payload,

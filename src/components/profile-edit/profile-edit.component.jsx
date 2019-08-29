@@ -17,9 +17,8 @@ const ProfileEdit = (props) => {
   const { currentUser } = user;
 
   const onSubmit = values => {
-    console.log('edit vals: ', values); 
-    console.log('current user: ', currentUser); 
     editUser(values, currentUser);
+    onClose(); 
   }
 
   const initialValues = {
@@ -48,15 +47,19 @@ const ProfileEdit = (props) => {
         <Formik 
           initialValues={initialValues}
           validationSchema={validationSchema}
-          render={formikBag => <ProfileEditFrom {...formikBag} onSubmit={onSubmit} />}
+          onSubmit={onSubmit}
+          render={ formikBag => <ProfileEditFrom {...formikBag} /> }
         />
         <ButtonContainer>
           <ProfileEditButton onClick={onClose}>
             <FontAwesomeIcon icon="chevron-left" />
             Back
           </ProfileEditButton>
+          <ProfileEditButton onClick={onClose} delete>
+            <FontAwesomeIcon icon="user-slash" />
+            Delete
+          </ProfileEditButton>
         </ButtonContainer>
-        
       </ProfileEditContainer>
     </>
   );

@@ -16,8 +16,7 @@ const ProfileEditForm = (props) => {
     isValid,
     handleReset,
     handleChange,
-    setFieldTouched,
-    onSubmit
+    setFieldTouched
   } = props;
   
   const onChange = (inputLabel, event) => {
@@ -28,11 +27,6 @@ const ProfileEditForm = (props) => {
 
   const onBlur = (inputLabel, event) => {
     setFieldTouched(inputLabel, true, true);
-  }
-
-  const handleSubmit = () => {
-    handleReset();
-    onSubmit(values);
   }
 
   return (
@@ -61,7 +55,6 @@ const ProfileEditForm = (props) => {
           <ButtonContainer>
             <FormButton 
               type='submit'
-              onClick={handleSubmit}
               disabled={!isValid}>
               Save
             </FormButton>

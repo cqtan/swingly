@@ -15,6 +15,6 @@ export const ButtonContainer = styled.div`
 ButtonContainer.displayName = 'ButtonContainer';
 
 export const ProfileEditButton = styled(FormButton)`
-
+  background-color: ${props => props.delete && props.theme.palette.error };
 `;
 ProfileEditButton.displayName = 'ProfileEditButton';
