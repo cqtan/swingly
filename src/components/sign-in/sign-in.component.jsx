@@ -13,6 +13,7 @@ import {
 } from "../../redux/user/user.actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faGooglePlus } from "@fortawesome/free-brands-svg-icons";
+import Modal from "../../ui/modal/modal.component";
 
 const SignIn = props => {
   const {
@@ -53,13 +54,12 @@ const SignIn = props => {
   };
 
   return (
-    <>
-      <SignInContainer
-        isOpen={isOpen}
-        direction="left"
-        transName="sign-in"
-        title='Login'
-      >
+    <Modal
+      isOpen={isOpen}
+      direction="left"
+      transName="sign-in"
+      title='Login'>
+      <SignInContainer>
         <TextField
           label="Email Address"
           type="text"
@@ -94,7 +94,7 @@ const SignIn = props => {
           </SignInButton>
         </SignInButtonContainer>
       </SignInContainer>
-    </>
+    </Modal>
   );
 };
 

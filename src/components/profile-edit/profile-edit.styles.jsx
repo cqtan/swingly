@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import Modal from '../../ui/modal/modal.component';
 import FormButton from '../../ui/form-elements/form-button/form-button.component';
 
-export const ProfileEditContainer = styled(Modal)`
-
+export const ProfileEditContainer = styled.div`
+  min-width: 26rem;
 `;
 ProfileEditContainer.displayName = 'ProfileEditContainer';
 
@@ -15,6 +14,6 @@ export const ButtonContainer = styled.div`
 ButtonContainer.displayName = 'ButtonContainer';
 
 export const ProfileEditButton = styled(FormButton)`
-  background-color: ${props => props.delete && props.theme.palette.error };
+
 `;
 ProfileEditButton.displayName = 'ProfileEditButton';

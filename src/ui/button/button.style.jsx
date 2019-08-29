@@ -1,14 +1,16 @@
 import styled, { css } from 'styled-components';
 
 const chooseColor = props => {
-  const { secondary, disabled, transparent, theme } = props;
+  const { secondary, disabled, transparent, deleteStyle, theme } = props;
   if (disabled) {
     return theme.buttons.disabled.bg;
   } else if (transparent) {
     return `transparent`;
   } else if (secondary) {
     return theme.palette.secondary.main;
-  } else {
+  } else if (deleteStyle) {
+    return theme.palette.error;
+  }else {
     return theme.palette.primary.main;
   }
 }

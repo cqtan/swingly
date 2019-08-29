@@ -1,13 +1,48 @@
 import React from 'react';
 import {
   ConfirmDeleteContainer,
-} from './confirm-delete.styles'
+  DeleteContent,
+  DeleteText,
+  ButtonContainer
+} from './confirm-delete.styles';
+import { connect } from 'react-redux';
+import FormButton from '../../ui/form-elements/form-button/form-button.component';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Backdrop from '../../ui/backdrop/backdrop.component';
+import { deleteUser } from '../../redux/user/user.actions';
 
 const ConfirmDelete = (props) => {
+  const { title, isOpen, onClose, deleteUser } = props;
+
   return (
     <>
+      <Backdrop isOpen={isOpen} onClick={onClose} />
+      <ConfirmDeleteContainer 
+        title={title}
+        isOpen={isOpen}
+        transName='confirm-delete'
+      >
+        <DeleteContent>
+          <DeleteText>
+            Are you really sure you want to delete your account?
+          </DeleteText>
+          <ButtonContainer>
+            <FormButton onClick={onClose}>
+              Cancel
+            </FormButton>
+            <FormButton deleteStyle onClick={deleteUser}>
+              <FontAwesomeIcon icon="user-slash" />
+              Delete
+            </FormButton>
+          </ButtonContainer>
+        </DeleteContent>
+      </ConfirmDeleteContainer>
     </>
   );
 }
 
-export default ConfirmDelete;
+const mapDispatchToProps = {
+  deleteUser
+}
+
+export default connect(null, mapDispatchToProps)(ConfirmDelete);

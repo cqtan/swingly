@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import Modal from '../../ui/modal/modal.component';
 import FormButton from '../../ui/form-elements/form-button/form-button.component';
 
-export const SignInContainer = styled(Modal)`
-
+export const SignInContainer = styled.div`
+  min-width: 26rem;
 `;
 SignInContainer.displayName = 'SignInContainer';
 

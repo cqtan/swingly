@@ -1,24 +1,24 @@
-import { UserActionTypes } from './user.types';
-import { 
-  createUserProfileDocument, 
+import { UserActionTypes } from "./user.types";
+import {
+  createUserProfileDocument,
   getCurrentUser,
   signInWithGithub,
-  signInWithGoogle,
-} from '../../firebase/firebase.utils';
-import { auth, firestore } from '../../firebase/firebase.utils';
-import { openSnackbar } from '../snackbar/snackbar.actions';
+  signInWithGoogle
+} from "../../firebase/firebase.utils";
+import { auth, firestore } from "../../firebase/firebase.utils";
+import { openSnackbar } from "../snackbar/snackbar.actions";
 
-const getUserWithProvider = async (signInMethod) => {
-  switch(signInMethod) {
-    case 'google':
+const getUserWithProvider = async signInMethod => {
+  switch (signInMethod) {
+    case "google":
       return await signInWithGoogle();
-    case 'github':
+    case "github":
       return await signInWithGithub();
     default:
-      console.log('Invalid provider!');
+      console.log("Invalid provider!");
       return;
   }
-}
+};
 
 export const setCurrentUser = () => async dispatch => {
   try {
@@ -27,8 +27,8 @@ export const setCurrentUser = () => async dispatch => {
     const userAuth = await getCurrentUser();
     if (!userAuth) {
       dispatch({ type: UserActionTypes.USER_NOT_LOADING });
-      return
-    };    
+      return;
+    }
 
     const userRef = await createUserProfileDocument(userAuth);
     const userSnapshot = await userRef.get();
@@ -43,9 +43,9 @@ export const setCurrentUser = () => async dispatch => {
       payload: error
     });
   }
-}
+};
 
-export const signInWithProvider = (signInMethod) => async dispatch => {
+export const signInWithProvider = signInMethod => async dispatch => {
   try {
     dispatch({ type: UserActionTypes.USER_LOADING });
 
@@ -58,40 +58,40 @@ export const signInWithProvider = (signInMethod) => async dispatch => {
       payload: userSnapshot.data()
     });
 
-    dispatch(openSnackbar('success', 'You have been successfully signed in!'));
+    dispatch(openSnackbar("success", "You have been successfully signed in!"));
   } catch (error) {
     dispatch({
       type: UserActionTypes.SIGNIN_FAILED,
       payload: error
     });
 
-    dispatch(openSnackbar('error', 'Sign in failed!'));
+    dispatch(openSnackbar("error", "Sign in failed!"));
   }
-}
+};
 
 export const signOut = () => async dispatch => {
   try {
     await auth.signOut();
-    dispatch({type: UserActionTypes.SIGNOUT_SUCCESS});
+    dispatch({ type: UserActionTypes.SIGNOUT_SUCCESS });
 
-    dispatch(openSnackbar('success', 'You have been successfully signed out!'));
+    dispatch(openSnackbar("success", "You have been successfully signed out!"));
   } catch (error) {
     dispatch({
       type: UserActionTypes.SIGNOUT_FAILED,
       payload: error
     });
 
-    dispatch(openSnackbar('error', 'Sign out failed!'));
+    dispatch(openSnackbar("error", "Sign out failed!"));
   }
-}
+};
 
 export const signUp = values => async dispatch => {
-  const usersSnap = await firestore.collection('users').get();
+  const usersSnap = await firestore.collection("users").get();
   let userExists = null;
   if (usersSnap) {
     usersSnap.forEach(doc => {
       if (doc.data().email === values.email) {
-        userExists = doc.data();        
+        userExists = doc.data();
       }
     });
   }
@@ -105,33 +105,33 @@ export const signUp = values => async dispatch => {
 
       if (user) {
         const userAuth = await getCurrentUser();
-        const userRef = await createUserProfileDocument(userAuth, { 
-          username: values.username 
+        const userRef = await createUserProfileDocument(userAuth, {
+          username: values.username
         });
-  
+
         const userSnapshot = await userRef.get();
         dispatch({
           type: UserActionTypes.SIGNUP_SUCCESS,
           payload: userSnapshot.data()
         });
-  
+
         await auth.signOut();
 
-        dispatch(openSnackbar('success', 'Sign up success!'));
+        dispatch(openSnackbar("success", "Sign up success!"));
       }
     } catch (error) {
-      dispatch({ 
+      dispatch({
         type: UserActionTypes.SIGNUP_FAILED,
         payload: error
       });
 
-      dispatch(openSnackbar('error', 'Sign up failed!'));
+      dispatch(openSnackbar("error", "Sign up failed!"));
     }
   } else {
     dispatch({ type: UserActionTypes.SIGNUP_FAILED });
-    dispatch(openSnackbar('error', 'User with given email already exists!'));
+    dispatch(openSnackbar("error", "User with given email already exists!"));
   }
-}
+};
 
 export const signInWithEmail = values => async dispatch => {
   try {
@@ -139,25 +139,27 @@ export const signInWithEmail = values => async dispatch => {
       values.email,
       values.password
     );
-  
+
     const userRef = await createUserProfileDocument(user);
     const userSnap = await userRef.get();
-  
+
     dispatch({
       type: UserActionTypes.SIGNIN_SUCCESS,
       payload: userSnap.data()
     });
 
-    dispatch(openSnackbar('success', 'You have been successfully signed in!'));
+    dispatch(openSnackbar("success", "You have been successfully signed in!"));
   } catch (error) {
     dispatch({
       type: UserActionTypes.SIGNIN_FAILED,
       payload: error
     });
 
-    dispatch(openSnackbar('error', 'Incorrect email or password! Please try again.'));
+    dispatch(
+      openSnackbar("error", "Incorrect email or password! Please try again.")
+    );
   }
-}
+};
 
 export const editUser = (values, currentUser) => async dispatch => {
   let newValues = {};
@@ -169,17 +171,17 @@ export const editUser = (values, currentUser) => async dispatch => {
     newValues.description = values.description;
   }
 
-  if (Object.keys(newValues).length !== 0) {    
+  if (Object.keys(newValues).length !== 0) {
     const userRef = firestore.doc(`users/${currentUser.id}`);
     const userSnap = await userRef.get();
 
     if (userSnap.exists) {
-      try {        
+      try {
         const batch = firestore.batch();
         Object.entries(newValues).forEach(([key, val]) => {
           batch.update(userRef, {
             [key]: val
-          })
+          });
         });
         await batch.commit();
 
@@ -188,17 +190,40 @@ export const editUser = (values, currentUser) => async dispatch => {
           payload: newValues
         });
 
-        dispatch(openSnackbar('success', 'Edit successful!'));
+        dispatch(openSnackbar("success", "Edit successful!"));
       } catch (error) {
-        dispatch({ 
+        dispatch({
           type: UserActionTypes.EDIT_FAILED,
           payload: error
         });
-        dispatch(openSnackbar('error', 'Edit failed! User snapshot does not exist!'));
+        dispatch(
+          openSnackbar("error", "Edit failed! User snapshot does not exist!")
+        );
       }
     }
   } else {
-    dispatch(openSnackbar('error', 'Edit failed!'));
+    dispatch(openSnackbar("error", "Edit failed!"));
   }
-}
+};
 
+export const deleteUser = () => async dispatch => {
+  const user = await auth.currentUser;
+  
+  if (user) {
+    try {
+      await firestore.doc(`users/${user.uid}`).delete();
+      await user.delete();
+      dispatch({ type: UserActionTypes.DELETE_SUCCESS });
+      dispatch(openSnackbar("success", "Delete successful!"));
+    } catch (error) {
+      dispatch({ 
+        type: UserActionTypes.DELETE_FAILED,
+        payload: error
+      });
+      dispatch(openSnackbar("error", "Deletion failed!"));
+    }
+  } else {
+    dispatch({ type: UserActionTypes.DELETE_FAILED });    
+    dispatch(openSnackbar("error", "Deletion failed! User not signed in"));
+  }
+};

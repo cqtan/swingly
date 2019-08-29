@@ -10,6 +10,7 @@ import { Formik } from "formik";
 import SignUpForm from "./sign-up-form/sign-up-form.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signUp } from "../../redux/user/user.actions";
+import Modal from "../../ui/modal/modal.component";
 
 const SignUp = props => {
   const { isOpen, setOpen, openSignIn, signUp } = props;
@@ -48,23 +49,25 @@ const SignUp = props => {
   });
 
   return (
-    <SignUpContainer 
+    <Modal 
       isOpen={isOpen}
       transName="sign-up" 
       direction="left"
       title="Register">
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        render={formikBag => <SignUpForm {...formikBag} onSubmit={onSubmit} />}
-      />
-      <ButtonConatainer>
-        <SignUpButton onClick={handleOpenSignIn}>
-          <FontAwesomeIcon icon="chevron-left" />
-          Back
-        </SignUpButton>
-      </ButtonConatainer>
-    </SignUpContainer>
+      <SignUpContainer>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          render={formikBag => <SignUpForm {...formikBag} onSubmit={onSubmit} />}
+        />
+        <ButtonConatainer>
+          <SignUpButton onClick={handleOpenSignIn}>
+            <FontAwesomeIcon icon="chevron-left" />
+            Back
+          </SignUpButton>
+        </ButtonConatainer>
+      </SignUpContainer>
+    </Modal>
   );
 };
 
