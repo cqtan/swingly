@@ -11,5 +11,10 @@ export const BackdropContainer = styled.button`
   background-color: rgba(0, 0, 0, 0.3);
   transition: all .4s ease-out;
   ${props => fadeInOut(props.transName)};
+
+  &:active,
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 `;
 BackdropContainer.displayName = BackdropContainer;

@@ -36,7 +36,6 @@ const Snackbar = (props) => {
 
   return (
     <>
-      <p></p>
       <CSSTransition
         in={isOpen}
         classNames='snackbar'

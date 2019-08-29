@@ -28,7 +28,7 @@ export const App = (props) => {
         <Background />
         <Header />
         <Snackbar
-          duration={5000} 
+          duration={3500} 
           type={snackbar.type}
           text={snackbar.text}
           isOpen={snackbar.isOpen}
