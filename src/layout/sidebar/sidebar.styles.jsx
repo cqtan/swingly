@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import Button from '../../ui/button/button.component';
 
 export const SidebarContainer = styled.div`
-  position: absolute;
+  position: fixed;
   display: flex;
   top: 0;
   left: ${props => props.isOpen ? 0 : `-30rem`};
   min-width: 18rem;
-  height: 100vh;
+  height: 100%;
   box-shadow: ${props => props.theme.shadows[4]};
   background-color: ${props => props.theme.background.layer2};
   text-align: center;

@@ -13,8 +13,12 @@ export const BackdropContainer = styled.button`
   ${props => fadeInOut(props.transName)};
 
   &:active,
-  &:hover {
+  &:focus,
+  &:active:focus {
     background-color: rgba(0, 0, 0, 0.3);
+    outline: none;
+    box-shadow: none;
+    border-style: outset;
   }
 `;
 BackdropContainer.displayName = BackdropContainer;
