@@ -33,7 +33,7 @@ export const App = props => {
     fetchEvents();
   }, [setCurrentUser, fetchEvents]);
 
-  if (Object.keys(events).length) {
+  if (events !== undefined && Object.keys(events).length) {
     console.log('events: ', events);
   }
   
