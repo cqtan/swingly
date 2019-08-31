@@ -34,12 +34,14 @@ export const HeaderButtons = styled(Button)`
     }
   }
 `;
+HeaderButtons.displayName = 'HeaderButtons';
 
 export const Logo = styled(Link)`
   font-family: 'Oleo Script', 'Open Sans', sans-serif; 
   text-transform: none;
   ${({ theme }) => theme.typo.h3 };
 `;
+Logo.displayName = 'Logo';
 
 export const HeaderProfile = styled.img`
   border: 2px solid ${props => props.theme.palette.text.primary};
