@@ -4,10 +4,10 @@ import ConnectedSidebar, { Sidebar } from './sidebar.component';
 import Root from '../../Root';
 
 describe('Sidebar component', () => {
-  let wrapper;
-  let mockProps;
-  let mockSetOpen;
-  let mockToggleTheme;
+  let wrapper = null;
+  let mockProps = null;
+  let mockSetOpen = null;
+  let mockToggleTheme = null;
   
   beforeEach(() => {
     mockSetOpen = jest.fn();
@@ -66,5 +66,6 @@ describe('Sidebar component', () => {
     lastButton.simulate('click');
     expect(lastButton.text()).toContain('Light Mode');    
   });
+  
 
 });

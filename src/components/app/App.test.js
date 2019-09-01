@@ -1,24 +1,36 @@
 import React from 'react';
 import { App } from './App';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+import Root from '../../Root';
 
 describe('App component', () => {
   let wrapper;
-  const mockThemeMode = { darkMode: true };
-  const mockProps = {
-    themeMode: mockThemeMode,
-    snackbar: {
-      type: '',
-      text: '',
-      isOpen: false
-    },
-    setCurrentUser: () => null
-  };
+  let mockSetCurrentUser;
+  let mockfetchEvents;
 
-  wrapper = shallow(<App {...mockProps}/>);
+  beforeEach(() => {
+    mockSetCurrentUser = jest.fn();
+    mockfetchEvents = jest.fn();
+
+    const mockProps = {
+      snackbar: {},
+      setCurrentUser: mockSetCurrentUser,
+      fetchEvents: mockfetchEvents
+    };
+
+    wrapper = mount(
+      <Root>
+        <App {...mockProps} />
+      </Root>
+    )
+  });
 
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should call setCurrentUser on mount only', () => {
+    expect(mockSetCurrentUser).toHaveBeenCalledTimes(1);
   });
 });
 
