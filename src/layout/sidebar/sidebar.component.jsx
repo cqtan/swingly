@@ -46,8 +46,15 @@ const mapStateToProps = createStructuredSelector({
   isDarkMode: selectIsDarkMode
 });
 
-const mapDispatchToProps = dispatch => ({
-  toggleTheme: () => dispatch(toggleTheme())
-});
+const mapDispatchToProps = {
+  toggleTheme
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+
+// export default connect(
+//   createStructuredSelector({
+//     isDarkMode: selectIsDarkMode
+//   }), {
+//   toggleTheme
+// })(Sidebar);

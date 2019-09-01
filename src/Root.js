@@ -34,6 +34,7 @@ import {
   faExclamationCircle,
   faCheckCircle
 } from '@fortawesome/free-solid-svg-icons';
+import ThemeManager from './themes/ThemeManager';
 
 export default (props) => {
   const { children, initialState = {} } = props;
@@ -79,9 +80,11 @@ export default (props) => {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <PersistGate persistor={persistor}>
-          {children}
-        </PersistGate>
+        {/* <PersistGate persistor={persistor}> */}
+          <ThemeManager>
+            {children}
+          </ThemeManager>
+        {/* </PersistGate> */}
       </BrowserRouter>
     </Provider>
   );
