@@ -1,12 +1,14 @@
 import {
   auth,
   firestore,
-  getRootPath
+  getRootPath,
+  createUserProfileDocument
 } from './firebase.utils';
 
 export const testUser = {
   email: 'user@test.com',
-  password: 'secret_password'
+  password: 'secret_password',
+  description: 'I am a test user!'
 };
 
 export const createTestUser = async () => {
@@ -18,20 +20,45 @@ export const createTestUser = async () => {
   return user;
 }
 
+export const createTestUserInStore = async (user) => {
+  const userRef = await createUserProfileDocument(user);
+  return userRef.get();
+}
+
 export const signInTestUser = async () => {
-  await auth.signInWithEmailAndPassword(
-    testUser.email,
-    testUser.password
-  );
+  try {
+    const { user } = await auth.signInWithEmailAndPassword(
+      testUser.email,
+      testUser.password,
+    );
+    return user;
+  } catch (error) {
+    return;
+  }
 }
 
 export const deleteTestUser = async () => {
-  const user = await auth.currentUser;
-  await user.delete();
+  if (auth.currentUser) {
+    const user = await auth.currentUser;
+    await user.delete();
+    return user.uid;
+  }
 }
 
 export const deleteUserFromStore = async (id) => {
   await firestore.doc(`${getRootPath()}/data/users/${id}`).delete();
+}
+
+export const deleteAllUsers = async () => {
+  const usersSnap = await firestore.collection(`${getRootPath()}/data/users`).get();
+  if (usersSnap) {
+    usersSnap.forEach(doc => {
+      // await doc.delete();
+      // console.log('data_ ', doc.data());
+      doc.delete();
+    });
+  }
+  return usersSnap;
 }
 
 export const signOutTestUser = async () => {
