@@ -2,11 +2,11 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-
 import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import { persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
+import promise from 'redux-promise-middleware';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './redux/root-reducer';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -38,7 +38,7 @@ import ThemeManager from './themes/ThemeManager';
 
 export default (props) => {
   const { children, initialState = {} } = props;
-  const middlewares = [thunk];
+  const middlewares = [thunk, promise];
 
   if (process.env.NODE_ENV === 'development') {
     middlewares.push(logger);
@@ -78,14 +78,25 @@ export default (props) => {
   );
 
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        {/* <PersistGate persistor={persistor}> */}
-          <ThemeManager>
-            {children}
-          </ThemeManager>
-        {/* </PersistGate> */}
-      </BrowserRouter>
-    </Provider>
+    <>
+      { process.env.NODE_ENV !== 'test' ? 
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <BrowserRouter>
+              <ThemeManager>
+                {children}
+              </ThemeManager>
+            </BrowserRouter>
+          </PersistGate>
+        </Provider> : 
+        <Provider store={store}>
+          <BrowserRouter>
+            <ThemeManager>
+              {children}
+            </ThemeManager>
+          </BrowserRouter>
+        </Provider>
+      }
+    </>
   );
 }
