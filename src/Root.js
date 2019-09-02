@@ -6,7 +6,6 @@ import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import { persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
-import promise from 'redux-promise-middleware';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './redux/root-reducer';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -38,7 +37,7 @@ import ThemeManager from './themes/ThemeManager';
 
 export default (props) => {
   const { children, initialState = {} } = props;
-  const middlewares = [thunk, promise];
+  const middlewares = [thunk];
 
   if (process.env.NODE_ENV === 'development') {
     middlewares.push(logger);

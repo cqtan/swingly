@@ -5,7 +5,7 @@ import {
   signInWithGithub,
   signInWithGoogle
 } from "../../firebase/firebase.utils";
-import { auth, firestore } from "../../firebase/firebase.utils";
+import { auth, firestore, getRootPath } from "../../firebase/firebase.utils";
 import { openSnackbar } from "../snackbar/snackbar.actions";
 
 const getUserWithProvider = async signInMethod => {
@@ -86,7 +86,7 @@ export const signOut = () => async dispatch => {
 };
 
 export const signUp = values => async dispatch => {
-  const usersSnap = await firestore.collection("users").get();
+  const usersSnap = await firestore.collection(`${getRootPath()}/data/users`).get();
   let userExists = null;
   if (usersSnap) {
     usersSnap.forEach(doc => {
@@ -172,7 +172,7 @@ export const editUser = (values, currentUser) => async dispatch => {
   }
 
   if (Object.keys(newValues).length !== 0) {
-    const userRef = firestore.doc(`users/${currentUser.id}`);
+    const userRef = firestore.doc(`${getRootPath()}/data/users/${currentUser.id}`);
     const userSnap = await userRef.get();
 
     if (userSnap.exists) {
@@ -211,7 +211,7 @@ export const deleteUser = () => async dispatch => {
   
   if (user) {
     try {
-      await firestore.doc(`users/${user.uid}`).delete();
+      await firestore.doc(`${getRootPath()}/data/users/${user.uid}`).delete();
       await user.delete();
       dispatch({ type: UserActionTypes.DELETE_SUCCESS });
       dispatch(openSnackbar("success", "Delete successful!"));
