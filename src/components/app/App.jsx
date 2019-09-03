@@ -23,7 +23,7 @@ export const App = props => {
 
   useEffect(() => {
     setCurrentUser();
-    // fetchEvents();
+    fetchEvents();
   }, [setCurrentUser, fetchEvents]);
 
   if (events !== undefined && Object.keys(events).length) {

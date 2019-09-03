@@ -1,6 +1,4 @@
-import { firestore } from '../../firebase/firebase.utils';
-
-const EVENTS_DATA = {
+export default {
   title: 'Mock Events',
   routeName: 'events',
   events: {
@@ -47,20 +45,3 @@ const EVENTS_DATA = {
   }
 }
 
-export const addMockEventsToDb = async (copies, hostObj) => {
-  const dummyEventsRef = firestore.collection('mockEvents');
-  let mockEvent = EVENTS_DATA.events.id;
-  mockEvent.host = hostObj;
-
-  for (let i = 0; i < copies; i++) {
-    const newDocRef = dummyEventsRef.doc();
-    mockEvent.id = newDocRef.id;
-
-    console.log('newDocRef: ', newDocRef);
-    try {
-      await newDocRef.set(mockEvent);
-    } catch (error) {
-      console.log('Add Mock Events Error!: ', error);
-    }
-  }
-} 

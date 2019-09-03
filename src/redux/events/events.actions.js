@@ -1,20 +1,18 @@
 import { EventsActionTypes } from './events.types';
-import { firestore } from '../../firebase/firebase.utils';
+import { firestore, getRootPath } from '../../firebase/firebase.utils';
 import { openSnackbar } from '../snackbar/snackbar.actions';
+import { eventsToObject } from './events.utils';
 
 export const fetchEvents = () => async dispatch => {
   try {
-    const eventsSnap = await firestore.collection('mockEvents').get();
-  
-    if (eventsSnap) {
-      const collectionAsObject = eventsSnap.docs.reduce((prev, event) => {
-        prev[event.data().id] = event.data();
-        return prev;
-      }, {}); 
+    const eventsSnap = await firestore.collection(`${getRootPath()}/data/events`).get();
+
+    if (eventsSnap.docs.length) {
+      const eventsObj = eventsToObject(eventsSnap.docs);
       
       dispatch({
         type: EventsActionTypes.FETCH_EVENTS_SUCCESS,
-        payload: collectionAsObject
+        payload: eventsObj
       });
 
       dispatch(openSnackbar('success', 'Events successfully fetched!'));
@@ -22,7 +20,7 @@ export const fetchEvents = () => async dispatch => {
       dispatch({ type: EventsActionTypes.FETCH_EVENTS_FAILED });
       dispatch(openSnackbar('error', 'No events found!'));
     }
-  } catch (error) {
+  } catch (error) {    
     dispatch({type: EventsActionTypes.FETCH_EVENTS_FAILED });
     dispatch(openSnackbar('error', 'Events failed to fetch!'));
   }

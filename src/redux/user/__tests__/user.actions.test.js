@@ -21,7 +21,7 @@ import {
 } from '../../../firebase/firebase-test.utils';
 import * as firebaseUtils from '../../../firebase/firebase.utils';
  
-describe('User Actions', () => {
+xdescribe('User Actions', () => {
   const middlewares = [thunk];
   const mockStore = configureStore(middlewares);
   let initialState = {};
@@ -37,6 +37,10 @@ describe('User Actions', () => {
     const id = await deleteTestUser();
     await deleteUserFromStore(id);
   });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+  })
 
   describe('signInWithEmail', () => {
     it('should dispatch SIGNIN_FAILED and snackbar of type error', async () => {

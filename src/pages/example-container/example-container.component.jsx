@@ -5,7 +5,7 @@ import {
   ExampleBgLogo
 } from './example-container.styles';
 import { CSSTransition } from 'react-transition-group';
-// import { addMockEventsToDb } from '../../redux/dummy-data/dummy-event-data';
+// import { createMockEventsInDb } from '../../redux/events/events.utils';
 
 const ExampleContainer = (props) => {
   const [isOpen, setOpen] = useState(true);
@@ -24,7 +24,7 @@ const ExampleContainer = (props) => {
         </ExampleBgLogoContainer>
       </CSSTransition>
       <ExampleButton primary onClick={() => setOpen(!isOpen)}>Toggle</ExampleButton>
-      {/* <ExampleButton primary onClick={() => addMockEventsToDb(1, 'jYfFcg7Yo3S5pWCviMtijlOidPv1')}>Toggle</ExampleButton> */}
+      {/* <ExampleButton primary onClick={() => createMockEventsInDb(1, 'jYfFcg7Yo3S5pWCviMtijlOidPv1')}>Toggle</ExampleButton> */}
     </>
   );
 }

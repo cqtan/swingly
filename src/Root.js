@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './redux/root-reducer';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -39,10 +40,7 @@ export default (props) => {
   const middlewares = [thunk];
 
   if (process.env.NODE_ENV === 'development') {
-    import('redux-logger')
-    .then(logger => {
-      middlewares.push(logger);
-    });
+    middlewares.push(logger);
   }
   
   const store = createStore(
