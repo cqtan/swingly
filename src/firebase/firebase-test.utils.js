@@ -31,9 +31,9 @@ export const signInTestUser = async () => {
       testUser.email,
       testUser.password,
     );
-    return user;
+    return user
   } catch (error) {
-    return;
+    return 'nope';
   }
 }
 

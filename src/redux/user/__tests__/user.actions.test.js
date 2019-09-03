@@ -4,7 +4,8 @@ import {
   signUp,
   signInWithEmail,
   editUser,
-  deleteUser
+  deleteUser,
+  signInWithProvider
 } from '../user.actions';
 import { UserActionTypes } from '../user.types';
 import configureStore from 'redux-mock-store';
@@ -18,7 +19,8 @@ import {
   deleteUserFromStore,
   signOutTestUser
 } from '../../../firebase/firebase-test.utils';
-
+import * as firebaseUtils from '../../../firebase/firebase.utils';
+ 
 describe('User Actions', () => {
   const middlewares = [thunk];
   const mockStore = configureStore(middlewares);
@@ -54,6 +56,31 @@ describe('User Actions', () => {
 
       expect(store.getActions()[0].type).toBe(UserActionTypes.SIGNIN_SUCCESS);
       expect(store.getActions()[1].payload.type).toBe('success');
+    });
+  });
+
+  describe('signInWithProvider', () => {
+    it('should disptach SIGNIN_FAILED if invalid provider given', async () => {
+      await store.dispatch(signInWithProvider('invalid_provider'));
+      expect(store.getActions()[1].type).toBe(UserActionTypes.SIGNIN_FAILED);
+    });
+    
+    it('should disptach SIGNIN_SUCCESS if valid google as provider given', async () => {
+      jest.spyOn(firebaseUtils, 'signInWithGoogle').mockImplementation(async () => ({ user: await signInTestUser() }));
+        
+      await store.dispatch(signInWithProvider('google'));
+
+      expect(firebaseUtils.signInWithGoogle).toHaveBeenCalledTimes(1);
+      expect(store.getActions()[1].type).toBe(UserActionTypes.SIGNIN_SUCCESS);
+    });
+
+    it('should disptach SIGNIN_SUCCESS if valid github as provider given', async () => {
+      jest.spyOn(firebaseUtils, 'signInWithGithub').mockImplementation(async () => ({ user: await signInTestUser() }));
+        
+      await store.dispatch(signInWithProvider('github'));
+      
+      expect(firebaseUtils.signInWithGithub).toHaveBeenCalledTimes(1);
+      expect(store.getActions()[1].type).toBe(UserActionTypes.SIGNIN_SUCCESS);
     });
   });
 

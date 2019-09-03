@@ -15,8 +15,7 @@ const getUserWithProvider = async signInMethod => {
     case "github":
       return await signInWithGithub();
     default:
-      console.log("Invalid provider!");
-      return;
+      return Error("Invalid provider!");
   }
 };
 

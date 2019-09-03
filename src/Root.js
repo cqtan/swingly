@@ -3,7 +3,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import logger from 'redux-logger';
 import { persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 // import { composeWithDevTools } from 'redux-devtools-extension';
@@ -40,7 +39,10 @@ export default (props) => {
   const middlewares = [thunk];
 
   if (process.env.NODE_ENV === 'development') {
-    middlewares.push(logger);
+    import('redux-logger')
+    .then(logger => {
+      middlewares.push(logger);
+    });
   }
   
   const store = createStore(
