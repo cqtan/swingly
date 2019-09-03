@@ -5,13 +5,10 @@ import Root from '../../Root';
 
 describe('App component', () => {
   let wrapper;
-  let mockSetCurrentUser;
-  let mockfetchEvents;
+  let mockSetCurrentUser = () => undefined;
+  let mockfetchEvents = () => undefined;
 
-  beforeEach(() => {
-    mockSetCurrentUser = jest.fn();
-    mockfetchEvents = jest.fn();
-
+  const mountComponent = () => {
     const mockProps = {
       snackbar: {},
       setCurrentUser: mockSetCurrentUser,
@@ -23,14 +20,39 @@ describe('App component', () => {
         <App {...mockProps} />
       </Root>
     )
+  };
+
+  afterEach(() => {
+    mockSetCurrentUser = () => undefined;
+    mockfetchEvents = () => undefined;
   });
 
   it('should render', () => {
-    expect(wrapper).toMatchSnapshot();
+    const mockProps = {
+      snackbar: {},
+      setCurrentUser: mockSetCurrentUser,
+      fetchEvents: mockfetchEvents
+    };
+
+    wrapper = shallow(<App {...mockProps} /> );
+
+    expect(wrapper.debug()).toMatchSnapshot();
   });
 
   it('should call setCurrentUser on mount only', () => {
+    mockSetCurrentUser = jest.fn();
+    
+    mountComponent();
+
     expect(mockSetCurrentUser).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call fetchEvents on mount only', () => {
+    mockfetchEvents = jest.fn();
+    
+    mountComponent();
+    
+    expect(mockfetchEvents).toHaveBeenCalledTimes(1);
   });
 });
 

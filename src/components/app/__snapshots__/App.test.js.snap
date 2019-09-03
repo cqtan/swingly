@@ -1,3 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App component should render 1`] = `ReactWrapper {}`;
+exports[`App component should render 1`] = `
+"<Fragment>
+  <GlobalStyleComponent />
+  <Background />
+  <Connect(Header) />
+  <Connect(Snackbar) duration={3500} type={[undefined]} text={[undefined]} isOpen={[undefined]} />
+  <Switch>
+    <Route path=\\"/hi\\" exact={true} render={[Function: render]} />
+    <Route path=\\"/profile\\" exact={true} component={{...}} />
+    <Route path=\\"/\\" component={[Function: ExampleContainer]} />
+  </Switch>
+</Fragment>"
+`;
