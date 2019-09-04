@@ -1,3 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Event Details Component should render correctly 1`] = `null`;
+exports[`Event Details Component should render correctly 1`] = `
+Array [
+  <button
+    className="sc-cSHVUG hJDeUw"
+    onClick={[MockFunction]}
+  />,
+  <div
+    className="sc-kAzzGY dzSYIU"
+  >
+    <div
+      className="css-1smlpex"
+    >
+      <div
+        className="css-18xo8fn"
+      />
+      <div
+        className="css-gfx32u"
+      />
+      <div
+        className="css-clle6u"
+      />
+      <div
+        className="css-146uy45"
+      />
+      <div
+        className="css-raj17w"
+      />
+      <div
+        className="css-raicj8"
+      />
+    </div>
+  </div>,
+]
+`;

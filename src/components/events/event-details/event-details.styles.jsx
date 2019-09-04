@@ -19,6 +19,7 @@ EventImageContainer.displayName = 'EventImageContainer';
 export const EventImage = styled.img`
   object-fit: cover;
   width: 100%;
+  border-radius: 5px 5px 0 0;
 `;
 EventImage.displayName = 'EventImage';
 

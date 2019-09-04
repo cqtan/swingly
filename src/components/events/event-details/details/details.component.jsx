@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   DetailsContainer,
   Row,
@@ -7,93 +7,101 @@ import {
   Data,
   Divider,
   Description
-} from './details.styles';
-import moment from 'moment';
+  // DropDownToggle
+} from "./details.styles";
+import moment from "moment";
+// import DropDown from '../../../../ui/drop-down/drop-down.component';
 
-const Details = (props) => {
-  const { event } = props;
+const Details = props => {
+  const { event, host } = props;
 
-  // const {
-  //   courses,
-  //   currency,
-  //   description,
-  //   end,
-  //   going,
-  //   host,
-  //   id,
-  //   interested,
-  //   linkgs,
-  //   location,
-  //   otherFees,
-  //   start,
-  //   title,
-  //   type
-  // } = event;
+  // const [isDropOpen, setDropOpen] = useState(false);
 
-  // 'courses', 'start', 'end', 'interested', 'going', 'otherFees', 'title', 'host'
+  const parseDate = date => moment(date).format("Do MMM, H:mm");
 
-  // return (
-  //   <Row key={key}>
-  //     <Label>{key}</Label>
-  //     <Data>{value}</Data>
-  //   </Row>
-  // );
-
-  const parseDate = (date) => moment(date).format("Do MMM, H:mm");
-  
-  const parseCourses = (courses) => {
-    let courseRows = courses.map(course => {
-      
+  const parseFees = fees => {
+    return fees.map(data => {
+      const { feeTitle, fee, slidingFee = null } = data;
+      const feeText = slidingFee ? `${fee} - ${slidingFee}` : fee;
+      const feeString = `${feeTitle}: (${feeText} ${event.currency})`;
+      return feeString;
     });
-  }
+  };
 
-  const parseValue = (key, value) => {
-
-    if (['start', 'end'].includes(key)) {
+  const parseData = (key, value) => {
+    if (["start", "end"].includes(key)) {
       return parseDate(value.toDate());
-    } else if (['type', 'location'].includes(key)) {
+    } else if (["type", "location", "courseTitle", "host"].includes(key)) {
       return value;
-    } else if (['links'].includes(key)) {
+    } else if (["links"].includes(key)) {
       return [value, value, value];
+    } else if (["fees", "otherFees"].includes(key)) {
+      return parseFees(value);
     } else {
       return null;
     }
+  };
+
+  const arrangeEventData = eventData => {
+    const { host, type, location = null, start, end, otherFees, links } = eventData;
+    return { host, type, location, start, end, otherFees, links };
+  };
+
+  const arrangeCourseData = course => {
+    const { courseTitle, location = null, start, end, fees } = course;
+    return { courseTitle, location, start, end, fees };
   }
 
-  const arrangeRows = (rows) => {
-
-  }
-
-  let rows = null;
-  if (event) {
-    rows = Object.entries(event).map(([key, value]) => {
+  const objToRows = obj => {
+    return Object.entries(obj).map(([key, value]) => {
       let dataList = [];
-      value = parseValue(key, value);
+      value = parseData(key, value);
+
       if (value instanceof Array) {
         dataList = value.length ? value : [];
       } else if (value) {
         dataList.push(value);
       }
 
-      return ( dataList.length > 0 &&
-        <Row key={key}>
-          <Label>{key}</Label>
-          <DataContainer>
-            { dataList.map((data, index) => <Data key={index}>{data}</Data> ) }
-          </DataContainer>
-        </Row>
+      return (
+        dataList.length > 0 && (
+          <Row key={key}>
+            <Label>{key}</Label>
+            <DataContainer>
+              {dataList.map((data, index) => (
+                <Data key={index}>{data}</Data>
+              ))}
+            </DataContainer>
+          </Row>
+        )
       );
     });
+  };
+
+  let details = null;
+  let courses = null;
+
+  if (event) {
+    details = objToRows(arrangeEventData(event));
+    courses = event.courses.map(course => objToRows(arrangeCourseData(course)));
   }
-  
 
   return (
     <DetailsContainer>
-      { rows ? rows : <p>oops</p> }
+      {details ? details : <p>oops</p>}
       <Divider />
-      { event.description && <Description>{event.description}</Description> }
+      {event.description && <Description>{event.description}</Description>}
+      <Divider />
+      {courses ? courses : <p>oops</p>}
+
+      {/* <DropDownToggle onClick={() => setDropOpen(!isDropOpen)}>
+        DropDown Toggle
+      </DropDownToggle>
+      <DropDown isOpen={isDropOpen}>
+        { event.description && <Description>{event.description}</Description> }
+      </DropDown> */}
     </DetailsContainer>
   );
-}
+};
 
 export default Details;

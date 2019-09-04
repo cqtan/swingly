@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import Button from '../../../../ui/button/button.component';
 
 export const DetailsContainer = styled.div`
-
+  
 `;
 DetailsContainer.displayName = 'DetailsContainer';
 
@@ -45,3 +46,9 @@ export const Description = styled.div`
   color: ${props => props.theme.palette.text.primary};
 `;
 Description.displayName = 'Description';
+
+export const DropDownToggle = styled(Button)`
+
+`;
+DropDownToggle.displayName = 'DropDownToggle';
+
