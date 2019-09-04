@@ -4,7 +4,9 @@ import {
   Row,
   Label,
   DataContainer,
-  Data
+  Data,
+  Divider,
+  Description
 } from './details.styles';
 import moment from 'moment';
 
@@ -37,15 +39,20 @@ const Details = (props) => {
   //   </Row>
   // );
 
-  const parseSecondsToData = (date) => moment(date).format("Do MMM, H:mm");
+  const parseDate = (date) => moment(date).format("Do MMM, H:mm");
   
+  const parseCourses = (courses) => {
+    let courseRows = courses.map(course => {
+      
+    });
+  }
 
   const parseValue = (key, value) => {
 
     if (['start', 'end'].includes(key)) {
-      return parseSecondsToData(value.toDate());
+      return parseDate(value.toDate());
     } else if (['type', 'location'].includes(key)) {
-      
+      return value;
     } else if (['links'].includes(key)) {
       return [value, value, value];
     } else {
@@ -83,6 +90,8 @@ const Details = (props) => {
   return (
     <DetailsContainer>
       { rows ? rows : <p>oops</p> }
+      <Divider />
+      { event.description && <Description>{event.description}</Description> }
     </DetailsContainer>
   );
 }

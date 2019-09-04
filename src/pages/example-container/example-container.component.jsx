@@ -14,7 +14,7 @@ const ExampleContainer = (props) => {
   return (
     <>
       <CSSTransition 
-        in={isOpen}
+        in={true}
         classNames='example'
         timeout={300}
         unmountOnExit>
@@ -24,7 +24,7 @@ const ExampleContainer = (props) => {
           </ExampleBgLogo>
         </ExampleBgLogoContainer>
       </CSSTransition>
-      <EventDetails isOpen={true} />
+      <EventDetails isOpen={isOpen} onClose={() => setOpen(false)} />
       <ExampleButton primary onClick={() => setOpen(!isOpen)}>Toggle</ExampleButton>
       {/* <ExampleButton primary onClick={() => createMockEventsInDb(1, 'jYfFcg7Yo3S5pWCviMtijlOidPv1')}>Toggle</ExampleButton> */}
     </>

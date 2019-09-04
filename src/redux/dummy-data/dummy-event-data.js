@@ -39,8 +39,14 @@ export default {
       currency: 'euro',
       description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit tellus aliquet, orci lacus torquent leo aptent lobortis cubilia blandit, tortor fringilla non nunc porta nec dis ac. Augue rutrum per egestas dictumst',
       links: 'https://rand.cat/',
-      interested: {},
-      going: {}
+      interested: {
+        count: 0,
+        users: {}
+      },
+      going: {
+        count: 0,
+        users: {}
+      }
     }
   }
 }

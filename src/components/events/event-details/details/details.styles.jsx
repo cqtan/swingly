@@ -15,13 +15,13 @@ export const Row = styled.div`
 Row.displayName = 'Row';
 
 export const Label = styled.div`
-  flex: 1 1 30%;
+  flex: 1 1 25%;
   color: ${props => props.theme.palette.text.secondary};
 `;
 Label.displayName = 'Label';
 
 export const DataContainer = styled.div`
-  flex: 1 1 70%;
+  flex: 1 1 75%;
   display: flex;
   flex-wrap: wrap;
 `;
@@ -32,3 +32,16 @@ export const Data = styled.div`
   color: ${props => props.theme.palette.text.primary};
 `;
 Data.displayName = 'Data';
+
+export const Divider = styled.div`
+  margin: 1.5rem auto 1.5rem auto;
+  width: 80%;
+  border-bottom: 1px solid ${props => props.theme.palette.grey[5]};
+`;
+Divider.displayName = 'Divider';
+
+export const Description = styled.div`
+  font-size: ${props => props.theme.typo.subtitle};
+  color: ${props => props.theme.palette.text.primary};
+`;
+Description.displayName = 'Description';
