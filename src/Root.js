@@ -73,7 +73,7 @@ export default (props) => {
     faInfoCircle,
     faExclamationTriangle,
     faExclamationCircle,
-    faCheckCircle
+    faCheckCircle,
   );
 
   return (
