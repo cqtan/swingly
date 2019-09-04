@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const EventDetailsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  min-width: 26rem;
+  width: 80vw;
 `;
 EventDetailsContainer.displayName = 'EventDetailsContainer';
 
@@ -31,27 +31,8 @@ export const EventTitle = styled.div`
 `;
 EventTitle.displayName = 'EventTitle';
 
-export const Details = styled.div`
+export const DetailsContainer = styled.div`
   margin: 1rem 0 1rem 0;
   width: 100%;
 `;
-Details.displayName = 'Details';
-
-export const Row = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-`;
-Row.displayName = 'Row';
-
-export const Label = styled.div`
-  flex: 1 1 20%;
-
-`;
-Label.displayName = 'Label';
-
-export const EventData = styled.div`
-  flex: 1 1 80%;
-
-`;
-EventData.displayName = 'EventData';
+DetailsContainer.displayName = 'DetailsContainer';
