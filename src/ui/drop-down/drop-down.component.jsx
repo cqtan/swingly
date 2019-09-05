@@ -1,23 +1,20 @@
 import React from 'react';
 import {
   DropDownContainer,
+  DropDownContent
 } from './drop-down.styles'
-import { CSSTransition } from 'react-transition-group';
+// import { CSSTransition } from 'react-transition-group';
 
 
 const DropDown = (props) => {
-  const { isOpen, transName, children } = props;
+  const { isOpen, contentHeight, children } = props;
 
   return (
-    <CSSTransition
-      in={isOpen}
-      classNames={transName}
-      timeout={300}
-      unmountOnExit>
-      <DropDownContainer transName={transName}>
+    <DropDownContainer isOpen={isOpen} contentHeight={contentHeight}>
+      <DropDownContent isOpen={isOpen} contentHeight={contentHeight}>
         {children}
-      </DropDownContainer>
-    </CSSTransition>
+      </DropDownContent>
+    </DropDownContainer>
   );
 }
 

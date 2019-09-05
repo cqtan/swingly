@@ -45,24 +45,22 @@ export const fadeInOut = (transName, direction) => css`
 
 export const growHeight = (transName, heightTo) => css`
   &.${transName}-enter {
-    opacity: 0;
+    opacity: 1;
     height: 0px;
   }
 
   &.${transName}-enter-active {
     opacity: 1;
-    height: 20rem;
-    transition: all 0.3s ease-out;
+    height: ${heightTo};
   }
 
   &.${transName}-exit {
     opacity: 1;
-    height: 20rem;
+    height: ${heightTo};
   }
 
   &.${transName}-exit-active {
-    opacity: 0;
+    opacity: 1;
     height: 0px;
-    transition: all 0.3s ease-out;
   }
 `

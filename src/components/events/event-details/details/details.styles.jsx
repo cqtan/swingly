@@ -48,7 +48,39 @@ export const Description = styled.div`
 Description.displayName = 'Description';
 
 export const DropDownToggle = styled(Button)`
+  background-color: transparent;
+  margin: 0 auto;
+  box-shadow: none;
+  color: ${props => props.theme.palette.text.primary};
 
+  :hover {
+    color: ${props => props.theme.palette.primary.main};
+    box-shadow: none;
+  }
+
+  :active {
+    box-shadow: none;
+  }
 `;
 DropDownToggle.displayName = 'DropDownToggle';
+
+export const DropDownContent = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+DropDownContent.displayName = 'DropDownContent';
+
+export const IconContainer = styled.div`
+  & > svg {
+    font-size: 2rem;
+    margin: 0 1rem;
+  }
+
+  color: ${props => props.isOpen && props.theme.palette.primary.main};
+
+  transition: all .2s ease-out;
+  transform-origin: center;
+  transform: ${props => props.isOpen ? `rotate(180deg)` : `rotate(0)`};
+`;
+IconContainer.displayName = 'IconContainer';
 

@@ -13,6 +13,7 @@ export const EventImageContainer = styled.div`
   width: 120%;
   margin: -2rem -2rem 0 -2rem;
   background-color: #fff;
+  border-radius: 5px;
 `;
 EventImageContainer.displayName = 'EventImageContainer';
 
