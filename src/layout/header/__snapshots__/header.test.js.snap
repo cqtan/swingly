@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Header should render the Header 1`] = `ShallowWrapper {}`;
-
-exports[`Header should render the HeaderProfile component if currentUser is defined. 1`] = `ShallowWrapper {}`;
