@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/functions';
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -60,6 +61,7 @@ export const getCurrentUser = () => {
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const functions = firebase.app().functions('europe-west1');
 
 // Only for GoogleAuth:
 // Make sure to enable Sign-in methods for Google on your account

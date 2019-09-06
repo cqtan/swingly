@@ -1,4 +1,4 @@
-import { firestore, getRootPath } from "../../firebase/firebase.utils";
+import { firestore, getRootPath, functions } from "../../firebase/firebase.utils";
 import mockEvents from '../dummy-data/dummy-event-data';
 
 export const deleteAllTestEventsInDb = async () => {
@@ -34,3 +34,52 @@ export const eventsToObject = (events) => {
     return prev;
   }, {}); 
 }
+
+// export const testCall = async (text) => {
+//   let rootPath = ''
+//   const db = firestore;
+
+//   if (process.env.NODE_ENV === 'production')
+//     rootPath = 'production';
+//   else if (process.env.NODE_ENV === 'test')
+//     rootPath = 'test';
+//   else if (process.env.NODE_ENV === 'development')
+//     rootPath = 'development';
+//   else 
+//     rootPath = 'somewhere-over-the-rainbow';
+  
+//   const newText = text.toUpperCase() + '-' + text.toUpperCase();
+
+//   const newDocRef = db.collection(`${rootPath}/data/text`).doc();
+//   let dummData = {
+//     id: newDocRef.id,
+//     text: newText
+//   };
+
+//   try {
+//     await newDocRef.set({
+//       dummData
+//     });
+//   } catch (error) {
+//     return error;
+//   }
+
+//   console.log('Where does this even log to?');  
+
+//   return newText;
+// }
+
+// const tester = functions.httpsCallable('testCall');
+
+// export const testCall = async (text) => {
+//   const textTest = await tester(text);
+//   console.log('tester text: ', textTest);
+// }
+
+
+// export const refresh = async () => {
+//   const refreshStore = functions.httpsCallable('refreshStore');
+//   const test = await refreshStore(true);
+//   console.log('testing refresh: ! ', test);
+// }
+

@@ -6,6 +6,7 @@ import {
 } from './example-container.styles';
 import { CSSTransition } from 'react-transition-group';
 import EventDetails from '../../components/events/event-details/event-details.component';
+import { testCall, refresh } from '../../redux/events/events.utils';
 // import { createMockEventsInDb } from '../../redux/events/events.utils';
 
 const ExampleContainer = (props) => {
