@@ -1,9 +1,8 @@
 export default {
-  title: 'Mock Events',
-  routeName: 'events',
   events: {
     id: {
       id: '',
+      cancelled: false,
       title: 'Swingtanzen Macht Froh!',
       host: {},
       type: 'social',
@@ -38,6 +37,7 @@ export default {
       ],
       currency: 'euro',
       description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit tellus aliquet, orci lacus torquent leo aptent lobortis cubilia blandit, tortor fringilla non nunc porta nec dis ac. Augue rutrum per egestas dictumst',
+      mapLink: 'https://www.google.com/maps',
       links: 'https://rand.cat/',
       interested: {
         count: 0,
@@ -48,6 +48,39 @@ export default {
         users: {}
       }
     }
+
   }
 }
 
+const eventUpdates = {
+  eventUpdates: {
+    id: {
+      eventId: '123123123',
+      messageType: 'cancelled',
+      createdAt: new Date()
+  
+    }
+  }
+}
+
+const users = {
+  id: {
+    id: '123123',
+    email: 'user@test.com',
+    username: 'user_test1',
+    createdAt: new Date(),
+    updatesRead: new Date(),
+    interested: {
+      count: 0,
+      users: {}
+    },
+    going: {
+      count: 0,
+      users: {}
+    },
+    ownEvents: {
+      count: 0,
+      users: {}
+    }
+  }
+}

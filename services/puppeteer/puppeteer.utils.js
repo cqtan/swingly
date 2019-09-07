@@ -110,8 +110,8 @@ const getDetails = async detailItems => {
   }
 
   return {
-    startDate,
-    endDate,
+    start: startDate,
+    end: endDate,
     location: location === null ? 'none' : location, 
     mapLink: mapLink === null ? 'none' : mapLink, 
     description: description === null ? 'none': description
@@ -172,4 +172,32 @@ const scrapeEvents = async () => {
   return uniqueEvents;
 }
 
+const formatEvents = events => {
+  const newEvents = events.map(event => (
+    {
+      ...event,
+      id: '',
+      cancelled: false,
+      host: 'A8WnU1fmQnWQ3bjvI6PYro32Tjh1',
+      type: 'social',
+      currency: 'euro',
+      links: [],
+      courses: [],
+      otherFees: [],
+      interested: {
+        count: 0,
+        users: {}
+      },
+      going: {
+        count: 0,
+        users: {}
+      }
+    }
+  ));
+  console.log(`${newEvents.length} have been formated!`);
+
+  return newEvents;
+}
+
+exports.formatEvents = formatEvents; 
 exports.scrapeEvents = scrapeEvents;

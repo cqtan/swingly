@@ -1,5 +1,6 @@
 import { firestore, getRootPath } from "../../firebase/firebase.utils";
 import mockEvents from '../dummy-data/dummy-event-data';
+import axios from 'axios';
 
 export const deleteAllTestEventsInDb = async () => {
   const eventsSnap = await firestore.collection(`test/data/events`).get();
@@ -33,6 +34,16 @@ export const eventsToObject = (events) => {
     prev[event.data().id] = event.data();
     return prev;
   }, {}); 
+}
+
+export const scrapeEvents = async (amount) => {
+  try {
+    const res = await axios.post('/api/data/sample/' + amount);
+    console.log('Success!: ', res);
+    
+  } catch (e) {
+    console.log('Failed!: ', e);
+  }
 }
 
 // export const testCall = async (text) => {

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { firestore, getRootPath } = require('../firebase/firebase-db.utils');
-const { scrapeEvents } = require('./puppeteer.utils');
+const { scrapeEvents, formatEvents } = require('./puppeteer.utils');
 
 router.get('/simple', (req, res) => {
   const text = `simplest test works!`;
@@ -40,12 +40,17 @@ router.post('/store/:text', async (req, res) => {
 
 });
 
-router.post('/sample', async (req, res) => {
+router.post('/sample/:amount', async (req, res) => {
+  const amount = req.params.amount;
+  if (amount < 1) {
+    res.status(500).send('Please enter a number larger than 0');
+  }
+
   try {
     let events = [];
     let counter = 0;
 
-    while (events.length < 2 && counter <= 3) {
+    while (events.length < 2 && counter <= 5) {
       counter++;
       console.log(`Attempt(s) (${counter}) at scraping`);
       events = await scrapeEvents();
@@ -53,21 +58,23 @@ router.post('/sample', async (req, res) => {
 
     if (events.length < 1) {
       res.status(404).send('Too many attempts...try again later!');
-    } else {
-      events = events.slice(0, 3);
-      const batch = firestore.batch();
-  
-      for (event of events) {
-        const newDocRef = firestore.collection(`${getRootPath()}/data/events`).doc();
-        batch.set(newDocRef, {
-          id: newDocRef.id,
-          ...event
-        });
-      }
-  
-      res.status(200).send(`Events ${events.length} have been persisted!`);
-      await batch.commit();
     }
+
+    events = events.slice(0, amount);
+    events = formatEvents(events);
+    const batch = firestore.batch();
+
+    for (event of events) {
+      const newDocRef = firestore.collection(`${getRootPath()}/data/events`).doc();
+      batch.set(newDocRef, {
+        ...event,
+        id: newDocRef.id
+      });
+    }
+
+    res.status(200).send(`Events ${events.length} have been persisted!`);
+    await batch.commit();
+    
   } catch (error) {
     res.status(404).send('Events failed to persist! ', error);
   }
