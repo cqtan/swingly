@@ -3,7 +3,7 @@ import {
   ProfileContainer,
 } from './profile.styles';
 import { connect } from 'react-redux';
-import ProfileImage from '../../components/profile-components/profile-image/profile-image.component';
+import ProfileImageSection from '../../components/profile-components/profile-image/profile-image-section.component';
 import ProfileDetails from '../../components/profile-components/profile-details/profile-details.component';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
@@ -16,8 +16,8 @@ const Profile = (props) => {
     <>
       { currentUser ?
         <ProfileContainer>
-            <ProfileImage />
-            <ProfileDetails />
+          <ProfileImageSection />
+          <ProfileDetails />
         </ProfileContainer> :
         <Redirect to='/' />
       }

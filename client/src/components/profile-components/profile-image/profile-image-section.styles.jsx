@@ -10,12 +10,3 @@ export const ProfileImageContainer = styled.div`
   border-bottom: 2px solid ${props => props.theme.palette.text.secondary};
 `;
 ProfileImageContainer.displayName = 'ProfileImageContainer';
-
-export const Image = styled.img`
-  height: 14rem;
-  width: 14rem;
-  border: 3px solid ${props => props.theme.palette.text.primary};
-  border-radius: 50%;
-  object-fit: cover;
-`;
-Image.displayName = 'Image';

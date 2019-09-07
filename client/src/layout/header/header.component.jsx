@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   HeaderContainer,
   HeaderButtons,
-  HeaderProfile,
   Logo,
 } from './header.styles';
 import { connect } from 'react-redux';
@@ -14,6 +13,7 @@ import SignUp from '../../components/sign-up/sign-up.component';
 import Backdrop from '../../ui/backdrop/backdrop.component';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
+import ProfileImage from '../../ui/profile-image/profile-image.component';
 
 export const Header = (props) => {
   const [sideOpen, setSideOpen] = useState(false);
@@ -41,7 +41,7 @@ export const Header = (props) => {
         <Logo to='/'>Swingly</Logo>
         <HeaderButtons flat onClick={() => currentUser ? setDrawerOpen(!drawerOpen) : handlePopupToggle()}>
           { currentUser ? 
-            <HeaderProfile src='http://lorempixel.com/400/200/cats' /> :
+            <ProfileImage sm src='http://lorempixel.com/400/200/cats' /> :
             <FontAwesomeIcon icon='user-circle' size='2x' />
           }
         </HeaderButtons>

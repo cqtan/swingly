@@ -10,7 +10,7 @@ const chooseColor = props => {
     return theme.palette.secondary.main;
   } else if (deleteStyle) {
     return theme.palette.error;
-  }else {
+  } else {
     return theme.palette.primary.main;
   }
 }
