@@ -4,7 +4,7 @@ import {
   getCurrentUser,
   signInWithGithub,
   signInWithGoogle
-} from "../../firebase/firebase.utils";
+} from "./user.utils";
 import { auth, firestore, getRootPath } from "../../firebase/firebase.utils";
 import { openSnackbar } from "../snackbar/snackbar.actions";
 import { fetchUsersArray } from "./user.utils";

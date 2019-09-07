@@ -1,9 +1,10 @@
 import {
   auth,
   firestore,
-  getRootPath,
-  createUserProfileDocument
+  getRootPath
 } from './firebase.utils';
+
+import { createUserProfileDocument } from '../redux/user/user.utils';
 
 export const testUser = {
   email: 'user@test.com',

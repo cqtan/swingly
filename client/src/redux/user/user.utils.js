@@ -1,4 +1,10 @@
-import { firestore, getRootPath } from "../../firebase/firebase.utils"
+import { 
+  firestore, 
+  getRootPath,
+  githubProvider,
+  googleProvider,
+  auth
+} from "../../firebase/firebase.utils"
 
 
 export const fetchUsersArray = async () => {
@@ -17,3 +23,44 @@ export const arrayToObject = (array) => {
     return prev;
   }, {});
 }
+
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) return;
+
+  const userRef = firestore.doc(`${getRootPath()}/data/users/${userAuth.uid}`);
+  
+  const snapShot = await userRef.get();
+
+  if (!snapShot.exists) {
+    const { uid, displayName, email } = userAuth;    
+    const createdAt = new Date();
+    try {
+      await userRef.set({
+        id: uid,
+        username: displayName,
+        email,
+        createdAt,
+        ...additionalData
+      });
+    } catch (error) {
+      console.log('error creating user', error.message);
+    }
+  }
+  return userRef;
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+}
+
+// Always promt popup on sign up/in.
+// Possible error onClick (restricted_client): Change name of consent screen.
+githubProvider.setCustomParameters({ prompt: 'select_account' });
+googleProvider.setCustomParameters({ prompt: 'select_account' });
+export const signInWithGithub = () => auth.signInWithPopup(githubProvider);
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);

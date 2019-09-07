@@ -20,6 +20,7 @@ import {
   signOutTestUser
 } from '../../../firebase/firebase-test.utils';
 import * as firebaseUtils from '../../../firebase/firebase.utils';
+import * as userUtils from '../user.utils';
  
 xdescribe('User Actions', () => {
   const middlewares = [thunk];
@@ -70,20 +71,20 @@ xdescribe('User Actions', () => {
     });
     
     it('should disptach SIGNIN_SUCCESS if valid google as provider given', async () => {
-      jest.spyOn(firebaseUtils, 'signInWithGoogle').mockImplementation(async () => ({ user: await signInTestUser() }));
+      jest.spyOn(userUtils, 'signInWithGoogle').mockImplementation(async () => ({ user: await signInTestUser() }));
         
       await store.dispatch(signInWithProvider('google'));
 
-      expect(firebaseUtils.signInWithGoogle).toHaveBeenCalledTimes(1);
+      expect(userUtils.signInWithGoogle).toHaveBeenCalledTimes(1);
       expect(store.getActions()[1].type).toBe(UserActionTypes.SIGNIN_SUCCESS);
     });
 
     it('should disptach SIGNIN_SUCCESS if valid github as provider given', async () => {
-      jest.spyOn(firebaseUtils, 'signInWithGithub').mockImplementation(async () => ({ user: await signInTestUser() }));
+      jest.spyOn(userUtils, 'signInWithGithub').mockImplementation(async () => ({ user: await signInTestUser() }));
         
       await store.dispatch(signInWithProvider('github'));
       
-      expect(firebaseUtils.signInWithGithub).toHaveBeenCalledTimes(1);
+      expect(userUtils.signInWithGithub).toHaveBeenCalledTimes(1);
       expect(store.getActions()[1].type).toBe(UserActionTypes.SIGNIN_SUCCESS);
     });
   });
