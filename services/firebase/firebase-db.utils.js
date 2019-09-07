@@ -13,4 +13,16 @@ const config = {
 
 firebase.initializeApp(config);
 
-exports.firestore = firebase.firestore()
+const getRootPath = () => {
+  if (process.env.NODE_ENV === 'production')
+    return 'production';
+  else if (process.env.NODE_ENV === 'test')
+    return 'test';
+  else if (process.env.NODE_ENV === 'development')
+    return 'development';
+  else 
+    return 'elsweyr';
+}
+
+exports.getRootPath = getRootPath;
+exports.firestore = firebase.firestore();

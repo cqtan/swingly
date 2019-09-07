@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const puppeteer = require('./services/puppeteer');
+const puppeteer = require('./services/puppeteer/puppeteer.routes');
 require('dotenv').config();
 
 app.use(express.json());

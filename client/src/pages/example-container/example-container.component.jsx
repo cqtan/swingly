@@ -13,9 +13,9 @@ import axios from 'axios';
 const ExampleContainer = (props) => {
   const [isOpen, setOpen] = useState(true);
 
-  const testCall = async (text) => {
+  const testCall = async () => {
     try {
-      const res = await axios.post('/api/data/store/' + text);
+      const res = await axios.post('/api/data/sample');
       console.log('-----> RES: ', res);
       
     } catch (e) {
@@ -37,7 +37,7 @@ const ExampleContainer = (props) => {
         </ExampleBgLogoContainer>
       </CSSTransition>
       <EventDetails isOpen={isOpen} onClose={() => setOpen(false)} />
-      <ExampleButton primary onClick={() => testCall('pancake')}>Toggle</ExampleButton>
+      <ExampleButton primary onClick={() => testCall()}>Sample</ExampleButton>
       {/* <ExampleButton primary onClick={() => setOpen(!isOpen)}>Toggle</ExampleButton> */}
       {/* <ExampleButton primary onClick={() => createMockEventsInDb(1, 'jYfFcg7Yo3S5pWCviMtijlOidPv1')}>Toggle</ExampleButton> */}
     </>
