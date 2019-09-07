@@ -6,13 +6,15 @@ import Root from '../../Root';
 describe('App component', () => {
   let wrapper;
   let mockSetCurrentUser = () => undefined;
+  let mockSetUsers = () => undefined;
   let mockfetchEvents = () => undefined;
 
   const mountComponent = () => {
     const mockProps = {
       snackbar: {},
       setCurrentUser: mockSetCurrentUser,
-      fetchEvents: mockfetchEvents
+      fetchEvents: mockfetchEvents,
+      setUsers: mockSetUsers
     };
 
     wrapper = mount(
@@ -25,6 +27,7 @@ describe('App component', () => {
   afterEach(() => {
     mockSetCurrentUser = () => undefined;
     mockfetchEvents = () => undefined;
+    mockSetUsers = () => undefined;
   });
 
   it('should render', () => {
@@ -53,6 +56,14 @@ describe('App component', () => {
     mountComponent();
     
     expect(mockfetchEvents).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call setUsers on mount only', () => {
+    mockSetUsers = jest.fn();
+    
+    mountComponent();
+    
+    expect(mockSetUsers).toHaveBeenCalledTimes(1);
   });
 });
 

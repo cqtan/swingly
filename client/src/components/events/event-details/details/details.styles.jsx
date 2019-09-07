@@ -34,6 +34,11 @@ export const Data = styled.div`
 `;
 Data.displayName = 'Data';
 
+export const DataLink = styled.a`
+  flex: 1 1 100%;
+  color: ${props => props.theme.palette.primary.main};
+`;
+
 export const Divider = styled.div`
   margin: 1.5rem auto 1.5rem auto;
   width: 80%;

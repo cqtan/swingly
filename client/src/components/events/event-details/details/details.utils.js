@@ -1,8 +1,8 @@
 import React from "react";
-import { Row, Label, DataContainer, Data } from "./details.styles";
+import { Row, Label, DataContainer, Data, DataLink } from "./details.styles";
 import moment from "moment";
 
-export const parseDate = date => moment(date).format("Do MMM, H:mm");
+export const parseDate = date => moment(date).format("Do MMMM, HH:mm");
 
 export const parseFees = fees => {
   return fees.map(data => {
@@ -16,49 +16,89 @@ export const parseFees = fees => {
 export const parseData = (key, value) => {
   if (["start", "end"].includes(key)) {
     return parseDate(value.toDate());
-  } else if (["type", "location", "courseTitle", "host"].includes(key)) {
+  } else if (["type", "location", "courseTitle", ].includes(key)) {
     return value;
   } else if (["links"].includes(key)) {
-    return [value, value, value];
+    return value.length ? value : null;
   } else if (["fees", "otherFees"].includes(key)) {
-    return parseFees(value);
-  } else {
+    return value.length ? parseFees(value) : null;
+  } else if (["host"].includes(key)) {
+    return Object.keys(value).length ? value : null;
+  }
+  else {
     return null;
   }
 };
 
 export const arrangeEventData = eventData => {
-  const { host, type, location = null, start, end, otherFees, links } = eventData;
-  return { host, type, location, start, end, otherFees, links };
+  const { host, type, location = null, start, end, otherFees, links, mapLink } = eventData;
+  return { mapLink, host, type, location, start, end, otherFees, links };
 };
 
 export const arrangeCourseData = course => {
-  const { courseTitle, location = null, start, end, fees } = course;
-  return { courseTitle, location, start, end, fees };
+  const { courseTitle, location = null, start, end, fees, mapLink } = course;
+  return { mapLink, courseTitle, location, start, end, fees };
+}
+
+export const createDataComponents = (dataList, key, mapLink = 'https://cat-bounce.com/') => {
+  const dataComponents = dataList.map((data, index) => {
+    let component = null;
+    if (key === 'location') {
+      component = <DataLink key={index} href={mapLink} target='_blank'>{data}</DataLink>
+    } else if (key === 'host') {
+      component = <Data key={index}>{data.id}</Data>; // TODO make mini profile
+    } else {
+      component = <Data key={index}>{data}</Data>;
+    }
+
+    return component;
+  });
+
+  return dataComponents;
+}
+
+export const formatLabel = key => {
+  if (['host', 'type', 'location', 'start', 'end'].includes(key)) {
+    return capitalizeFirstLetter(key);
+  } else {
+    return key;
+  }
+}
+
+const capitalizeFirstLetter = string => {
+  return string[0].toUpperCase() + string.slice(1);
 }
 
 export const objToRows = obj => {
+  let mapLink = '';
+
   return Object.entries(obj).map(([key, value]) => {
     let dataList = [];
-    value = parseData(key, value);
+    let parsedValue = null;
 
-    if (value instanceof Array) {
-      dataList = value.length ? value : [];
-    } else if (value) {
-      dataList.push(value);
+    if (key === 'mapLink') {
+      mapLink = value;
+    } else {
+      parsedValue = parseData(key, value);
     }
 
+    if (!parsedValue) {
+      return null;
+    } else if (parsedValue instanceof Array) {
+      dataList = parsedValue.length ? parsedValue : null;
+    } else {
+      dataList.push(parsedValue);
+    }
+
+    const dataComponents = createDataComponents(dataList, key, mapLink);
+
     return (
-      dataList.length > 0 && (
-        <Row key={key}>
-          <Label>{key}</Label>
-          <DataContainer>
-            {dataList.map((data, index) => (
-              <Data key={index}>{data}</Data>
-            ))}
-          </DataContainer>
-        </Row>
-      )
-    );
+      <Row key={key}>
+        <Label>{formatLabel(key)}</Label>
+        <DataContainer>
+          {dataComponents}
+        </DataContainer>
+      </Row>
+    )
   });
 };

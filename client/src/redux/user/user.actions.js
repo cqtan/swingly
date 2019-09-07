@@ -7,6 +7,7 @@ import {
 } from "../../firebase/firebase.utils";
 import { auth, firestore, getRootPath } from "../../firebase/firebase.utils";
 import { openSnackbar } from "../snackbar/snackbar.actions";
+import { fetchUsersArray } from "./user.utils";
 
 const getUserWithProvider = async signInMethod => {
   switch (signInMethod) {
@@ -43,6 +44,30 @@ export const setCurrentUser = () => async dispatch => {
     });
   }
 };
+
+export const setUsers = () => async (dispatch) => {
+  try {
+    const usersObj = await fetchUsersArray();
+
+    if (Object.keys(usersObj).length) {
+      dispatch({
+        type: UserActionTypes.SET_USERS_SUCCESS,
+        payload: usersObj
+      });
+    } else {
+      dispatch({
+        type: UserActionTypes.SET_USERS_FAILED,
+        payload: 'No users in DB!'
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: UserActionTypes.SET_USERS_FAILED,
+      payload: 'Fetch Users failed!'
+    });
+    dispatch(openSnackbar("error", "Fetch Users failed!"));
+  }
+}
 
 export const signInWithProvider = signInMethod => async dispatch => {
   try {

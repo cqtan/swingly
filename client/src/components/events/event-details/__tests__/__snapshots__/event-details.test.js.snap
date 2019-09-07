@@ -3,11 +3,11 @@
 exports[`Event Details Component should render correctly 1`] = `
 Array [
   <button
-    className="sc-kGXeez cFpExQ"
+    className="sc-kpOJdX gGjbXx"
     onClick={[MockFunction]}
   />,
   <div
-    className="sc-kpOJdX duhVDd"
+    className="sc-dxgOiQ ePLTYJ"
   >
     <div
       className="css-1smlpex"

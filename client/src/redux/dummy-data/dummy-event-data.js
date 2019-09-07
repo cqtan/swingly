@@ -52,35 +52,35 @@ export default {
   }
 }
 
-const eventUpdates = {
-  eventUpdates: {
-    id: {
-      eventId: '123123123',
-      messageType: 'cancelled',
-      createdAt: new Date()
+// const eventUpdates = {
+//   eventUpdates: {
+//     id: {
+//       eventId: '123123123',
+//       messageType: 'cancelled',
+//       createdAt: new Date()
   
-    }
-  }
-}
+//     }
+//   }
+// }
 
-const users = {
-  id: {
-    id: '123123',
-    email: 'user@test.com',
-    username: 'user_test1',
-    createdAt: new Date(),
-    updatesRead: new Date(),
-    interested: {
-      count: 0,
-      users: {}
-    },
-    going: {
-      count: 0,
-      users: {}
-    },
-    ownEvents: {
-      count: 0,
-      users: {}
-    }
-  }
-}
+// const users = {
+//   id: {
+//     id: '123123',
+//     email: 'user@test.com',
+//     username: 'user_test1',
+//     createdAt: new Date(),
+//     updatesRead: new Date(),
+//     interested: {
+//       count: 0,
+//       users: {}
+//     },
+//     going: {
+//       count: 0,
+//       users: {}
+//     },
+//     ownEvents: {
+//       count: 0,
+//       users: {}
+//     }
+//   }
+// }

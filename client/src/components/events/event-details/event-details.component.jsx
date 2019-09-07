@@ -14,20 +14,24 @@ import { selectAllEvents } from '../../../redux/events/events.selectors';
 import Details from './details/details.component';
 import Backdrop from '../../../ui/backdrop/backdrop.component';
 import Spinner from '../../../ui/spinner/spinner.component';
+import { selectUsers } from '../../../redux/user/user.selectors';
 
 export const EventDetails = (props) => {
-  const { isOpen, onClose, events } = props;
+  const { isOpen, onClose, events, users } = props;
 
   let event = null;
-  if (Object.keys(events).length) {
+  if (Object.keys(events).length && Object.keys(users).length) {
     event = events[Object.keys(events)[0]];
+    console.log('<<<<<event: ', event.host);
   }
+
+
 
   return (
     <>
       <Backdrop isOpen={isOpen} onClick={onClose}/>
 
-      { (isOpen && event) ?
+      { (isOpen && event && users) ?
         <Modal
           isOpen={isOpen}
           direction="left"
@@ -38,7 +42,7 @@ export const EventDetails = (props) => {
               <EventImage src='http://lorempixel.com/400/200/cats' />
             </EventImageContainer>
             <EventTitle>
-              Swingtanzen macht froh!
+              {event.title}
             </EventTitle>
             <DetailsContainer>
               <Details event={event} />
@@ -54,7 +58,8 @@ export const EventDetails = (props) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-  events: selectAllEvents
+  events: selectAllEvents,
+  users: selectUsers
 });
 
 export default connect(mapStateToProps)(EventDetails);

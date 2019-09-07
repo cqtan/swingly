@@ -4,6 +4,7 @@ import userReducer from '../user.reducer';
 describe('User Reducer', () => {
   const initialState = {
     currentUser: null,
+    users: null,
     error: null,
     isLoading: false,
   };
@@ -13,6 +14,7 @@ describe('User Reducer', () => {
       username: 'test_user',
       email: 'test@test.com'
     },
+    users: null,
     isLoading: false,
     error: null
   };
