@@ -9,7 +9,7 @@
     "client": "cd client && yarn start",
     "dev": "NODE_ENV=development concurrently \"yarn server\" \"yarn client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cd client && yarn test"
   },
   "repository": {
     "type": "git",
