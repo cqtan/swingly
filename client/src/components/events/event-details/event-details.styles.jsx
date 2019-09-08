@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { SpinnerContainer } from '../../../ui/spinner/spinner.styles';
 import Button from '../../../ui/button/button.component';
 
 export const EventDetailsContainer = styled.div`

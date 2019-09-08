@@ -28,13 +28,11 @@ export const EventDetails = (props) => {
     console.log('<<<<<event: ', event.host);
   }
 
-
-
   return (
     <>
       <Backdrop isOpen={isOpen} onClick={onClose}/>
 
-      { (isOpen && event && users) ?
+      { (event && users) ?
         <Modal
           isOpen={isOpen}
           direction="left"

@@ -5,7 +5,7 @@ import { eventsToObject } from './events.utils';
 
 export const fetchEvents = () => async dispatch => {
   try {
-    const eventsSnap = await firestore.collection(`${getRootPath()}/data/events`).get();
+    const eventsSnap = await firestore.collection(`${getRootPath()}/data/events`).orderBy('start').get();
 
     if (eventsSnap.docs.length) {
       const eventsObj = eventsToObject(eventsSnap.docs);

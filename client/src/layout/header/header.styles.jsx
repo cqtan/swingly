@@ -7,7 +7,7 @@ export const HeaderContainer = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 6rem;
+  height: ${props => props.theme.layout.header.height};
   background-color: ${({ theme }) => theme.palette.primary.main };
   box-shadow: ${({ theme }) => theme.shadows[2]};
   display: flex;

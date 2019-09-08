@@ -11,13 +11,12 @@ import { setCurrentUser, setUsers } from "../../redux/user/user.actions";
 import { fetchEvents } from "../../redux/events/events.actions";
 import { createStructuredSelector } from "reselect";
 import { selectSnackbarState } from "../../redux/snackbar/snackbar.selectors";
-import { selectAllEvents } from "../../redux/events/events.selectors";
+import EventsPage from '../../pages/events-page/events-page.component';
 
 export const App = props => {
   const {
     setCurrentUser,
     setUsers,
-    events,
     fetchEvents,
     snackbar
   } = props;
@@ -27,10 +26,6 @@ export const App = props => {
     setUsers();
     fetchEvents();
   }, [setCurrentUser, setUsers, fetchEvents]);
-
-  if (events !== undefined && Object.keys(events).length) {
-    console.log('events: ', events);
-  }
   
   return (
     <>
@@ -46,15 +41,14 @@ export const App = props => {
       <Switch>
         <Route path="/hi" exact render={() => <ExampleContainer hi />} />
         <Route path="/profile" exact component={Profile} />
-        <Route path="/" component={ExampleContainer} />
+        <Route path="/" component={EventsPage} />
       </Switch>
     </>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
-  snackbar: selectSnackbarState,
-  events: selectAllEvents
+  snackbar: selectSnackbarState
 });
 
 const mapDispatchToProps = {

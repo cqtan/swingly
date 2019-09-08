@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Button from '../../ui/button/button.component';
 
 export const ProfileContainer = styled.div`
-  margin-top: 6rem;
+  margin-top: ${props => props.theme.layout.header.height};
   display: flex;
   flex-wrap: wrap;
   color: ${props => props.theme.palette.text.primary};
