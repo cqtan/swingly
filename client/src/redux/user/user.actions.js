@@ -47,6 +47,8 @@ export const setCurrentUser = () => async dispatch => {
 
 export const setUsers = () => async (dispatch) => {
   try {
+    dispatch({ type: UserActionTypes.USER_LOADING });
+
     const usersObj = await fetchUsersArray();
 
     if (Object.keys(usersObj).length) {

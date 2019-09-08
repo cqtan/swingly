@@ -44,7 +44,6 @@ export const CustomButton = styled.button`
   padding: ${props => props.theme.spacing(1)};
   margin: ${props => props.theme.spacing(1)};
   background-color: ${chooseColor};
-  cursor: pointer;
   ${props => props.theme.typo.button};
   transition: all .2s ease-out;
   ${props => props.flat ? flatButton : defaultButton};

@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Label, DataContainer, Data, DataLink } from "./details.styles";
+import ProfileStack from '../../../profile-components/profile-stack/profile-stack.component';
 import moment from "moment";
 
 export const parseDate = date => moment(date).format("Do MMMM, HH:mm");
@@ -16,16 +17,13 @@ export const parseFees = fees => {
 export const parseData = (key, value) => {
   if (["start", "end"].includes(key)) {
     return parseDate(value.toDate());
-  } else if (["type", "location", "courseTitle", ].includes(key)) {
+  } else if (["type", "location", "courseTitle", "host"].includes(key)) {
     return value;
   } else if (["links"].includes(key)) {
     return value.length ? value : null;
   } else if (["fees", "otherFees"].includes(key)) {
     return value.length ? parseFees(value) : null;
-  } else if (["host"].includes(key)) {
-    return Object.keys(value).length ? value : null;
-  }
-  else {
+  } else {
     return null;
   }
 };
@@ -46,7 +44,7 @@ export const createDataComponents = (dataList, key, mapLink = 'https://cat-bounc
     if (key === 'location') {
       component = <DataLink key={index} href={mapLink} target='_blank'>{data}</DataLink>
     } else if (key === 'host') {
-      component = <Data key={index}>{data.id}</Data>; // TODO make mini profile
+      component = <ProfileStack key={index} hosts={data} />
     } else {
       component = <Data key={index}>{data}</Data>;
     }

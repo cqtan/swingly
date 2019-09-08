@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const selectSize = props => {
-  const { xl, lg, md, sm, xm } = props;
+  const { xl, lg, md, sm, xs } = props;
   if (xl) 
     return css`
       width: 20rem;
@@ -26,7 +26,7 @@ const selectSize = props => {
       height: 3.5rem;
       border: 2px solid ${props => props.theme.palette.text.primary};
     `;
-  else if (xm)
+  else if (xs)
     return css`
       width: 2rem;
       height: 2rem;

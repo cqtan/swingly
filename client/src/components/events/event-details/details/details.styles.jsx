@@ -10,7 +10,7 @@ export const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  font-size: ${props => props.theme.typo.subtitle};
+  ${props => props.theme.typo.subtitle};
   line-height: 1.8rem;
 `;
 Row.displayName = 'Row';

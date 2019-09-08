@@ -30,6 +30,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.SET_USERS_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         error: null,
         users: action.payload
       }
