@@ -16,7 +16,7 @@ export const FirstUser = styled.div`
   font-family: 'Lato', 'Roboto', 'Arial', sans-serif;
   ${props => props.theme.typo.subtitle};
   margin-right: 1rem;
-  transition: all .1s ease-in;
+  transition: color .1s ease-in;
 
   :hover {
     color: ${props => props.theme.palette.primary.main};

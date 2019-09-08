@@ -32,21 +32,25 @@ const Details = props => {
 
   return (
     <DetailsContainer>
-      {details ? details : <p>oops</p>}
+      {details.length > 0 && details}
       <Divider />
       {event.description && <Description>{event.description}</Description>}
-      <Divider />
-      <DropDownToggle onClick={() => setDropOpen(!isDropOpen)}>
-        Courses
-        <IconContainer isOpen={isDropOpen} >
-          <FontAwesomeIcon icon='caret-down' />
-        </IconContainer> 
-      </DropDownToggle>
-      <DropDown isOpen={isDropOpen} contentHeight={dropHeight}>
-        <DropDownContent ref={dropRef}>
-          {courses ? courses : <p>oops</p>}
-        </DropDownContent>
-      </DropDown>
+      {courses.length > 0 && 
+        <>
+          <Divider />
+          <DropDownToggle onClick={() => setDropOpen(!isDropOpen)}>
+            Courses
+            <IconContainer isOpen={isDropOpen} >
+              <FontAwesomeIcon icon='caret-down' />
+            </IconContainer> 
+          </DropDownToggle>
+          <DropDown isOpen={isDropOpen} contentHeight={dropHeight}>
+            <DropDownContent ref={dropRef}>
+              {courses}
+            </DropDownContent>
+          </DropDown>
+        </>
+      }
     </DetailsContainer>
   );
 };

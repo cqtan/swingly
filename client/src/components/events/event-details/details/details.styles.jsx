@@ -36,7 +36,12 @@ Data.displayName = 'Data';
 
 export const DataLink = styled.a`
   flex: 1 1 100%;
-  color: ${props => props.theme.palette.primary.main};
+  color: ${props => props.theme.palette.text.primary};
+  transition: color .1s ease-in;
+
+  :hover {
+    color: ${props => props.theme.palette.primary.main};
+  }
 `;
 
 export const Divider = styled.div`

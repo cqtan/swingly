@@ -5,6 +5,9 @@ import {
   EventImage,
   EventTitle,
   DetailsContainer,
+  ButtonsContainer,
+  VerticalDivider,
+  EventButton,
 } from './event-details.styles';
 import { connect } from 'react-redux';
 import Modal from '../../../ui/modal/modal.component';
@@ -47,6 +50,13 @@ export const EventDetails = (props) => {
             <DetailsContainer>
               <Details event={event} />
             </DetailsContainer>
+            <ButtonsContainer>
+              <EventButton transparent>Guests</EventButton>
+              <VerticalDivider />
+              <EventButton transparent>Interested</EventButton>
+              <VerticalDivider />
+              <EventButton transparent>Going</EventButton>
+            </ButtonsContainer>
           </EventDetailsContainer>
         </Modal>
         :

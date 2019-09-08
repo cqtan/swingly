@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { SpinnerContainer } from '../../../ui/spinner/spinner.styles';
+import Button from '../../../ui/button/button.component';
 
 export const EventDetailsContainer = styled.div`
   display: flex;
@@ -38,3 +40,32 @@ export const DetailsContainer = styled.div`
   width: 100%;
 `;
 DetailsContainer.displayName = 'DetailsContainer';
+
+export const ButtonsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+ButtonsContainer.displayName = 'ButtonsContainer';
+
+export const EventButton  = styled(Button)`
+  flex: 1 1 100%;
+  ${props => props.theme.typo.body};
+  margin: 0;
+  color: ${props => props.theme.palette.text.primary};
+  box-shadow: none;
+
+  :hover {
+    box-shadow: none;
+    color: ${props => props.theme.palette.primary.main};
+  }
+`;
+EventButton.displayName = 'EventButton';
+
+export const VerticalDivider = styled.div`
+  margin: auto 1.5rem auto 1.5rem;
+  height: 70%;
+  border-right: 1px solid ${props => props.theme.palette.grey[5]};
+`;
+VerticalDivider.displayName = 'VerticalDivider';
+
