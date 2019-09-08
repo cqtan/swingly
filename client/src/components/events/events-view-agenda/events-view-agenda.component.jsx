@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   EventsViewAgendaContainer,
   MonthRow,
@@ -13,18 +13,32 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectAllEvents, selectEventsLoaded } from '../../../redux/events/events.selectors';
 import { getMonthString, getDayString, getDayNumber, getTime, checkIsToday } from './events-view-agenda.utils';
+import EventDetails from '../event-details/event-details.component';
 
 const EventsViewAgenda = (props) => {
   const { events, isEventsLoaded } = props;
   let timeTracker = {};
-  let eventComponents = [];
+  let initialComponents = [];
+
+  const [isDetailsOpen, setDetailsOpen] = useState(false);
+  const [currentEvent, setCurrentEvent] = useState(null);
+  const [eventComponents, setEventComponents] = useState([]);
+
+  const handleEventOpen = event => {
+    setCurrentEvent(event);
+    setDetailsOpen(true);
+  }
+
+  const handleEventClose = () => {
+    setDetailsOpen(false);
+  }
 
   const addMonthRow = event => {
     const startMonth = getMonthString(event.start);
 
     if (!timeTracker.hasOwnProperty(startMonth)) {
       timeTracker[startMonth] = {};
-      eventComponents.push(
+      initialComponents.push(
         <MonthRow key={startMonth}>{startMonth}</MonthRow>
       )      
     }
@@ -50,13 +64,13 @@ const EventsViewAgenda = (props) => {
     const endTime = getTime(event.end);
     const timeFormatted = `${startTime} - ${endTime}`;
 
-    eventComponents.push(
-      <DayRow key={event.id} isToday={isToday}>
+    initialComponents.push(
+      <DayRow key={event.id} isDayDisplayed={isDayDisplayed}>
         <DayDate isDayDisplayed={isDayDisplayed}>
           <DayDateItem>{dayString}</DayDateItem>
           <DayDateItem>{dayNumber}</DayDateItem>
         </DayDate>
-        <DayEvents>
+        <DayEvents flat isToday={isToday} onClick={() => handleEventOpen(event)}>
           <DayEventItem>{event.title}</DayEventItem>
           <DayEventItem>{timeFormatted}</DayEventItem>
         </DayEvents>
@@ -65,18 +79,26 @@ const EventsViewAgenda = (props) => {
     );
   }
 
-  if (isEventsLoaded) {
-    Object.values(events).slice(0, 3).forEach(event => {
+  if (isEventsLoaded && eventComponents.length === 0) {
+    Object.values(events).forEach(event => {
       addMonthRow(event);
       addDayRow(event);
-      console.log('---- time tracker:', timeTracker);
+      setEventComponents(initialComponents);
+      // console.log('---- time tracker:', timeTracker);
     });
-  } 
+  }
 
   return (
-    <EventsViewAgendaContainer>
-      {eventComponents}
-    </EventsViewAgendaContainer>
+    <>
+      <EventsViewAgendaContainer>
+        {eventComponents}
+      </EventsViewAgendaContainer>
+      <EventDetails 
+        isOpen={isDetailsOpen} 
+        event={currentEvent}
+        onClose={handleEventClose} 
+      />
+    </>
   );
 }
 
@@ -86,4 +108,3 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default connect(mapStateToProps)(EventsViewAgenda);
-

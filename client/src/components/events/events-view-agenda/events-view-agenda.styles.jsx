@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Button from '../../../ui/button/button.component';
 
 const getBgColor = props => {
   if (props.theme.type === 'dark') {
@@ -15,6 +16,7 @@ export const EventsViewAgendaContainer = styled.div`
   align-content: flex-start;
   width: 100%;
   ${props => props.theme.typo.subtitle};
+  padding-bottom: 10rem; 
 `;
 EventsViewAgendaContainer.displayName = 'EventsViewAgendaContainer';
 
@@ -26,7 +28,8 @@ export const MonthRow = styled.div`
   height: 5rem;
   color: ${props => props.theme.palette.text.primary};
   ${props => props.theme.typo.h5};
-  margin: ${props => props.theme.spacing(2)} 0;
+  margin: ${props => props.theme.spacing(1)} 0;
+  padding-top: 2rem; 
 `;
 MonthRow.displayName = 'MonthRow';
 
@@ -37,6 +40,7 @@ export const DayRow = styled.div`
   color: ${props => props.theme.palette.text.primary};
   border: ${props => props.isToday ? `2px solid ${props.theme.palette.primary.main}` : `none`};
   margin: 0.2rem 0;
+  margin-top: ${props => !props.isDayDisplayed ? `2rem` : `0.2rem`};
 `;
 DayRow.displayName = 'DayRow';
 
@@ -61,7 +65,7 @@ export const DayDateItem = styled.div`
 `;
 DayDateItem.displayName = 'DayDateItem';
 
-export const DayEvents = styled.div`
+export const DayEvents = styled(Button)`
   display: flex;
   flex-wrap: wrap;
   flex: 1 1 80%;
@@ -70,11 +74,14 @@ export const DayEvents = styled.div`
   background-color: ${getBgColor};
   ${props => props.theme.mixins.defaultBorderRadius}; 
   border: ${props => props.isToday ? `1px solid ${props.theme.palette.primary.main}` : `none`};
+  margin: 0;
+  color: ${props => props.theme.palette.text.primary};
+  ${props => props.theme.typo.subtitle};
+  font-family: 'Lato', 'Roboto', 'Arial', sans-serif;
 
   & > div:first-of-type {
     line-height: 1.3;
   }
-
 `;
 DayEvents.displayName = 'DayEvents';
 
