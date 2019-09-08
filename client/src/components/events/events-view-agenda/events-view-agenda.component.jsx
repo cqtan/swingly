@@ -12,50 +12,70 @@ import {
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectAllEvents, selectEventsLoaded } from '../../../redux/events/events.selectors';
-import { getMonthString } from './events-view-agenda.utils';
+import { getMonthString, getDayString, getDayNumber, getTime, checkIsToday } from './events-view-agenda.utils';
 
 const EventsViewAgenda = (props) => {
   const { events, isEventsLoaded } = props;
-  let months = {};
+  let timeTracker = {};
   let eventComponents = [];
 
   const addMonthRow = event => {
     const startMonth = getMonthString(event.start);
 
-    if (!months.hasOwnProperty(startMonth)) {
-      console.log(`Month: ${startMonth} added!`);
-      months[startMonth] = startMonth;
+    if (!timeTracker.hasOwnProperty(startMonth)) {
+      timeTracker[startMonth] = {};
       eventComponents.push(
-        <MonthRow>{startMonth}</MonthRow>
-      )
+        <MonthRow key={startMonth}>{startMonth}</MonthRow>
+      )      
     }
   }
 
   const addDayRow = event => {
-    
+    const startMonth = getMonthString(event.start);
+    let dayNumber = getDayNumber(event.start);
+    let dayString = null;
+    let isDayDisplayed = false;
+    let isToday = checkIsToday(event.start);
+
+    if (!timeTracker[startMonth].hasOwnProperty(dayNumber)) {
+      timeTracker[startMonth][dayNumber] = [event.title];
+      dayString = getDayString(event.start);
+    } else {
+      timeTracker[startMonth][dayNumber].push(event.title);
+      dayNumber = null;
+      isDayDisplayed = true;
+    }
+
+    const startTime = getTime(event.start);
+    const endTime = getTime(event.end);
+    const timeFormatted = `${startTime} - ${endTime}`;
+
+    eventComponents.push(
+      <DayRow key={event.id} isToday={isToday}>
+        <DayDate isDayDisplayed={isDayDisplayed}>
+          <DayDateItem>{dayString}</DayDateItem>
+          <DayDateItem>{dayNumber}</DayDateItem>
+        </DayDate>
+        <DayEvents>
+          <DayEventItem>{event.title}</DayEventItem>
+          <DayEventItem>{timeFormatted}</DayEventItem>
+        </DayEvents>
+        <DayEventIcon>x</DayEventIcon>
+      </DayRow>
+    );
   }
 
   if (isEventsLoaded) {
     Object.values(events).slice(0, 3).forEach(event => {
       addMonthRow(event);
       addDayRow(event);
+      console.log('---- time tracker:', timeTracker);
     });
   } 
 
   return (
     <EventsViewAgendaContainer>
-      <MonthRow>August</MonthRow>
-      <DayRow>
-        <DayDate>
-          <DayDateItem>Fri</DayDateItem>
-          <DayDateItem>10</DayDateItem>
-        </DayDate>
-        <DayEvents>
-          <DayEventItem>Swingtanzen macht froh!</DayEventItem>
-          <DayEventItem>20:00 - 23:30</DayEventItem>
-        </DayEvents>
-        <DayEventIcon>yo</DayEventIcon>
-      </DayRow>
+      {eventComponents}
     </EventsViewAgendaContainer>
   );
 }

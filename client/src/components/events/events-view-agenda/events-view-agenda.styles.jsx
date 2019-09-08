@@ -1,24 +1,32 @@
 import styled from 'styled-components';
 
+const getBgColor = props => {
+  if (props.theme.type === 'dark') {
+    return props.theme.palette.grey[2]
+  } else {
+    return props.theme.palette.grey[8]
+  }
+}
+
 export const EventsViewAgendaContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   align-content: flex-start;
-  background-color: darkblue;
-  height: 20rem;
-  width: 40rem;
-  ${props => props.theme.typo.body};
+  width: 100%;
+  ${props => props.theme.typo.subtitle};
 `;
 EventsViewAgendaContainer.displayName = 'EventsViewAgendaContainer';
 
 export const MonthRow = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   flex: 1 1 100%;
+  height: 5rem;
   color: ${props => props.theme.palette.text.primary};
-  background-color: darkgreen;
   ${props => props.theme.typo.h5};
+  margin: ${props => props.theme.spacing(2)} 0;
 `;
 MonthRow.displayName = 'MonthRow';
 
@@ -26,19 +34,25 @@ export const DayRow = styled.div`
   display: flex;
   flex: 1 1 100%;
   text-align: center;
-  background-color: darkgreen;
-  border: 1px solid black;
+  color: ${props => props.theme.palette.text.primary};
+  border: ${props => props.isToday ? `2px solid ${props.theme.palette.primary.main}` : `none`};
+  margin: 0.2rem 0;
 `;
 DayRow.displayName = 'DayRow';
 
 export const DayDate = styled.div`
   display: flex;
   flex: 1 1 15%;
-  align-content: center;
+  align-content: flex-start;
+  align-items: flex-start;
   flex-wrap: wrap;
-  background-color: darkmagenta;
-  padding: 5px;
-  border-bottom: 3px solid darkcyan;
+  padding: 0.5rem 1rem;
+  line-height: 1.3;
+
+  & > div:last-of-type {
+    border-bottom: ${props => props.isDayDisplayed ? `none` : `3px solid ${props.theme.palette.primary.main}`};
+    padding-bottom: 4px;
+  }
 `;
 DayDate.displayName = 'DayDate';
 
@@ -52,8 +66,15 @@ export const DayEvents = styled.div`
   flex-wrap: wrap;
   flex: 1 1 80%;
   align-content: center;
-  background-color: darkgoldenrod;
-  margin: ${props => props.theme.spacing(1)} 0;
+  padding: 0.5rem 0.8rem;
+  background-color: ${getBgColor};
+  ${props => props.theme.mixins.defaultBorderRadius}; 
+  border: ${props => props.isToday ? `1px solid ${props.theme.palette.primary.main}` : `none`};
+
+  & > div:first-of-type {
+    line-height: 1.3;
+  }
+
 `;
 DayEvents.displayName = 'DayEvents';
 
@@ -65,10 +86,8 @@ DayEventItem.displayName = 'DayEventItem';
 export const DayEventIcon = styled.div`
   display: flex;
   flex: 1 1 15%;
-  background-color: darkkhaki;
   align-items: center;
   justify-content: center;
-
 `;
 DayEventIcon.displayName = 'DayEventIcon';
 
