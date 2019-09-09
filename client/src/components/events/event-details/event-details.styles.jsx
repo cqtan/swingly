@@ -54,9 +54,16 @@ export const EventButton  = styled(Button)`
   color: ${props => props.theme.palette.text.primary};
   box-shadow: none;
 
-  :hover {
+  @media (hover: hover) {
+    :hover {
+      box-shadow: none;
+      color: ${props => props.theme.palette.primary.main};
+    }
+  }
+
+  :active {
     box-shadow: none;
-    color: ${props => props.theme.palette.primary.main};
+    color: ${props => props.theme.palette.text.primary};
   }
 `;
 EventButton.displayName = 'EventButton';

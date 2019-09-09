@@ -2,14 +2,14 @@ import styled from 'styled-components';
 import Button from '../../ui/button/button.component';
 
 export const UserDrawerContainer = styled.div`
-  position: absolute;
+  position: fixed;
   box-shadow: ${props => props.theme.shadows[4]};
-  ${props => props.theme.mixins.defaultBorderRadius};
-  right: 0;
+  border-bottom-left-radius: 5px;
+  right: ${props => props.isOpen ? `0` : `-6rem`};
   display: flex;
   width: 12rem;
   background-color: ${props => props.theme.background.layer2};
-  top: ${props => props.isOpen ? `6rem` : `-12rem`};
+  top: 6rem;
   z-index: ${props => props.isOpen ? 500 : -500 }; 
   opacity: ${props => props.isOpen ? 1 : 0};
   transition: all .2s ease-out .1s;

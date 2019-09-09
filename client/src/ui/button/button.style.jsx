@@ -18,9 +18,12 @@ const chooseColor = props => {
 const defaultButton = css`
   box-shadow: ${props => props.theme.shadows[2]};
   border-radius: 0.5rem;
-  :hover {
-    box-shadow: ${props => !props.disabled && props.theme.shadows[8]};
-    filter: ${props => !props.disabled && `brightness(105%)`};
+
+  @media (hover: hover) {
+    :hover {
+      box-shadow: ${props => !props.disabled && props.theme.shadows[8]};
+      filter: ${props => !props.disabled && `brightness(105%)`};
+    }
   }
 
   :active {

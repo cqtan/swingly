@@ -22,29 +22,28 @@ export const EventDetails = (props) => {
       <Backdrop isOpen={isOpen} onClick={onClose}/>
       <Modal
         isOpen={isOpen}
-        direction="left"
         transName="event-details">
-          { event &&
-            <EventDetailsContainer>
-              <CloseButton onClick={onClose} />
-              <EventImageContainer>
-                <EventImage src='http://lorempixel.com/400/200/cats' />
-              </EventImageContainer>
-              <EventTitle>
-                {event.title}
-              </EventTitle>
-              <DetailsContainer>
-                <Details event={event} />
-              </DetailsContainer>
-              <ButtonsContainer>
-                <EventButton transparent>Guests</EventButton>
-                <VerticalDivider />
-                <EventButton transparent>Interested</EventButton>
-                <VerticalDivider />
-                <EventButton transparent>Going</EventButton>
-              </ButtonsContainer>
-            </EventDetailsContainer>
-          }
+        { event &&
+          <EventDetailsContainer>
+            <CloseButton onClick={onClose} />
+            <EventImageContainer>
+              <EventImage src='http://lorempixel.com/400/200/cats' />
+            </EventImageContainer>
+            <EventTitle>
+              {event.title}
+            </EventTitle>
+            <DetailsContainer>
+              <Details event={event} />
+            </DetailsContainer>
+            <ButtonsContainer>
+              <EventButton transparent>Guests</EventButton>
+              <VerticalDivider />
+              <EventButton transparent>Interested</EventButton>
+              <VerticalDivider />
+              <EventButton transparent>Going</EventButton>
+            </ButtonsContainer>
+          </EventDetailsContainer>
+        }
       </Modal>
     </>
   );

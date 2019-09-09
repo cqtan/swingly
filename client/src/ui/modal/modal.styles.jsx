@@ -4,6 +4,7 @@ import { fadeInOut } from '../../themes/animations';
 export const ModalContainer = styled.div`
   ${props => props.theme.mixins.absCentered};
   ${props => props.theme.mixins.defaultBorderRadius};
+  position: fixed;
   background-color: ${props => props.theme.background.layer2};
   box-shadow: ${props => props.theme.shadows[4]};
   padding: ${props => props.theme.spacing(2)};
