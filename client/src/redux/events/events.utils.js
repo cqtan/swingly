@@ -1,4 +1,4 @@
-import { firestore, getRootPath } from "../../firebase/firebase.utils";
+import { firestore, getEnvironment } from "../../firebase/firebase.utils";
 import mockEvents from '../dummy-data/dummy-event-data';
 import axios from 'axios';
 
@@ -13,7 +13,7 @@ export const deleteAllTestEventsInDb = async () => {
 };
 
 export const createMockEventsInDb = async (copies, hostObj) => {
-  const dummyEventsRef = firestore.collection(`${getRootPath()}/data/events`);
+  const dummyEventsRef = firestore.collection(`${getEnvironment()}/data/events`);
   let mockEvent = mockEvents.events.id;
   mockEvent.host = hostObj;
 

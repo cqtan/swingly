@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const faker = require('faker');
 const { uniqWith, isEqual } = require('lodash');
+const fs = require('fs');
 
 async function startBrowser() {
   const browser = await puppeteer.launch({
@@ -178,20 +179,14 @@ const formatEvents = events => {
       ...event,
       id: '',
       cancelled: false,
-      host: 'A8WnU1fmQnWQ3bjvI6PYro32Tjh1',
+      host: ['A8WnU1fmQnWQ3bjvI6PYro32Tjh1'],
       type: 'social',
       currency: 'euro',
       links: [],
       courses: [],
       otherFees: [],
-      interested: {
-        count: 0,
-        users: {}
-      },
-      going: {
-        count: 0,
-        users: {}
-      }
+      interested: [],
+      going: []
     }
   ));
   console.log(`${newEvents.length} have been formated!`);

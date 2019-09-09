@@ -1,7 +1,7 @@
 import {
   auth,
   firestore,
-  getRootPath
+  getEnvironment
 } from './firebase.utils';
 
 import { createUserProfileDocument } from '../redux/user/user.utils';
@@ -47,11 +47,11 @@ export const deleteTestUser = async () => {
 }
 
 export const deleteUserFromStore = async (id) => {
-  await firestore.doc(`${getRootPath()}/data/users/${id}`).delete();
+  await firestore.doc(`${getEnvironment()}/data/users/${id}`).delete();
 }
 
 export const deleteAllUsers = async () => {
-  const usersSnap = await firestore.collection(`${getRootPath()}/data/users`).get();
+  const usersSnap = await firestore.collection(`${getEnvironment()}/data/users`).get();
   if (usersSnap) {
     usersSnap.forEach(doc => {
       // await doc.delete();

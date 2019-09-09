@@ -2,6 +2,8 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/functions';
+import fs from 'fs';
+import path from 'path';
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -15,7 +17,7 @@ const config = {
 
 firebase.initializeApp(config);
 
-export const getRootPath = () => {
+export const getEnvironment = () => {
   if (process.env.NODE_ENV === 'production')
     return 'production';
   else if (process.env.NODE_ENV === 'test')
@@ -34,5 +36,16 @@ export const functions = firebase.app().functions('europe-west1');
 export const githubProvider = new firebase.auth.GithubAuthProvider();
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 
+export const loadJsonToObj = filename => {
+  const filePath = path.join(__dirname, filename);
 
+  fs.readFile(filePath, 'utf8', (error, data) => {
+    if (!error) {
+      const parsedData = JSON.parse(data);
+      return parsedData
+    } else {
+      return console.log('Read File error: ', error);
+    }
+  });
+}
 export default firebase;

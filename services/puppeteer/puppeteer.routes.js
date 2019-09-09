@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { firestore, getRootPath } = require('../firebase/firebase-db.utils');
+const { firestore, getEnvironment, loadJsonToObj } = require('../firebase/firebase-db.utils');
 const { scrapeEvents, formatEvents } = require('./puppeteer.utils');
+const fs = require('fs');
+const path = require('path');
+
 
 router.get('/simple', (req, res) => {
   const text = `simplest test works!`;
@@ -20,7 +23,7 @@ router.post('/store/:text', async (req, res) => {
   text = `Your ${text} has been stored!`;
 
   try {
-    const newDocRef = firestore.collection(`${getRootPath()}/data/text`).doc();
+    const newDocRef = firestore.collection(`${getEnvironment()}/data/text`).doc();
 
     let dummyData = {
       id: newDocRef.id,
@@ -65,7 +68,7 @@ router.post('/sample/:amount', async (req, res) => {
     const batch = firestore.batch();
 
     for (event of events) {
-      const newDocRef = firestore.collection(`${getRootPath()}/data/events`).doc();
+      const newDocRef = firestore.collection(`${getEnvironment()}/data/events`).doc();
       batch.set(newDocRef, {
         ...event,
         id: newDocRef.id
@@ -77,6 +80,62 @@ router.post('/sample/:amount', async (req, res) => {
     
   } catch (error) {
     res.status(404).send('Events failed to persist! ', error);
+  }
+});
+
+
+router.post('/refresh', async (req, res) => {
+  try {
+    let events = [];
+    let counter = 0;
+
+    while (events.length < 2 && counter <= 5) {
+      counter++;
+      console.log(`Attempt(s) (${counter}) at scraping`);
+      events = await scrapeEvents();
+    }
+
+    if (events.length < 1) {
+      res.status(404).send('Too many attempts...try again later!');
+    }
+
+    events = formatEvents(events);
+    const batch = firestore.batch();
+
+    for (event of events) {
+      const newDocRef = firestore.collection(`${getEnvironment()}/data/events`).doc();
+      batch.set(newDocRef, {
+        ...event,
+        id: newDocRef.id
+      });
+    }
+
+    res.status(200).send(`Events ${events.length} have been persisted!`);
+    await batch.commit();
+    
+  } catch (error) {
+    res.status(404).send('Events failed to persist! ', error);
+  }
+});
+
+router.get('/mockevents', async (req, res) => {
+  if (getEnvironment() === 'development' || getEnvironment() === 'test') {
+    const filePath = path.join(__dirname, 'EVENTS_DATA.json');
+
+    try {
+      fs.readFile(filePath, 'utf8', (error, data) => {
+        if (!error) {
+          const parsedData = JSON.parse(data);          
+          res.status(200).send(parsedData);
+        } else {
+          throw new Error(`Read file error for file ${filePath}: ` + error);
+        }
+      });
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  } else {
+    res.status(401).send('Not meant for you!');
   }
 });
 

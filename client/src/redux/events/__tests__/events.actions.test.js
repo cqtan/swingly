@@ -21,7 +21,8 @@ describe('Events Actions', () => {
 
   describe('fetchEvents', () => {
     let mockEventsSnap = null;
-    let mockCollection = null
+    let mockCollection = null;
+    const mockOrderedCollection = { get: () => mockEventsSnap }
 
     const applyMocks = () => {
       jest.spyOn(firestore, 'collection').mockImplementation(() => mockCollection);
@@ -35,7 +36,7 @@ describe('Events Actions', () => {
 
     it('FETCH_EVENTS_SUCCESS: should fetch all events from DB', async () => {
       mockEventsSnap = { docs: ['test'] };
-      mockCollection = { get: () => mockEventsSnap };
+      mockCollection = { orderBy: () => mockOrderedCollection };
       applyMocks();
       
       await store.dispatch(fetchEvents());
@@ -54,7 +55,7 @@ describe('Events Actions', () => {
 
     it('FETCH_EVENTS_FAILED: should fail if no collection found', async () => {
       mockEventsSnap = { docs: [] };
-      mockCollection = { get: () => mockEventsSnap };
+      mockCollection = { orderBy: () => mockOrderedCollection };
       applyMocks();
 
       await store.dispatch(fetchEvents());

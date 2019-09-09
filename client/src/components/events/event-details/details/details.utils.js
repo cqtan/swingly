@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Label, DataContainer, Data, DataLink } from "./details.styles";
 import ProfileStack from '../../../profile-components/profile-stack/profile-stack.component';
 import moment from "moment";
+import { convertTimestamptoDate } from "../../events-view-agenda/events-view-agenda.utils";
 
 export const parseDate = date => moment(date).format("Do MMMM, HH:mm");
 
@@ -16,11 +17,11 @@ export const parseFees = fees => {
 
 export const parseData = (key, value) => {
   if (["start", "end"].includes(key)) {
-    return parseDate(value.toDate());
-  } else if (["type", "location", "courseTitle", "host"].includes(key)) {
+    return parseDate(convertTimestamptoDate(value));
+  } else if (["type", "location", "courseTitle"].includes(key)) {
     return value;
-  } else if (["links"].includes(key)) {
-    return value.length ? value : null;
+  } else if (["links", "host"].includes(key)) {
+    return value.length ? [value, value, value, value] : null;
   } else if (["fees", "otherFees"].includes(key)) {
     return value.length ? parseFees(value) : null;
   } else {
@@ -43,8 +44,6 @@ export const createDataComponents = (dataList, key, mapLink = 'https://cat-bounc
     let component = null;
     if (key === 'location') {
       component = <DataLink key={index} href={mapLink} target='_blank'>{data}</DataLink>
-    } else if (key === 'host') {
-      component = <ProfileStack key={index} hosts={data} />
     } else {
       component = <Data key={index}>{data}</Data>;
     }
@@ -88,7 +87,12 @@ export const objToRows = obj => {
       dataList.push(parsedValue);
     }
 
-    const dataComponents = createDataComponents(dataList, key, mapLink);
+    let dataComponents = null; 
+    if (key === 'host') {
+      dataComponents = <ProfileStack hosts={dataList} />
+    } else {
+      dataComponents = createDataComponents(dataList, key, mapLink);
+    }
 
     return (
       <Row key={key}>

@@ -1,6 +1,6 @@
 import { 
   firestore, 
-  getRootPath,
+  getEnvironment,
   githubProvider,
   googleProvider,
   auth
@@ -8,7 +8,7 @@ import {
 
 
 export const fetchUsersArray = async () => {
-  const usersSnap = await firestore.collection(`${getRootPath()}/data/users`).get();
+  const usersSnap = await firestore.collection(`${getEnvironment()}/data/users`).get();
 
   if (usersSnap.docs.length) {
     return arrayToObject(usersSnap.docs);
@@ -27,7 +27,7 @@ export const arrayToObject = (array) => {
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
-  const userRef = firestore.doc(`${getRootPath()}/data/users/${userAuth.uid}`);
+  const userRef = firestore.doc(`${getEnvironment()}/data/users/${userAuth.uid}`);
   
   const snapShot = await userRef.get();
 

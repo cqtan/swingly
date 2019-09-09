@@ -11,7 +11,7 @@ import {
 } from './events-view-agenda.styles';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectAllEvents, selectEventsLoaded } from '../../../redux/events/events.selectors';
+import { selectEventsLoaded, selectSortedEvents } from '../../../redux/events/events.selectors';
 import { getMonthString, getDayString, getDayNumber, getTime, checkIsToday } from './events-view-agenda.utils';
 import EventDetails from '../event-details/event-details.component';
 
@@ -80,12 +80,12 @@ const EventsViewAgenda = (props) => {
   }
 
   if (isEventsLoaded && eventComponents.length === 0) {
-    Object.values(events).forEach(event => {
+    events.forEach(event => {
       addMonthRow(event);
       addDayRow(event);
       setEventComponents(initialComponents);
-      // console.log('---- time tracker:', timeTracker);
     });
+    // console.log('---- time tracker:', timeTracker);
   }
 
   return (
@@ -103,7 +103,7 @@ const EventsViewAgenda = (props) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-  events: selectAllEvents,
+  events: selectSortedEvents,
   isEventsLoaded: selectEventsLoaded,
 });
 

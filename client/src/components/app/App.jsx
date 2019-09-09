@@ -18,7 +18,7 @@ export const App = props => {
     setCurrentUser,
     setUsers,
     fetchEvents,
-    snackbar
+    snackbar,
   } = props;
 
   useEffect(() => {

@@ -1,25 +1,38 @@
 import moment from 'moment';
+import { getEnvironment } from '../../../firebase/firebase.utils';
+
+export const convertTimestamptoDate = date => {
+  if (getEnvironment() === 'production')
+    return date.toDate();
+  else
+    return date;
+}
 
 export const getEventDate = date => {
-  return date.toDate()
+  return convertTimestamptoDate(date)
 }
 
 export const getMonthString = date => {
-  return moment(date.toDate()).format('MMMM');
+  date = convertTimestamptoDate(date)
+  return moment(date).format('MMMM');
 }
 
 export const getDayString = date => {
-  return moment(date.toDate()).format('ddd');
+  date = convertTimestamptoDate(date)
+  return moment(date).format('ddd');
 }
 
 export const getDayNumber = date => {
-  return moment(date.toDate()).format('DD');
+  date = convertTimestamptoDate(date)
+  return moment(date).format('DD');
 }
 
 export const getTime = date => {
-  return moment(date.toDate()).format('HH:mm');
+  date = convertTimestamptoDate(date)
+  return moment(date).format('HH:mm');
 }
 
 export const checkIsToday = date => {
-  return moment().isSame(date.toDate(), 'day');
+  date = convertTimestamptoDate(date)
+  return moment().isSame(date, 'day');
 }
