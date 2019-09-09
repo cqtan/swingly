@@ -8,7 +8,7 @@ const ProfileImageSection = (props) => {
   return (
     <>
       <ProfileImageContainer>
-        <ProfileImage lg src='http://lorempixel.com/400/200/cats' />
+        <ProfileImage themeColor lg src='http://lorempixel.com/400/200/cats' />
       </ProfileImageContainer>
     </>
   );

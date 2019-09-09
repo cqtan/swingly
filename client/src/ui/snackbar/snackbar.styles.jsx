@@ -20,7 +20,7 @@ const selectColor = (props) => {
 }
 
 export const SnackbarContainer = styled.div`
-  position: absolute;
+  position: fixed;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;

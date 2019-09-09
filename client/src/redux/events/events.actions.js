@@ -35,7 +35,7 @@ export const fetchEvents = () => async dispatch => {
       type: EventsActionTypes.FETCH_EVENTS_SUCCESS,
       payload: eventsObj
     });
-    dispatch(openSnackbar('success', 'Events successfully fetched!'));
+    // dispatch(openSnackbar('success', 'Events successfully fetched!'));
   } catch (error) {    
     dispatch({type: EventsActionTypes.FETCH_EVENTS_FAILED });
     dispatch(openSnackbar('error', error.message));

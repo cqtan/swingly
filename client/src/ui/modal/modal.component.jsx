@@ -7,6 +7,13 @@ import { CSSTransition } from 'react-transition-group';
 
 const Modal = (props) => {
   const { isOpen, transName, direction = '', title, children } = props;
+  
+  let bodyEl = document.body;
+  if (isOpen) {
+    bodyEl.style.overflow = 'hidden';
+  } else {
+    bodyEl.style.overflow = 'auto';
+  }
 
   return (
     <>
@@ -15,12 +22,12 @@ const Modal = (props) => {
         classNames={transName}
         timeout={300}
         unmountOnExit>
-          <ModalContainer 
-            transName={transName} 
-            direction={direction}>
-            <ModalTitle>{title}</ModalTitle>
-            {children}
-          </ModalContainer>
+        <ModalContainer 
+          transName={transName} 
+          direction={direction}>
+          <ModalTitle>{title}</ModalTitle>
+          {children}
+        </ModalContainer>
       </CSSTransition>
     </>
   );

@@ -21,7 +21,7 @@ export const parseData = (key, value) => {
   } else if (["type", "location", "courseTitle"].includes(key)) {
     return value;
   } else if (["links", "host"].includes(key)) {
-    return value.length ? [value, value, value, value] : null;
+    return value.length ? value : null;
   } else if (["fees", "otherFees"].includes(key)) {
     return value.length ? parseFees(value) : null;
   } else {

@@ -10,6 +10,8 @@ export const ModalContainer = styled.div`
   z-index: 500; 
   transition: all .2s ease-out .1s;
   ${props => fadeInOut(props.transName, props.direction)};
+  max-height: 90vh;
+  overflow-y: scroll;
 `;
 ModalContainer.displayName = 'ModalContainer';
 
