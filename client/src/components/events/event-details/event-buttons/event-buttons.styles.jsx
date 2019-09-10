@@ -28,12 +28,12 @@ export const EventButton  = styled(Button)`
   margin: 0 auto;
   color: ${props => props.theme.palette.text.primary};
   box-shadow: none;
-  background-color: ${props => props.theme.type === 'dark' ? props.theme.palette.grey[2] : props.theme.palette.grey[8]};
+  background-color: ${props => props.theme.type === 'dark' ? props.theme.palette.grey[3] : props.theme.palette.grey[8]};
 
   @media (hover: hover) {
     :hover {
       box-shadow: none;
-      background-color: ${props => props.theme.type === 'dark' ? props.theme.palette.grey[3] : props.theme.palette.grey[7]};
+      background-color: ${props => props.theme.type === 'dark' ? props.theme.palette.grey[4] : props.theme.palette.grey[7]};
     }
   }
 
