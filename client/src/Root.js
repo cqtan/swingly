@@ -33,6 +33,9 @@ import {
   faExclamationCircle,
   faCheckCircle,
   faCaretDown,
+  faListUl,
+  faCheck,
+  faStar,
 } from '@fortawesome/free-solid-svg-icons';
 import ThemeManager from './themes/ThemeManager';
 
@@ -75,7 +78,10 @@ export default (props) => {
     faExclamationTriangle,
     faExclamationCircle,
     faCheckCircle,
-    faCaretDown
+    faCaretDown,
+    faListUl,
+    faCheck,
+    faStar,
   );
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   ModalContainer, 
-  ModalTitle,
+  ModalTitle
 } from './modal.styles';
 import { CSSTransition } from 'react-transition-group';
 

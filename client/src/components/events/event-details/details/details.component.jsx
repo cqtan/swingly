@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import {
   DetailsContainer,
-  Divider,
-  Description,
   DropDownToggle,
   IconContainer,
   DropDownContent
@@ -14,6 +12,7 @@ import {
   arrangeCourseData
 } from "./details.utils";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Divider } from "../../../../ui/dividers/divider-horizontal.styles";
 
 const Details = props => {
   const { event } = props;
@@ -33,8 +32,6 @@ const Details = props => {
   return (
     <DetailsContainer>
       {details.length > 0 && details}
-      <Divider />
-      {event.description && <Description>{event.description}</Description>}
       {courses.length > 0 && 
         <>
           <Divider />

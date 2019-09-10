@@ -44,19 +44,6 @@ export const DataLink = styled.a`
   }
 `;
 
-export const Divider = styled.div`
-  margin: 1.5rem auto 1.5rem auto;
-  width: 80%;
-  border-bottom: 1px solid ${props => props.theme.palette.grey[5]};
-`;
-Divider.displayName = 'Divider';
-
-export const Description = styled.div`
-  font-size: ${props => props.theme.typo.subtitle};
-  color: ${props => props.theme.palette.text.primary};
-`;
-Description.displayName = 'Description';
-
 export const DropDownToggle = styled(Button)`
   background-color: transparent;
   margin: 0 auto;

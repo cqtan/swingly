@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Button from '../../../ui/button/button.component';
 
 export const EventDetailsContainer = styled.div`
   display: flex;
@@ -10,9 +9,9 @@ EventDetailsContainer.displayName = 'EventDetailsContainer';
 
 export const EventImageContainer = styled.div`
   display: flex;
-  height: 10rem;
+  height: 13rem;
   width: 120%;
-  margin: -2rem -2rem 0 -2rem;
+  margin: -6.5rem -2rem 0 -2rem;
   background-color: #fff;
   border-radius: 5px;
 `;
@@ -35,8 +34,8 @@ export const EventTitle = styled.div`
 EventTitle.displayName = 'EventTitle';
 
 export const DetailsContainer = styled.div`
-  margin: 1rem 0 1rem 0;
   width: 100%;
+  margin: 1rem 0 1rem 0;
 `;
 DetailsContainer.displayName = 'DetailsContainer';
 
@@ -44,34 +43,14 @@ export const ButtonsContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin: 1rem 0 1rem 0;
 `;
 ButtonsContainer.displayName = 'ButtonsContainer';
 
-export const EventButton  = styled(Button)`
-  flex: 1 1 100%;
-  ${props => props.theme.typo.body};
-  margin: 0;
+export const Description = styled.div`
+  font-size: ${props => props.theme.typo.subtitle};
   color: ${props => props.theme.palette.text.primary};
-  box-shadow: none;
-
-  @media (hover: hover) {
-    :hover {
-      box-shadow: none;
-      color: ${props => props.theme.palette.primary.main};
-    }
-  }
-
-  :active {
-    box-shadow: none;
-    color: ${props => props.theme.palette.text.primary};
-  }
+  margin: 1rem 0 1rem 0;
 `;
-EventButton.displayName = 'EventButton';
-
-export const VerticalDivider = styled.div`
-  margin: auto 1.5rem auto 1.5rem;
-  height: 70%;
-  border-right: 1px solid ${props => props.theme.palette.grey[5]};
-`;
-VerticalDivider.displayName = 'VerticalDivider';
+Description.displayName = 'Description';
 
