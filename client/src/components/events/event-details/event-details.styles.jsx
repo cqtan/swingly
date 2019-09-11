@@ -42,15 +42,10 @@ DetailsContainer.displayName = 'DetailsContainer';
 export const ButtonsContainer = styled.div`
   width: 100%;
   display: flex;
+  flex-flow: row wrap;
   justify-content: space-between;
   margin: 1rem 0 1rem 0;
 `;
 ButtonsContainer.displayName = 'ButtonsContainer';
 
-export const Description = styled.div`
-  font-size: ${props => props.theme.typo.subtitle};
-  color: ${props => props.theme.palette.text.primary};
-  margin: 1rem 0 1rem 0;
-`;
-Description.displayName = 'Description';
 

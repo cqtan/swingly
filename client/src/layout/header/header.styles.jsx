@@ -40,5 +40,6 @@ export const Logo = styled(Link)`
   font-family: 'Oleo Script', 'Open Sans', sans-serif; 
   text-transform: none;
   ${({ theme }) => theme.typo.h3 };
+  color: ${props => props.theme.palette.grey[0]};
 `;
 Logo.displayName = 'Logo';

@@ -16,7 +16,7 @@ export default (mode) => ({
     info: "#90caf9",
     success: "#43a047",
     grey: {
-      0: "0b0b0b",
+      0: "#0b0b0b",
       1: "#212121",
       2: "#373737",
       3: "#4d4d4d",

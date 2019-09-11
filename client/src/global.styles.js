@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
 
   a {
     text-decoration: none;
-    color: #212121;
+    color: ${props => props.theme.palette.text.primary};
   }
 
   * {

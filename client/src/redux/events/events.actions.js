@@ -21,7 +21,7 @@ export const fetchEvents = () => async dispatch => {
       }
     } else {
       throw new Error('Environement not set!');
-    }  
+    }
     
     // const eventsSnap = await firestore.collection(`${getEnvironment()}/data/events`).orderBy('start').get();
 

@@ -5,14 +5,14 @@ import {
   EventImage,
   EventTitle,
   DetailsContainer,
-  ButtonsContainer,
-  Description,
+  ButtonsContainer
 } from './event-details.styles';
 import Modal from '../../../ui/modal/modal.component';
 import CloseButton from '../../../ui/button/button-close/button-close.component';
 import Details from './details/details.component';
 import Backdrop from '../../../ui/backdrop/backdrop.component';
 import EventButtons from './event-buttons/event-buttons.component';
+import EventDescription from './event-description/event-description.component';
 
 export const EventDetails = (props) => {
   const { isOpen, onClose, event } = props;
@@ -39,7 +39,9 @@ export const EventDetails = (props) => {
               <ButtonsContainer>
                 <EventButtons />
               </ButtonsContainer>
-              {event.description && <Description>{event.description}</Description>}
+              { event.description && 
+                <EventDescription description={event.description} />
+              }
             </EventDetailsContainer>
           </>
         }
