@@ -3,7 +3,7 @@ import { App } from './App';
 import { shallow, mount } from 'enzyme';
 import Root from '../../Root';
 
-xdescribe('App component', () => {
+describe('App component', () => {
   let wrapper;
   let mockSetCurrentUser = () => undefined;
   let mockSetUsers = () => undefined;
