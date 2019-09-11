@@ -37,7 +37,7 @@ export const EventDetails = (props) => {
                 <Details event={event} />
               </DetailsContainer>
               <ButtonsContainer>
-                <EventButtons />
+                <EventButtons eventId={event.id} />
               </ButtonsContainer>
               { event.description && 
                 <EventDescription description={event.description} />

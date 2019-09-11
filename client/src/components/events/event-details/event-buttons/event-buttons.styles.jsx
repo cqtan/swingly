@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 import Button from '../../../../ui/button/button.component';
 
+const setColor = props => {
+  const { isGuest, theme } = props;
+  if (isGuest) {
+    return theme.palette.primary.main;
+  } else {
+    return theme.type === 'dark' ? theme.palette.grey[3] : theme.palette.grey[8];
+  }
+}
+
 export const EventButtonsContainer = styled.div`
   width: 100%;
   display: flex;
@@ -20,7 +29,7 @@ export const ButtonItem = styled.div`
 `;
 ButtonItem.displayName = 'ButtonItem';
 
-export const EventButton  = styled(Button)`
+export const EventButton = styled(Button)`
   flex: 0 1 4.5rem;
   height: 4.5rem;
   border-radius: 50%;
@@ -28,7 +37,7 @@ export const EventButton  = styled(Button)`
   margin: 0 auto;
   color: ${props => props.theme.palette.text.primary};
   box-shadow: none;
-  background-color: ${props => props.theme.type === 'dark' ? props.theme.palette.grey[3] : props.theme.palette.grey[8]};
+  background-color: ${setColor};
 
   @media (hover: hover) {
     :hover {

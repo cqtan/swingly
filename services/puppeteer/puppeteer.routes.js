@@ -125,8 +125,10 @@ router.post('/refresh', async (req, res) => {
     }
     await batch.commit();
 
-    const localMockEvents = createMockData(events);
-    writeObjToJson(localMockEvents, '../puppeteer/EVENTS_DATA.json');    
+    if (getEnvironment() !== 'production') {
+      const localMockEvents = createMockData(events);
+      writeObjToJson(localMockEvents, '../puppeteer/EVENTS_DATA.json');    
+    }
 
     res.status(200).send(`Events ${events.length} have been persisted!`);
   } catch (error) {
