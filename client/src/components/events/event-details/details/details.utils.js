@@ -20,7 +20,7 @@ export const parseData = (key, value) => {
     return parseDate(convertTimestamptoDate(value));
   } else if (["type", "location", "courseTitle"].includes(key)) {
     return value;
-  } else if (["links", "host"].includes(key)) {
+  } else if (["hosts"].includes(key)) {
     return value.length ? value : null;
   } else if (["fees", "otherFees"].includes(key)) {
     return value.length ? parseFees(value) : null;
@@ -30,8 +30,8 @@ export const parseData = (key, value) => {
 };
 
 export const arrangeEventData = eventData => {
-  const { host, type, location = null, start, end, otherFees, links, mapLink } = eventData;
-  return { mapLink, host, type, location, start, end, otherFees, links };
+  const { hosts, type, location = null, start, end, otherFees, links, mapLink } = eventData;
+  return { mapLink, hosts, type, location, start, end, otherFees, links };
 };
 
 export const arrangeCourseData = course => {
@@ -55,7 +55,7 @@ export const createDataComponents = (dataList, key, mapLink = 'https://cat-bounc
 }
 
 export const formatLabel = key => {
-  if (['host', 'type', 'location', 'start', 'end'].includes(key)) {
+  if (['hosts', 'type', 'location', 'start', 'end'].includes(key)) {
     return capitalizeFirstLetter(key);
   } else {
     return key;
@@ -88,7 +88,7 @@ export const objToRows = obj => {
     }
 
     let dataComponents = null; 
-    if (key === 'host') {
+    if (key === 'hosts') {
       dataComponents = <ProfileStack hosts={dataList} />
     } else {
       dataComponents = createDataComponents(dataList, key, mapLink);

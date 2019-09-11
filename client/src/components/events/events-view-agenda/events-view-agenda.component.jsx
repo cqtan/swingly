@@ -14,9 +14,11 @@ import { createStructuredSelector } from 'reselect';
 import { selectEventsLoaded, selectSortedEvents } from '../../../redux/events/events.selectors';
 import { getMonthString, getDayString, getDayNumber, getTime, checkIsToday } from './events-view-agenda.utils';
 import EventDetails from '../event-details/event-details.component';
+import { selectCurrentUser } from '../../../redux/user/user.selectors';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const EventsViewAgenda = (props) => {
-  const { events, isEventsLoaded } = props;
+  const { events, isEventsLoaded, currentUser } = props;
   let timeTracker = {};
   let initialComponents = [];
 
@@ -44,6 +46,19 @@ const EventsViewAgenda = (props) => {
     }
   }
 
+  const addEventIcon = (event) => {
+    let eventIcon = null;
+    if (currentUser) {
+      if (event.interested.hasOwnProperty(currentUser.id)) {
+        eventIcon = <FontAwesomeIcon icon='star' />;
+      } else if (event.interested.hasOwnProperty(currentUser.id)) {
+        eventIcon = <FontAwesomeIcon icon='check' />;
+      }
+    }
+
+    return eventIcon;
+  }
+
   const addDayRow = event => {
     const startMonth = getMonthString(event.start);
     let dayNumber = getDayNumber(event.start);
@@ -63,6 +78,7 @@ const EventsViewAgenda = (props) => {
     const startTime = getTime(event.start);
     const endTime = getTime(event.end);
     const timeFormatted = `${startTime} - ${endTime}`;
+    const eventIcon = addEventIcon(event);
 
     initialComponents.push(
       <DayRow key={event.id} isDayDisplayed={isDayDisplayed}>
@@ -74,7 +90,7 @@ const EventsViewAgenda = (props) => {
           <DayEventItem>{event.title}</DayEventItem>
           <DayEventItem>{timeFormatted}</DayEventItem>
         </DayEvents>
-        <DayEventIcon>x</DayEventIcon>
+        <DayEventIcon>{eventIcon}</DayEventIcon>
       </DayRow>
     );
   }
@@ -105,6 +121,7 @@ const EventsViewAgenda = (props) => {
 const mapStateToProps = createStructuredSelector({
   events: selectSortedEvents,
   isEventsLoaded: selectEventsLoaded,
+  currentUser: selectCurrentUser
 });
 
 export default connect(mapStateToProps)(EventsViewAgenda);

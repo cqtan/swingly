@@ -174,21 +174,27 @@ const scrapeEvents = async () => {
 }
 
 const formatEvents = events => {
-  const newEvents = events.map(event => (
-    {
+  let deleteIndex = null;
+  let newEvents = events.map((event, idx) => {
+    if (event.title === null) {
+      deleteIndex = idx;
+    }
+
+    return {
       ...event,
       id: '',
+      images: [],
       cancelled: false,
-      host: ['A8WnU1fmQnWQ3bjvI6PYro32Tjh1'],
+      hosts: ['A8WnU1fmQnWQ3bjvI6PYro32Tjh1'],
       type: 'social',
       currency: 'euro',
-      links: [],
       courses: [],
       otherFees: [],
-      interested: [],
-      going: []
+      guests: {},
     }
-  ));
+  });
+  
+  newEvents.splice(deleteIndex, 1);
   console.log(`${newEvents.length} have been formated!`);
 
   return newEvents;

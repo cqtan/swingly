@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { firestore, getEnvironment, loadJsonToObj } = require('../firebase/firebase-db.utils');
+const { firestore, getEnvironment, createMockData, writeObjToJson } = require('../firebase/firebase-db.utils');
 const { scrapeEvents, formatEvents } = require('./puppeteer.utils');
 const fs = require('fs');
 const path = require('path');
@@ -88,7 +88,20 @@ router.post('/refresh', async (req, res) => {
   try {
     let events = [];
     let counter = 0;
+    let batch = firestore.batch();
 
+    // Delete All Events
+    try {
+      const eventsSnap = await firestore.collection(`${getEnvironment()}/data/events`).get();
+      for (let eventSnap of eventsSnap.docs) {
+        batch.delete(eventSnap.ref);
+      }
+      await batch.commit();
+    } catch (err) {
+      console.log('Delete err: ', err);
+    }
+
+    // Scrape New Events
     while (events.length < 2 && counter <= 5) {
       counter++;
       console.log(`Attempt(s) (${counter}) at scraping`);
@@ -99,8 +112,9 @@ router.post('/refresh', async (req, res) => {
       res.status(404).send('Too many attempts...try again later!');
     }
 
+    // Persist Formated Events
     events = formatEvents(events);
-    const batch = firestore.batch();
+    batch = firestore.batch();
 
     for (event of events) {
       const newDocRef = firestore.collection(`${getEnvironment()}/data/events`).doc();
@@ -109,10 +123,12 @@ router.post('/refresh', async (req, res) => {
         id: newDocRef.id
       });
     }
+    await batch.commit();
+
+    const localMockEvents = createMockData(events);
+    writeObjToJson(localMockEvents, '../puppeteer/EVENTS_DATA.json');    
 
     res.status(200).send(`Events ${events.length} have been persisted!`);
-    await batch.commit();
-    
   } catch (error) {
     res.status(404).send('Events failed to persist! ', error);
   }
