@@ -13,6 +13,8 @@ export const ModalContainer = styled.div`
   ${props => fadeInOut(props.transName, props.direction)};
   max-height: 90vh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
 `;
 ModalContainer.displayName = 'ModalContainer';
 
