@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { firestore, getEnvironment, createMockData, writeObjToJson } = require('../firebase/firebase-db.utils');
+const { firestore, getEnvironment, writeArrayToJsonObj } = require('../firebase/firebase-db.utils');
 const { scrapeEvents, formatEvents } = require('./puppeteer.utils');
 const fs = require('fs');
 const path = require('path');
@@ -114,20 +114,26 @@ router.post('/refresh', async (req, res) => {
 
     // Persist Formated Events
     events = formatEvents(events);
+    const localMockEvents = [];
     batch = firestore.batch();
 
     for (event of events) {
       const newDocRef = firestore.collection(`${getEnvironment()}/data/events`).doc();
-      batch.set(newDocRef, {
+      const newEvent = {
         ...event,
         id: newDocRef.id
+      };
+
+      batch.set(newDocRef, {
+        ...newEvent
       });
+      
+      localMockEvents.push(newEvent);
     }
     await batch.commit();
-
+    
     if (getEnvironment() !== 'production') {
-      const localMockEvents = createMockData(events);
-      writeObjToJson(localMockEvents, '../puppeteer/EVENTS_DATA.json');    
+      writeArrayToJsonObj(localMockEvents, '../puppeteer/EVENTS_DATA.json');    
     }
 
     res.status(200).send(`Events ${events.length} have been persisted!`);

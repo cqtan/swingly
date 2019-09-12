@@ -32,7 +32,6 @@ const EventButtons = (props) => {
       console.log('User not signed in! ');
     }  
   }
-
   
   let isGuest = '';
   if (currentUser) {

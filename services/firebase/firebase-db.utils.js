@@ -42,7 +42,15 @@ const createMockData = data => {
   return mockData;
 }
 
-const writeObjToJson = (obj, filename) => {
+const writeArrayToJsonObj = (array, filename) => {
+  const obj = array.reduce((prev, current) => {
+    prev[current.id] = {
+      ...current,
+    };
+
+    return prev;
+  }, {});
+
   const jsonContent = JSON.stringify(obj);
   const filePath = path.join(__dirname, filename);
   
@@ -71,6 +79,6 @@ const loadJsonToObj = async filename => {
 
 exports.getEnvironment = getEnvironment;
 exports.createMockData = createMockData;
-exports.writeObjToJson = writeObjToJson;
+exports.writeArrayToJsonObj = writeArrayToJsonObj;
 exports.loadJsonToObj = loadJsonToObj;
 exports.firestore = firebase.firestore();

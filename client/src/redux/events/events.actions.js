@@ -1,5 +1,5 @@
 import { EventsActionTypes } from './events.types';
-import { firestore, getEnvironment } from '../../firebase/firebase.utils';
+import { firestore, getEnvironment, deleteFieldValue } from '../../firebase/firebase.utils';
 import { openSnackbar } from '../snackbar/snackbar.actions';
 import { eventsToObject } from './events.utils';
 import axios from 'axios';
@@ -43,43 +43,25 @@ export const fetchEvents = () => async dispatch => {
 }
 
 export const setEventGuest = (userId, event, guestType) => async dispatch => {
-  // const newEvent = {...event};
-  // const eventRef = firestore.doc(`${getEnvironment()}/data/events/${event.id}`);
-  // const eventSnap = await eventRef.get();
-  let newGuestList = null;
+  const eventRef = firestore.doc(`${getEnvironment()}/data/events/${event.id}`);
 
   try {
-    // if (eventSnap.exists) {
-      // if (!event.guestList.hasOwnProperty(userId)) {
-        // await eventRef.update({
-        //   guestList: {
-        //     ...event.guestList,
-        //     userId: guestType 
-        //   }
-        // });
+    await eventRef.update({
+      [`guests.${userId}`]: guestType    
+    });
 
-        newGuestList = {
-          ...event.guests,
-          [userId]: guestType
-        }
+    const newGuestList = {
+      ...event.guests,
+      [userId]: guestType
+    }
 
-        dispatch({
-          type: EventsActionTypes.SET_EVENT_GUEST_SUCCESS,
-          payload: { 
-            eventId: event.id,
-            guests: newGuestList
-          }
-        });
-      // } else {
-      //   // await eventRef.update({
-      //   //   guestList: {
-      //   //     ...event.guestList,
-      //   //     userId: delete 
-      //   //   }
-      //   // });
-      //   console.log('Set event guest error: ');
-      // }
-    // }    
+    dispatch({
+      type: EventsActionTypes.SET_EVENT_GUEST_SUCCESS,
+      payload: { 
+        eventId: event.id,
+        guests: newGuestList
+      }
+    });
   } catch (err) {
     dispatch({
       type: EventsActionTypes.SET_EVENT_GUEST_FAILED,
@@ -89,25 +71,26 @@ export const setEventGuest = (userId, event, guestType) => async dispatch => {
 }
 
 export const deleteEventGuest = (userId, event) => async dispatch => {
-  // const eventRef = firestore.doc(`${getEnvironment()}/data/events/${event.id}`);
-  // const eventSnap = await eventRef.get();
+  const eventRef = firestore.doc(`${getEnvironment()}/data/events/${event.id}`);
   let newGuestList = null;
 
   try {
-    // if (eventSnap.exists) {
-      newGuestList = {
-        ...event.guests,
-      };
-      delete newGuestList[userId];
+    eventRef.update({
+      [`guests.${userId}`]: deleteFieldValue()
+    });
 
-      dispatch({
-        type: EventsActionTypes.DELETE_EVENT_GUEST_SUCCESS,
-        payload: { 
-          eventId: event.id,
-          guests: newGuestList
-        }
-      });
-    // }
+    newGuestList = {
+      ...event.guests,
+    };
+    delete newGuestList[userId];
+
+    dispatch({
+      type: EventsActionTypes.DELETE_EVENT_GUEST_SUCCESS,
+      payload: { 
+        eventId: event.id,
+        guests: newGuestList
+      }
+    });
   } catch (err) {
     dispatch({
       type: EventsActionTypes.DELETE_EVENT_GUEST_FAILED,

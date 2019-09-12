@@ -48,13 +48,13 @@ const EventsViewAgenda = (props) => {
 
   const addEventIcon = (event) => {
     let eventIcon = null;
-    if (currentUser) {
-      if (event.interested.hasOwnProperty(currentUser.id)) {
-        eventIcon = <FontAwesomeIcon icon='star' />;
-      } else if (event.interested.hasOwnProperty(currentUser.id)) {
-        eventIcon = <FontAwesomeIcon icon='check' />;
-      }
-    }
+  //   if (currentUser) {
+  //     if (event.guests.hasOwnProperty(currentUser.id)) {
+  //       eventIcon = <FontAwesomeIcon icon='star' />;
+  //     } else if (event.guests.hasOwnProperty(currentUser.id)) {
+  //       eventIcon = <FontAwesomeIcon icon='check' />;
+  //     }
+  //   }
 
     return eventIcon;
   }

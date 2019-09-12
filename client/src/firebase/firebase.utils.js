@@ -48,4 +48,7 @@ export const loadJsonToObj = filename => {
     }
   });
 }
+
+export const deleteFieldValue = () => firebase.firestore.FieldValue.delete();
+
 export default firebase;
