@@ -24,7 +24,7 @@ const EventsViewAgenda = (props) => {
 
   const [isDetailsOpen, setDetailsOpen] = useState(false);
   const [currentEvent, setCurrentEvent] = useState(null);
-  const [eventComponents, setEventComponents] = useState([]);
+  // const [eventComponents, setEventComponents] = useState([]);
 
   const handleEventOpen = event => {
     setCurrentEvent(event);
@@ -48,13 +48,13 @@ const EventsViewAgenda = (props) => {
 
   const addEventIcon = (event) => {
     let eventIcon = null;
-  //   if (currentUser) {
-  //     if (event.guests.hasOwnProperty(currentUser.id)) {
-  //       eventIcon = <FontAwesomeIcon icon='star' />;
-  //     } else if (event.guests.hasOwnProperty(currentUser.id)) {
-  //       eventIcon = <FontAwesomeIcon icon='check' />;
-  //     }
-  //   }
+    if (currentUser && event.guests.hasOwnProperty(currentUser.id)) {
+      if (event.guests[currentUser.id] === 'interested') {
+        eventIcon = <FontAwesomeIcon icon='star' />;
+      } else {
+        eventIcon = <FontAwesomeIcon icon='check' />;
+      }
+    }
 
     return eventIcon;
   }
@@ -95,19 +95,18 @@ const EventsViewAgenda = (props) => {
     );
   }
 
-  if (isEventsLoaded && eventComponents.length === 0) {
+  if (isEventsLoaded && initialComponents.length === 0) {
     events.forEach(event => {
       addMonthRow(event);
       addDayRow(event);
-      setEventComponents(initialComponents);
+      // setEventComponents(initialComponents);
     });
-    // console.log('---- time tracker:', timeTracker);
   }
 
   return (
     <>
       <EventsViewAgendaContainer>
-        {eventComponents}
+        {initialComponents}
       </EventsViewAgendaContainer>
       <EventDetails 
         isOpen={isDetailsOpen} 
