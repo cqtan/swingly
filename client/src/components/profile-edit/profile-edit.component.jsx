@@ -13,10 +13,11 @@ import Backdrop from '../../ui/backdrop/backdrop.component';
 import { editUser } from '../../redux/user/user.actions';
 import Modal from '../../ui/modal/modal.component';
 import ConfirmDelete from '../confirm-delete/confirm-delete.component';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 const ProfileEdit = (props) => {
-  const { isOpen, onClose, user, editUser } = props; 
-  const { currentUser } = user;
+  const { isOpen, onClose, currentUser, editUser } = props; 
 
   const [isDeleteOpen, setDeleteOpen] = useState(false);
 
@@ -71,8 +72,8 @@ const ProfileEdit = (props) => {
   );
 }
 
-const mapStateToProps = (state) => ({
-  user: state.user
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = {
