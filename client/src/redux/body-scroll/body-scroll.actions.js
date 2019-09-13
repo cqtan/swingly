@@ -2,7 +2,7 @@ import { BodyScrollType } from './body-scroll.types';
 
 export const saveScrollTop = (scrollTop) => dispatch => {
   const bodyEl = document.body;
-  if (bodyEl.clientHeight > window.screen.availHeight && scrollTop > 0) {
+  if (bodyEl.clientHeight > window.screen.availHeight && scrollTop >= 0) {
     bodyEl.style.top = `-${scrollTop}px`;
     bodyEl.style.position = 'fixed';
     bodyEl.style.overflowY = 'scroll';
@@ -16,7 +16,7 @@ export const saveScrollTop = (scrollTop) => dispatch => {
 
 export const setScrollTop = (prevScrollTop) => dispatch => {
   const bodyEl = document.body;
-  if (bodyEl.clientHeight > window.screen.availHeight && prevScrollTop > 0) {
+  if (bodyEl.clientHeight > window.screen.availHeight && prevScrollTop >= 0) {
     bodyEl.style.position = '';
     bodyEl.style.top = '';
     window.scrollTo(0, parseInt(prevScrollTop));

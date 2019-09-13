@@ -20,11 +20,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const EventsViewAgenda = (props) => {
   const { events, isEventsLoaded, currentUser } = props;
   let timeTracker = {};
-  let initialComponents = [];
+  let eventComponents = [];
 
   const [isDetailsOpen, setDetailsOpen] = useState(false);
   const [currentEvent, setCurrentEvent] = useState(null);
-  // const [eventComponents, setEventComponents] = useState([]);
 
   const handleEventOpen = event => {
     setCurrentEvent(event);
@@ -40,7 +39,7 @@ const EventsViewAgenda = (props) => {
 
     if (!timeTracker.hasOwnProperty(startMonth)) {
       timeTracker[startMonth] = {};
-      initialComponents.push(
+      eventComponents.push(
         <MonthRow key={startMonth}>{startMonth}</MonthRow>
       )      
     }
@@ -80,7 +79,7 @@ const EventsViewAgenda = (props) => {
     const timeFormatted = `${startTime} - ${endTime}`;
     const eventIcon = addEventIcon(event);
 
-    initialComponents.push(
+    eventComponents.push(
       <DayRow key={event.id} isDayDisplayed={isDayDisplayed}>
         <DayDate isDayDisplayed={isDayDisplayed}>
           <DayDateItem>{dayString}</DayDateItem>
@@ -95,18 +94,17 @@ const EventsViewAgenda = (props) => {
     );
   }
 
-  if (isEventsLoaded && initialComponents.length === 0) {
+  if (isEventsLoaded && eventComponents.length === 0) {
     events.forEach(event => {
       addMonthRow(event);
       addDayRow(event);
-      // setEventComponents(initialComponents);
     });
   }
 
   return (
     <>
       <EventsViewAgendaContainer>
-        {initialComponents}
+        {eventComponents}
       </EventsViewAgendaContainer>
       <EventDetails 
         isOpen={isDetailsOpen} 
