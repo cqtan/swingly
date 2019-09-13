@@ -1,16 +1,16 @@
 import { EventsActionTypes } from './events.types';
 import { firestore, getEnvironment, deleteFieldValue } from '../../firebase/firebase.utils';
 import { openSnackbar } from '../snackbar/snackbar.actions';
-import { eventsToObject } from './events.utils';
+import { eventsToObject, formatMockEvents } from './events.utils';
 import axios from 'axios';
 
 export const fetchEvents = () => async dispatch => {
   try {
     let eventsObj = null;
     if (getEnvironment() === 'development') {
-      const res = await axios.get('/api/data/mockevents');      
-      eventsObj = res.data;
-      console.log('Using Local Events Data!', res.data);
+      const res = await axios.get('/api/data/mockevents');
+      eventsObj = formatMockEvents(res.data);
+      console.log('Using Local Events Data!', eventsObj);
     } else if (getEnvironment() === 'production' || getEnvironment() === 'test') {
       const eventsSnap = await firestore.collection(`${getEnvironment()}/data/events`).orderBy('start').get();
 

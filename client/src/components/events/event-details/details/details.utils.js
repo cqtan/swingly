@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Label, DataContainer, Data, DataLink } from "./details.styles";
 import ProfileStack from '../../../profile-components/profile-stack/profile-stack.component';
 import moment from "moment";
-import { convertTimestamptoDate } from "../../events-view-agenda/events-view-agenda.utils";
+import { convertTimestampToDate } from "../../events-view-agenda/events-view-agenda.utils";
 
 export const parseDate = date => moment(date).format("Do MMMM, HH:mm");
 
@@ -17,7 +17,7 @@ export const parseFees = fees => {
 
 export const parseData = (key, value) => {
   if (["start", "end"].includes(key)) {
-    return parseDate(convertTimestamptoDate(value));
+    return parseDate(convertTimestampToDate(value));
   } else if (["type", "location", "courseTitle"].includes(key)) {
     return value;
   } else if (["hosts"].includes(key)) {

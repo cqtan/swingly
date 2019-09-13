@@ -1,4 +1,4 @@
-import { firestore, getEnvironment } from "../../firebase/firebase.utils";
+import { firestore, getEnvironment, dateToTimestamp } from "../../firebase/firebase.utils";
 import mockEvents from '../dummy-data/dummy-event-data';
 import axios from 'axios';
 
@@ -28,6 +28,17 @@ export const createMockEventsInDb = async (copies, hostObj) => {
     }
   }
 } 
+
+export const formatMockEvents = eventsObj => {
+  const newEventsObj = eventsObj;
+  Object.values(newEventsObj).forEach(val => {
+      val.start = dateToTimestamp(new Date (val.start));
+      val.end = dateToTimestamp(new Date(val.end));
+  });
+
+  console.log('new events: ', newEventsObj);
+  return newEventsObj;
+}
 
 export const eventsToObject = (events) => {
   return events.reduce((prev, event) => {

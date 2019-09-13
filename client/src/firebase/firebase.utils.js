@@ -50,5 +50,6 @@ export const loadJsonToObj = filename => {
 }
 
 export const deleteFieldValue = () => firebase.firestore.FieldValue.delete();
+export const dateToTimestamp = firebase.firestore.Timestamp.fromDate;
 
 export default firebase;

@@ -89,10 +89,12 @@ router.post('/refresh', async (req, res) => {
     let events = [];
     let counter = 0;
     let batch = firestore.batch();
+    const env = getEnvironment();
+    // const env = 'production';
 
     // Delete All Events
     try {
-      const eventsSnap = await firestore.collection(`${getEnvironment()}/data/events`).get();
+      const eventsSnap = await firestore.collection(`${env}/data/events`).get();
       for (let eventSnap of eventsSnap.docs) {
         batch.delete(eventSnap.ref);
       }
@@ -118,7 +120,7 @@ router.post('/refresh', async (req, res) => {
     batch = firestore.batch();
 
     for (event of events) {
-      const newDocRef = firestore.collection(`${getEnvironment()}/data/events`).doc();
+      const newDocRef = firestore.collection(`${env}/data/events`).doc();
       const newEvent = {
         ...event,
         id: newDocRef.id
