@@ -6,7 +6,7 @@ import themeModeReducer from './theme-mode/theme-mode.reducer';
 import userReducer from './user/user.reducer';
 import snackbarReducer from './snackbar/snackbar.reducer';
 import eventsReducer from './events/events.reducer';
-
+import bodyScrollReducer from './body-scroll/body-scroll.reducer';
 
 const persistConfig = {
   key: 'root',
@@ -18,7 +18,8 @@ const rootReducer = combineReducers({
   themeMode: themeModeReducer,
   snackbar: snackbarReducer,
   user: userReducer,
-  events: eventsReducer
+  events: eventsReducer,
+  bodyScroll: bodyScrollReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);
