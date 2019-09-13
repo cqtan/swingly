@@ -1,5 +1,6 @@
-import { firestore, dateToTimestamp } from "../../firebase/firebase.utils";
+import moment from 'moment';
 import axios from 'axios';
+import { dateToTimestamp } from "../../firebase/firebase.utils";
 
 export const formatMockEvents = eventsObj => {
   const newEventsObj = eventsObj;
@@ -27,4 +28,24 @@ export const scrapeEvents = async (amount) => {
   } catch (e) {
     console.log('Failed!: ', e);
   }
+}
+
+export const getMonthString = date => {
+  return moment(date.toDate()).format('MMMM');
+}
+
+export const getDayString = date => {
+  return moment(date.toDate()).format('ddd');
+}
+
+export const getDayNumber = date => {
+  return moment(date.toDate()).format('DD');
+}
+
+export const getTime = date => {
+  return moment(date.toDate()).format('HH:mm');
+}
+
+export const checkIsToday = date => {
+  return moment().isSame(date.toDate(), 'day');
 }

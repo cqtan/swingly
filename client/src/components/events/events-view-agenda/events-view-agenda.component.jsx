@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectEventsLoaded, selectSortedEvents } from '../../../redux/events/events.selectors';
-import { getMonthString, getDayString, getDayNumber, getTime, checkIsToday } from './events-view-agenda.utils';
+import { getMonthString, getDayString, getDayNumber, getTime, checkIsToday } from '../../../redux/events/events.utils';
 import EventDetails from '../event-details/event-details.component';
 import { selectCurrentUser } from '../../../redux/user/user.selectors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
