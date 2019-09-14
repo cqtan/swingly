@@ -12,6 +12,7 @@ import { fetchEvents } from "../../redux/events/events.actions";
 import { createStructuredSelector } from "reselect";
 import { selectSnackbarState } from "../../redux/snackbar/snackbar.selectors";
 import EventsPage from '../../pages/events-page/events-page.component';
+import EventEdit from "../events/event-edit/event-edit.component";
 
 export const App = props => {
   const {
@@ -41,6 +42,7 @@ export const App = props => {
       <Switch>
         <Route path="/hi" exact render={() => <ExampleContainer hi />} />
         <Route path="/profile" exact component={Profile} />
+        <Route path="/event-edit" component={EventEdit} />
         <Route path="/" component={EventsPage} />
       </Switch>
     </>

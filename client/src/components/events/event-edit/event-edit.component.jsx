@@ -34,7 +34,7 @@ const EventEdit = (props) => {
       .required('This should not be visible but...Boolean please'),
     start: Yup.date()
       .required('Please enter a valid date')
-      .min(Yup.ref(new Date())),
+      .min(new Date(), 'Start date needs to be later than current time'),
     end: Yup.date()
       .required('Please enter a valid date')
       .min(Yup.ref('start')),
