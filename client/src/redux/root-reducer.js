@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   events: eventsReducer,
   bodyScroll: bodyScrollReducer,
-  eventEditReducer: eventEditReducer
+  eventEdit: eventEditReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);

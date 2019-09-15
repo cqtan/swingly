@@ -3,23 +3,40 @@ import {
   EventEditPageContainer,
 } from './event-edit-page.styles';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
+import { selectEditEvent } from '../../redux/event-edit/event-edit.selectors';
 
 // TODO: Store for navigation: needs eventId, last events view, scroll position.
 const EventEditPage = (props) => {
-  return (
-    <EventEditPageContainer>
+  const { eventEdit, history } = props;
+  const { event, lastRoute } = eventEdit;
 
-    </EventEditPageContainer>
+  const onClose = () => {
+    history.push(lastRoute);
+  }
+
+  if (!event) {
+    history.push('/');
+  }
+
+  return (
+    <>
+      { event && 
+        <EventEditPageContainer>
+          
+        </EventEditPageContainer> 
+      }
+    </>
   );
 }
 
-
 const mapStateToProps = createStructuredSelector({
-  
+  eventEdit: selectEditEvent
 });
 
-const mapDispatchToProps = {}
-
-export default connect(mapStateToProps, mapDispatchToProps)(EventEditPage);
-
+export default compose(
+  withRouter,
+  connect(mapStateToProps),
+)(EventEditPage)

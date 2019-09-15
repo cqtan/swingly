@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   EventsViewAgendaContainer,
   MonthRow,
@@ -16,14 +16,23 @@ import { getMonthString, getDayString, getDayNumber, getTime, checkIsToday } fro
 import EventDetails from '../event-details/event-details.component';
 import { selectCurrentUser } from '../../../redux/user/user.selectors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { cleanUpEventEdit } from '../../../redux/event-edit/event-edit.actions';
+import { selectEditEventScrollPos } from '../../../redux/event-edit/event-edit.selectors';
 
 const EventsViewAgenda = (props) => {
-  const { events, isEventsLoaded, currentUser } = props;
+  const { events, isEventsLoaded, currentUser, cleanUpEventEdit, scrollPos } = props;
   let timeTracker = {};
   let eventComponents = [];
 
   const [isDetailsOpen, setDetailsOpen] = useState(false);
   const [currentEvent, setCurrentEvent] = useState(null);
+
+  useEffect(() => {
+    if (scrollPos !== null) {
+      cleanUpEventEdit();
+      console.log('<<<<<<<Event Edit Cleaned!');
+    }
+  },[scrollPos, cleanUpEventEdit]);
 
   const handleEventOpen = event => {
     setCurrentEvent(event);
@@ -31,6 +40,7 @@ const EventsViewAgenda = (props) => {
   }
 
   const handleEventClose = () => {
+
     setDetailsOpen(false);
   }
 
@@ -118,7 +128,12 @@ const EventsViewAgenda = (props) => {
 const mapStateToProps = createStructuredSelector({
   events: selectSortedEvents,
   isEventsLoaded: selectEventsLoaded,
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  scrollPos: selectEditEventScrollPos
 });
 
-export default connect(mapStateToProps)(EventsViewAgenda);
+const mapDispatchToProps = {
+  cleanUpEventEdit
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventsViewAgenda);

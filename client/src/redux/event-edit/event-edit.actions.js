@@ -1,25 +1,18 @@
 import { EventEditActionTypes } from './event-edit.types';
 
-export const openEditEvent = (event, history) => dispatch => {
-  console.log('History: ', history);
-  const currentRoute = history.location.pathname;
-  const scrollPos = window.scrollY;
-  history.push('/event-edit');
-
+export const setupEventEdit = (event, lastRoute, scrollPos) => dispatch => {
   dispatch({
-    type: EventEditActionTypes.EDIT_PAGE_OPEN_SUCCESS,
+    type: EventEditActionTypes.EDIT_PAGE_OPEN,
     payload: {
       event,
-      currentRoute,
+      lastRoute,
       scrollPos
     }
   });
 }
 
-// export const closeEditEvent = (history) => dispatch => {
-//   console.log('History: ', history);
-
-//   dispatch({
-//     type: EventEditActionTypes.EDIT_PAGE_CLOSE_SUCCESS
-//   });
-// }
+export const cleanUpEventEdit = () => dispatch => {
+  dispatch({
+    type: EventEditActionTypes.EDIT_PAGE_CLEAN_UP
+  });
+}

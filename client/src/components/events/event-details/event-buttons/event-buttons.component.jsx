@@ -14,7 +14,7 @@ import {
   deleteEventGuest
 } from "../../../../redux/events/events.actions";
 import { selectAllEvents } from "../../../../redux/events/events.selectors";
-import { openEditEvent } from "../../../../redux/event-edit/event-edit.actions";
+import { setupEventEdit } from "../../../../redux/event-edit/event-edit.actions";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 
@@ -25,10 +25,17 @@ const EventButtons = props => {
     currentUser,
     setEventGuest,
     deleteEventGuest,
-    openEditEvent,
+    setupEventEdit,
     history
   } = props;
   const event = events[eventId];
+
+  const handleOpenEventEdit = () => {
+    const lastRoute = history.location.pathname;
+    const scrollPos = window.scrollY;
+    setupEventEdit(event, lastRoute, scrollPos);
+    history.push('/event-edit');
+  }
 
   const handleClick = async guestType => {
     if (currentUser) {
@@ -73,7 +80,7 @@ const EventButtons = props => {
             <EventButton
               transparent
               isGuest={false}
-              onClick={() => openEditEvent(event, history)}
+              onClick={handleOpenEventEdit}
             >
               <FontAwesomeIcon icon="edit" />
             </EventButton>
@@ -116,7 +123,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   setEventGuest,
   deleteEventGuest,
-  openEditEvent
+  setupEventEdit
 };
 
 export default compose(
