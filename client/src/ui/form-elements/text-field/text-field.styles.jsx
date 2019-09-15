@@ -61,7 +61,7 @@ TextFieldContainer.displayName = 'TextFieldContainer';
 
 export const TextAreaInput = styled.textarea`
   background-color: transparent;
-  min-height: 10rem;
+  min-height: ${props => props.minHeight ? `${props.minHeight}rem` : `10rem`};
   width: 100%;
   font-size: 1.8rem;
   display: block;

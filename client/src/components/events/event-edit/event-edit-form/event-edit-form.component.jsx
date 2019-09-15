@@ -7,7 +7,6 @@ import { Form } from 'formik';
 import TextField from '../../../../ui/form-elements/text-field/text-field.component';
 import FormButton from '../../../../ui/form-elements/form-button/form-button.component';
 
-
 const EventEditForm = (props) => {
   const {
     values,
@@ -32,7 +31,9 @@ const EventEditForm = (props) => {
   return (
     <EventEditFormContainer>
       <Form>
-        <TextField 
+        <TextField
+          textarea
+          minHeight={5}
           name='title'
           label='Title'
           onChange={(e) => onChange('title', e)}
@@ -40,15 +41,6 @@ const EventEditForm = (props) => {
           value={values.title}
           helperText={touched.title ? errors.title : ''}
           error={touched.title && Boolean(errors.title)}
-        />
-        <TextField 
-          name='isCancelled'
-          label='isCancelled'
-          onChange={(e) => onChange('isCancelled', e)}
-          onBlur={(e) => onBlur('isCancelled', e)}
-          value={values.isCancelled}
-          helperText={touched.isCancelled ? errors.isCancelled : ''}
-          error={touched.isCancelled && Boolean(errors.isCancelled)}
         />
         <TextField 
           name='start'
@@ -68,7 +60,9 @@ const EventEditForm = (props) => {
           helperText={touched.end ? errors.end : ''}
           error={touched.end && Boolean(errors.end)}
         />
-        <TextField 
+        <TextField
+          textarea
+          minHeight={5}
           name='location'
           label='location'
           onChange={(e) => onChange('location', e)}
@@ -86,7 +80,9 @@ const EventEditForm = (props) => {
           helperText={touched.mapLink ? errors.mapLink : ''}
           error={touched.mapLink && Boolean(errors.mapLink)}
         />
-        <TextField 
+        <TextField
+          textarea
+          minHeight={30}
           name='description'
           label='description'
           onChange={(e) => onChange('description', e)}

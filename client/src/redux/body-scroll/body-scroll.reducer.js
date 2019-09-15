@@ -19,6 +19,10 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         scrollTop: null
       }
+    case BodyScrollType.RESET_BODY_SCROLL:
+      return {
+        ...INITIAL_STATE
+      }
     default: {
       return {
         ...state

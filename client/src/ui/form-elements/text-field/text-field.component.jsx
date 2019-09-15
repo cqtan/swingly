@@ -5,7 +5,7 @@ import {
   TextFieldInput,
   TextAreaInput,
   HelperText
-} from './text-field.styles'
+} from './text-field.styles';
 
 const TextField = (props) => {
   const { label, helperText, textarea, ...otherProps } = props;

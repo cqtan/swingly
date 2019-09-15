@@ -38,6 +38,8 @@ import {
   faStar,
 } from '@fortawesome/free-solid-svg-icons';
 import ThemeManager from './themes/ThemeManager';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 
 export default (props) => {
   const { children, initialState = {} } = props;
@@ -85,25 +87,22 @@ export default (props) => {
   );
 
   return (
-    <>
-      { process.env.NODE_ENV !== 'test' ? 
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <BrowserRouter>
-              <ThemeManager>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ThemeManager>
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            { process.env.NODE_ENV !== 'test' ? (
+              <PersistGate loading={null} persistor={persistor}>
                 {children}
-              </ThemeManager>
-            </BrowserRouter>
-          </PersistGate>
-        </Provider> : 
-        <Provider store={store}>
-          <BrowserRouter>
-            <ThemeManager>
-              {children}
-            </ThemeManager>
-          </BrowserRouter>
-        </Provider>
-      }
-    </>
+              </PersistGate>
+            ) : (
+              <>
+                {children}
+              </>
+            )}
+          </MuiPickersUtilsProvider>
+        </ThemeManager>
+      </BrowserRouter>
+    </Provider>
   );
 }

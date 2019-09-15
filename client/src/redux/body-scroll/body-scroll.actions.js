@@ -27,3 +27,15 @@ export const setScrollTop = (prevScrollTop) => dispatch => {
     });
   } 
 }
+
+export const resetBodyScroll = () => dispatch => {
+  const bodyEl = document.body;
+  if (document.body.style.position === 'fixed') {
+    bodyEl.style.position = '';
+    bodyEl.style.top = '';
+    bodyEl.style.overflowY = '';
+    dispatch({
+      type: BodyScrollType.RESET_BODY_SCROLL
+    });
+  }
+}

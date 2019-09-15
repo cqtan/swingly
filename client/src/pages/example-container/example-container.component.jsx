@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import {
   ExampleBgLogoContainer,
   ExampleButton,
-  ExampleBgLogo
+  ExampleBgLogo,
+  ExampleContent
 } from './example-container.styles';
 import { CSSTransition } from 'react-transition-group';
-import EventDetails from '../../components/events/event-details/event-details.component';
+import DateTimeInput from '../../ui/form-elements/date-time-input/date-time-input.component';
 
 const ExampleContainer = (props) => {
   const [isOpen, setOpen] = useState(true);
@@ -17,13 +18,17 @@ const ExampleContainer = (props) => {
         classNames='example'
         timeout={300}
         unmountOnExit>
-        <ExampleBgLogoContainer transName='example'>
-          <ExampleBgLogo>
-            S
-          </ExampleBgLogo>
-        </ExampleBgLogoContainer>
+        <>
+          <ExampleBgLogoContainer transName='example'>
+            <ExampleBgLogo>
+              S
+            </ExampleBgLogo>
+          </ExampleBgLogoContainer>
+          <ExampleContent>
+            <DateTimeInput />
+          </ExampleContent>
+        </>
       </CSSTransition>
-      <EventDetails isOpen={isOpen} onClose={() => setOpen(false)} />
       <ExampleButton primary onClick={() => setOpen(!isOpen)}>Toggle</ExampleButton>
     </>
   );

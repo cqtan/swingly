@@ -29,3 +29,14 @@ export const ExampleBgLogo = styled.div`
   color: ${props => props.theme.type === 'dark' ? props.theme.palette.grey[3] : props.theme.palette.grey[9]};
 `;
 ExampleBgLogo.displayName = 'ExampleBgLogo';
+
+export const ExampleContent = styled.div`
+  ${props => props.theme.mixins.absCentered};
+  background-color: ${props => props.theme.palette.grey[4]};
+  width: 40rem;
+  height: 40rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+ExampleContent.displayName = 'ExampleContent';
