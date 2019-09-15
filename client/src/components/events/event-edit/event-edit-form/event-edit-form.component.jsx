@@ -6,6 +6,7 @@ import {
 import { Form } from 'formik';
 import TextField from '../../../../ui/form-elements/text-field/text-field.component';
 import FormButton from '../../../../ui/form-elements/form-button/form-button.component';
+import DateTimeField from '../../../../ui/form-elements/date-time-field/date-time-field.component';
 
 const EventEditForm = (props) => {
   const {
@@ -15,6 +16,7 @@ const EventEditForm = (props) => {
     isValid,
     handleReset,
     handleChange,
+    setFieldValue,
     setFieldTouched
   } = props;
 
@@ -22,6 +24,22 @@ const EventEditForm = (props) => {
     event.persist();
     handleChange(event);
     setFieldTouched(inputLabel, false, false);
+  }
+
+  const handleDateChange = (name, event) => {
+    if (event) {
+      const selectedDate = event.toDate();
+      if (name === 'start') {
+        setFieldValue(name, selectedDate, true);
+        if (selectedDate > values.end) {
+          setFieldValue('end', selectedDate, true);
+        }
+      } else { 
+        if (selectedDate > values.start)
+          setFieldValue(name, selectedDate, true);
+      }
+      setFieldTouched(name, true, false);
+    }
   }
 
   const onBlur = (inputLabel, event) => {
@@ -42,7 +60,7 @@ const EventEditForm = (props) => {
           helperText={touched.title ? errors.title : ''}
           error={touched.title && Boolean(errors.title)}
         />
-        <TextField 
+        {/* <TextField 
           name='start'
           label='start'
           onChange={(e) => onChange('start', e)}
@@ -50,6 +68,15 @@ const EventEditForm = (props) => {
           value={values.start}
           helperText={touched.start ? errors.start : ''}
           error={touched.start && Boolean(errors.start)}
+        /> */}
+        <DateTimeField 
+          name='start'
+          label='start'
+          onChange={(e) => handleDateChange('start', e)}
+          onBlur={(e) => onBlur('start', e)}
+          value={values.start}
+          helperText={touched.start ? errors.start : ''}
+          error={touched.start && Boolean(errors.start)}          
         />
         <TextField 
           name='end'

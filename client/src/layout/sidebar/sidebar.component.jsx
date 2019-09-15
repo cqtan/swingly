@@ -26,9 +26,9 @@ export const Sidebar = (props) => {
           <FontAwesomeIcon icon='home' />
           Home
         </SidebarButton>
-        <SidebarButton onClick={() => setOpen(false)} as={Link} to='/hi'>
-          <FontAwesomeIcon icon='hat-wizard' />
-          Hi
+        <SidebarButton onClick={() => setOpen(false)} as={Link} to='/events-agenda'>
+          <FontAwesomeIcon icon='calendar-week' />
+          Agenda View
         </SidebarButton>
         <SidebarButton onClick={() => setOpen(false)} as={Link} to='/'>
           <FontAwesomeIcon icon='hat-wizard' />

@@ -10,6 +10,10 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Lato', 'Roboto', 'Arial', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    .MuiPickersToolbar-toolbar {
+      background-color: ${props => props.theme.palette.primary.main};
+    }
   }
 
   code {
@@ -54,4 +58,6 @@ export const GlobalStyle = createGlobalStyle`
     transition: background-color 5000s ease-in-out 5000s,
                 color 5000s ease-in-out 5000s;
   }
+
+  
 `;
