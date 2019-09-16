@@ -42,12 +42,6 @@ export const DateTimeFieldContainer = styled.div`
     border-bottom: none;
   } 
 
-  .MuiPickersToolbar-toolbar {
-    background-color: ${props => props.theme.palette.primary.main};
-  }
-
-
-  /* 'body > div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div > div.MuiToolbar-root.MuiToolbar-regular.MuiPickersToolbar-toolbar.MuiPickerDTToolbar-toolbar.MuiToolbar-gutters' */
 `;
 DateTimeFieldContainer.displayName = 'DateTimeFieldContainer';
 

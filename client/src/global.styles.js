@@ -11,8 +11,50 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    .MuiPickersToolbar-toolbar {
+    .MuiPickersToolbar-toolbar,
+    .MuiPickerDTTabs-tabs {
+      background-color: ${props => props.theme.type === 'dark' ? props.theme.background.layer1 : props.theme.palette.primary.main};
+      color: ${props => props.theme.type === 'dark' && props.theme.palette.text.primary};
+    }
+
+    .MuiTabs-indicator {
+      background-color: ${props => props.theme.type === 'dark' ? props.theme.palette.primary.main : props.theme.palette.grey[1]};
+    }
+
+    .MuiPickersClockPointer-pointer,
+    .MuiPickersClock-pin,
+    .MuiPickersClockPointer-noPoint {
       background-color: ${props => props.theme.palette.primary.main};
+    }
+
+    .MuiPickersClockPointer-thumb {
+      border: 14px solid ${props => props.theme.palette.primary.main};
+    }
+
+    .MuiPickersDay-daySelected {
+      background-color: ${props => props.theme.palette.primary.main};
+      color: ${props => props.theme.palette.grey[1]};
+    }
+
+    .MuiTypography-body1 {
+      font-size: 1.5rem;
+      font-family: 'Lato', 'Roboto', 'Arial', sans-serif;
+    }
+
+    .MuiTypography-body2,
+    .MuiTypography-caption {
+      font-size: 1rem;
+      font-family: 'Lato', 'Roboto', 'Arial', sans-serif;
+    }
+
+    .MuiButton-textPrimary {
+      color: ${props => props.theme.palette.grey[1]};
+      font-size: 1.5rem;
+    }
+
+    .MuiSvgIcon-root {
+      width: 2rem;
+      height: 2rem;
     }
   }
 
