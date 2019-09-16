@@ -2,15 +2,18 @@ import React from 'react';
 import {
   EventEditContainer,
 } from './event-edit.styles';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import EventEditForm from './event-edit-form/event-edit-form.component';
+import { editEvent } from '../../../redux/events/events.actions';
 
 const EventEdit = (props) => {
-  const { event, onClose } = props;
+  const { event, onClose, editEvent } = props;
 
   const onSubmit = values => {
     console.log('Event edit submission: ', values);
+    editEvent(event, values);
   }
 
   const initialValues = {
@@ -36,7 +39,7 @@ const EventEdit = (props) => {
     location: Yup.string()
       .required('Please enter the location of the event'),
     mapLink: Yup.string()
-      .notRequired(),
+      .required(),
     description: Yup.string()
       .required('Please enter a description of the event'),
     currency: Yup.string()
@@ -55,4 +58,8 @@ const EventEdit = (props) => {
   );
 }
 
-export default EventEdit;
+const mapDispatchToProps = {
+  editEvent
+}
+
+export default connect(null, mapDispatchToProps)(EventEdit);

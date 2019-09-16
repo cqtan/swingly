@@ -1,5 +1,5 @@
 import { EventsActionTypes } from './events.types';
-import { firestore, getEnvironment, deleteFieldValue } from '../../firebase/firebase.utils';
+import { firestore, getEnvironment, deleteFieldValue, dateToTimestamp } from '../../firebase/firebase.utils';
 import { openSnackbar } from '../snackbar/snackbar.actions';
 import { eventsToObject, formatMockEvents } from './events.utils';
 import axios from 'axios';
@@ -96,5 +96,42 @@ export const deleteEventGuest = (userId, event) => async dispatch => {
       type: EventsActionTypes.DELETE_EVENT_GUEST_FAILED,
       payload: err
     });
+  }
+}
+
+export const editEvent = (event, values) => async dispatch => {
+  try {
+    const eventRef = firestore.doc(`${getEnvironment()}/data/events/${event.id}`);
+    const eventSnap = await eventRef.get();
+    const batch = firestore.batch();
+
+    values.start = dateToTimestamp(values.start);
+    values.end = dateToTimestamp(values.end);
+    
+    if (eventSnap.exists) {
+      Object.entries(values).forEach(([key, val]) => {
+        if (val !== event[key]) {
+          batch.update(eventRef, {
+            [key]: val
+          });
+        }
+      });
+      await batch.commit();
+
+      dispatch({
+        type: EventsActionTypes.EDIT_EVENT_SUCCESS,
+        payload: {
+          eventId: event.id,
+          values
+        }
+      })
+      dispatch(openSnackbar("success", "Event edit successful!"));
+    }
+  } catch (err) {
+    dispatch({
+      type: EventsActionTypes.EDIT_EVENT_FAILED,
+      payload: err
+    })
+    openSnackbar("error", "Event edit failed!")
   }
 }

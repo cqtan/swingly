@@ -18,6 +18,7 @@ const eventsReducer = (state = INITIAL_STATE, action) => {
     case EventsActionTypes.DELETE_EVENT_GUEST_SUCCESS:
       return {
         ...state,
+        error: null,
         events: {
           ...state.events,
           [action.payload.eventId]: {
@@ -28,9 +29,22 @@ const eventsReducer = (state = INITIAL_STATE, action) => {
           }
         }
       }
+    case EventsActionTypes.EDIT_EVENT_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        events: {
+          ...state.events,
+          [action.payload.eventId]: {
+            ...state.events[action.payload.eventId],
+            ...action.payload.values
+          }
+        }
+      }
     case EventsActionTypes.SET_EVENT_GUEST_FAILED:
     case EventsActionTypes.FETCH_EVENTS_FAILED:
     case EventsActionTypes.DELETE_EVENT_GUEST_FAILED:
+    case EventsActionTypes.EDIT_EVENT_FAILED:
       return {
         ...state,
         isLoading: false,
