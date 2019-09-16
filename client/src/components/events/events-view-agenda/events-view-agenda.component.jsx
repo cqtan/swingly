@@ -24,8 +24,10 @@ const EventsViewAgenda = (props) => {
   let timeTracker = {};
   let eventComponents = [];
 
-  const [isDetailsOpen, setDetailsOpen] = useState(false);
-  const [currentEvent, setCurrentEvent] = useState(null);
+  const [isDetailsOpen, setDetailsOpen] = useState({
+    isOpen: false,
+    event: null
+  });
 
   useEffect(() => {
     if (scrollPos !== null) {
@@ -37,13 +39,17 @@ const EventsViewAgenda = (props) => {
   },[scrollPos, cleanUpEventEdit]);
 
   const handleEventOpen = event => {
-    setCurrentEvent(event);
-    setDetailsOpen(true);
+    setDetailsOpen({
+      isOpen: true, 
+      event
+    });
   }
 
   const handleEventClose = () => {
-
-    setDetailsOpen(false);
+    setDetailsOpen({
+      isOpen: false, 
+      event: null
+    });  
   }
 
   const addMonthRow = event => {
@@ -119,8 +125,8 @@ const EventsViewAgenda = (props) => {
         {eventComponents}
       </EventsViewAgendaContainer>
       <EventDetails 
-        isOpen={isDetailsOpen} 
-        event={currentEvent}
+        isOpen={isDetailsOpen.isOpen} 
+        event={isDetailsOpen.event}
         onClose={handleEventClose} 
       />
     </>

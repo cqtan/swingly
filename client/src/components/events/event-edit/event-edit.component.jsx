@@ -14,6 +14,7 @@ const EventEdit = (props) => {
   const onSubmit = values => {
     console.log('Event edit submission: ', values);
     editEvent(event, values);
+    onClose();
   }
 
   const initialValues = {

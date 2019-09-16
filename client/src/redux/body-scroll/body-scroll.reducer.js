@@ -17,7 +17,7 @@ const reducer = (state = INITIAL_STATE, action) => {
     case BodyScrollType.SAVE_BODY_SCROLL_FAILED:
     case BodyScrollType.SET_BODY_SCROLL_FAILED:
       return {
-        scrollTop: null
+        scrollTop: 0
       }
     case BodyScrollType.RESET_BODY_SCROLL:
       return {
