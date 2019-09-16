@@ -30,9 +30,9 @@ export const Sidebar = (props) => {
           <FontAwesomeIcon icon='calendar-week' />
           Agenda View
         </SidebarButton>
-        <SidebarButton onClick={() => setOpen(false)} as={Link} to='/'>
-          <FontAwesomeIcon icon='hat-wizard' />
-          Nope
+        <SidebarButton onClick={() => setOpen(false)} as={Link} to='/event-create'>
+          <FontAwesomeIcon icon='calendar-plus' />
+          Create Event
         </SidebarButton>
         <SidebarButton onClick={() => toggleTheme()} transparent flat>
           {toggleThemeIcon}{toggleThemeText}
