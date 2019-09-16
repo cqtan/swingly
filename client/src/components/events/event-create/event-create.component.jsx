@@ -3,18 +3,21 @@ import {
   EventCreateContainer,
 } from './event-create.styles';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import EventCreateForm from './event-create-form/event-create-form.component';
 import { createEvent } from '../../../redux/events/events.actions';
+import { withRouter } from 'react-router-dom';
 
 const EventCreate = (props) => {
-  const { userId, createEvent } = props;
+  const { userId, createEvent, history } = props;
 
   const onSubmit = values => {
     values.hosts = [userId];
-    console.log('Event edit submission: ', values);
+    console.log('Event create submission: ', values);
     createEvent(values);
+    history.push('/');
   }
 
   const initialValues = {
@@ -63,4 +66,7 @@ const mapDispatchToProps = {
   createEvent
 }
 
-export default connect(null, mapDispatchToProps)(EventCreate);
+export default compose(
+  withRouter,
+  connect(null, mapDispatchToProps)
+)(EventCreate)

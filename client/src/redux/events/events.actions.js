@@ -174,6 +174,24 @@ export const editEvent = (event, values) => async dispatch => {
       type: EventsActionTypes.EDIT_EVENT_FAILED,
       payload: err
     })
-    openSnackbar("error", "Event failed to modify!")
+    openSnackbar("error", "Event failed to modify!");
+  }
+}
+
+export const deleteEvent = eventId => async dispatch => {
+  try {
+    await firestore.doc(`${getEnvironment()}/data/events/${eventId}`).delete();
+    dispatch({
+      type: EventsActionTypes.DELETE_EVENT_SUCCESS,
+      payload: eventId
+    });
+
+    dispatch(openSnackbar("success", "Event successfully modified!"));
+  } catch (err) {
+    dispatch({
+      type: EventsActionTypes.DELETE_EVENT_FAILED,
+      payload: err
+    })
+    openSnackbar("error", "Event failed to delete!");
   }
 }

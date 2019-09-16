@@ -74,7 +74,7 @@ const EventButtons = props => {
           </EventButton>
           <ButtonLabel>Guests</ButtonLabel>
         </ButtonItem>
-        { !event.hosts.includes(currentUser.id) ? (
+        { event.hosts.includes(currentUser.id) ? (
           <ButtonItem>
             <EventButton
               transparent

@@ -49,11 +49,26 @@ const eventsReducer = (state = INITIAL_STATE, action) => {
           }
         }
       }
+    case EventsActionTypes.DELETE_EVENT_SUCCESS:
+      const newEvents = Object.keys(state.events).reduce((prev, current) => {
+        if (action.payload !== current) {
+          prev[current] = state.events[current];
+        }
+        return prev;
+      }, {});
+
+      return {
+        ...state,
+        events: {
+          ...newEvents
+        }
+      }
     case EventsActionTypes.SET_EVENT_GUEST_FAILED:
     case EventsActionTypes.FETCH_EVENTS_FAILED:
     case EventsActionTypes.DELETE_EVENT_GUEST_FAILED:
     case EventsActionTypes.CREATE_EVENT_FAILED:
     case EventsActionTypes.EDIT_EVENT_FAILED:
+    case EventsActionTypes.DELETE_EVENT_FAILED:
       return {
         ...state,
         isLoading: false,

@@ -24,7 +24,7 @@ const EventEditPage = props => {
     history.push(lastRoute);
   };
 
-  if (event && scrollTop > 0) {
+  if (event && document.body.style.position === 'fixed') {
     setScrollPosForEventEdit(scrollTop);
     resetBodyScroll();
   } else if (!event) {

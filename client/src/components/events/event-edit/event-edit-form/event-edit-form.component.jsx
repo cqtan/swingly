@@ -18,7 +18,8 @@ const EventEditForm = (props) => {
     handleChange,
     setFieldValue,
     setFieldTouched,
-    onClose
+    onClose,
+    onDelete
   } = props;
 
   const onChange = (inputLabel, event) => {
@@ -134,6 +135,11 @@ const EventEditForm = (props) => {
             type='button'
             onClick={onClose}>          
             Back
+          </FormButton>
+          <FormButton 
+            type='button'
+            onClick={onDelete}>          
+            Delete
           </FormButton>
         </ButtonContainer>
       </Form>

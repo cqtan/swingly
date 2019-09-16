@@ -46,7 +46,7 @@ export const App = props => {
         <Route path="/event-create" component={EventCreatePage} />
         <Route path="/event-edit" component={EventEditPage} />
         <Route path="/events-agenda" component={EventsPage} />
-        <Route path="/" component={EventCreatePage} />
+        <Route path="/" component={ExampleContainer} />
       </Switch>
     </>
   );
