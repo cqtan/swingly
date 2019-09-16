@@ -32,8 +32,7 @@ const EventButtons = props => {
 
   const handleOpenEventEdit = () => {
     const lastRoute = history.location.pathname;
-    const scrollPos = window.scrollY;
-    setupEventEdit(event, lastRoute, scrollPos);
+    setupEventEdit(event, lastRoute);
     history.push('/event-edit');
   }
 

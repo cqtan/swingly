@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import EventEditForm from './event-edit-form/event-edit-form.component';
 
 const EventEdit = (props) => {
-  const { event } = props;
+  const { event, onClose } = props;
 
   const onSubmit = values => {
     console.log('Event edit submission: ', values);
@@ -49,7 +49,7 @@ const EventEdit = (props) => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
-        render={ formikBag => <EventEditForm {...formikBag} /> }
+        render={ formikBag => <EventEditForm {...formikBag} onClose={onClose} /> }
       />
     </EventEditContainer>
   );

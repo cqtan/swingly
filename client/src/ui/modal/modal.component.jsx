@@ -22,9 +22,14 @@ const Modal = props => {
   } = props;
 
   if (isOpen) {
-    saveScrollTop(window.scrollY);
+    const scrollY = window.scrollY;
+    if (scrollY > 0) {
+      saveScrollTop(scrollY);
+    }
   } else {
-    setScrollTop(scrollTop);
+    if (scrollTop > 0) {
+      setScrollTop(scrollTop);
+    }
   }
 
   return (

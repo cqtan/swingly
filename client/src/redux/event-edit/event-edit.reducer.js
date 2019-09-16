@@ -12,6 +12,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...action.payload,
       }
+    case EventEditActionTypes.EDIT_PAGE_SET_SCROLLPOS:
+      return {
+        ...state,
+        scrollPos: action.payload
+      }
     case EventEditActionTypes.EDIT_PAGE_CLEAN_UP:
       return {
         ...initialState,

@@ -17,7 +17,8 @@ const EventEditForm = (props) => {
     handleReset,
     handleChange,
     setFieldValue,
-    setFieldTouched
+    setFieldTouched,
+    onClose
   } = props;
 
   const onChange = (inputLabel, event) => {
@@ -60,15 +61,6 @@ const EventEditForm = (props) => {
           helperText={touched.title ? errors.title : ''}
           error={touched.title && Boolean(errors.title)}
         />
-        {/* <TextField 
-          name='start'
-          label='start'
-          onChange={(e) => onChange('start', e)}
-          onBlur={(e) => onBlur('start', e)}
-          value={values.start}
-          helperText={touched.start ? errors.start : ''}
-          error={touched.start && Boolean(errors.start)}
-        /> */}
         <DateTimeField 
           name='start'
           label='start'
@@ -78,14 +70,14 @@ const EventEditForm = (props) => {
           helperText={touched.start ? errors.start : ''}
           error={touched.start && Boolean(errors.start)}          
         />
-        <TextField 
+        <DateTimeField 
           name='end'
           label='end'
-          onChange={(e) => onChange('end', e)}
+          onChange={(e) => handleDateChange('end', e)}
           onBlur={(e) => onBlur('end', e)}
           value={values.end}
           helperText={touched.end ? errors.end : ''}
-          error={touched.end && Boolean(errors.end)}
+          error={touched.end && Boolean(errors.end)}          
         />
         <TextField
           textarea
@@ -137,6 +129,11 @@ const EventEditForm = (props) => {
             type='button'
             onClick={handleReset}>          
             Reset
+          </FormButton>
+          <FormButton 
+            type='button'
+            onClick={onClose}>          
+            Back
           </FormButton>
         </ButtonContainer>
       </Form>

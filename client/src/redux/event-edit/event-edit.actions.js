@@ -1,13 +1,19 @@
 import { EventEditActionTypes } from './event-edit.types';
 
-export const setupEventEdit = (event, lastRoute, scrollPos) => dispatch => {
+export const setupEventEdit = (event, lastRoute) => dispatch => {
   dispatch({
     type: EventEditActionTypes.EDIT_PAGE_OPEN,
     payload: {
       event,
-      lastRoute,
-      scrollPos
+      lastRoute
     }
+  });
+}
+
+export const setScrollPosForEventEdit = scrollPos => dispatch => {
+  dispatch({
+    type: EventEditActionTypes.EDIT_PAGE_SET_SCROLLPOS,
+    payload: scrollPos
   });
 }
 

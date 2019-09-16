@@ -29,8 +29,10 @@ const EventsViewAgenda = (props) => {
 
   useEffect(() => {
     if (scrollPos !== null) {
+      const scrollY =  scrollPos;
       cleanUpEventEdit();
-      console.log('<<<<<<<Event Edit Cleaned!');
+      window.scrollTo(0, scrollY);
+      console.log('<<<<<<<Event Edit Cleaned! ScrollY: ', scrollY);
     }
   },[scrollPos, cleanUpEventEdit]);
 
