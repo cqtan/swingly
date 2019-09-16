@@ -9,6 +9,8 @@ exports[`App component should render 1`] = `
   <Switch>
     <Route path=\\"/hi\\" exact={true} render={[Function: render]} />
     <Route path=\\"/profile\\" exact={true} component={{...}} />
+    <Route path=\\"/event-edit\\" component={[Function: C]} />
+    <Route path=\\"/events-agenda\\" component={[Function: EventsPage]} />
     <Route path=\\"/\\" component={[Function: EventsPage]} />
   </Switch>
 </Fragment>"
