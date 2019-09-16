@@ -99,6 +99,48 @@ export const deleteEventGuest = (userId, event) => async dispatch => {
   }
 }
 
+export const createEvent = values => async dispatch => {
+  const defaultValues = {
+    cancelled: false,
+    courses: [],
+    guests: {},
+    images: [],
+    otherFees: [],
+    type: 'social'
+  }
+
+  values.start = dateToTimestamp(values.start);
+  values.end = dateToTimestamp(values.end);
+
+  try {
+    const eventRef = firestore.collection(`${getEnvironment()}/data/events`).doc();
+    const newEvent = {
+      id: eventRef.id,
+      ...defaultValues,
+      ...values
+    }
+
+    await eventRef.set(newEvent);
+
+    dispatch({
+      type: EventsActionTypes.CREATE_EVENT_SUCCESS,
+      payload: {
+        eventId: newEvent.id,
+        event: newEvent
+      }
+    });
+
+    dispatch(openSnackbar("success", "Event successfully created!"));
+  } catch (err) {
+    dispatch({
+      type: EventsActionTypes.CREATE_EVENT_FAILED,
+      payload: err
+    });
+
+    openSnackbar("error", "Event creation failed!")
+  }
+}
+
 export const editEvent = (event, values) => async dispatch => {
   try {
     const eventRef = firestore.doc(`${getEnvironment()}/data/events/${event.id}`);
@@ -125,13 +167,13 @@ export const editEvent = (event, values) => async dispatch => {
           values
         }
       })
-      dispatch(openSnackbar("success", "Event edit successful!"));
+      dispatch(openSnackbar("success", "Event successfully modified!"));
     }
   } catch (err) {
     dispatch({
       type: EventsActionTypes.EDIT_EVENT_FAILED,
       payload: err
     })
-    openSnackbar("error", "Event edit failed!")
+    openSnackbar("error", "Event failed to modify!")
   }
 }

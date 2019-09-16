@@ -63,7 +63,7 @@ const EventEditForm = (props) => {
         />
         <DateTimeField 
           name='start'
-          label='start'
+          label='Start Date'
           onChange={(e) => handleDateChange('start', e)}
           onBlur={(e) => onBlur('start', e)}
           value={values.start}
@@ -72,7 +72,7 @@ const EventEditForm = (props) => {
         />
         <DateTimeField 
           name='end'
-          label='end'
+          label='End Date'
           onChange={(e) => handleDateChange('end', e)}
           onBlur={(e) => onBlur('end', e)}
           value={values.end}
@@ -83,7 +83,7 @@ const EventEditForm = (props) => {
           textarea
           minHeight={5}
           name='location'
-          label='location'
+          label='Location'
           onChange={(e) => onChange('location', e)}
           onBlur={(e) => onBlur('location', e)}
           value={values.location}
@@ -92,7 +92,7 @@ const EventEditForm = (props) => {
         />
         <TextField 
           name='mapLink'
-          label='mapLink'
+          label='Google Maps Link'
           onChange={(e) => onChange('mapLink', e)}
           onBlur={(e) => onBlur('mapLink', e)}
           value={values.mapLink}
@@ -103,7 +103,7 @@ const EventEditForm = (props) => {
           textarea
           minHeight={30}
           name='description'
-          label='description'
+          label='Description'
           onChange={(e) => onChange('description', e)}
           onBlur={(e) => onBlur('description', e)}
           value={values.description}
@@ -112,7 +112,7 @@ const EventEditForm = (props) => {
         />
         <TextField 
           name='currency'
-          label='currency'
+          label='Currency'
           onChange={(e) => onChange('currency', e)}
           onBlur={(e) => onBlur('currency', e)}
           value={values.currency}

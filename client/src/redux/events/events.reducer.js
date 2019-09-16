@@ -29,6 +29,14 @@ const eventsReducer = (state = INITIAL_STATE, action) => {
           }
         }
       }
+    case EventsActionTypes.CREATE_EVENT_SUCCESS:
+      return {
+        ...state,
+        events: {
+          ...state.events,
+          [action.payload.eventId]: action.payload.event
+        }
+      }
     case EventsActionTypes.EDIT_EVENT_SUCCESS:
       return {
         ...state,
@@ -44,6 +52,7 @@ const eventsReducer = (state = INITIAL_STATE, action) => {
     case EventsActionTypes.SET_EVENT_GUEST_FAILED:
     case EventsActionTypes.FETCH_EVENTS_FAILED:
     case EventsActionTypes.DELETE_EVENT_GUEST_FAILED:
+    case EventsActionTypes.CREATE_EVENT_FAILED:
     case EventsActionTypes.EDIT_EVENT_FAILED:
       return {
         ...state,

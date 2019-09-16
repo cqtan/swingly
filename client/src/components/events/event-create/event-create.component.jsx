@@ -2,21 +2,29 @@ import React from 'react';
 import {
   EventCreateContainer,
 } from './event-create.styles';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import EventCreateForm from './event-create-form/event-create-form.component';
+import { createEvent } from '../../../redux/events/events.actions';
 
 const EventCreate = (props) => {
+  const { userId, createEvent } = props;
+
   const onSubmit = values => {
+    values.hosts = [userId];
     console.log('Event edit submission: ', values);
+    createEvent(values);
   }
+
   const initialValues = {
-    title: event.title,
-    start: event.start.toDate(),
-    end: event.end.toDate(),
-    location: event.location,
-    mapLink: event.mapLink,
-    description: event.description,
-    currency: event.currency,
+    title: '',
+    start: null,
+    end: null,
+    location: '',
+    mapLink: '',
+    description: '',
+    currency: 'euro',
   }
 
   const validationSchema = Yup.object().shape({
@@ -45,10 +53,14 @@ const EventCreate = (props) => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
-        render={ formikBag => <EventEditForm {...formikBag} onClose={onClose} /> }
+        render={ formikBag => <EventCreateForm {...formikBag} /> }
       />
     </EventCreateContainer>
   );
 }
 
-export default EventCreate;
+const mapDispatchToProps = {
+  createEvent
+}
+
+export default connect(null, mapDispatchToProps)(EventCreate);
