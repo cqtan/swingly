@@ -28,7 +28,6 @@ export const fadeInOut = (transName, direction) => css`
   &.${transName}-enter-active {
     opacity: 1;
     ${direction}: 50%;
-    transition: all 0.3s ease-out;
   }
 
   &.${transName}-exit {
@@ -39,7 +38,6 @@ export const fadeInOut = (transName, direction) => css`
   &.${transName}-exit-active {
     opacity: 0;
     ${direction}: 0%;
-    transition: all 0.3s ease-out;
   }
 `
 

@@ -57,7 +57,8 @@ const SignIn = props => {
     <Modal
       isOpen={isOpen}
       transName="sign-in"
-      title='Login'>
+      title='Login'
+      timeout={500}>
       <SignInContainer>
         <TextField
           label="Email Address"

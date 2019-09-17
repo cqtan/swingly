@@ -32,9 +32,8 @@ export const SnackbarContainer = styled.div`
   bottom: 5rem;
   ${props => props.theme.mixins.defaultBorderRadius};
   z-index: 700;
-  transition: all 1s ease-in 0.5s;
-
-  ${props => fadeInOut(props.transName, 'left')};
+  transition: opacity 0.2s ease-in 0.5s;
+  ${props => fadeInOut(props.transName)};
 `;
 SnackbarContainer.displayName = 'SnackbarContainer';
 

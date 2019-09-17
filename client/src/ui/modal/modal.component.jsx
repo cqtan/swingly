@@ -18,7 +18,7 @@ const Modal = props => {
     saveScrollTop,
     setScrollTop,
     title,
-    children
+    children,
   } = props;
 
   if (isOpen) {
