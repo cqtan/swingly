@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const setBgColor = (props) => {
-  const { theme, isFilterToggled } = props;
-  if (isFilterToggled) {
+  const { theme, isSelected } = props;
+  if (isSelected) {
     return theme.palette.primary.main;
   }
 }

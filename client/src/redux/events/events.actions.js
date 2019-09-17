@@ -195,3 +195,10 @@ export const deleteEvent = eventId => async dispatch => {
     openSnackbar("error", "Event failed to delete!");
   }
 }
+
+export const setFilterType = filterType => dispatch => {
+  dispatch({
+    type: EventsActionTypes.SET_FILTER_TYPE,
+    payload: filterType
+  });
+}

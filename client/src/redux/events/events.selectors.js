@@ -12,6 +12,11 @@ export const selectEventsAreLoading = createSelector(
   (events) => events.isLoading
 );
 
+export const selectFilterType = createSelector(
+  [selectEvents],
+  (events) => events.filterType
+);
+
 export const selectEventsLoaded = createSelector(
   [selectAllEvents],
   (events) =>  Object.keys(events).length > 0

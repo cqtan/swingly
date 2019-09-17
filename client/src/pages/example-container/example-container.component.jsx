@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ExampleBgLogoContainer,
   // ExampleButton,
@@ -6,16 +6,14 @@ import {
   // ExampleContent
 } from './example-container.styles';
 import { CSSTransition } from 'react-transition-group';
-import Fab from '../../components/fab/fab.component';
 
 const ExampleContainer = (props) => {
-  const [isOpen, setOpen] = useState(true);
-  const [isFabOpen, setFabOpen] = useState(false);
+  // const [isOpen, setOpen] = useState(true);
 
   return (
     <>
       <CSSTransition 
-        in={isOpen}
+        in={true}
         classNames='example'
         timeout={300}
         unmountOnExit>
@@ -27,7 +25,6 @@ const ExampleContainer = (props) => {
           </ExampleBgLogoContainer>
         </>
       </CSSTransition>
-      <Fab isOpen={isFabOpen} setFabOpen={setFabOpen} />
       {/* <ExampleButton primary onClick={() => setOpen(!isOpen)}>Toggle</ExampleButton> */}
     </>
   );

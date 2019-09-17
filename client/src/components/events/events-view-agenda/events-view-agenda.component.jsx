@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   EventsViewAgendaContainer,
   MonthRow,
@@ -8,19 +8,36 @@ import {
   DayEvents,
   DayEventItem,
   DayEventIcon
-} from './events-view-agenda.styles';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { selectEventsLoaded, selectSortedEvents } from '../../../redux/events/events.selectors';
-import { getMonthString, getDayString, getDayNumber, getTime, checkIsToday } from '../../../redux/events/events.utils';
-import EventDetails from '../event-details/event-details.component';
-import { selectCurrentUser } from '../../../redux/user/user.selectors';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { cleanUpEventEdit } from '../../../redux/event-edit/event-edit.actions';
-import { selectEditEventScrollPos } from '../../../redux/event-edit/event-edit.selectors';
+} from "./events-view-agenda.styles";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import {
+  selectEventsLoaded,
+  selectSortedEvents,
+  selectFilterType
+} from "../../../redux/events/events.selectors";
+import {
+  getMonthString,
+  getDayString,
+  getDayNumber,
+  getTime,
+  checkIsToday
+} from "../../../redux/events/events.utils";
+import EventDetails from "../event-details/event-details.component";
+import { selectCurrentUser } from "../../../redux/user/user.selectors";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { cleanUpEventEdit } from "../../../redux/event-edit/event-edit.actions";
+import { selectEditEventScrollPos } from "../../../redux/event-edit/event-edit.selectors";
 
-const EventsViewAgenda = (props) => {
-  const { events, isEventsLoaded, currentUser, cleanUpEventEdit, scrollPos } = props;
+const EventsViewAgenda = props => {
+  const {
+    events,
+    isEventsLoaded,
+    currentUser,
+    cleanUpEventEdit,
+    scrollPos,
+    filterType
+  } = props;
   let timeTracker = {};
   let eventComponents = [];
 
@@ -31,50 +48,48 @@ const EventsViewAgenda = (props) => {
 
   useEffect(() => {
     if (scrollPos !== null) {
-      const scrollY =  scrollPos;
+      const scrollY = scrollPos;
       cleanUpEventEdit();
       window.scrollTo(0, scrollY);
-      console.log('<<<<<<<Event Edit Cleaned! ScrollY: ', scrollY);
+      console.log("<<<<<<<Event Edit Cleaned! ScrollY: ", scrollY);
     }
-  },[scrollPos, cleanUpEventEdit]);
+  }, [scrollPos, cleanUpEventEdit]);
 
   const handleEventOpen = event => {
     setDetailsOpen({
-      isOpen: true, 
+      isOpen: true,
       event
     });
-  }
+  };
 
   const handleEventClose = () => {
     setDetailsOpen({
-      isOpen: false, 
+      isOpen: false,
       event: null
-    });  
-  }
+    });
+  };
 
   const addMonthRow = event => {
     const startMonth = getMonthString(event.start);
 
     if (!timeTracker.hasOwnProperty(startMonth)) {
       timeTracker[startMonth] = {};
-      eventComponents.push(
-        <MonthRow key={startMonth}>{startMonth}</MonthRow>
-      )      
+      eventComponents.push(<MonthRow key={startMonth}>{startMonth}</MonthRow>);
     }
-  }
+  };
 
-  const addEventIcon = (event) => {
+  const addEventIcon = event => {
     let eventIcon = null;
     if (currentUser && event.guests.hasOwnProperty(currentUser.id)) {
-      if (event.guests[currentUser.id] === 'interested') {
-        eventIcon = <FontAwesomeIcon icon='star' />;
+      if (event.guests[currentUser.id] === "interested") {
+        eventIcon = <FontAwesomeIcon icon="star" />;
       } else {
-        eventIcon = <FontAwesomeIcon icon='check' />;
+        eventIcon = <FontAwesomeIcon icon="check" />;
       }
     }
 
     return eventIcon;
-  }
+  };
 
   const addDayRow = event => {
     const startMonth = getMonthString(event.start);
@@ -103,17 +118,37 @@ const EventsViewAgenda = (props) => {
           <DayDateItem>{dayString}</DayDateItem>
           <DayDateItem>{dayNumber}</DayDateItem>
         </DayDate>
-        <DayEvents flat isToday={isToday} onClick={() => handleEventOpen(event)}>
+        <DayEvents
+          flat
+          isToday={isToday}
+          onClick={() => handleEventOpen(event)}
+        >
           <DayEventItem>{event.title}</DayEventItem>
           <DayEventItem>{timeFormatted}</DayEventItem>
         </DayEvents>
         <DayEventIcon>{eventIcon}</DayEventIcon>
       </DayRow>
     );
-  }
+  };
+
+  const filterEventsByGuests = events => {  
+    if (filterType !== 'none') {
+      return events.filter(event => {
+        if (event.guests.hasOwnProperty(currentUser.id)) {
+          return event.guests[currentUser.id] === filterType ? true : false;
+        } else {
+          return false;
+        }
+      });
+    } else {
+      return events;
+    }
+  };
 
   if (isEventsLoaded && eventComponents.length === 0) {
-    events.forEach(event => {
+    const filteredEvents = filterEventsByGuests(events);
+
+    filteredEvents.forEach(event => {
       addMonthRow(event);
       addDayRow(event);
     });
@@ -121,27 +156,29 @@ const EventsViewAgenda = (props) => {
 
   return (
     <>
-      <EventsViewAgendaContainer>
-        {eventComponents}
-      </EventsViewAgendaContainer>
-      <EventDetails 
-        isOpen={isDetailsOpen.isOpen} 
+      <EventsViewAgendaContainer>{eventComponents}</EventsViewAgendaContainer>
+      <EventDetails
+        isOpen={isDetailsOpen.isOpen}
         event={isDetailsOpen.event}
-        onClose={handleEventClose} 
+        onClose={handleEventClose}
       />
     </>
   );
-}
+};
 
 const mapStateToProps = createStructuredSelector({
   events: selectSortedEvents,
   isEventsLoaded: selectEventsLoaded,
   currentUser: selectCurrentUser,
-  scrollPos: selectEditEventScrollPos
+  scrollPos: selectEditEventScrollPos,
+  filterType: selectFilterType
 });
 
 const mapDispatchToProps = {
   cleanUpEventEdit
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventsViewAgenda);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EventsViewAgenda);

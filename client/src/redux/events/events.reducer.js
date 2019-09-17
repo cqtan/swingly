@@ -3,6 +3,7 @@ import { EventsActionTypes } from './events.types';
 const INITIAL_STATE = {
   events: {},
   isLoading: false,
+  filterType: 'none',
   error: null
 };
 const eventsReducer = (state = INITIAL_STATE, action) => {
@@ -62,6 +63,12 @@ const eventsReducer = (state = INITIAL_STATE, action) => {
         events: {
           ...newEvents
         }
+      }
+    case EventsActionTypes.SET_FILTER_TYPE:
+      const filterType = state.filterType === action.payload ? 'none' : action.payload;
+      return {
+        ...state,
+        filterType
       }
     case EventsActionTypes.SET_EVENT_GUEST_FAILED:
     case EventsActionTypes.FETCH_EVENTS_FAILED:

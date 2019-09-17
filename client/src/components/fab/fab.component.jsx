@@ -1,58 +1,54 @@
-import React, { useState } from 'react';
-import {
-  FabContainer,
-  FabSubContainer,
-  FabMain,
-  FabSub
-} from './fab.styles';
-import Backdrop from '../../ui/backdrop/backdrop.component';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { CSSTransition } from 'react-transition-group';
+import React from "react";
+import { FabContainer, FabSubContainer, FabMain, FabSub } from "./fab.styles";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import Backdrop from "../../ui/backdrop/backdrop.component";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CSSTransition } from "react-transition-group";
+import { selectFilterType } from "../../redux/events/events.selectors";
+import { setFilterType } from "../../redux/events/events.actions";
 
+const Fab = props => {
+  const { isOpen, setFabOpen, filterType, setFilterType } = props;
 
-// TODO: Build around events.selector for filtered property: 'none', 'interested', 'going' 
-const Fab = (props) => {
-  const { isOpen, setFabOpen } = props;
+  const handleFilterClick = type => {
+    setFilterType(type);
+    setFabOpen(false);
+  }
 
-  const initialState = [false, false, false];
-  const [isFilterToggled, setFilterToggled] = useState([false, false, false]);
+  const handleCalendarDayClick = () => {
+    console.log("Calendar Day clicked: ");
+    setFabOpen(false);
+  };
 
-  const handleFilterClick = (idx) => {
-    console.log('Filter Clicked for: ', idx);
-    if (isFilterToggled[idx] === true) {
-      setFilterToggled(initialState);
-    } else {
-      const newState = initialState;
-      newState[idx] = true;
-      setFilterToggled(newState);
+  const fabSubData = {
+    interested: {
+      icon: <FontAwesomeIcon icon="star" />,
+      func: () => handleFilterClick('interested'),
+      isSelected: filterType === 'interested' ? true : false
+    },
+    going: {
+      icon: <FontAwesomeIcon icon="check" />,
+      func: () => handleFilterClick('going'),
+      isSelected: filterType === 'going' ? true : false
+    },
+    today: {
+      icon: <FontAwesomeIcon icon="calendar-day" />,
+      func: handleCalendarDayClick,
+      isSelected: false
     }
   }
 
-  const handleCalendarDayClick = (param) => {
-    console.log('Calendar Day clicked: ', param);
-  }
-
-  const icons = [
-    <FontAwesomeIcon icon='star' />,
-    <FontAwesomeIcon icon='check' />,
-    <FontAwesomeIcon icon='calendar-day' />
-  ];
-
-  const functions = [
-    () => handleFilterClick(0),
-    () => handleFilterClick(1),
-    handleCalendarDayClick,
-  ];
-
-  const FabSubs = icons.map((icon, idx) => {
+  const FabSubs = Object.values(fabSubData).map((val, idx) => {
     return (
-      <FabSub 
-        key={idx} 
-        onClick={functions[idx]} 
-        isFilterToggled={isFilterToggled[idx]}>
-        {icon}
+      <FabSub
+        key={idx}
+        onClick={val.func}
+        isSelected={val.isSelected}
+      >
+        {val.icon}
       </FabSub>
-    )
+    );
   });
 
   return (
@@ -61,23 +57,35 @@ const Fab = (props) => {
       <FabContainer isOpen={isOpen}>
         <CSSTransition
           in={isOpen}
-          classNames='fab-subs'
+          classNames="fab-subs"
           timeout={300}
-          unmountOnExit>
+          unmountOnExit
+        >
           <FabSubContainer isOpen={isOpen} itemsLength={FabSubs.length}>
             {FabSubs}
           </FabSubContainer>
         </CSSTransition>
-        <FabMain onClick={() => setFabOpen(!isOpen)}  >
-          { isOpen ? 
-            <FontAwesomeIcon icon='times' size='2x' />
-            : 
-            <FontAwesomeIcon icon='ellipsis-v' size='2x' />
-          }
+        <FabMain onClick={() => setFabOpen(!isOpen)}>
+          {isOpen ? (
+            <FontAwesomeIcon icon="times" size="2x" />
+          ) : (
+            <FontAwesomeIcon icon="ellipsis-v" size="2x" />
+          )}
         </FabMain>
       </FabContainer>
     </>
   );
-}
+};
 
-export default Fab;
+const mapStateToProps = createStructuredSelector({
+  filterType: selectFilterType
+});
+
+const mapDispatchToProps = {
+  setFilterType
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Fab);
