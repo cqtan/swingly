@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+const setBgColor = (props) => {
+  const { theme, isFilterToggled } = props;
+  if (isFilterToggled) {
+    return theme.palette.primary.main;
+  }
+}
+
 export const FabContainer = styled.div`
   position: fixed;
   display: flex;
@@ -38,5 +45,6 @@ export const FabSub = styled.button`
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
+  background-color: ${setBgColor};
 `;
 FabSub.displayName = 'FabSub';

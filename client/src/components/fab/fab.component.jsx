@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FabContainer,
   FabSubContainer,
@@ -9,15 +9,23 @@ import Backdrop from '../../ui/backdrop/backdrop.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CSSTransition } from 'react-transition-group';
 
+
+// TODO: Build around events.selector for filtered property: 'none', 'interested', 'going' 
 const Fab = (props) => {
   const { isOpen, setFabOpen } = props;
 
-  const handleStarClick = (param) => {
-    console.log('Star clicked: ', param);
-  }
+  const initialState = [false, false, false];
+  const [isFilterToggled, setFilterToggled] = useState([false, false, false]);
 
-  const handleCheckClick = (param) => {
-    console.log('Check clicked: ', param);
+  const handleFilterClick = (idx) => {
+    console.log('Filter Clicked for: ', idx);
+    if (isFilterToggled[idx] === true) {
+      setFilterToggled(initialState);
+    } else {
+      const newState = initialState;
+      newState[idx] = true;
+      setFilterToggled(newState);
+    }
   }
 
   const handleCalendarDayClick = (param) => {
@@ -31,14 +39,17 @@ const Fab = (props) => {
   ];
 
   const functions = [
-    handleStarClick,
-    handleCheckClick,
+    () => handleFilterClick(0),
+    () => handleFilterClick(1),
     handleCalendarDayClick,
   ];
 
   const FabSubs = icons.map((icon, idx) => {
     return (
-      <FabSub key={idx} onClick={() => functions[idx]('with param')}>
+      <FabSub 
+        key={idx} 
+        onClick={functions[idx]} 
+        isFilterToggled={isFilterToggled[idx]}>
         {icon}
       </FabSub>
     )

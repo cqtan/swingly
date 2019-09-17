@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   ExampleBgLogoContainer,
-  ExampleButton,
+  // ExampleButton,
   ExampleBgLogo,
   // ExampleContent
 } from './example-container.styles';
