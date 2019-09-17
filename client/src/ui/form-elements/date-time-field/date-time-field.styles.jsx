@@ -28,6 +28,7 @@ export const DateTimeFieldContainer = styled.div`
     width: 100%;
     font-size: 1.8rem;
     margin-bottom: 0.2rem;
+    border-radius: 0px;
     border-bottom: 1px solid ${props => props.error ? 
       props.theme.palette.error : 
       props.theme.palette.text.primary

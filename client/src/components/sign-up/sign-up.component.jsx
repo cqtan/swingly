@@ -52,7 +52,6 @@ const SignUp = props => {
     <Modal 
       isOpen={isOpen}
       transName="sign-up" 
-      direction="left"
       title="Register">
       <SignUpContainer>
         <Formik

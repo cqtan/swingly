@@ -41,7 +41,7 @@ export const Header = (props) => {
         <Logo to='/'>Swingly</Logo>
         <HeaderButtons flat onClick={() => currentUser ? setDrawerOpen(!drawerOpen) : handlePopupToggle()}>
           { currentUser ? 
-            <ProfileImage sm src='http://lorempixel.com/400/200/cats' /> :
+            <ProfileImage sm /> :
             <FontAwesomeIcon icon='user-circle' size='2x' />
           }
         </HeaderButtons>

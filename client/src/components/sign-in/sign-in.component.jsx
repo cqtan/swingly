@@ -56,7 +56,6 @@ const SignIn = props => {
   return (
     <Modal
       isOpen={isOpen}
-      direction="left"
       transName="sign-in"
       title='Login'>
       <SignInContainer>
