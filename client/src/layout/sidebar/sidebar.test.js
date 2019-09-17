@@ -2,21 +2,32 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import ConnectedSidebar, { Sidebar } from './sidebar.component';
 import Root from '../../Root';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('Sidebar component', () => {
   let wrapper = null;
   let mockProps = null;
   let mockSetOpen = null;
   let mockToggleTheme = null;
+  let mockIsDarkMode = null;
+  let mockCurrentUser = null;
+  let mockOpenSnackbar = null;
+  let mockHistory = null;
   
   beforeEach(() => {
     mockSetOpen = jest.fn();
     mockToggleTheme = jest.fn();
+    mockHistory = {
+      location: {
+        pathname: '/'
+      }
+    }
 
     mockProps = {
       isOpen: true,
       setOpen: mockSetOpen,
-      toggleTheme: mockToggleTheme
+      toggleTheme: mockToggleTheme,
+      history: mockHistory
     };
 
     const initialState = {
@@ -25,7 +36,9 @@ describe('Sidebar component', () => {
     
     wrapper = mount(
       <Root initialState={initialState}>
-        <ConnectedSidebar {...mockProps} />
+        <MemoryRouter initialEntries={['/']}>
+          <ConnectedSidebar {...mockProps} />
+        </MemoryRouter>
       </Root>
     );
   });

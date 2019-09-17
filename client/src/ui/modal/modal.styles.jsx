@@ -9,10 +9,12 @@ export const ModalContainer = styled.div`
   box-shadow: ${props => props.theme.shadows[4]};
   padding: ${props => props.theme.spacing(2)};
   z-index: 500; 
+  transition: opacity .2s ease-out .1s;
   ${props => fadeInOut(props.transName, props.direction)};
   max-height: 90vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+
 `;
 ModalContainer.displayName = 'ModalContainer';
 

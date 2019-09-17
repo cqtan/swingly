@@ -6,9 +6,11 @@ import {
   // ExampleContent
 } from './example-container.styles';
 import { CSSTransition } from 'react-transition-group';
+import Fab from '../../components/fab/fab.component';
 
 const ExampleContainer = (props) => {
   const [isOpen, setOpen] = useState(true);
+  const [isFabOpen, setFabOpen] = useState(false);
 
   return (
     <>
@@ -25,7 +27,8 @@ const ExampleContainer = (props) => {
           </ExampleBgLogoContainer>
         </>
       </CSSTransition>
-      <ExampleButton primary onClick={() => setOpen(!isOpen)}>Toggle</ExampleButton>
+      <Fab isOpen={isFabOpen} setFabOpen={setFabOpen} />
+      {/* <ExampleButton primary onClick={() => setOpen(!isOpen)}>Toggle</ExampleButton> */}
     </>
   );
 }

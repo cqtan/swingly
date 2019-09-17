@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   EventCreatePageContainer,
 } from './event-create-page.styles';
@@ -10,6 +10,10 @@ import { Redirect } from 'react-router-dom';
 
 const EventCreatePage = (props) => {
   const { currentUser } = props;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

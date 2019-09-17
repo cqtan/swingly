@@ -1,60 +1,94 @@
-import React from 'react';
+import React from "react";
 import {
   SidebarContainer,
   SidebarHeader,
   SidebarButton
-} from './sidebar.styles';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Backdrop from '../../ui/backdrop/backdrop.component';
-import { toggleTheme } from '../../redux/theme-mode/theme-mode.actions';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { createStructuredSelector } from 'reselect';
-import { selectIsDarkMode } from '../../redux/theme-mode/theme-mode.selectors';
+} from "./sidebar.styles";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { Link, withRouter } from "react-router-dom";
+import Backdrop from "../../ui/backdrop/backdrop.component";
+import { toggleTheme } from "../../redux/theme-mode/theme-mode.actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { createStructuredSelector } from "reselect";
+import { selectIsDarkMode } from "../../redux/theme-mode/theme-mode.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { openSnackbar } from "../../redux/snackbar/snackbar.actions";
 
-export const Sidebar = (props) => {
-  const { isOpen, setOpen, toggleTheme, isDarkMode } = props;
-  const toggleThemeIcon = isDarkMode ? <FontAwesomeIcon icon='sun' /> : <FontAwesomeIcon icon='moon' />;
-  const toggleThemeText = isDarkMode ? 'Light Mode' : 'Dark Mode';
+export const Sidebar = props => {
+  const {
+    isOpen,
+    setOpen,
+    toggleTheme,
+    isDarkMode,
+    currentUser,
+    openSnackbar,
+    history
+  } = props;
+
+  const toggleThemeIcon = isDarkMode ? (
+    <FontAwesomeIcon icon="sun" />
+  ) : (
+    <FontAwesomeIcon icon="moon" />
+  );
+
+  const toggleThemeText = isDarkMode ? "Light Mode" : "Dark Mode";
+
+  const handleLinkClick = () => {
+    if (!currentUser) {
+      openSnackbar('info', 'Please sign in to use this feature');
+    }
+    setOpen(false);
+  }
 
   return (
     <>
-      <Backdrop onClick={() => setOpen(false)} isOpen={isOpen}/>
+      <Backdrop onClick={() => setOpen(false)} isOpen={isOpen} />
       <SidebarContainer isOpen={isOpen}>
         <SidebarHeader>Navigation</SidebarHeader>
-        <SidebarButton onClick={() => setOpen(false)} as={Link} to='/'>
-          <FontAwesomeIcon icon='home' />
+        <SidebarButton onClick={() => setOpen(false)} as={Link} to="/">
+          <FontAwesomeIcon icon="home" />
           Home
         </SidebarButton>
-        <SidebarButton onClick={() => setOpen(false)} as={Link} to='/events-agenda'>
-          <FontAwesomeIcon icon='calendar-week' />
+        <SidebarButton
+          onClick={() => setOpen(false)}
+          as={Link}
+          to="/events-agenda"
+        >
+          <FontAwesomeIcon icon="calendar-week" />
           Agenda View
         </SidebarButton>
-        <SidebarButton onClick={() => setOpen(false)} as={Link} to='/event-create'>
-          <FontAwesomeIcon icon='calendar-plus' />
+        <SidebarButton
+          onClick={() => handleLinkClick()}
+          as={Link}
+          to={currentUser ? '/event-create' : history.location.pathname}
+        >
+          <FontAwesomeIcon icon="calendar-plus" />
           Create Event
         </SidebarButton>
         <SidebarButton onClick={() => toggleTheme()} transparent flat>
-          {toggleThemeIcon}{toggleThemeText}
+          {toggleThemeIcon}
+          {toggleThemeText}
         </SidebarButton>
       </SidebarContainer>
     </>
   );
-}
+};
 
 const mapStateToProps = createStructuredSelector({
-  isDarkMode: selectIsDarkMode
+  isDarkMode: selectIsDarkMode,
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = {
-  toggleTheme
-}
+  toggleTheme,
+  openSnackbar
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
-
-// export default connect(
-//   createStructuredSelector({
-//     isDarkMode: selectIsDarkMode
-//   }), {
-//   toggleTheme
-// })(Sidebar);
+export default compose(
+  withRouter,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(Sidebar);

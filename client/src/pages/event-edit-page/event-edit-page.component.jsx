@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { EventEditPageContainer } from "./event-edit-page.styles";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -19,6 +19,10 @@ const EventEditPage = props => {
     resetBodyScroll
   } = props;
   const { event, lastRoute } = eventEdit;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const onClose = () => {
     history.push(lastRoute);

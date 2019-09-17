@@ -11,7 +11,7 @@ const selectColor = (props) => {
     case 'warning':
       return theme.palette.warning;
     case 'info':
-      return theme.palette.info;
+      return theme.palette.primary.main;
     case 'success':
       return theme.palette.success;
     default:
