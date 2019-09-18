@@ -5,6 +5,7 @@ describe('Events Reducer', () => {
   const initialState = {
     events: {},
     isLoading: false,
+    filterType: 'none',
     error: null
   };
 
@@ -27,6 +28,7 @@ describe('Events Reducer', () => {
       }
     },
     isLoading: false,
+    filterType: 'none',
     error: null
   }
 

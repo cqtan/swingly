@@ -11,7 +11,7 @@ import {
 } from "./events-view-agenda.styles";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectEventsLoaded } from "../../../redux/events/events.selectors";
+import { selectEventsLoaded, selectFilteredEvents } from "../../../redux/events/events.selectors";
 import {
   getMonthString,
   getDayString,
@@ -20,7 +20,7 @@ import {
   checkIsToday
 } from "../../../redux/events/events.utils";
 import EventDetails from "../event-details/event-details.component";
-import { selectCurrentUser, selectFilteredEvents } from "../../../redux/user/user.selectors";
+import { selectCurrentUser } from "../../../redux/user/user.selectors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { cleanUpEventEdit } from "../../../redux/event-edit/event-edit.actions";
 import { selectEditEventScrollPos } from "../../../redux/event-edit/event-edit.selectors";
@@ -31,8 +31,7 @@ const EventsViewAgenda = props => {
     isEventsLoaded,
     currentUser,
     cleanUpEventEdit,
-    scrollPos,
-    filterType
+    scrollPos
   } = props;
   let timeTracker = {};
   let eventComponents = [];

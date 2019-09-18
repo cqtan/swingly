@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import { selectCurrentUserId } from "../user/user.selectors";
 
 export const sortByDate = eventsObj => {
   return Object.values(eventsObj).sort((a, b) => {
@@ -35,5 +36,70 @@ export const selectSortedEvents = createSelector(
   [selectAllEvents],
   (events) => {
     return sortByDate(events);
+  }
+);
+
+export const selectCurrentUserEvents = createSelector(
+  [selectAllEvents, selectCurrentUserId],
+  (events, currentUserId) => {
+    const userEvents = Object.values(events).reduce((prev, val) => {
+      if (val.hosts[0] === currentUserId) {
+        prev[val.id] = val;
+      }
+      return prev;
+    }, {});
+
+    return sortByDate(userEvents);
+  }
+);
+
+export const selectFilteredEvents = createSelector(
+  [selectSortedEvents, selectFilterType, selectCurrentUserId],
+  (events, filterType, currentUserId) => {
+    if (filterType !== 'none' && selectCurrentUserId) {
+      return events.filter(event => {
+        if (event.guests.hasOwnProperty(currentUserId)) {
+          return event.guests[currentUserId] === filterType ? true : false;
+        } else {
+          return false;
+        }
+      });
+    } else {
+      return events;
+    }
+  }
+);
+
+export const selectInterestedEvents = createSelector(
+  [selectSortedEvents, selectCurrentUserId],
+  (events, currentUserId) => {
+    if (selectCurrentUserId) {
+      return events.filter(event => {
+        if (event.guests.hasOwnProperty(currentUserId)) {
+          return event.guests[currentUserId] === 'interested' ? true : false;
+        } else {
+          return false;
+        }
+      });
+    } else {
+      return events;
+    }
+  }
+);
+
+export const selectGoingEvents = createSelector(
+  [selectSortedEvents, selectCurrentUserId],
+  (events, currentUserId) => {
+    if (selectCurrentUserId) {
+      return events.filter(event => {
+        if (event.guests.hasOwnProperty(currentUserId)) {
+          return event.guests[currentUserId] === 'going' ? true : false;
+        } else {
+          return false;
+        }
+      });
+    } else {
+      return events;
+    }
   }
 );
