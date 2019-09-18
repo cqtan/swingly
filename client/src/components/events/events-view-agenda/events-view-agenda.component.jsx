@@ -11,11 +11,7 @@ import {
 } from "./events-view-agenda.styles";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import {
-  selectEventsLoaded,
-  selectSortedEvents,
-  selectFilterType
-} from "../../../redux/events/events.selectors";
+import { selectEventsLoaded } from "../../../redux/events/events.selectors";
 import {
   getMonthString,
   getDayString,
@@ -24,7 +20,7 @@ import {
   checkIsToday
 } from "../../../redux/events/events.utils";
 import EventDetails from "../event-details/event-details.component";
-import { selectCurrentUser } from "../../../redux/user/user.selectors";
+import { selectCurrentUser, selectFilteredEvents } from "../../../redux/user/user.selectors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { cleanUpEventEdit } from "../../../redux/event-edit/event-edit.actions";
 import { selectEditEventScrollPos } from "../../../redux/event-edit/event-edit.selectors";
@@ -131,24 +127,8 @@ const EventsViewAgenda = props => {
     );
   };
 
-  const filterEventsByGuests = events => {  
-    if (filterType !== 'none') {
-      return events.filter(event => {
-        if (event.guests.hasOwnProperty(currentUser.id)) {
-          return event.guests[currentUser.id] === filterType ? true : false;
-        } else {
-          return false;
-        }
-      });
-    } else {
-      return events;
-    }
-  };
-
   if (isEventsLoaded && eventComponents.length === 0) {
-    const filteredEvents = filterEventsByGuests(events);
-
-    filteredEvents.forEach(event => {
+    events.forEach(event => {
       addMonthRow(event);
       addDayRow(event);
     });
@@ -167,11 +147,10 @@ const EventsViewAgenda = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  events: selectSortedEvents,
+  events: selectFilteredEvents,
   isEventsLoaded: selectEventsLoaded,
   currentUser: selectCurrentUser,
   scrollPos: selectEditEventScrollPos,
-  filterType: selectFilterType
 });
 
 const mapDispatchToProps = {

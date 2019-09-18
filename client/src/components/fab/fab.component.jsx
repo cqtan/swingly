@@ -7,9 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CSSTransition } from "react-transition-group";
 import { selectFilterType } from "../../redux/events/events.selectors";
 import { setFilterType } from "../../redux/events/events.actions";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 
 const Fab = props => {
-  const { isOpen, setFabOpen, filterType, setFilterType } = props;
+  const { isOpen, setFabOpen, filterType, setFilterType, currentUser } = props;
 
   const handleFilterClick = type => {
     setFilterType(type);
@@ -25,31 +26,37 @@ const Fab = props => {
     interested: {
       icon: <FontAwesomeIcon icon="star" />,
       func: () => handleFilterClick('interested'),
-      isSelected: filterType === 'interested' ? true : false
+      isSelected: filterType === 'interested' ? true : false,
+      isRendered: currentUser ? true : false,
     },
     going: {
       icon: <FontAwesomeIcon icon="check" />,
       func: () => handleFilterClick('going'),
-      isSelected: filterType === 'going' ? true : false
+      isSelected: filterType === 'going' ? true : false,
+      isRendered: currentUser ? true : false,
     },
     today: {
       icon: <FontAwesomeIcon icon="calendar-day" />,
       func: handleCalendarDayClick,
-      isSelected: false
+      isSelected: false,
+      isRendered: true,
     }
   }
 
-  const FabSubs = Object.values(fabSubData).map((val, idx) => {
-    return (
-      <FabSub
-        key={idx}
-        onClick={val.func}
-        isSelected={val.isSelected}
-      >
-        {val.icon}
-      </FabSub>
-    );
-  });
+  const FabSubs = Object.entries(fabSubData).reduce((prev, [key, val]) => {
+    if (val.isRendered) {
+      prev.push(
+        <FabSub
+          key={key}
+          onClick={val.func}
+          isSelected={val.isSelected}
+        >
+          {val.icon}
+        </FabSub>
+      );
+    }
+    return prev;
+  }, []);
 
   return (
     <>
@@ -78,7 +85,8 @@ const Fab = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  filterType: selectFilterType
+  filterType: selectFilterType,
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = {

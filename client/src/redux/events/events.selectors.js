@@ -1,5 +1,14 @@
 import { createSelector } from "reselect";
 
+export const sortByDate = eventsObj => {
+  return Object.values(eventsObj).sort((a, b) => {
+    a = a.start.toDate();
+    b = b.start.toDate();
+
+    return a > b ? 1 : a < b ? -1 : 0;
+  });
+}
+
 const selectEvents = state => state.events;
 
 export const selectAllEvents = createSelector(
@@ -25,11 +34,6 @@ export const selectEventsLoaded = createSelector(
 export const selectSortedEvents = createSelector(
   [selectAllEvents],
   (events) => {
-    const sortedEvents = Object.values(events).sort((a, b) => {
-      a = a.start.toDate();
-      b = b.start.toDate();
-      return a > b ? 1 : a < b ? -1 : 0;
-    });
-    return sortedEvents; 
+    return sortByDate(events);
   }
 );
