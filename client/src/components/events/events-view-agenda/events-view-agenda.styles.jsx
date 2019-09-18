@@ -23,16 +23,19 @@ EventsViewAgendaContainer.displayName = 'EventsViewAgendaContainer';
 export const MonthRow = styled.div`
   position: sticky;
   top: 6rem;
-  background: ${props => props.theme.background.layer1};
+  background-color: ${getBgColor};
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0 1 75%;
+  flex: 0 1 100%;
   height: 5rem;
   color: ${props => props.theme.palette.text.primary};
   ${props => props.theme.typo.h5};
   margin: ${props => props.theme.spacing(1)} auto;
-  padding: 1.5rem 0; 
+  margin-top: ${props => props.theme.spacing(3)};
+  padding: 1.5rem 0.8rem; 
+  ${props => props.theme.mixins.defaultBorderRadius}; 
+  
 `;
 MonthRow.displayName = 'MonthRow';
 

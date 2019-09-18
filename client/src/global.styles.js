@@ -11,6 +11,10 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
+    .MuiDialog-paper {
+      -webkit-overflow-scrolling: auto;
+    }
+
     .MuiPickersToolbar-toolbar,
     .MuiPickerDTTabs-tabs {
       background-color: ${props => props.theme.type === 'dark' ? props.theme.background.layer1 : props.theme.palette.primary.main};

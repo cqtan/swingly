@@ -4,6 +4,8 @@ const setBgColor = (props) => {
   const { theme, isSelected } = props;
   if (isSelected) {
     return theme.palette.primary.main;
+  } else {
+    return theme.palette.grey[9];
   }
 }
 
@@ -18,7 +20,7 @@ export const FabContainer = styled.div`
   bottom: 2rem;
   right: 2rem;
   z-index: 500;
-  opacity: ${props => props.isOpen ? 1 : 0.4}; 
+  opacity: ${props => props.isOpen ? 1 : 0.5}; 
   transition: all 0.2s ease-in .1s;
 `;
 FabContainer.displayName = 'FabContainer';
@@ -27,6 +29,7 @@ export const FabMain = styled.button`
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
+  background-color: ${props => props.theme.palette.grey[9]};
 `;
 FabMain.displayName = 'FabMain';
 

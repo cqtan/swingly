@@ -14,7 +14,6 @@ export const ModalContainer = styled.div`
   max-height: 90vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-
 `;
 ModalContainer.displayName = 'ModalContainer';
 
