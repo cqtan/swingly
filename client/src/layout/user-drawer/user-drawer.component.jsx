@@ -9,9 +9,11 @@ import { signOut } from '../../redux/user/user.actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Backdrop from '../../ui/backdrop/backdrop.component';
 import { withRouter } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUserId } from '../../redux/user/user.selectors';
 
 const UserDrawer = (props) => {
-  const { isOpen, setOpen, signOut, history } = props;
+  const { isOpen, setOpen, signOut, history, currentUserId } = props;
 
   const handleLink = linkPath => {
     setOpen(false);
@@ -28,7 +30,7 @@ const UserDrawer = (props) => {
     <>
       <Backdrop onClick={() => setOpen(false)} isOpen={isOpen}/>
       <UserDrawerContainer isOpen={isOpen}>
-        <DrawerButton transparent flat onClick={() => handleLink('/profile')}>
+        <DrawerButton transparent flat onClick={() => handleLink(`/profile?user_id=${currentUserId}`)}>
           <FontAwesomeIcon icon='user-circle' />
           Profile
         </DrawerButton>
@@ -42,11 +44,15 @@ const UserDrawer = (props) => {
   );
 }
 
+const mapStateToProps = createStructuredSelector({
+  currentUserId: selectCurrentUserId
+});
+
 const mapDispatchToProps = {
   signOut
 }
 
 export default compose(
   withRouter,
-  connect(null, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps)
 )(UserDrawer);

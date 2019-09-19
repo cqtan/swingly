@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import memoize from 'lodash/memoize';
 
 const selectUser = state => state.user;
 
@@ -27,8 +28,10 @@ export const selectUsers = createSelector(
   (user) => user.users
 );
 
-export const selectUserById = id => createSelector(
+export const selectUserById = createSelector(
   [selectUsers],
-  (users) => users[id]
+  users => memoize(userId => {
+    return users.hasOwnProperty(userId) ? users[userId] : false;
+  })
 );
 

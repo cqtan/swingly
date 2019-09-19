@@ -8,7 +8,6 @@ export const ProfileDetailsContainer = styled.div`
   align-items: flex-start;
   align-content: flex-start;
   flex-wrap: wrap;
-  background-color: ${props => props.theme.background.layer2};
   padding: ${props => props.theme.spacing(2)};
   border-bottom: 2px solid ${props => props.theme.palette.text.secondary};
 `;

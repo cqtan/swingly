@@ -1,5 +1,6 @@
 import { createSelector } from "reselect";
 import { selectCurrentUserId } from "../user/user.selectors";
+import memoize from 'lodash/memoize';
 
 export const sortByDate = eventsObj => {
   return Object.values(eventsObj).sort((a, b) => {
@@ -53,6 +54,11 @@ export const selectCurrentUserEvents = createSelector(
   }
 );
 
+// const filter = {
+//   guestType: [],
+//   hosts: [],
+// }
+
 export const selectFilteredEvents = createSelector(
   [selectSortedEvents, selectFilterType, selectCurrentUserId],
   (events, filterType, currentUserId) => {
@@ -102,4 +108,21 @@ export const selectGoingEvents = createSelector(
       return events;
     }
   }
+);
+
+export const selectEventsByUserId = createSelector(
+  [selectFilteredEvents],
+  events => memoize(userId => {
+    if (userId === null) {
+      return events;
+    } else {
+      return events.filter(event => {
+        if (event.hosts.includes(userId)) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
+  })
 );

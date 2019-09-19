@@ -42,7 +42,7 @@ export const App = props => {
       />
       <Switch>
         <Route path="/hi" exact render={() => <ExampleContainer hi />} />
-        <Route path="/profile" exact component={Profile} />
+        <Route path="/profile" component={Profile} />
         <Route path="/event-create" component={EventCreatePage} />
         <Route path="/event-edit" component={EventEditPage} />
         <Route path="/events-agenda" component={EventsPage} />

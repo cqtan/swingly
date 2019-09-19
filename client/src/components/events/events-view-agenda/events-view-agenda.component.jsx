@@ -11,7 +11,7 @@ import {
 } from "./events-view-agenda.styles";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectEventsLoaded, selectFilteredEvents } from "../../../redux/events/events.selectors";
+import { selectEventsLoaded } from "../../../redux/events/events.selectors";
 import {
   getMonthString,
   getDayString,
@@ -146,7 +146,6 @@ const EventsViewAgenda = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  events: selectFilteredEvents,
   isEventsLoaded: selectEventsLoaded,
   currentUser: selectCurrentUser,
   scrollPos: selectEditEventScrollPos,
