@@ -31,7 +31,6 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const functions = firebase.app().functions('europe-west1');
 
-// Only for GoogleAuth:
 // Make sure to enable Sign-in methods for Google on your account
 export const githubProvider = new firebase.auth.GithubAuthProvider();
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -51,5 +50,7 @@ export const loadJsonToObj = filename => {
 
 export const deleteFieldValue = () => firebase.firestore.FieldValue.delete();
 export const dateToTimestamp = firebase.firestore.Timestamp.fromDate;
+export const getCredentials = firebase.auth.EmailAuthProvider.credential;
 
 export default firebase;
+

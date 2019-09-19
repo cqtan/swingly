@@ -5,7 +5,7 @@ import {
   signInWithGithub,
   signInWithGoogle
 } from "./user.utils";
-import { auth, firestore, getEnvironment } from "../../firebase/firebase.utils";
+import { auth, firestore, getEnvironment, getCredentials } from "../../firebase/firebase.utils";
 import { openSnackbar } from "../snackbar/snackbar.actions";
 import { fetchUsersArray } from "./user.utils";
 
@@ -171,7 +171,7 @@ export const signInWithEmail = values => async dispatch => {
 
     dispatch({
       type: UserActionTypes.SIGNIN_SUCCESS,
-      payload: userSnap.data()
+      payload: userSnap.data().id
     });
 
     dispatch(openSnackbar("success", "You have been successfully signed in!"));
@@ -232,12 +232,13 @@ export const editUser = (values, currentUser) => async dispatch => {
   }
 };
 
-// TODO: re-authenticate user with creds before deleting
-export const deleteUser = () => async dispatch => {
+export const deleteUser = password => async dispatch => {
   const user = await auth.currentUser;
   
   if (user) {
     try {
+      const credential = await getCredentials(auth.currentUser.email, password);
+      await auth.currentUser.reauthenticateWithCredential(credential);
       await firestore.doc(`${getEnvironment()}/data/users/${user.uid}`).delete();
       await auth.currentUser.delete();
       await auth.signOut();
@@ -248,7 +249,7 @@ export const deleteUser = () => async dispatch => {
         type: UserActionTypes.DELETE_FAILED,
         payload: error
       });
-      dispatch(openSnackbar("error", "Deletion failed!"));
+      dispatch(openSnackbar("error", "Deletion failed! Please check your password"));
     }
   } else {
     dispatch({ type: UserActionTypes.DELETE_FAILED });    

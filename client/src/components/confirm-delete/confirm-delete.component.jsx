@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ConfirmDeleteContainer,
   DeleteContent,
@@ -7,16 +7,27 @@ import {
 } from './confirm-delete.styles';
 import { connect } from 'react-redux';
 import FormButton from '../../ui/form-elements/form-button/form-button.component';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Backdrop from '../../ui/backdrop/backdrop.component';
 import { deleteUser } from '../../redux/user/user.actions';
+import TextField from '../../ui/form-elements/text-field/text-field.component';
 
 const ConfirmDelete = (props) => {
-  const { title, isOpen, onClose, deleteUser } = props;
+  const { title, isOpen, onClose, deleteUser, usePassword } = props;
+  const [formField, setFormField] = useState("");
 
-  // TODO: re-auth here
   const handleDelete = () => {
+    deleteUser(formField);
+    setFormField("");
+  } 
 
+  const onChange = (event) => {
+    event.persist();
+    setFormField(event.target.value);
+  };
+
+  let confirmDeleteText = "Please confirm deletion"
+  if (usePassword) {
+    confirmDeleteText = "Please enter your password to confirm deletion of your account";
   }
 
   return (
@@ -29,14 +40,21 @@ const ConfirmDelete = (props) => {
       >
         <DeleteContent>
           <DeleteText>
-            Please enter your password to confirm deletion of your account
+            {confirmDeleteText}
           </DeleteText>
+          { usePassword && 
+            <TextField
+              label="Password"
+              type="password"
+              value={formField}
+              onChange={e => onChange(e)}
+            />
+          }
           <ButtonContainer>
             <FormButton onClick={onClose}>
               Cancel
             </FormButton>
-            <FormButton deleteStyle onClick={deleteUser}>
-              <FontAwesomeIcon icon="user-slash" />
+            <FormButton deleteStyle onClick={handleDelete}>
               Delete
             </FormButton>
           </ButtonContainer>

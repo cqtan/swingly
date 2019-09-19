@@ -8,12 +8,13 @@ ConfirmDeleteContainer.displayName = 'ConfirmDeleteContainer';
 
 export const DeleteContent = styled.div`
   z-index: 800;
-  min-width: 28rem;
+  min-width: 26rem;
 `;
 DeleteContent.displayName = 'DeleteContent';
 
 export const DeleteText = styled.div`
-  margin-top: 2rem; 
+  text-align: center;
+  margin-bottom: 2rem; 
   ${props => props.theme.typo.h5};
   color: ${props => props.theme.palette.text.primary};
 `;

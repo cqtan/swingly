@@ -44,7 +44,6 @@ const ProfileEdit = props => {
       <Modal
         isOpen={isOpen}
         transName="profile-edit"
-        direction="left"
         title="Edit Profile"
       >
         <ProfileEditContainer>
