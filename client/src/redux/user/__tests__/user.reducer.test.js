@@ -4,17 +4,14 @@ import userReducer from '../user.reducer';
 describe('User Reducer', () => {
   const initialState = {
     currentUser: null,
-    users: null,
+    users: {},
     error: null,
     isLoading: false,
   };
 
   const mockState = {
-    currentUser: {
-      username: 'test_user',
-      email: 'test@test.com'
-    },
-    users: null,
+    currentUser: 'asdfasdfasdf',
+    users: {},
     isLoading: false,
     error: null
   };
@@ -65,10 +62,27 @@ describe('User Reducer', () => {
   });
 
   describe('should set currentUser to null', () => {
+    const mockUser = {
+      id: '1234',
+      username: 'test_name1'
+    }
+
     it('SIGNUP_SUCCESS', () => {
-      const mockAction = { type: UserActionTypes.SIGNUP_SUCCESS };
+      const mockAction = { 
+        type: UserActionTypes.SIGNUP_SUCCESS,
+        payload: mockUser 
+      };
+
+      const newState = {
+        ...initialState,
+        users: {
+          [mockUser.id]: {
+            ...mockUser
+          }
+        }
+      }
   
-      expect(userReducer(mockState, mockAction)).toEqual(initialState);
+      expect(userReducer(mockState, mockAction)).toEqual(newState);
     });
 
     it('SIGNOUT_SUCCESS', () => {
@@ -86,25 +100,40 @@ describe('User Reducer', () => {
 
   describe('should return a partially modified currentUser', () => {
     it('EDIT_SUCCESS', () => {
-      const mockExpected = {
-        ...mockState,
-        currentUser: {
-          ...mockState.currentUser,
-          email: 'different@test.com'
-        }
-      };
-  
       const mockAction = {
         type: UserActionTypes.EDIT_SUCCESS,
         payload: {
-          email: 'different@test.com'
+          username: 'test_name_new_and_exciting'
         }
       };
+
+      const mockExpected = {
+        ...initialState,
+        currentUser: 'asdf1234',
+        users: {
+          ...initialState.users,
+          asdf1234: {
+            id: 'asdf1234',
+            username: 'test_name_new_and_exciting'
+          }
+        }
+      }
+
+      const mockInitial = {
+        ...initialState,
+        currentUser: 'asdf1234',
+        users: {
+          ...initialState.users,
+          asdf1234: {
+            id: 'asdf1234',
+            username: 'test_name_old_and_boring'
+          }
+        }
+      }
   
-      expect(userReducer(mockState, mockAction)).toEqual(mockExpected);
+      expect(userReducer(mockInitial, mockAction)).toEqual(mockExpected);
     });
   });
-
 
   describe('should return the current state and an error object', () => {
     const error = 'I have errored!';

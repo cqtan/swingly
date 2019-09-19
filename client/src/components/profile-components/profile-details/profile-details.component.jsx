@@ -14,11 +14,11 @@ import ProfileEdit from "../../profile-edit/profile-edit.component";
 import { createStructuredSelector } from "reselect";
 import {
   selectUserById,
-  selectCurrentUserId
+  selectCurrentUser
 } from "../../../redux/user/user.selectors";
 
 const ProfileDetails = props => {
-  const { currentUserId, userId, getUserById } = props;
+  const { currentUser, userId, getUserById } = props;
   const [editFormOpen, setEditFormOpen] = useState(false);
   const user = getUserById(userId);
 
@@ -27,11 +27,12 @@ const ProfileDetails = props => {
       <ProfileEdit
         isOpen={editFormOpen}
         onClose={() => setEditFormOpen(false)}
+        user={user}
       />
       <ProfileDetailsContainer>
         <ProfileTitle>
           Details
-          {currentUserId === user.id ? (
+          {currentUser === user.id ? (
             <ProfileButton
               transparent
               flat
@@ -49,7 +50,7 @@ const ProfileDetails = props => {
           <ProfileLabel>Username</ProfileLabel>
           <ProfileData>{user.username}</ProfileData>
         </ProfileRow>
-        {currentUserId === user.id && (
+        {currentUser === user.id && (
           <ProfileRow>
             <ProfileLabel>Email</ProfileLabel>
             <ProfileData>{user.email}</ProfileData>
@@ -73,7 +74,7 @@ const ProfileDetails = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  currentUserId: selectCurrentUserId,
+  currentUser: selectCurrentUser,
   getUserById: selectUserById
 });
 

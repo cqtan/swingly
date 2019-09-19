@@ -14,6 +14,11 @@ import { deleteUser } from '../../redux/user/user.actions';
 const ConfirmDelete = (props) => {
   const { title, isOpen, onClose, deleteUser } = props;
 
+  // TODO: re-auth here
+  const handleDelete = () => {
+
+  }
+
   return (
     <>
       <Backdrop isOpen={isOpen} onClick={onClose} />
@@ -24,7 +29,7 @@ const ConfirmDelete = (props) => {
       >
         <DeleteContent>
           <DeleteText>
-            Are you really sure you want to delete your account?
+            Please enter your password to confirm deletion of your account
           </DeleteText>
           <ButtonContainer>
             <FormButton onClick={onClose}>

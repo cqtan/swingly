@@ -18,11 +18,6 @@ export const selectCurrentUsername = createSelector(
   (currentUser) => currentUser ? currentUser.username : null
 );
 
-export const selectCurrentUserId = createSelector(
-  [selectCurrentUser],
-  (currentUser) => currentUser ? currentUser.id : null
-);
-
 export const selectUsers = createSelector(
   [selectUser],
   (user) => user.users

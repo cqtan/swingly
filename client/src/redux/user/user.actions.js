@@ -35,7 +35,7 @@ export const setCurrentUser = () => async dispatch => {
 
     dispatch({
       type: UserActionTypes.SET_CURRENT_USER_SUCCESS,
-      payload: userSnapshot.data()
+      payload: userSnapshot.data().id
     });
   } catch (error) {
     dispatch({
@@ -81,7 +81,7 @@ export const signInWithProvider = signInMethod => async dispatch => {
 
     dispatch({
       type: UserActionTypes.SIGNIN_SUCCESS,
-      payload: userSnapshot.data()
+      payload: userSnapshot.data().id
     });
 
     dispatch(openSnackbar("success", "You have been successfully signed in!"));
@@ -232,13 +232,15 @@ export const editUser = (values, currentUser) => async dispatch => {
   }
 };
 
+// TODO: re-authenticate user with creds before deleting
 export const deleteUser = () => async dispatch => {
   const user = await auth.currentUser;
   
   if (user) {
     try {
       await firestore.doc(`${getEnvironment()}/data/users/${user.uid}`).delete();
-      await user.delete();
+      await auth.currentUser.delete();
+      await auth.signOut();
       dispatch({ type: UserActionTypes.DELETE_SUCCESS });
       dispatch(openSnackbar("success", "Delete successful!"));
     } catch (error) {

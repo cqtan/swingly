@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { selectCurrentUserId } from "../user/user.selectors";
+import { selectCurrentUser } from "../user/user.selectors";
 import memoize from 'lodash/memoize';
 
 export const sortByDate = eventsObj => {
@@ -41,10 +41,10 @@ export const selectSortedEvents = createSelector(
 );
 
 export const selectCurrentUserEvents = createSelector(
-  [selectAllEvents, selectCurrentUserId],
-  (events, currentUserId) => {
+  [selectAllEvents, selectCurrentUser],
+  (events, currentUser) => {
     const userEvents = Object.values(events).reduce((prev, val) => {
-      if (val.hosts[0] === currentUserId) {
+      if (val.hosts[0] === currentUser) {
         prev[val.id] = val;
       }
       return prev;
@@ -60,12 +60,12 @@ export const selectCurrentUserEvents = createSelector(
 // }
 
 export const selectFilteredEvents = createSelector(
-  [selectSortedEvents, selectFilterType, selectCurrentUserId],
-  (events, filterType, currentUserId) => {
-    if (filterType !== 'none' && selectCurrentUserId) {
+  [selectSortedEvents, selectFilterType, selectCurrentUser],
+  (events, filterType, currentUser) => {
+    if (filterType !== 'none' && selectCurrentUser) {
       return events.filter(event => {
-        if (event.guests.hasOwnProperty(currentUserId)) {
-          return event.guests[currentUserId] === filterType ? true : false;
+        if (event.guests.hasOwnProperty(currentUser)) {
+          return event.guests[currentUser] === filterType ? true : false;
         } else {
           return false;
         }
@@ -77,12 +77,12 @@ export const selectFilteredEvents = createSelector(
 );
 
 export const selectInterestedEvents = createSelector(
-  [selectSortedEvents, selectCurrentUserId],
-  (events, currentUserId) => {
-    if (selectCurrentUserId) {
+  [selectSortedEvents, selectCurrentUser],
+  (events, currentUser) => {
+    if (selectCurrentUser) {
       return events.filter(event => {
-        if (event.guests.hasOwnProperty(currentUserId)) {
-          return event.guests[currentUserId] === 'interested' ? true : false;
+        if (event.guests.hasOwnProperty(currentUser)) {
+          return event.guests[currentUser] === 'interested' ? true : false;
         } else {
           return false;
         }
@@ -94,12 +94,12 @@ export const selectInterestedEvents = createSelector(
 );
 
 export const selectGoingEvents = createSelector(
-  [selectSortedEvents, selectCurrentUserId],
-  (events, currentUserId) => {
-    if (selectCurrentUserId) {
+  [selectSortedEvents, selectCurrentUser],
+  (events, currentUser) => {
+    if (selectCurrentUser) {
       return events.filter(event => {
-        if (event.guests.hasOwnProperty(currentUserId)) {
-          return event.guests[currentUserId] === 'going' ? true : false;
+        if (event.guests.hasOwnProperty(currentUser)) {
+          return event.guests[currentUser] === 'going' ? true : false;
         } else {
           return false;
         }

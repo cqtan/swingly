@@ -10,10 +10,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Backdrop from '../../ui/backdrop/backdrop.component';
 import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentUserId } from '../../redux/user/user.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 const UserDrawer = (props) => {
-  const { isOpen, setOpen, signOut, history, currentUserId } = props;
+  const { isOpen, setOpen, signOut, history, currentUser } = props;
 
   const handleLink = linkPath => {
     setOpen(false);
@@ -30,7 +30,7 @@ const UserDrawer = (props) => {
     <>
       <Backdrop onClick={() => setOpen(false)} isOpen={isOpen}/>
       <UserDrawerContainer isOpen={isOpen}>
-        <DrawerButton transparent flat onClick={() => handleLink(`/profile?user_id=${currentUserId}`)}>
+        <DrawerButton transparent flat onClick={() => handleLink(`/profile?user_id=${currentUser}`)}>
           <FontAwesomeIcon icon='user-circle' />
           Profile
         </DrawerButton>
@@ -45,7 +45,7 @@ const UserDrawer = (props) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUserId: selectCurrentUserId
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = {

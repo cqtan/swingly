@@ -2,7 +2,7 @@ import { UserActionTypes } from './user.types';
 
 const INITIAL_STATE = {
   currentUser: null,
-  users: null,
+  users: {},
   error: null,
   isLoading: false,
 };
@@ -35,19 +35,38 @@ const userReducer = (state = INITIAL_STATE, action) => {
         users: action.payload
       }
     case UserActionTypes.SIGNUP_SUCCESS:
-    case UserActionTypes.SIGNOUT_SUCCESS:
-    case UserActionTypes.DELETE_SUCCESS:
       return {
         ...state,
         currentUser: null,
+        users: {
+          ...state.users,
+          [action.payload.id]: action.payload
+        }
+      }
+    case UserActionTypes.SIGNOUT_SUCCESS: 
+      return {
+        ...state,
+        currentUser: null
+      }
+    case UserActionTypes.DELETE_SUCCESS:
+      const newUsers = { ...state.users };
+      delete newUsers[state.currentUser];
+
+      return {
+        ...state,
+        currentUser: null,
+        users: newUsers,
         error: null
       };
     case UserActionTypes.EDIT_SUCCESS:
       return {
         ...state,
-        currentUser: {
-          ...state.currentUser,
-          ...action.payload
+        users: {
+          ...state.users,
+          [state.currentUser]: {
+            ...state.users[state.currentUser],
+            ...action.payload
+          }
         }
       };
     case UserActionTypes.SIGNUP_FAILED:

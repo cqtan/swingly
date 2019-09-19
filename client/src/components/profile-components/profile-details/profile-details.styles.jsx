@@ -32,6 +32,7 @@ ProfileRow.displayName = 'ProfileRow';
 export const ProfileTitle = styled(ProfileRow)`
   ${props => props.theme.typo.h5};
   justify-content: space-between;
+  align-items: center;
 `;
 ProfileTitle.displayName = 'ProfileTitle';
 
