@@ -100,7 +100,8 @@ const EventCreateForm = (props) => {
         />
         <TextField
           textarea
-          minHeight={30}
+          minHeight={15}
+          growOnFocus
           name='description'
           label='Description'
           onChange={(e) => onChange('description', e)}
@@ -120,14 +121,14 @@ const EventCreateForm = (props) => {
         />
         <ButtonContainer>
           <FormButton 
-            type='submit'
-            disabled={!isValid}>
-            Create
-          </FormButton>
-          <FormButton 
             type='button'
             onClick={handleReset}>          
             Reset
+          </FormButton>
+          <FormButton 
+            type='submit'
+            disabled={!isValid}>
+            Create
           </FormButton>
         </ButtonContainer>
       </Form>

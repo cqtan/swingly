@@ -7,7 +7,8 @@ import {
   DayDateItem,
   DayEvents,
   DayEventItem,
-  DayEventIcon
+  DayEventIcon,
+  NoEventsMessage
 } from "./events-view-agenda.styles";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -135,7 +136,15 @@ const EventsViewAgenda = props => {
 
   return (
     <>
-      <EventsViewAgendaContainer>{eventComponents}</EventsViewAgendaContainer>
+      <EventsViewAgendaContainer>
+        {eventComponents.length ? (
+          eventComponents
+        ) : (
+          <NoEventsMessage>
+            No events to be displayed
+          </NoEventsMessage>
+        )}
+      </EventsViewAgendaContainer>
       <EventDetails
         isOpen={isDetailsOpen.isOpen}
         event={isDetailsOpen.event}

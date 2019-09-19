@@ -75,11 +75,13 @@ export const TextAreaInput = styled.textarea`
   color: ${props => props.theme.palette.text.primary};
   padding: 1rem 0;
   letter-spacing: ${props => props.type === 'password' && `0.3rem`};
+  transition: all 0.2s ease-out; 
 
-  &:focus {
+  :focus {
     ~ ${TextFieldLabel} {
       ${shrinkLabel};
     }
+    height: ${props => props.growOnFocus && `25rem`};
     border-bottom: 1px solid ${props => props.theme.palette.primary.main};
   }
 

@@ -5,5 +5,6 @@ export const EventsPageContainer = styled.div`
   width: 100%;
   justify-content: center;
   margin-top: ${props => props.theme.layout.header.height};
+  padding-bottom: 10rem;
 `;
 EventsPageContainer.displayName = 'EventsPageContainer';

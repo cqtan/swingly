@@ -22,8 +22,8 @@ const EventCreate = (props) => {
 
   const initialValues = {
     title: '',
-    start: null,
-    end: null,
+    start: new Date(),
+    end: new Date(),
     location: '',
     mapLink: '',
     description: '',

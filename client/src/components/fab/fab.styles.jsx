@@ -29,7 +29,7 @@ export const FabMain = styled.button`
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
-  background-color: ${props => props.theme.palette.grey[9]};
+  background-color: ${props => props.theme.palette.grey[7]};
 `;
 FabMain.displayName = 'FabMain';
 

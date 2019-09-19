@@ -102,7 +102,8 @@ const EventEditForm = (props) => {
         />
         <TextField
           textarea
-          minHeight={30}
+          minHeight={15}
+          growOnFocus          
           name='description'
           label='Description'
           onChange={(e) => onChange('description', e)}

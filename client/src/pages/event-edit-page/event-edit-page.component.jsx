@@ -20,9 +20,9 @@ const EventEditPage = props => {
   } = props;
   const { event, lastRoute } = eventEdit;
 
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const onClose = () => {
     history.push(lastRoute);

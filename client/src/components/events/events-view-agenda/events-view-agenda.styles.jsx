@@ -16,7 +16,6 @@ export const EventsViewAgendaContainer = styled.div`
   align-content: flex-start;
   width: 100%;
   ${props => props.theme.typo.subtitle};
-  padding-bottom: 10rem; 
 `;
 EventsViewAgendaContainer.displayName = 'EventsViewAgendaContainer';
 
@@ -34,8 +33,7 @@ export const MonthRow = styled.div`
   margin: ${props => props.theme.spacing(1)} auto;
   margin-top: ${props => props.theme.spacing(3)};
   padding: 1.5rem 0.8rem; 
-  ${props => props.theme.mixins.defaultBorderRadius}; 
-  
+  box-shadow: ${props => props.theme.shadows[2]};
 `;
 MonthRow.displayName = 'MonthRow';
 
@@ -103,4 +101,12 @@ export const DayEventIcon = styled.div`
   justify-content: center;
 `;
 DayEventIcon.displayName = 'DayEventIcon';
+
+export const NoEventsMessage = styled(MonthRow)`
+  flex: 0 1 75%;
+  margin: 4rem auto;
+  ${props => props.theme.typo.subtitle};
+  box-shadow: none;
+`;
+NoEventsMessage.displayName = 'NoEventsMessage';
 
