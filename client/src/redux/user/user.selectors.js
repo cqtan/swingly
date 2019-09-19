@@ -13,11 +13,6 @@ export const selectIsUserLoading = createSelector(
   (user) => user.isLoading
 );
 
-export const selectCurrentUsername = createSelector(
-  [selectCurrentUser],
-  (currentUser) => currentUser ? currentUser.username : null
-);
-
 export const selectUsers = createSelector(
   [selectUser],
   (user) => user.users

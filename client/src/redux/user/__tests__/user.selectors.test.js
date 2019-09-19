@@ -1,17 +1,12 @@
 import { 
   selectCurrentUser,
-  selectIsUserLoading,
-  selectCurrentUsername
+  selectIsUserLoading
 } from '../user.selectors';
 
 describe('User Selectors', () => {
   const mockState = {
     user: {
-      currentUser: {
-        id: '123',
-        username: 'testuser',
-        email: 'testpassword'
-      },
+      currentUser: 'asdfasdfasdf',
       isLoading: false
     }
   };
@@ -25,12 +20,6 @@ describe('User Selectors', () => {
   describe('selectIsUserLoading', () => {
     it('should return the isLoading boolean value', () => {
       expect(selectIsUserLoading(mockState)).toBe(mockState.user.isLoading);
-    });
-  });
-
-  describe('selectCurrenUsername', () => {
-    it('should return the username of currentUser', () => {
-      expect(selectCurrentUsername(mockState)).toBe(mockState.user.currentUser.username);
     });
   });
 });

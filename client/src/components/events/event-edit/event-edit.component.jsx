@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { EventEditContainer } from "./event-edit.styles";
 import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import EventEditForm from "./event-edit-form/event-edit-form.component";
 import { editEvent, deleteEvent } from "../../../redux/events/events.actions";
+import ConfirmDelete from "../../confirm-delete/confirm-delete.component";
 
 const EventEdit = props => {
   const { event, onClose, editEvent, deleteEvent } = props;
+  const [isDeleteOpen, setDeleteOpen] = useState(false);
 
   const onSubmit = values => {
     console.log("Event edit submission: ", values);
@@ -44,20 +46,27 @@ const EventEdit = props => {
   });
 
   return (
-    <EventEditContainer>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-        render={formikBag => (
-          <EventEditForm
-            {...formikBag}
-            onClose={onClose}
-            onDelete={() => deleteEvent(event.id)}
-          />
-        )}
+    <>
+      <EventEditContainer>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
+          render={formikBag => (
+            <EventEditForm
+              {...formikBag}
+              onClose={onClose}
+              onDelete={() => setDeleteOpen(true)}
+            />
+          )}
+        />
+      </EventEditContainer>
+      <ConfirmDelete
+        isOpen={isDeleteOpen}
+        onClose={() => setDeleteOpen(false)}
+        onDelete={() => deleteEvent(event.id)}
       />
-    </EventEditContainer>
+    </>
   );
 };
 

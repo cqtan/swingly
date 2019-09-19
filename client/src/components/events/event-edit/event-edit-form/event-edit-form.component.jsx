@@ -122,14 +122,14 @@ const EventEditForm = (props) => {
         />
         <ButtonContainer>
           <FormButton 
-            type='submit'
-            disabled={!isValid}>
-            Save
-          </FormButton>
-          <FormButton 
             type='button'
             onClick={handleReset}>          
             Reset
+          </FormButton>
+          <FormButton 
+            type='submit'
+            disabled={!isValid}>
+            Save
           </FormButton>
           <FormButton 
             type='button'
@@ -138,6 +138,7 @@ const EventEditForm = (props) => {
           </FormButton>
           <FormButton 
             type='button'
+            deleteStyle
             onClick={onDelete}>          
             Delete
           </FormButton>

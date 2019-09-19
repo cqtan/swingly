@@ -16,7 +16,6 @@ import ConfirmDelete from "../confirm-delete/confirm-delete.component";
 
 const ProfileEdit = props => {
   const { isOpen, onClose, user, editUser, deleteUser } = props;
-
   const [isDeleteOpen, setDeleteOpen] = useState(false);
 
   const onSubmit = values => {

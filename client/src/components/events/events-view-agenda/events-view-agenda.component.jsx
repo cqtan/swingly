@@ -75,8 +75,8 @@ const EventsViewAgenda = props => {
 
   const addEventIcon = event => {
     let eventIcon = null;
-    if (currentUser && event.guests.hasOwnProperty(currentUser.id)) {
-      if (event.guests[currentUser.id] === "interested") {
+    if (currentUser && event.guests.hasOwnProperty(currentUser)) {
+      if (event.guests[currentUser] === "interested") {
         eventIcon = <FontAwesomeIcon icon="star" />;
       } else {
         eventIcon = <FontAwesomeIcon icon="check" />;

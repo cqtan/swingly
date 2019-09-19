@@ -38,15 +38,15 @@ const EventButtons = props => {
 
   const handleClick = async guestType => {
     if (currentUser) {
-      if (event.guests.hasOwnProperty(currentUser.id)) {
-        const prevGuestType = event.guests[currentUser.id];
+      if (event.guests.hasOwnProperty(currentUser)) {
+        const prevGuestType = event.guests[currentUser];
         if (prevGuestType === guestType) {
-          await deleteEventGuest(currentUser.id, event);
+          await deleteEventGuest(currentUser, event);
         } else {
-          await setEventGuest(currentUser.id, event, guestType);
+          await setEventGuest(currentUser, event, guestType);
         }
       } else {
-        await setEventGuest(currentUser.id, event, guestType);
+        await setEventGuest(currentUser, event, guestType);
       }
     } else {
       console.log("User not signed in! ");
@@ -55,8 +55,8 @@ const EventButtons = props => {
 
   let isGuest = "";
   if (currentUser) {
-    if (event.guests.hasOwnProperty(currentUser.id)) {
-      const guestType = event.guests[currentUser.id];
+    if (event.guests.hasOwnProperty(currentUser)) {
+      const guestType = event.guests[currentUser];
       if (guestType === "interested") {
         isGuest = "interested";
       } else {
@@ -74,7 +74,7 @@ const EventButtons = props => {
           </EventButton>
           <ButtonLabel>Guests</ButtonLabel>
         </ButtonItem>
-        { event.hosts.includes(currentUser.id) ? (
+        { event.hosts.includes(currentUser) ? (
           <ButtonItem>
             <EventButton
               transparent
