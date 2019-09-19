@@ -5,18 +5,16 @@ import {
   DeleteText,
   ButtonContainer
 } from './confirm-delete.styles';
-import { connect } from 'react-redux';
 import FormButton from '../../ui/form-elements/form-button/form-button.component';
 import Backdrop from '../../ui/backdrop/backdrop.component';
-import { deleteUser } from '../../redux/user/user.actions';
 import TextField from '../../ui/form-elements/text-field/text-field.component';
 
 const ConfirmDelete = (props) => {
-  const { title, isOpen, onClose, deleteUser, usePassword } = props;
+  const { title, isOpen, onClose, onDelete, isPassword } = props;
   const [formField, setFormField] = useState("");
 
   const handleDelete = () => {
-    deleteUser(formField);
+    onDelete(formField);
     setFormField("");
   } 
 
@@ -26,7 +24,7 @@ const ConfirmDelete = (props) => {
   };
 
   let confirmDeleteText = "Please confirm deletion"
-  if (usePassword) {
+  if (isPassword) {
     confirmDeleteText = "Please enter your password to confirm deletion of your account";
   }
 
@@ -42,7 +40,7 @@ const ConfirmDelete = (props) => {
           <DeleteText>
             {confirmDeleteText}
           </DeleteText>
-          { usePassword && 
+          { isPassword && 
             <TextField
               label="Password"
               type="password"
@@ -64,8 +62,4 @@ const ConfirmDelete = (props) => {
   );
 }
 
-const mapDispatchToProps = {
-  deleteUser
-}
-
-export default connect(null, mapDispatchToProps)(ConfirmDelete);
+export default ConfirmDelete;

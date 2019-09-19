@@ -10,12 +10,12 @@ import * as Yup from "yup";
 import ProfileEditFrom from "./profile-edit-form/profile-edit-form.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Backdrop from "../../ui/backdrop/backdrop.component";
-import { editUser } from "../../redux/user/user.actions";
+import { editUser, deleteUser } from "../../redux/user/user.actions";
 import Modal from "../../ui/modal/modal.component";
 import ConfirmDelete from "../confirm-delete/confirm-delete.component";
 
 const ProfileEdit = props => {
-  const { isOpen, onClose, user, editUser } = props;
+  const { isOpen, onClose, user, editUser, deleteUser } = props;
 
   const [isDeleteOpen, setDeleteOpen] = useState(false);
 
@@ -67,6 +67,8 @@ const ProfileEdit = props => {
         <ConfirmDelete
           isOpen={isDeleteOpen}
           onClose={() => setDeleteOpen(false)}
+          onDelete={deleteUser}
+          isPassword={true}
         />
       </Modal>
     </>
@@ -74,7 +76,8 @@ const ProfileEdit = props => {
 };
 
 const mapDispatchToProps = {
-  editUser: editUser
+  editUser: editUser,
+  deleteUser: deleteUser
 };
 
 export default connect(
