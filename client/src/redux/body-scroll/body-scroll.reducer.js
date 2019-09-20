@@ -1,28 +1,31 @@
 import { BodyScrollType } from './body-scroll.types';
 
-const INITIAL_STATE = {
-  scrollTop: 0
-};
+const INITIAL_STATE = {};
+const blackList = ["eventEditPage"];
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
-    case BodyScrollType.SAVE_BODY_SCROLL_SUCCESS:
-      return {
-        scrollTop: action.payload
+    case BodyScrollType.SAVE_SCROLL_POS:      
+      if (state[action.payload]) {
+        return { ...state };
+      } else {
+        return {
+          ...state,
+          [action.payload]: window.scrollY
+        };
       }
-    case BodyScrollType.SET_BODY_SCROLL_SUCCESS:
-      return {
-        scrollTop: 0
+    case BodyScrollType.SET_SCROLL_POS:
+      if (state[action.payload] && !blackList.includes(action.payload)) {
+        window.scrollTo(0, state[action.payload]);
+      } else {
+        window.scrollTo(0, 0);
       }
-    case BodyScrollType.SAVE_BODY_SCROLL_FAILED:
-    case BodyScrollType.SET_BODY_SCROLL_FAILED:
       return {
-        scrollTop: 0
+        ...state,
+        [action.payload]: null
       }
-    case BodyScrollType.RESET_BODY_SCROLL:
-      return {
-        ...INITIAL_STATE
-      }
+    case BodyScrollType.SET_BODY_STYLES:
+    case BodyScrollType.RESET_BODY_STYLES:
     default: {
       return {
         ...state

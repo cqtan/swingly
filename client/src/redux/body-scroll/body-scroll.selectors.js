@@ -1,8 +1,11 @@
 import { createSelector } from "reselect";
+import memoize from 'lodash/memoize';
 
 const selectBodyScroll = state => state.bodyScroll;
 
-export const selectScrollTop = createSelector(
+export const selectScrollTopByPageName = createSelector(
   [selectBodyScroll],
-  (bodyScroll) => bodyScroll.scrollTop
+  (bodyScroll) => memoize( pageName => {
+    return bodyScroll.hasOwnProperty(pageName) ? bodyScroll[pageName] : 0;
+  })
 );

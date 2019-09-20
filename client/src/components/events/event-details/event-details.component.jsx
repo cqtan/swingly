@@ -18,13 +18,14 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../../redux/user/user.selectors';
 
 export const EventDetails = (props) => {
-  const { isOpen, onClose, event, currentUser } = props;
+  const { isOpen, onClose, event, currentUser, pageName } = props;
 
   return (
     <>
       <Backdrop isOpen={isOpen} onClick={onClose}/>
       <Modal
         isOpen={isOpen}
+        pageName={pageName}
         transName="event-details">
         { event &&
           <>
@@ -41,7 +42,7 @@ export const EventDetails = (props) => {
               </DetailsContainer>
               { currentUser &&
                 <ButtonsContainer>
-                  <EventButtons eventId={event.id} />
+                  <EventButtons eventId={event.id} onClose={onClose} />
                 </ButtonsContainer>
               }
               { event.description && 

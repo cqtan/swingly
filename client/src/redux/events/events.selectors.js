@@ -18,6 +18,13 @@ export const selectAllEvents = createSelector(
   (events) => events.events
 );
 
+export const selectEventById = createSelector(
+  [selectAllEvents],
+  (events) => memoize(id => {
+    return events.hasOwnProperty(id) ? events[id]: null
+  })
+);
+
 export const selectEventsAreLoading = createSelector(
   [selectEvents],
   (events) => events.isLoading

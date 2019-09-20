@@ -25,15 +25,12 @@ const EventButtons = props => {
     currentUser,
     setEventGuest,
     deleteEventGuest,
-    setupEventEdit,
-    history
+    history,
   } = props;
   const event = events[eventId];
 
   const handleOpenEventEdit = () => {
-    const lastRoute = history.location.pathname;
-    setupEventEdit(event, lastRoute);
-    history.push('/event-edit');
+    history.push(`/event-edit?id=${eventId}`);
   }
 
   const handleClick = async guestType => {

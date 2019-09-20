@@ -3,36 +3,43 @@ import { EventEditPageContainer } from "./event-edit-page.styles";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
+import queryString from 'query-string';
 import { createStructuredSelector } from "reselect";
-import { selectEditEvent } from "../../redux/event-edit/event-edit.selectors";
 import EventEdit from "../../components/events/event-edit/event-edit.component";
-import { resetBodyScroll } from "../../redux/body-scroll/body-scroll.actions";
-import { selectScrollTop } from "../../redux/body-scroll/body-scroll.selectors";
-import { setScrollPosForEventEdit } from "../../redux/event-edit/event-edit.actions";
+import { resetBodyStyles, setScrollPosForPage, saveScrollPosForPage } from "../../redux/body-scroll/body-scroll.actions";
+import { selectEventById } from "../../redux/events/events.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 
 const EventEditPage = props => {
   const {
-    eventEdit,
+    getEventById,
+    currentUser,
     history,
-    scrollTop,
-    setScrollPosForEventEdit,
-    resetBodyScroll
+    saveScrollPosForPage,
+    setScrollPosForPage,
+    resetBodyStyles
   } = props;
-  const { event, lastRoute } = eventEdit;
+
+  const params = queryString.parse(history.location.search);
+  const event = getEventById(params.id);
+  const pageName = "eventEditPage";
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    resetBodyStyles();
+    setScrollPosForPage(pageName);
+    
+    return () => {
+      saveScrollPosForPage(pageName);
+      resetBodyStyles();
+    };
+  },[resetBodyStyles, setScrollPosForPage, saveScrollPosForPage]);
 
   const onClose = () => {
-    history.push(lastRoute);
+    history.push("/events-agenda");
   };
 
-  if (event && document.body.style.position === 'fixed') {
-    setScrollPosForEventEdit(scrollTop);
-    resetBodyScroll();
-  } else if (!event) {
-    history.push("/");
+  if (!event || !event.hosts.includes(currentUser) ) {
+    onClose();
   }
 
   return (
@@ -43,13 +50,14 @@ const EventEditPage = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  eventEdit: selectEditEvent,
-  scrollTop: selectScrollTop
+  getEventById: selectEventById,
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = {
-  resetBodyScroll,
-  setScrollPosForEventEdit
+  resetBodyStyles,
+  setScrollPosForPage,
+  saveScrollPosForPage
 };
 
 export default compose(
