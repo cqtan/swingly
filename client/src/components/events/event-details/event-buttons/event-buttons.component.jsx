@@ -14,7 +14,6 @@ import {
   deleteEventGuest
 } from "../../../../redux/events/events.actions";
 import { selectAllEvents } from "../../../../redux/events/events.selectors";
-import { setupEventEdit } from "../../../../redux/event-edit/event-edit.actions";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 
@@ -118,8 +117,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   setEventGuest,
-  deleteEventGuest,
-  setupEventEdit
+  deleteEventGuest
 };
 
 export default compose(
