@@ -11,7 +11,7 @@ const setBgImage = props => {
 }
 
 export const BackgroundSurface = styled.div`
-  min-height: 100vh;
+  min-height: 120vh;
   min-width: 100vw;
   position: fixed;
   top: 0;

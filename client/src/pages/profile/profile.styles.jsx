@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Button from '../../ui/button/button.component';
 import FormButton from '../../ui/form-elements/form-button/form-button.component';
 
 export const ProfileContainer = styled.div`
