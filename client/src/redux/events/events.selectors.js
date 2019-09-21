@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
 import { selectCurrentUser } from "../user/user.selectors";
 import memoize from 'lodash/memoize';
+import moment from 'moment';
 
 export const sortByDate = eventsObj => {
   return Object.values(eventsObj).sort((a, b) => {
@@ -30,9 +31,19 @@ export const selectEventsAreLoading = createSelector(
   (events) => events.isLoading
 );
 
-export const selectFilterType = createSelector(
+export const selectFilter = createSelector(
   [selectEvents],
-  (events) => events.filterType
+  (events) => events.filter
+);
+
+export const selectGuestFilter = createSelector(
+  [selectFilter],
+  (filter) => filter.guestFilter
+);
+
+export const selectHostFilter = createSelector(
+  [selectFilter],
+  (filter) => filter.hostFilter
 );
 
 export const selectEventsLoaded = createSelector(
@@ -47,32 +58,26 @@ export const selectSortedEvents = createSelector(
   }
 );
 
-export const selectCurrentUserEvents = createSelector(
-  [selectAllEvents, selectCurrentUser],
-  (events, currentUser) => {
-    const userEvents = Object.values(events).reduce((prev, val) => {
-      if (val.hosts[0] === currentUser) {
-        prev[val.id] = val;
+export const selectUpcomingEvents = createSelector(
+  [selectSortedEvents],
+  (events) => { 
+    return events.filter(event => {
+      if (moment(event.start.toDate()).isSameOrAfter(new Date(), 'day')) {
+        return true
+      } else {
+        return false;
       }
-      return prev;
-    }, {});
-
-    return sortByDate(userEvents);
+    });
   }
 );
-
-// const filter = {
-//   guestType: [],
-//   hosts: [],
-// }
 
 export const selectFilteredEvents = createSelector(
-  [selectSortedEvents, selectFilterType, selectCurrentUser],
-  (events, filterType, currentUser) => {
-    if (filterType !== 'none' && selectCurrentUser) {
+  [selectSortedEvents, selectFilter, selectCurrentUser],
+  (events, filter, currentUser) => {
+    if ( !filter.guestFilter.includes("none") && selectCurrentUser) {
       return events.filter(event => {
         if (event.guests.hasOwnProperty(currentUser)) {
-          return event.guests[currentUser] === filterType ? true : false;
+          return filter.guestFilter.includes(event.guests[currentUser]) ? true : false;
         } else {
           return false;
         }
@@ -83,13 +88,13 @@ export const selectFilteredEvents = createSelector(
   }
 );
 
-export const selectInterestedEvents = createSelector(
-  [selectSortedEvents, selectCurrentUser],
-  (events, currentUser) => {
-    if (selectCurrentUser) {
+export const selectUpcomingFilteredEvents = createSelector(
+  [selectUpcomingEvents, selectFilter, selectCurrentUser],
+  (events, filter, currentUser) => {
+    if ( !filter.guestFilter.includes("none") && selectCurrentUser) {
       return events.filter(event => {
-        if (event.guests.hasOwnProperty(currentUser)) {
-          return event.guests[currentUser] === 'interested' ? true : false;
+        if (event.guests.hasOwnProperty(currentUser) && event.hosts.some(host => filter.hostFilter.includes(host))) {
+          return filter.guestFilter.includes(event.guests[currentUser]) ? true : false;
         } else {
           return false;
         }
@@ -98,27 +103,10 @@ export const selectInterestedEvents = createSelector(
       return events;
     }
   }
-);
-
-export const selectGoingEvents = createSelector(
-  [selectSortedEvents, selectCurrentUser],
-  (events, currentUser) => {
-    if (selectCurrentUser) {
-      return events.filter(event => {
-        if (event.guests.hasOwnProperty(currentUser)) {
-          return event.guests[currentUser] === 'going' ? true : false;
-        } else {
-          return false;
-        }
-      });
-    } else {
-      return events;
-    }
-  }
-);
+)
 
 export const selectEventsByUserId = createSelector(
-  [selectFilteredEvents],
+  [selectUpcomingFilteredEvents],
   events => memoize(userId => {
     if (userId === null) {
       return events;

@@ -3,7 +3,10 @@ import { EventsActionTypes } from './events.types';
 const INITIAL_STATE = {
   events: {},
   isLoading: false,
-  filterType: 'none',
+  filter: {
+    guestFilter: ["none"],
+    hostFilter: ['A8WnU1fmQnWQ3bjvI6PYro32Tjh1', 'wrlw2iC2tsOrM02iLm6OyUXfIv33']
+  },
   error: null
 };
 const eventsReducer = (state = INITIAL_STATE, action) => {
@@ -64,11 +67,21 @@ const eventsReducer = (state = INITIAL_STATE, action) => {
           ...newEvents
         }
       }
-    case EventsActionTypes.SET_FILTER_TYPE:
-      const filterType = state.filterType === action.payload ? 'none' : action.payload;
+    case EventsActionTypes.SET_GUEST_FILTER:
+      const newFilter = { ...state.filter };
+      const index = newFilter.guestFilter.indexOf(action.payload)
+      if (index > -1) {
+        newFilter.guestFilter.splice(index, 1);
+        if (newFilter.guestFilter.length === 0) {
+          newFilter.guestFilter.push("none");
+        }
+      } else {
+        newFilter.guestFilter.push(action.payload);
+      }
+
       return {
         ...state,
-        filterType
+        newFilter
       }
     case EventsActionTypes.SET_EVENT_GUEST_FAILED:
     case EventsActionTypes.FETCH_EVENTS_FAILED:

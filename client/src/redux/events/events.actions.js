@@ -196,9 +196,16 @@ export const deleteEvent = eventId => async dispatch => {
   }
 }
 
-export const setFilterType = filterType => dispatch => {
+export const setGuestFilter = guestFilter => dispatch => {
   dispatch({
-    type: EventsActionTypes.SET_FILTER_TYPE,
-    payload: filterType
+    type: EventsActionTypes.SET_GUEST_FILTER,
+    payload: guestFilter
+  });
+}
+
+export const setHostFilter = userId => dispatch => {
+  dispatch({
+    type: EventsActionTypes.SET_HOST_FILTER,
+    payload: userId
   });
 }

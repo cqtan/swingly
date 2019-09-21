@@ -5,7 +5,10 @@ describe('Events Reducer', () => {
   const initialState = {
     events: {},
     isLoading: false,
-    filterType: 'none',
+    filter: {
+      guestFilter: ["none"],
+      hostFilter: ['A8WnU1fmQnWQ3bjvI6PYro32Tjh1', 'wrlw2iC2tsOrM02iLm6OyUXfIv33']
+    },    
     error: null
   };
 
@@ -28,7 +31,10 @@ describe('Events Reducer', () => {
       }
     },
     isLoading: false,
-    filterType: 'none',
+    filter: {
+      guestFilter: ["none"],
+      hostFilter: ['A8WnU1fmQnWQ3bjvI6PYro32Tjh1', 'wrlw2iC2tsOrM02iLm6OyUXfIv33']
+    },     
     error: null
   }
 

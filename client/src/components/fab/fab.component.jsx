@@ -5,16 +5,16 @@ import { createStructuredSelector } from "reselect";
 import Backdrop from "../../ui/backdrop/backdrop.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CSSTransition } from "react-transition-group";
-import { selectFilterType } from "../../redux/events/events.selectors";
-import { setFilterType } from "../../redux/events/events.actions";
+import { selectGuestFilter } from "../../redux/events/events.selectors";
+import { setGuestFilter } from "../../redux/events/events.actions";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { openSnackbar } from "../../redux/snackbar/snackbar.actions";
 
 const Fab = props => {
-  const { isOpen, setFabOpen, filterType, setFilterType, currentUser, openSnackbar } = props;
+  const { isOpen, setFabOpen, guestFilter, setGuestFilter, currentUser, openSnackbar } = props;
 
-  const handleFilterClick = type => {
-    setFilterType(type);
+  const handleGuestFilterClick = filter => {
+    setGuestFilter(filter);
     setFabOpen(false);
   }
 
@@ -32,14 +32,14 @@ const Fab = props => {
   const fabSubData = {
     interested: {
       icon: <FontAwesomeIcon icon="star" />,
-      func: () => handleFilterClick('interested'),
-      isSelected: filterType === 'interested' ? true : false,
+      func: () => handleGuestFilterClick('interested'),
+      isSelected: guestFilter === 'interested' ? true : false,
       isRendered: currentUser ? true : false,
     },
     going: {
       icon: <FontAwesomeIcon icon="check" />,
-      func: () => handleFilterClick('going'),
-      isSelected: filterType === 'going' ? true : false,
+      func: () => handleGuestFilterClick('going'),
+      isSelected: guestFilter === 'going' ? true : false,
       isRendered: currentUser ? true : false,
     },
     today: {
@@ -92,12 +92,12 @@ const Fab = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  filterType: selectFilterType,
+  guestFilter: selectGuestFilter,
   currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = {
-  setFilterType,
+  setGuestFilter,
   openSnackbar
 };
 
