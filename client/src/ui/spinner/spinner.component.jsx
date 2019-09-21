@@ -2,14 +2,14 @@ import React from 'react';
 import {
   SpinnerContainer,
 } from './spinner.styles'
-import PacmanLoader from 'react-spinners/PacmanLoader';
+import PropagateLoader from 'react-spinners/PropagateLoader';
 
 const Spinner = (props) => {
   const { loading, size } = props;
 
   return (
     <SpinnerContainer>
-      <PacmanLoader 
+      <PropagateLoader 
         sizeUnit={"px"}
         size={size}
         color={'#FFC107'}

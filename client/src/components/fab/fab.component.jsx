@@ -8,9 +8,10 @@ import { CSSTransition } from "react-transition-group";
 import { selectFilterType } from "../../redux/events/events.selectors";
 import { setFilterType } from "../../redux/events/events.actions";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { openSnackbar } from "../../redux/snackbar/snackbar.actions";
 
 const Fab = props => {
-  const { isOpen, setFabOpen, filterType, setFilterType, currentUser } = props;
+  const { isOpen, setFabOpen, filterType, setFilterType, currentUser, openSnackbar } = props;
 
   const handleFilterClick = type => {
     setFilterType(type);
@@ -18,7 +19,13 @@ const Fab = props => {
   }
 
   const handleCalendarDayClick = () => {
-    console.log("Calendar Day clicked: ");
+    const isTodayEvents = document.getElementsByClassName("isToday");
+    if (isTodayEvents.length) {
+      isTodayEvents[0].scrollIntoView({behavior: "smooth", block: "center"});
+    } else {
+      openSnackbar("info", "No events today with given filter");
+    }
+
     setFabOpen(false);
   };
 
@@ -90,7 +97,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  setFilterType
+  setFilterType,
+  openSnackbar
 };
 
 export default connect(

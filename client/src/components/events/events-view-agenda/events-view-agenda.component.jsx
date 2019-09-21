@@ -23,6 +23,7 @@ import {
 import EventDetails from "../event-details/event-details.component";
 import { selectCurrentUser } from "../../../redux/user/user.selectors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Spinner from "../../../ui/spinner/spinner.component";
 
 const EventsViewAgenda = props => {
   const {
@@ -31,6 +32,7 @@ const EventsViewAgenda = props => {
     currentUser,
     pageName
   } = props;
+  let isLoading = true;
   let timeTracker = {};
   let eventComponents = [];
 
@@ -105,6 +107,7 @@ const EventsViewAgenda = props => {
         <DayEvents
           flat
           isToday={isToday}
+          className={isToday ? 'isToday' : ''}
           onClick={() => handleEventOpen(event)}
         >
           <DayEventItem>{event.title}</DayEventItem>
@@ -120,19 +123,30 @@ const EventsViewAgenda = props => {
       addMonthRow(event);
       addDayRow(event);
     });
+    isLoading = false;
+
+    const isTodayEvents = document.getElementsByClassName("isToday");
+    if (isTodayEvents.length) {
+      isTodayEvents[0].scrollIntoView({behavior: "smooth", block: "center"});
+    } 
+    
   }
 
   return (
     <>
-      <EventsViewAgendaContainer>
-        {eventComponents.length ? (
-          eventComponents
-        ) : (
-          <NoEventsMessage>
-            No events to be displayed
-          </NoEventsMessage>
-        )}
-      </EventsViewAgendaContainer>
+      {isLoading ? (
+        <Spinner isLoading={isLoading}  />
+      ) : (
+        <EventsViewAgendaContainer>
+          {eventComponents.length ? (
+            eventComponents
+          ) : (
+            <NoEventsMessage>
+              No events to be displayed
+            </NoEventsMessage>
+          )}
+        </EventsViewAgendaContainer>
+      ) }
       <EventDetails
         isOpen={isDetailsOpen.isOpen}
         event={isDetailsOpen.event}

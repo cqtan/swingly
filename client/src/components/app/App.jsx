@@ -41,12 +41,12 @@ export const App = props => {
         isOpen={snackbar.isOpen}
       />
       <Switch>
-        <Route path="/hi" exact render={() => <ExampleContainer hi />} />
+        <Route path="/about" exact render={() => <ExampleContainer hi />} />
         <Route path="/profile" component={Profile} />
-        <Route path="/event-create" component={EventCreatePage} />
+        <Route path="/event-create" exact component={EventCreatePage} />
         <Route path="/event-edit" component={EventEditPage} />
-        <Route path="/events-agenda" component={EventsPage} />
-        <Route path="/" component={ExampleContainer} />
+        <Route path="/events-agenda" exact component={EventsPage} />
+        <Route path="/" component={EventsPage} />
       </Switch>
     </>
   );

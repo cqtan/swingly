@@ -63,7 +63,7 @@ describe('Sidebar component', () => {
       btn.simulate('click');
     })
 
-    expect(mockSetOpen).toHaveBeenCalledTimes(sidebarButtons.length - 1);     
+    expect(mockSetOpen).toHaveBeenCalledTimes(sidebarButtons.length);     
   });
 
   it('should call the toggleTheme function on last SideButton click event.', () => {

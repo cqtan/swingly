@@ -34,6 +34,11 @@ export const Sidebar = props => {
 
   const toggleThemeText = isDarkMode ? "Light Mode" : "Dark Mode";
 
+  const handleToggleTheme = () => {
+    toggleTheme();
+    setOpen(false);
+  }
+
   const handleLinkClick = () => {
     if (!currentUser) {
       openSnackbar('info', 'Please sign in to use this feature');
@@ -46,14 +51,10 @@ export const Sidebar = props => {
       <Backdrop onClick={() => setOpen(false)} isOpen={isOpen} />
       <SidebarContainer isOpen={isOpen}>
         <SidebarHeader>Navigation</SidebarHeader>
-        <SidebarButton onClick={() => setOpen(false)} as={Link} to="/">
-          <FontAwesomeIcon icon="home" />
-          Home
-        </SidebarButton>
         <SidebarButton
           onClick={() => setOpen(false)}
           as={Link}
-          to="/events-agenda"
+          to="/"
         >
           <FontAwesomeIcon icon="calendar-week" />
           Agenda View
@@ -66,7 +67,11 @@ export const Sidebar = props => {
           <FontAwesomeIcon icon="calendar-plus" />
           Create Event
         </SidebarButton>
-        <SidebarButton onClick={() => toggleTheme()} transparent flat>
+        <SidebarButton onClick={() => setOpen(false)} as={Link} to="/about">
+          <FontAwesomeIcon icon="info-circle" />
+          About
+        </SidebarButton>
+        <SidebarButton onClick={handleToggleTheme} transparent flat>
           {toggleThemeIcon}
           {toggleThemeText}
         </SidebarButton>
