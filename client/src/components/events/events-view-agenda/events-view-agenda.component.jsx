@@ -21,6 +21,7 @@ import {
   checkIsToday
 } from "../../../redux/events/events.utils";
 import EventDetails from "../event-details/event-details.component";
+import Fab from '../../fab/fab.component';
 import { selectCurrentUser } from "../../../redux/user/user.selectors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Spinner from "../../../ui/spinner/spinner.component";
@@ -40,6 +41,8 @@ const EventsViewAgenda = props => {
     isOpen: false,
     event: null
   });
+
+  const [isFabOpen, setFabOpen] = useState(false);
 
   const handleEventOpen = event => {
     setDetailsOpen({
@@ -153,6 +156,9 @@ const EventsViewAgenda = props => {
         onClose={handleEventClose}
         pageName={pageName}
       />
+      { !isDetailsOpen.isOpen && 
+        <Fab isOpen={isFabOpen} setFabOpen={setFabOpen} />
+      }
     </>
   );
 };

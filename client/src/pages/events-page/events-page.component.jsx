@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { EventsPageContainer } from "./events-page.styles";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import EventsViewAgenda from "../../components/events/events-view-agenda/events-view-agenda.component";
-import Fab from "../../components/fab/fab.component";
 import { selectEventsByUserId } from "../../redux/events/events.selectors";
 import {
   saveScrollPosForPage,
@@ -18,7 +17,6 @@ const EventsPage = props => {
     setScrollPosForPage,
     saveScrollPosForPage
   } = props;
-  const [isFabOpen, setFabOpen] = useState(false);
   const filteredEvents = selectEventsByUserId(null);
   const pageName = "eventsPage";
 
@@ -37,7 +35,6 @@ const EventsPage = props => {
       <EventsPageContainer>
         <EventsViewAgenda events={filteredEvents} pageName={pageName} />
       </EventsPageContainer>
-      <Fab isOpen={isFabOpen} setFabOpen={setFabOpen} />
     </>
   );
 };
