@@ -13,7 +13,7 @@ exports[`App component should render 1`] = `
     <Route path=\\"/event-edit\\" component={[Function: C]} />
     <Route path=\\"/events-agenda\\" exact={true} component={{...}} />
     <Route path=\\"/users\\" exact={true} component={{...}} />
-    <Route path=\\"/\\" component={{...}} />
+    <Route path=\\"/\\" component={[Function: C]} />
   </Switch>
 </Fragment>"
 `;

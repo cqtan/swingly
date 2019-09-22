@@ -1,5 +1,5 @@
 import React from "react";
-import { ProfileContainer, ProfileButton } from "./profile.styles";
+import { ProfileContainer } from "./profile.styles";
 import { connect } from "react-redux";
 import { compose } from 'redux';
 import ProfileImageSection from "../../components/profile-components/profile-image/profile-image-section.component";
@@ -7,10 +7,9 @@ import ProfileDetails from "../../components/profile-components/profile-details/
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { Redirect } from "react-router-dom";
-import ProfileEvents from "../../components/profile-components/profile-events/profile-events.component";
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ProfileBody from "../../components/profile-components/profile-body/profile-body.component";
 
 const Profile = props => {
   const { history, currentUser } = props;
@@ -24,13 +23,8 @@ const Profile = props => {
         <ProfileContainer>
           <ProfileImageSection userId={userId} />
           <ProfileDetails userId={userId} />
-          <ProfileEvents userId={userId} />
-          {currentUser === userId && 
-            <ProfileButton onClick={() => history.push("/event-create")}>
-              <FontAwesomeIcon icon='calendar-plus' />
-              Create Event
-            </ProfileButton>
-          }
+          {/* <ProfileEvents userId={userId} /> */}
+          <ProfileBody userId={userId} />
         </ProfileContainer>
       ) : (
         <Redirect to="/" />
