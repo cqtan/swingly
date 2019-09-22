@@ -14,6 +14,7 @@ import { selectSnackbarState } from "../../redux/snackbar/snackbar.selectors";
 import EventsPage from '../../pages/events-page/events-page.component';
 import EventEditPage from '../../pages/event-edit-page/event-edit-page.component'
 import EventCreatePage from "../../pages/event-create-page/event-create-page.component";
+import UsersPage from "../../pages/users-page/users-page.component";
 
 export const App = props => {
   const {
@@ -46,7 +47,8 @@ export const App = props => {
         <Route path="/event-create" exact component={EventCreatePage} />
         <Route path="/event-edit" component={EventEditPage} />
         <Route path="/events-agenda" exact component={EventsPage} />
-        <Route path="/" component={EventsPage} />
+        <Route path="/users" exact component={UsersPage} />
+        <Route path="/" component={UsersPage} />
       </Switch>
     </>
   );

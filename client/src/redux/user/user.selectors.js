@@ -15,7 +15,7 @@ export const selectIsUserLoading = createSelector(
 
 export const selectUsers = createSelector(
   [selectUser],
-  (user) => user.users
+  (user) => Object.keys(user.users).length ? user.users : null
 );
 
 export const selectUserById = createSelector(
