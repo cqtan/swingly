@@ -11,10 +11,13 @@ import { setCurrentUser, setUsers } from "../../redux/user/user.actions";
 import { fetchEvents } from "../../redux/events/events.actions";
 import { createStructuredSelector } from "reselect";
 import { selectSnackbarState } from "../../redux/snackbar/snackbar.selectors";
-import EventsPage from '../../pages/events-page/events-page.component';
-import EventEditPage from '../../pages/event-edit-page/event-edit-page.component'
+import EventsPage from "../../pages/events-page/events-page.component";
+import EventEditPage from "../../pages/event-edit-page/event-edit-page.component";
 import EventCreatePage from "../../pages/event-create-page/event-create-page.component";
 import UsersPage from "../../pages/users-page/users-page.component";
+import { selectUserIsLoading } from "../../redux/user/user.selectors";
+import { selectEventsIsLoading } from "../../redux/events/events.selectors";
+import Spinner from "../../ui/spinner/spinner.component";
 
 export const App = props => {
   const {
@@ -22,14 +25,18 @@ export const App = props => {
     setUsers,
     fetchEvents,
     snackbar,
+    isLoadingUsers,
+    isLoadingEvents
   } = props;
+
+  const isLoading = isLoadingUsers || isLoadingEvents;
 
   useEffect(() => {
     setCurrentUser();
     setUsers();
     fetchEvents();
   }, [setCurrentUser, setUsers, fetchEvents]);
-  
+
   return (
     <>
       <GlobalStyle />
@@ -41,21 +48,27 @@ export const App = props => {
         text={snackbar.text}
         isOpen={snackbar.isOpen}
       />
-      <Switch>
-        <Route path="/about" exact render={() => <ExampleContainer hi />} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/event-create" exact component={EventCreatePage} />
-        <Route path="/event-edit" component={EventEditPage} />
-        <Route path="/events-agenda" exact component={EventsPage} />
-        <Route path="/users" exact component={UsersPage} />
-        <Route path="/" component={UsersPage} />
-      </Switch>
+      {isLoading ? (
+        <Spinner isLoading={isLoading} />
+      ) : (
+        <Switch>
+          <Route path="/about" exact render={() => <ExampleContainer hi />} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/event-create" exact component={EventCreatePage} />
+          <Route path="/event-edit" component={EventEditPage} />
+          <Route path="/events-agenda" exact component={EventsPage} />
+          <Route path="/users" exact component={UsersPage} />
+          <Route path="/" component={UsersPage} />
+        </Switch>
+      )}
     </>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
-  snackbar: selectSnackbarState
+  snackbar: selectSnackbarState,
+  isLoadingUsers: selectUserIsLoading,
+  isLoadingEvents: selectEventsIsLoading
 });
 
 const mapDispatchToProps = {

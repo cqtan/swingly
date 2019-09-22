@@ -8,14 +8,14 @@ export const selectCurrentUser = createSelector(
   (user) => user.currentUser
 );
 
-export const selectIsUserLoading = createSelector(
+export const selectUserIsLoading = createSelector(
   [selectUser],
   (user) => user.isLoading
 );
 
 export const selectUsers = createSelector(
   [selectUser],
-  (user) => Object.keys(user.users).length ? user.users : null
+  (user) => user.users
 );
 
 export const selectUserById = createSelector(

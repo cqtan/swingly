@@ -1,6 +1,6 @@
 import {
   selectAllEvents,
-  selectEventsAreLoading
+  selectEventsIsLoading
 } from '../events.selectors';
 
 describe('Events Selectors', () => {
@@ -34,7 +34,7 @@ describe('Events Selectors', () => {
     });
 
     it('should return the isLoading value', () => {
-      expect(selectEventsAreLoading(mockState)).toEqual(mockState.events.isLoading);
+      expect(selectEventsIsLoading(mockState)).toEqual(mockState.events.isLoading);
     });
   });
 });

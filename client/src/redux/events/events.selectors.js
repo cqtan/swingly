@@ -26,7 +26,7 @@ export const selectEventById = createSelector(
   })
 );
 
-export const selectEventsAreLoading = createSelector(
+export const selectEventsIsLoading = createSelector(
   [selectEvents],
   (events) => events.isLoading
 );
@@ -44,11 +44,6 @@ export const selectGuestFilter = createSelector(
 export const selectHostFilter = createSelector(
   [selectFilter],
   (filter) => filter.hostFilter
-);
-
-export const selectEventsLoaded = createSelector(
-  [selectAllEvents],
-  (events) =>  Object.keys(events).length > 0
 );
 
 export const selectSortedEvents = createSelector(

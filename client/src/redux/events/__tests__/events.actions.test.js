@@ -41,7 +41,7 @@ describe('Events Actions', () => {
       
       await store.dispatch(fetchEvents());
       
-      expect(store.getActions()[0].type).toBe(EventsActionTypes.FETCH_EVENTS_SUCCESS);
+      expect(store.getActions()[1].type).toBe(EventsActionTypes.FETCH_EVENTS_SUCCESS);
     });
   
     it('FETCH_EVENTS_FAILED: should fail on failed to fetch collection snapshot', async () => {
@@ -50,7 +50,7 @@ describe('Events Actions', () => {
 
       await store.dispatch(fetchEvents());      
       
-      expect(store.getActions()[0].type).toBe(EventsActionTypes.FETCH_EVENTS_FAILED);
+      expect(store.getActions()[1].type).toBe(EventsActionTypes.FETCH_EVENTS_FAILED);
     });
 
     it('FETCH_EVENTS_FAILED: should fail if no collection found', async () => {
@@ -60,7 +60,7 @@ describe('Events Actions', () => {
 
       await store.dispatch(fetchEvents());
       
-      expect(store.getActions()[0].type).toBe(EventsActionTypes.FETCH_EVENTS_FAILED);
+      expect(store.getActions()[1].type).toBe(EventsActionTypes.FETCH_EVENTS_FAILED);
     });
 
   });

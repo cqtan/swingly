@@ -11,6 +11,11 @@ const INITIAL_STATE = {
 };
 const eventsReducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
+    case EventsActionTypes.EVENTS_IS_LOADING:
+      return {
+        ...state,
+        isLoading: true
+      }
     case EventsActionTypes.FETCH_EVENTS_SUCCESS:
       return {
         ...state,

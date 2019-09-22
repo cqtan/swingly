@@ -10,19 +10,15 @@ import {
 
 const UsersList = (props) => {
   const { users } = props;
-  let UsersRows = null;
 
-  if (users) {
-    UsersRows = Object.keys(users).map(user => {
-
-      return (
-        <UsersRow key={user.id}>
-          <RowUsername>{user.username}</RowUsername>
-        </UsersRow>
-      );
-    });
-  }
-
+  const UsersRows = Object.values(users).map((user, idx) => {
+    return (
+      <UsersRow key={idx}>
+        <RowUsername>{user.username}</RowUsername>
+      </UsersRow>
+    );
+  });
+  
   return (
     <UsersListContainer>
       <UsersHeader>
@@ -31,7 +27,6 @@ const UsersList = (props) => {
         <HeaderItem>Following</HeaderItem>
       </UsersHeader>
       {UsersRows}
-
     </UsersListContainer>
   );
 }

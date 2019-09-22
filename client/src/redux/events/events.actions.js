@@ -7,6 +7,7 @@ import axios from 'axios';
 export const fetchEvents = () => async dispatch => {
   try {
     let eventsObj = null;
+    dispatch({type: EventsActionTypes.EVENTS_IS_LOADING});
     if (getEnvironment() === 'development') {
       const res = await axios.get('/api/data/mockevents');
       eventsObj = formatMockEvents(res.data);
@@ -35,7 +36,6 @@ export const fetchEvents = () => async dispatch => {
       type: EventsActionTypes.FETCH_EVENTS_SUCCESS,
       payload: eventsObj
     });
-    // dispatch(openSnackbar('success', 'Events successfully fetched!'));
   } catch (error) {    
     dispatch({type: EventsActionTypes.FETCH_EVENTS_FAILED });
     dispatch(openSnackbar('error', error.message));

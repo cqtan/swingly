@@ -1,6 +1,6 @@
 import { 
   selectCurrentUser,
-  selectIsUserLoading
+  selectUserIsLoading
 } from '../user.selectors';
 
 describe('User Selectors', () => {
@@ -17,9 +17,9 @@ describe('User Selectors', () => {
     });
   });
 
-  describe('selectIsUserLoading', () => {
+  describe('selectUserIsLoading', () => {
     it('should return the isLoading boolean value', () => {
-      expect(selectIsUserLoading(mockState)).toBe(mockState.user.isLoading);
+      expect(selectUserIsLoading(mockState)).toBe(mockState.user.isLoading);
     });
   });
 });

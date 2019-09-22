@@ -12,7 +12,6 @@ import {
 } from "./events-view-agenda.styles";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectEventsLoaded } from "../../../redux/events/events.selectors";
 import {
   getMonthString,
   getDayString,
@@ -24,16 +23,13 @@ import EventDetails from "../event-details/event-details.component";
 import Fab from '../../fab/fab.component';
 import { selectCurrentUser } from "../../../redux/user/user.selectors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Spinner from "../../../ui/spinner/spinner.component";
 
 const EventsViewAgenda = props => {
   const {
     events,
-    isEventsLoaded,
     currentUser,
     pageName
   } = props;
-  let isLoading = true;
   let timeTracker = {};
   let eventComponents = [];
 
@@ -121,35 +117,24 @@ const EventsViewAgenda = props => {
     );
   };
 
-  if (isEventsLoaded && eventComponents.length === 0) {
+  if (eventComponents.length === 0) {
     events.forEach(event => {
       addMonthRow(event);
       addDayRow(event);
     });
-    isLoading = false;
-
-    const isTodayEvents = document.getElementsByClassName("isToday");
-    if (isTodayEvents.length) {
-      isTodayEvents[0].scrollIntoView({behavior: "smooth", block: "center"});
-    } 
-    
   }
 
   return (
     <>
-      {isLoading ? (
-        <Spinner isLoading={isLoading}  />
-      ) : (
-        <EventsViewAgendaContainer>
-          {eventComponents.length ? (
-            eventComponents
-          ) : (
-            <NoEventsMessage>
-              No events to be displayed
-            </NoEventsMessage>
-          )}
-        </EventsViewAgendaContainer>
-      ) }
+      <EventsViewAgendaContainer>
+        {eventComponents.length ? (
+          eventComponents
+        ) : (
+          <NoEventsMessage>
+            No events to be displayed
+          </NoEventsMessage>
+        )}
+      </EventsViewAgendaContainer>
       <EventDetails
         isOpen={isDetailsOpen.isOpen}
         event={isDetailsOpen.event}
@@ -164,7 +149,6 @@ const EventsViewAgenda = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  isEventsLoaded: selectEventsLoaded,
   currentUser: selectCurrentUser
 });
 
