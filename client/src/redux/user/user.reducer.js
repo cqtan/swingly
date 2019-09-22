@@ -69,6 +69,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
           }
         }
       };
+    case UserActionTypes.FOLLOW_SUCCESS:
+      return {
+        ...state,
+      }
+    case UserActionTypes.UNFOLLOW_SUCCESS:
+      return {
+        ...state,
+      }
     case UserActionTypes.SIGNUP_FAILED:
     case UserActionTypes.SET_CURRENT_USER_FAILED:
     case UserActionTypes.SET_USERS_FAILED:
@@ -76,6 +84,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.SIGNOUT_FAILED:
     case UserActionTypes.EDIT_FAILED:
     case UserActionTypes.DELETE_FAILED:
+    case UserActionTypes.FOLLOW_FAILED:
+    case UserActionTypes.UNFOLLOW_FAILED:
       return {
         ...state,
         error: action.payload,

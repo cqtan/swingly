@@ -16,6 +16,7 @@ import {
   selectUserById,
   selectCurrentUser
 } from "../../../redux/user/user.selectors";
+import FormButton from "../../../ui/form-elements/form-button/form-button.component";
 
 const ProfileDetails = props => {
   const { currentUser, userId, getUserById } = props;
@@ -41,9 +42,9 @@ const ProfileDetails = props => {
               <FontAwesomeIcon icon="edit" />
             </ProfileButton>
           ) : (
-            <ProfileButton transparent flat onClick={() => {}}>
-              <FontAwesomeIcon icon="hat-wizard" />
-            </ProfileButton>
+            <FormButton onClick={() => {}}>
+              <FontAwesomeIcon icon="plus" /> Follow
+            </FormButton>
           )}
         </ProfileTitle>
         <ProfileRow>

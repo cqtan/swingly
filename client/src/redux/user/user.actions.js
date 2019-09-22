@@ -256,3 +256,31 @@ export const deleteUser = password => async dispatch => {
     dispatch(openSnackbar("error", "Deletion failed! User not signed in"));
   }
 };
+
+export const followUser = userId => dispatch => {
+  try {
+    dispatch({
+      type: UserActionTypes.FOLLOW_SUCCESS,
+      payload: userId
+    });
+  } catch (err) {
+    dispatch({
+      type: UserActionTypes.FOLLOW_FAILED,
+      payload: userId
+    });
+  }
+}
+
+export const unfollowUser = userId => dispatch => {
+  try {
+    dispatch({
+      type: UserActionTypes.FOLLOW_SUCCESS,
+      payload: userId
+    });
+  } catch (err) {
+    dispatch({
+      type: UserActionTypes.UNFOLLOW_FAILED,
+      payload: userId
+    });
+  }
+}

@@ -36,6 +36,8 @@ import {
   faListUl,
   faCheck,
   faStar,
+  faUsers,
+  faPlus
 } from '@fortawesome/free-solid-svg-icons';
 import ThemeManager from './themes/ThemeManager';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -84,6 +86,8 @@ export default (props) => {
     faListUl,
     faCheck,
     faStar,
+    faUsers,
+    faPlus
   );
 
   return (

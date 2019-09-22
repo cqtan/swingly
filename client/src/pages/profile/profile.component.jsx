@@ -25,10 +25,12 @@ const Profile = props => {
           <ProfileImageSection userId={userId} />
           <ProfileDetails userId={userId} />
           <ProfileEvents userId={userId} />
-          <ProfileButton onClick={() => history.push("/event-create")}>
-            <FontAwesomeIcon icon='calendar-plus' />
-            Create Event
-          </ProfileButton>
+          {currentUser === userId && 
+            <ProfileButton onClick={() => history.push("/event-create")}>
+              <FontAwesomeIcon icon='calendar-plus' />
+              Create Event
+            </ProfileButton>
+          }
         </ProfileContainer>
       ) : (
         <Redirect to="/" />

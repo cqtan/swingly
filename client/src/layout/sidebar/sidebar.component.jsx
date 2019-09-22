@@ -67,6 +67,10 @@ export const Sidebar = props => {
           <FontAwesomeIcon icon="calendar-plus" />
           Create Event
         </SidebarButton>
+        <SidebarButton onClick={() => setOpen(false)} as={Link} to="/users">
+          <FontAwesomeIcon icon="users" />
+          Users
+        </SidebarButton>
         <SidebarButton onClick={() => setOpen(false)} as={Link} to="/about">
           <FontAwesomeIcon icon="info-circle" />
           About

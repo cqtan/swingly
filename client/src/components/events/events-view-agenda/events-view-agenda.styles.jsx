@@ -32,7 +32,7 @@ export const MonthRow = styled.div`
   ${props => props.theme.typo.h5};
   margin: ${props => props.theme.spacing(1)} auto;
   margin-top: ${props => props.theme.spacing(3)};
-  padding: 1.5rem 0.8rem; 
+  padding: 0 0.8rem; 
   box-shadow: ${props => props.theme.shadows[2]};
 `;
 MonthRow.displayName = 'MonthRow';
