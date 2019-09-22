@@ -14,14 +14,44 @@ import ProfileEdit from "../../profile-edit/profile-edit.component";
 import { createStructuredSelector } from "reselect";
 import {
   selectUserById,
-  selectCurrentUser
+  selectCurrentUser,
+  selectIsFollowingUserId
 } from "../../../redux/user/user.selectors";
 import FormButton from "../../../ui/form-elements/form-button/form-button.component";
+import { followUser, unfollowUser } from "../../../redux/user/user.actions";
 
 const ProfileDetails = props => {
-  const { currentUser, userId, getUserById } = props;
+  const {
+    currentUser,
+    userId,
+    getUserById,
+    isFollowingUserId,
+    followUser,
+    unfollowUser
+  } = props;
   const [editFormOpen, setEditFormOpen] = useState(false);
   const user = getUserById(userId);
+
+  let DetailsButton = null;
+  if (currentUser === user.id) {
+    DetailsButton = (
+      <ProfileButton transparent flat onClick={() => setEditFormOpen(true)}>
+        <FontAwesomeIcon icon="edit" />
+      </ProfileButton>
+    );
+  } else if (isFollowingUserId(userId)) {
+    DetailsButton = (
+      <FormButton deleteStyle onClick={() => unfollowUser(userId)}>
+        <FontAwesomeIcon icon="minus" /> Unfollow
+      </FormButton>
+    );
+  } else {
+    DetailsButton = (
+      <FormButton onClick={() => followUser(userId)}>
+        <FontAwesomeIcon icon="plus" /> Follow
+      </FormButton>
+    );
+  }
 
   return (
     <>
@@ -33,19 +63,7 @@ const ProfileDetails = props => {
       <ProfileDetailsContainer>
         <ProfileTitle>
           Details
-          {currentUser === user.id ? (
-            <ProfileButton
-              transparent
-              flat
-              onClick={() => setEditFormOpen(true)}
-            >
-              <FontAwesomeIcon icon="edit" />
-            </ProfileButton>
-          ) : (
-            <FormButton onClick={() => {}}>
-              <FontAwesomeIcon icon="plus" /> Follow
-            </FormButton>
-          )}
+          {DetailsButton}
         </ProfileTitle>
         <ProfileRow>
           <ProfileLabel>Username</ProfileLabel>
@@ -76,7 +94,16 @@ const ProfileDetails = props => {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  getUserById: selectUserById
+  getUserById: selectUserById,
+  isFollowingUserId: selectIsFollowingUserId
 });
 
-export default connect(mapStateToProps)(ProfileDetails);
+const mapDispatchToProps = {
+  followUser,
+  unfollowUser
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfileDetails);

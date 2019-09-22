@@ -25,3 +25,15 @@ export const selectUserById = createSelector(
   })
 );
 
+export const selectCurrentUserFollowing = createSelector(
+  [selectUsers, selectCurrentUser],
+  (users, currentUser) => users[currentUser].following
+);
+
+export const selectIsFollowingUserId = createSelector(
+  [selectCurrentUserFollowing],
+  following => memoize(userId => {
+    return following.hasOwnProperty(userId) ? true : false
+  })
+);
+

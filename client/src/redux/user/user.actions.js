@@ -138,7 +138,10 @@ export const signUp = values => async dispatch => {
         const userSnapshot = await userRef.get();
         dispatch({
           type: UserActionTypes.SIGNUP_SUCCESS,
-          payload: userSnapshot.data()
+          payload: {
+            ...userSnapshot.data(),
+            following: {}
+          }
         });
 
         await auth.signOut();
@@ -274,7 +277,7 @@ export const followUser = userId => dispatch => {
 export const unfollowUser = userId => dispatch => {
   try {
     dispatch({
-      type: UserActionTypes.FOLLOW_SUCCESS,
+      type: UserActionTypes.UNFOLLOW_SUCCESS,
       payload: userId
     });
   } catch (err) {

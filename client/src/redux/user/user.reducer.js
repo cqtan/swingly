@@ -72,10 +72,28 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.FOLLOW_SUCCESS:
       return {
         ...state,
+        users: {
+          ...state.users,
+          [state.currentUser]: {
+            following: {
+              ...state.users[state.currentUser].following,
+              [action.payload]: true
+            }
+          }
+        }
       }
     case UserActionTypes.UNFOLLOW_SUCCESS:
+      const newFollowing = { ...state.users[state.currentUser].following };
+      delete newFollowing[action.payload];
+
       return {
         ...state,
+        users: {
+          ...state.users,
+          [state.currentUser]: {
+            following: newFollowing
+          }
+        }
       }
     case UserActionTypes.SIGNUP_FAILED:
     case UserActionTypes.SET_CURRENT_USER_FAILED:
