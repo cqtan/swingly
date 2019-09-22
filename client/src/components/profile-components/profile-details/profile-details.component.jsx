@@ -15,7 +15,7 @@ import { createStructuredSelector } from "reselect";
 import {
   selectUserById,
   selectCurrentUser,
-  selectIsFollowingUserId
+  selectCurrentUserFollowing
 } from "../../../redux/user/user.selectors";
 import FormButton from "../../../ui/form-elements/form-button/form-button.component";
 import { followUser, unfollowUser } from "../../../redux/user/user.actions";
@@ -25,7 +25,7 @@ const ProfileDetails = props => {
     currentUser,
     userId,
     getUserById,
-    isFollowingUserId,
+    following,
     followUser,
     unfollowUser
   } = props;
@@ -39,7 +39,7 @@ const ProfileDetails = props => {
         <FontAwesomeIcon icon="edit" />
       </ProfileButton>
     );
-  } else if (isFollowingUserId(userId)) {
+  } else if (following.hasOwnProperty(userId)) {
     DetailsButton = (
       <FormButton deleteStyle onClick={() => unfollowUser(userId)}>
         <FontAwesomeIcon icon="minus" /> Unfollow
@@ -95,7 +95,7 @@ const ProfileDetails = props => {
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
   getUserById: selectUserById,
-  isFollowingUserId: selectIsFollowingUserId
+  following: selectCurrentUserFollowing
 });
 
 const mapDispatchToProps = {

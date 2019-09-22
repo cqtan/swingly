@@ -75,6 +75,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         users: {
           ...state.users,
           [state.currentUser]: {
+            ...state.users[state.currentUser],
             following: {
               ...state.users[state.currentUser].following,
               [action.payload]: true
@@ -91,6 +92,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         users: {
           ...state.users,
           [state.currentUser]: {
+            ...state.users[state.currentUser],
             following: newFollowing
           }
         }

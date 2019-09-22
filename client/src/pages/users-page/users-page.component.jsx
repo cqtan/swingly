@@ -5,7 +5,7 @@ import {
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import UsersList from '../../components/users-components/users-list/users-list.component';
-import { selectUsers } from '../../redux/user/user.selectors';
+import { selectUnfollowedUsersList } from '../../redux/user/user.selectors';
 
 const UsersPage = (props) => {
   const { users } = props;
@@ -18,7 +18,7 @@ const UsersPage = (props) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-  users: selectUsers
+  users: selectUnfollowedUsersList
 });
 
 const mapDispatchToProps = {

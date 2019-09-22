@@ -14,7 +14,7 @@ import ProfileImage from '../../../ui/profile-image/profile-image.component';
 const UsersList = (props) => {
   const { users, history } = props;
 
-  const UsersRows = Object.values(users).map((user, idx) => {
+  const UsersRows = users.map((user, idx) => {
     return (
       <UsersRow key={idx} onClick={() => history.push(`/profile?user_id=${user.id}`)} >
         <RowItem>
@@ -25,6 +25,8 @@ const UsersList = (props) => {
       </UsersRow>
     );
   });
+
+  console.log('users: ', users);
   
   return (
     <UsersListContainer>

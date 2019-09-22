@@ -30,10 +30,25 @@ export const selectCurrentUserFollowing = createSelector(
   (users, currentUser) => users[currentUser].following
 );
 
-export const selectIsFollowingUserId = createSelector(
-  [selectCurrentUserFollowing],
-  following => memoize(userId => {
-    return following.hasOwnProperty(userId) ? true : false
+export const selectFollowedUsersList = createSelector(
+  [selectUsers, selectCurrentUser],
+  (users, currentUser) => Object.values(users).filter(user => {
+    if (currentUser && users[currentUser].following.hasOwnProperty(user.id)) {
+      return user.id !== currentUser ? true : false;
+    } else {
+      return false;
+    }
+  })
+);
+
+export const selectUnfollowedUsersList = createSelector(
+  [selectUsers, selectCurrentUser],
+  (users, currentUser) => Object.values(users).filter(user => {
+    if (currentUser && !users[currentUser].following.hasOwnProperty(user.id)) {
+      return user.id !== currentUser ? true : false;
+    } else {
+      return false;
+    }
   })
 );
 
