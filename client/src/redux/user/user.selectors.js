@@ -70,5 +70,16 @@ export const selectHasActiveFollowedUser = createSelector(
       return false;
     }
   }
+);
+
+export const selectIsActiveFilterById = createSelector(
+  [selectCurrentUserFollowing],
+  following => memoize(userId => {
+    if (following.hasOwnProperty(userId)) {
+      return following[userId];
+    } else {
+      return false;
+    }
+  })
 )
 

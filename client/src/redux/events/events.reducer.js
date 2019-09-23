@@ -4,8 +4,7 @@ const INITIAL_STATE = {
   events: {},
   isLoading: false,
   filter: {
-    guestFilter: ["none"],
-    hostFilter: ['A8WnU1fmQnWQ3bjvI6PYro32Tjh1', 'wrlw2iC2tsOrM02iLm6OyUXfIv33']
+    guestFilter: []
   },
   error: null
 };
@@ -77,16 +76,13 @@ const eventsReducer = (state = INITIAL_STATE, action) => {
       const index = newFilter.guestFilter.indexOf(action.payload)
       if (index > -1) {
         newFilter.guestFilter.splice(index, 1);
-        if (newFilter.guestFilter.length === 0) {
-          newFilter.guestFilter.push("none");
-        }
       } else {
         newFilter.guestFilter.push(action.payload);
       }
 
       return {
         ...state,
-        newFilter
+        filter: newFilter
       }
     case EventsActionTypes.SET_EVENT_GUEST_FAILED:
     case EventsActionTypes.FETCH_EVENTS_FAILED:

@@ -15,6 +15,7 @@ export const EventsViewAgendaContainer = styled.div`
   align-items: flex-start;
   align-content: flex-start;
   width: 100%;
+  margin: 0 auto;
   ${props => props.theme.typo.subtitle};
 `;
 EventsViewAgendaContainer.displayName = 'EventsViewAgendaContainer';

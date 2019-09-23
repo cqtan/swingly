@@ -6,8 +6,7 @@ describe('Events Reducer', () => {
     events: {},
     isLoading: false,
     filter: {
-      guestFilter: ["none"],
-      hostFilter: ['A8WnU1fmQnWQ3bjvI6PYro32Tjh1', 'wrlw2iC2tsOrM02iLm6OyUXfIv33']
+      guestFilter: [],
     },    
     error: null
   };
@@ -32,8 +31,7 @@ describe('Events Reducer', () => {
     },
     isLoading: false,
     filter: {
-      guestFilter: ["none"],
-      hostFilter: ['A8WnU1fmQnWQ3bjvI6PYro32Tjh1', 'wrlw2iC2tsOrM02iLm6OyUXfIv33']
+      guestFilter: [],
     },     
     error: null
   }

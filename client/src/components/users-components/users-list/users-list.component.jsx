@@ -14,11 +14,20 @@ import { createStructuredSelector } from "reselect";
 import { withRouter } from "react-router-dom";
 import ProfileImage from "../../../ui/profile-image/profile-image.component";
 import { toggleFollowedUser } from "../../../redux/user/user.actions";
+import { selectIsActiveFilterById } from "../../../redux/user/user.selectors";
+import { selectEventsByUserId } from "../../../redux/events/events.selectors";
 
 const UsersList = props => {
-  const { users, history, isFilter = false, toggleFollowedUser } = props;
+  const {
+    users,
+    history,
+    isFilter = false,
+    toggleFollowedUser,
+    isActiveFilterById,
+    getEvents
+  } = props;
 
-  const handleUserRowClick = async (userId) => {
+  const handleUserRowClick = async userId => {
     if (isFilter) {
       await toggleFollowedUser(userId);
     } else {
@@ -27,22 +36,27 @@ const UsersList = props => {
   };
 
   const UsersRows = users.map((user, idx) => {
+    const eventsCount = getEvents(user.id).length;
+
     return (
-      <UsersRow 
-        key={idx} 
-        onClick={() => handleUserRowClick(user.id)}>
+      <UsersRow
+        key={idx}
+        onClick={() => handleUserRowClick(user.id)}
+        active={!isFilter ? true : isActiveFilterById(user.id)}
+        isFilter={isFilter}
+      >
         <RowItem>
           <ProfileImage key={idx} sm />
         </RowItem>
         <RowUsername>{user.username}</RowUsername>
-        <RowItem>42</RowItem>
+        <RowItem>{eventsCount}</RowItem>
       </UsersRow>
     );
   });
 
   return (
     <UsersListContainer>
-      <UsersHeader>
+      <UsersHeader isFilter={isFilter}>
         <HeaderItem />
         <HeaderUsername>Users</HeaderUsername>
         <HeaderItem>
@@ -56,7 +70,10 @@ const UsersList = props => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({});
+const mapStateToProps = createStructuredSelector({
+  isActiveFilterById: selectIsActiveFilterById,
+  getEvents: selectEventsByUserId
+});
 
 const mapDispatchToProps = {
   toggleFollowedUser

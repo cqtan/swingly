@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { MonthRow, DayEvents } from '../../events/events-view-agenda/events-view-agenda.styles';
 
 const getBgColor = (props, alpha) => {
@@ -9,15 +9,29 @@ const getBgColor = (props, alpha) => {
   }
 }
 
+const setFilterStyles = (props) => {
+  const { active, theme } = props;
+  
+  return css`
+    ${theme.mixins.defaultBorderRadius};
+    border: ${active ? `1px solid ${theme.palette.primary.main}` : `1px solid ${theme.palette.grey[7]}`};
+    opacity: ${active ? 1 : 0.5};
+  `;
+}
+
 export const UsersListContainer = styled.div`
   display: flex;
   width: 100%;
   flex-wrap: wrap;
   justify-content: center;
+  overflow: hidden;
 `;
 UsersListContainer.displayName = 'UsersListContainer';
 
 export const UsersHeader = styled(MonthRow)`
+  top: 0;
+  border-bottom: ${props => props.isFilter && `1px solid ${props.theme.palette.text.primary}`};
+  box-shadow: ${props => props.isFilter && `none`};
   ${props => props.theme.typo.body};
   padding-right: 0.8rem;
   padding-left: 0;
@@ -48,6 +62,7 @@ export const UsersRow = styled(DayEvents)`
   border-radius: 0;
   background-color: ${props => getBgColor(props, 0.3)};
   ${props => props.theme.typo.body};
+  ${props => props.isFilter === true && setFilterStyles};
 
   @media (hover: hover) {
     :hover {

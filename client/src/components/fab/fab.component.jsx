@@ -52,13 +52,13 @@ const Fab = props => {
     interested: {
       icon: <FontAwesomeIcon icon="star" />,
       func: () => handleGuestFilterClick("interested"),
-      isSelected: guestFilter === "interested" ? true : false,
+      isSelected: guestFilter.includes("interested") ? true : false,
       isRendered: currentUser ? true : false
     },
     going: {
       icon: <FontAwesomeIcon icon="check" />,
       func: () => handleGuestFilterClick("going"),
-      isSelected: guestFilter === "going" ? true : false,
+      isSelected: guestFilter.includes("going") ? true : false,
       isRendered: currentUser ? true : false
     },
     userFilter: {

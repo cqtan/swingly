@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { selectCurrentUser } from "../user/user.selectors";
+import { selectCurrentUser, selectCurrentUserFollowing } from "../user/user.selectors";
 import memoize from 'lodash/memoize';
 import moment from 'moment';
 
@@ -74,7 +74,7 @@ export const selectUpcomingEvents = createSelector(
 export const selectFilteredEvents = createSelector(
   [selectSortedEvents, selectFilter, selectCurrentUser],
   (events, filter, currentUser) => {
-    if ( !filter.guestFilter.includes("none") && selectCurrentUser) {
+    if ( !filter.guestFilter.includes("none") && currentUser) {
       return events.filter(event => {
         if (event.guests.hasOwnProperty(currentUser)) {
           return filter.guestFilter.includes(event.guests[currentUser]) ? true : false;
@@ -88,13 +88,17 @@ export const selectFilteredEvents = createSelector(
   }
 );
 
-export const selectUpcomingFilteredEvents = createSelector(
+export const selectUpcomingEventsFilteredByGuestType = createSelector(
   [selectUpcomingEvents, selectFilter, selectCurrentUser],
   (events, filter, currentUser) => {
-    if ( !filter.guestFilter.includes("none") && selectCurrentUser) {
+    if (filter.guestFilter.length) {
       return events.filter(event => {
-        if (event.guests.hasOwnProperty(currentUser) && event.hosts.some(host => filter.hostFilter.includes(host))) {
-          return filter.guestFilter.includes(event.guests[currentUser]) ? true : false;
+        if (event.guests.hasOwnProperty(currentUser)) {
+          if (filter.guestFilter.includes(event.guests[currentUser])) {
+            return true;
+          } else {
+            return false;
+          }
         } else {
           return false;
         }
@@ -102,6 +106,21 @@ export const selectUpcomingFilteredEvents = createSelector(
     } else {
       return events;
     }
+  }
+)
+
+export const selectUpcomingFilteredEvents = createSelector(
+  [selectUpcomingEventsFilteredByGuestType, selectCurrentUserFollowing],
+  (events, following) => {
+    return events.filter(event => {
+      return event.hosts.some(host => {
+        if (following.hasOwnProperty(host)) {
+          return following[host]
+        } else {
+          return false;
+        }
+      }) 
+    })
   }
 )
 

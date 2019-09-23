@@ -9,7 +9,6 @@ export const formatMockEvents = eventsObj => {
       val.end = dateToTimestamp(new Date(val.end));
   });
 
-  console.log('new events: ', newEventsObj);
   return newEventsObj;
 }
 
