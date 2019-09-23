@@ -33,7 +33,7 @@ export const selectUserById = createSelector(
 export const selectCurrentUserFollowing = createSelector(
   [selectUsers, selectCurrentUser],
   (users, currentUser) => {
-    return users[currentUser].following
+    return currentUser ? users[currentUser].following : null
   }
 );
 
@@ -62,9 +62,13 @@ export const selectUnfollowedUsersList = createSelector(
 export const selectHasActiveFollowedUser = createSelector(
   [selectCurrentUserFollowing],
   following => {
-    return Object.values(following).every(val => {
-      return val
-    })
+    if (following) {
+      return Object.values(following).every(val => {
+        return val
+      })
+    } else {
+      return false;
+    }
   }
 )
 

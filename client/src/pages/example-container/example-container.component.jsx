@@ -6,6 +6,7 @@ import {
   // ExampleContent
 } from './example-container.styles';
 import { CSSTransition } from 'react-transition-group';
+// import UsersFilter from '../../components/users-components/users-filter/users-filter.component';
 
 const ExampleContainer = (props) => {
   // const [isOpen, setOpen] = useState(true);

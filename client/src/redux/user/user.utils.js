@@ -3,11 +3,12 @@ import {
   getEnvironment,
   githubProvider,
   googleProvider,
-  auth
+  auth,
+  getMainHost
 } from "../../firebase/firebase.utils"
 
 
-export const fetchUsersArray = async () => {
+export const fetchUsers = async () => {
   const usersSnap = await firestore.collection(`${getEnvironment()}/data/users`).get();
 
   if (usersSnap.docs.length) {
@@ -19,7 +20,13 @@ export const fetchUsersArray = async () => {
 
 export const arrayToObject = (array) => {
   return array.reduce((prev, current) => {
-    prev[current.data().id] = current.data();
+    prev[current.data().id] = {
+      ...current.data(),
+      following: {
+        ...current.data().following,
+        [getMainHost()]: true
+      }
+    }
     return prev;
   }, {});
 }

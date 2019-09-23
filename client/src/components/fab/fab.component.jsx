@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FabContainer, FabSubContainer, FabMain, FabSub } from "./fab.styles";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -12,6 +12,7 @@ import {
   selectHasActiveFollowedUser
 } from "../../redux/user/user.selectors";
 import { openSnackbar } from "../../redux/snackbar/snackbar.actions";
+import UsersFilter from "../users-components/users-filter/users-filter.component";
 
 const Fab = props => {
   const {
@@ -23,6 +24,8 @@ const Fab = props => {
     openSnackbar,
     hasActiveFollowedUser
   } = props;
+
+  const [isUserFilterOpen, setUserFilterOpen] = useState(false);
 
   const handleGuestFilterClick = filter => {
     setGuestFilter(filter);
@@ -41,6 +44,7 @@ const Fab = props => {
   };
 
   const handleHostFilter = () => {
+    setUserFilterOpen(true);
     setFabOpen(false);
   };
 
@@ -84,26 +88,35 @@ const Fab = props => {
 
   return (
     <>
-      <Backdrop isOpen={isOpen} onClick={() => setFabOpen(false)} />
-      <FabContainer isOpen={isOpen}>
-        <CSSTransition
-          in={isOpen}
-          classNames="fab-subs"
-          timeout={300}
-          unmountOnExit
-        >
-          <FabSubContainer isOpen={isOpen} itemsLength={FabSubs.length}>
-            {FabSubs}
-          </FabSubContainer>
-        </CSSTransition>
-        <FabMain onClick={() => setFabOpen(!isOpen)}>
-          {isOpen ? (
-            <FontAwesomeIcon icon="times" size="2x" />
-          ) : (
-            <FontAwesomeIcon icon="ellipsis-v" size="2x" />
-          )}
-        </FabMain>
-      </FabContainer>
+    {currentUser && 
+      <>
+        <Backdrop isOpen={isOpen} onClick={() => setFabOpen(false)} />
+        <FabContainer isOpen={isOpen}>
+          <CSSTransition
+            in={isOpen}
+            classNames="fab-subs"
+            timeout={300}
+            unmountOnExit
+          >
+            <FabSubContainer isOpen={isOpen} itemsLength={FabSubs.length}>
+              {FabSubs}
+            </FabSubContainer>
+          </CSSTransition>
+          <FabMain onClick={() => setFabOpen(!isOpen)}>
+            {isOpen ? (
+              <FontAwesomeIcon icon="times" size="2x" />
+            ) : (
+              <FontAwesomeIcon icon="ellipsis-v" size="2x" />
+            )}
+          </FabMain>
+        </FabContainer>
+        <UsersFilter 
+          isOpen={isUserFilterOpen}
+          pageName="eventsPage"
+          onClose={() => setUserFilterOpen(false)}
+        />
+      </>
+    }
     </>
   );
 };

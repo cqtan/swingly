@@ -48,6 +48,14 @@ export const loadJsonToObj = filename => {
   });
 }
 
+export const getMainHost = () => {
+  if (getEnvironment() === 'production') {
+    return "wrlw2iC2tsOrM02iLm6OyUXfIv33";
+  } else {
+    return "A8WnU1fmQnWQ3bjvI6PYro32Tjh1";
+  }
+}
+
 export const deleteFieldValue = () => firebase.firestore.FieldValue.delete();
 export const dateToTimestamp = firebase.firestore.Timestamp.fromDate;
 export const getCredentials = firebase.auth.EmailAuthProvider.credential;

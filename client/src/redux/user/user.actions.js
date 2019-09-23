@@ -7,7 +7,7 @@ import {
 } from "./user.utils";
 import { auth, firestore, getEnvironment, getCredentials, deleteFieldValue } from "../../firebase/firebase.utils";
 import { openSnackbar } from "../snackbar/snackbar.actions";
-import { fetchUsersArray } from "./user.utils";
+import { fetchUsers } from "./user.utils";
 
 const getUserWithProvider = async signInMethod => {
   switch (signInMethod) {
@@ -49,7 +49,7 @@ export const setUsers = () => async (dispatch) => {
   try {
     dispatch({ type: UserActionTypes.USER_LOADING });
 
-    const usersObj = await fetchUsersArray();
+    const usersObj = await fetchUsers();
 
     if (Object.keys(usersObj).length) {
       dispatch({
