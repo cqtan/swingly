@@ -5,10 +5,17 @@ import { Header } from './header.component.jsx';
 describe('Header', () => {
   let wrapper = null;
   let currentUser = null;
+  let history = {
+    location: {
+      pathname: [],
+      search: ""
+    }
+  }
   
   beforeEach(() => {
     const mockProps = {
-      currentUser
+      currentUser,
+      history
     }
 
     wrapper = shallow(<Header {...mockProps} />);

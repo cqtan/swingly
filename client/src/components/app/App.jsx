@@ -58,7 +58,7 @@ export const App = props => {
           <Route path="/event-edit" component={EventEditPage} />
           <Route path="/events-agenda" exact component={EventsPage} />
           <Route path="/users" exact component={UsersPage} />
-          <Route path="/" component={Profile} />
+          <Route path="/" component={EventsPage} />
         </Switch>
       )}
     </>

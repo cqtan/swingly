@@ -40,6 +40,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         username: displayName,
         email,
         createdAt,
+        following: {},
         ...additionalData
       });
     } catch (error) {

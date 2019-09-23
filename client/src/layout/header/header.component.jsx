@@ -3,8 +3,12 @@ import {
   HeaderContainer,
   HeaderButtons,
   Logo,
+  ButtonText,
 } from './header.styles';
 import { connect } from 'react-redux';
+import { compose } from "redux";
+import { withRouter } from "react-router-dom";
+import queryString from 'query-string';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Sidebar from '../sidebar/sidebar.component';
 import UserDrawer from '../user-drawer/user-drawer.component';
@@ -16,6 +20,9 @@ import { createStructuredSelector } from 'reselect';
 import ProfileImage from '../../ui/profile-image/profile-image.component';
 
 export const Header = (props) => {
+  const { currentUser, history } = props;
+  const params = queryString.parse(history.location.search);
+
   const [sideOpen, setSideOpen] = useState(false);
   const [signInOpen, setSignInOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);  
@@ -30,16 +37,35 @@ export const Header = (props) => {
     }
   }
 
-  const { currentUser } = props;
+  let leftButtonLink = () => setSideOpen(!sideOpen);
+  let leftButtonIcon = "bars";
+  let leftButtonText = null;
+
+  if (history.location.pathname.includes("/profile")) {
+    if (params.user_id !== currentUser) {
+      leftButtonIcon = "chevron-left";
+      leftButtonLink = () => history.goBack();
+      leftButtonText = "Back";
+    }
+  } else if (history.location.pathname.includes("/event-edit")) {
+    leftButtonLink = () => history.push(`/events-agenda`);
+    leftButtonIcon = "chevron-left";
+    leftButtonText = "Events";
+  }
+
+  const LeftHeaderButton = (
+    <HeaderButtons onClick={leftButtonLink}>
+      <FontAwesomeIcon icon={leftButtonIcon} />
+      {leftButtonText && <ButtonText>{leftButtonText}</ButtonText>}
+    </HeaderButtons>
+  );
 
   return (
     <>
       <HeaderContainer>
-        <HeaderButtons onClick={() => setSideOpen(!sideOpen)} flat>
-          <FontAwesomeIcon icon='bars' />
-        </HeaderButtons>
+        {LeftHeaderButton}
         <Logo to='/'>Swingly</Logo>
-        <HeaderButtons flat onClick={() => currentUser ? setDrawerOpen(!drawerOpen) : handlePopupToggle()}>
+        <HeaderButtons onClick={() => currentUser ? setDrawerOpen(!drawerOpen) : handlePopupToggle()}>
           { currentUser ? 
             <ProfileImage sm /> :
             <FontAwesomeIcon icon='user-circle' size='2x' />
@@ -63,4 +89,7 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
 })
 
-export default connect(mapStateToProps)(Header);
+export default compose(
+  withRouter,
+  connect(mapStateToProps)
+)(Header);

@@ -4,7 +4,7 @@ exports[`App component should render 1`] = `
 "<Fragment>
   <GlobalStyleComponent />
   <Background />
-  <Connect(Header) />
+  <withRouter(Connect(Header)) />
   <Connect(Snackbar) duration={3500} type={[undefined]} text={[undefined]} isOpen={[undefined]} />
   <Switch>
     <Route path=\\"/about\\" exact={true} render={[Function: render]} />
@@ -13,7 +13,7 @@ exports[`App component should render 1`] = `
     <Route path=\\"/event-edit\\" component={[Function: C]} />
     <Route path=\\"/events-agenda\\" exact={true} component={{...}} />
     <Route path=\\"/users\\" exact={true} component={{...}} />
-    <Route path=\\"/\\" component={[Function: C]} />
+    <Route path=\\"/\\" component={{...}} />
   </Switch>
 </Fragment>"
 `;

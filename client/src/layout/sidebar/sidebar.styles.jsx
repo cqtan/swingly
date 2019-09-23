@@ -23,7 +23,7 @@ export const SidebarContainer = styled.div`
   }
 
   svg {
-    margin: 0 2rem 0 1rem;
+    min-width: 4rem;
   }
 `;
 SidebarContainer.displayName = 'SidebarContainer';

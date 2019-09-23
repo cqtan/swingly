@@ -48,55 +48,64 @@ export default (mode) => ({
       fontWeight: 300,
       fontSize: '6rem',
       lineHeight: 1,
-      letterSpacing: '-0.01562em'
+      letterSpacing: '-0.01562em',
+      fontFamily: `"Lato", "Roboto", "Arial", sans-serif`
     },
     h2: {
       fontWeight: 300,
       fontSize: '3.75rem',
       lineHeight: 1,
-      letterSpacing: '-0.00833em'
+      letterSpacing: '-0.00833em',
+      fontFamily: `"Lato", "Roboto", "Arial", sans-serif`
     },
     h3: { 
       fontWeight: 400,
       fontSize: '3rem',
       lineHeight: 1.04,
       letterSpacing: '0em',
+      fontFamily: `"Lato", "Roboto", "Arial", sans-serif`
     },
     h4: { 
       fontWeight: 400,
       fontSize: '2.5rem',
       lineHeight: 1.17,
       letterSpacing: '0em',
+      fontFamily: `"Lato", "Roboto", "Arial", sans-serif`
     },
     h5: { 
       fontWeight: 400,
       fontSize: '1.9rem',
       lineHeight: 1.33,
       letterSpacing: '0em',
+      fontFamily: `"Lato", "Roboto", "Arial", sans-serif`
     },
     subtitle: {
       fontWeight: 400,
       fontSize: '1.2rem',
       lineHeight: 1.75,
       letterSpacing: '0.00938em',
+      fontFamily: `"Lato", "Roboto", "Arial", sans-serif`
     },
     body: {
       fontWeight: 400,
       fontSize: '1.5rem',
       lineHeight: 1.5,
       letterSpacing: '0.00938em',
+      fontFamily: `"Lato", "Roboto", "Arial", sans-serif`
     },
     button: {
       fontWeight: 500,
       fontSize: '1.5rem',
       lineHeight: 1.75,
       letterSpacing: '0.02857em',
+      fontFamily: `"Lato", "Roboto", "Arial", sans-serif`
     },
     caption: {
       fontWeight: 400,
       fontSize: '1rem',
       lineHeight: 1.66,
       letterSpacing: '0.03333em',
+      fontFamily: `"Lato", "Roboto", "Arial", sans-serif`
     }
 
   },
