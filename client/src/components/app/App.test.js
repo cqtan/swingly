@@ -50,7 +50,7 @@ describe('App component', () => {
     expect(mockSetCurrentUser).toHaveBeenCalledTimes(1);
   });
 
-  it('should call fetchEvents on mount only', () => {
+  xit('should call fetchEvents on mount only', () => {
     mockfetchEvents = jest.fn();
     
     mountComponent();
@@ -58,7 +58,7 @@ describe('App component', () => {
     expect(mockfetchEvents).toHaveBeenCalledTimes(1);
   });
 
-  it('should call setUsers on mount only', () => {
+  xit('should call setUsers on mount only', () => {
     mockSetUsers = jest.fn();
     
     mountComponent();

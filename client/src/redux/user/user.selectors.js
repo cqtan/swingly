@@ -18,6 +18,11 @@ export const selectUsers = createSelector(
   (user) => user.users
 );
 
+export const selectIsUsersFinishedLoading = createSelector(
+  [selectUsers],
+  users => Boolean(Object.keys(users).length)
+);
+
 export const selectUserById = createSelector(
   [selectUsers],
   users => memoize(userId => {
@@ -27,7 +32,9 @@ export const selectUserById = createSelector(
 
 export const selectCurrentUserFollowing = createSelector(
   [selectUsers, selectCurrentUser],
-  (users, currentUser) => users[currentUser].following
+  (users, currentUser) => {
+    return users[currentUser].following
+  }
 );
 
 export const selectFollowedUsersList = createSelector(
@@ -51,4 +58,13 @@ export const selectUnfollowedUsersList = createSelector(
     }
   })
 );
+
+export const selectHasActiveFollowedUser = createSelector(
+  [selectCurrentUserFollowing],
+  following => {
+    return Object.values(following).every(val => {
+      return val
+    })
+  }
+)
 

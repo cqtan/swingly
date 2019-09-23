@@ -15,8 +15,8 @@ import EventsPage from "../../pages/events-page/events-page.component";
 import EventEditPage from "../../pages/event-edit-page/event-edit-page.component";
 import EventCreatePage from "../../pages/event-create-page/event-create-page.component";
 import UsersPage from "../../pages/users-page/users-page.component";
-import { selectUserIsLoading } from "../../redux/user/user.selectors";
-import { selectEventsIsLoading } from "../../redux/events/events.selectors";
+import { selectUserIsLoading, selectIsUsersFinishedLoading } from "../../redux/user/user.selectors";
+import { selectEventsIsLoading, selectIsEventsFinishedLoading } from "../../redux/events/events.selectors";
 import Spinner from "../../ui/spinner/spinner.component";
 
 export const App = props => {
@@ -26,15 +26,20 @@ export const App = props => {
     fetchEvents,
     snackbar,
     isLoadingUsers,
-    isLoadingEvents
+    isLoadingEvents,
+    isUsersFinishedLoading,
+    isEventsFinishedLoading
   } = props;
 
   const isLoading = isLoadingUsers || isLoadingEvents;
+  const isLoaded = isUsersFinishedLoading || isEventsFinishedLoading;
 
   useEffect(() => {
-    setCurrentUser();
-    setUsers();
-    fetchEvents();
+    (async () => {
+      await setCurrentUser();
+      await fetchEvents();
+      await setUsers();
+    })();
   }, [setCurrentUser, setUsers, fetchEvents]);
 
   return (
@@ -48,8 +53,8 @@ export const App = props => {
         text={snackbar.text}
         isOpen={snackbar.isOpen}
       />
-      {isLoading ? (
-        <Spinner isLoading={isLoading} />
+      {isLoading || !isLoaded ? (
+        <Spinner isLoading={true} />
       ) : (
         <Switch>
           <Route path="/about" exact render={() => <ExampleContainer hi />} />
@@ -68,7 +73,9 @@ export const App = props => {
 const mapStateToProps = createStructuredSelector({
   snackbar: selectSnackbarState,
   isLoadingUsers: selectUserIsLoading,
-  isLoadingEvents: selectEventsIsLoading
+  isLoadingEvents: selectEventsIsLoading,
+  isUsersFinishedLoading: selectIsUsersFinishedLoading,
+  isEventsFinishedLoading: selectIsEventsFinishedLoading,
 });
 
 const mapDispatchToProps = {

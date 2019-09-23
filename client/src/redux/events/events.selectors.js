@@ -31,6 +31,11 @@ export const selectEventsIsLoading = createSelector(
   (events) => events.isLoading
 );
 
+export const selectIsEventsFinishedLoading = createSelector(
+  [selectAllEvents],
+  events => Boolean(Object.keys(events).length)
+);
+
 export const selectFilter = createSelector(
   [selectEvents],
   (events) => events.filter

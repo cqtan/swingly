@@ -25,7 +25,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         currentUser: action.payload,
         error: null,
-        isLoading: false
       };
     case UserActionTypes.SET_USERS_SUCCESS:
       return {
@@ -97,6 +96,21 @@ const userReducer = (state = INITIAL_STATE, action) => {
           }
         }
       }
+    case UserActionTypes.TOGGLE_FOLLOWED_USER_SUCCESS: {
+      let newFollowing = { ...state.users[state.currentUser].following };
+      newFollowing[action.payload] = !newFollowing[action.payload]
+
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          [state.currentUser]: {
+            ...state.users[state.currentUser],
+            following: newFollowing
+          }
+        }
+      }
+    }
     case UserActionTypes.SIGNUP_FAILED:
     case UserActionTypes.SET_CURRENT_USER_FAILED:
     case UserActionTypes.SET_USERS_FAILED:
@@ -106,6 +120,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.DELETE_FAILED:
     case UserActionTypes.FOLLOW_FAILED:
     case UserActionTypes.UNFOLLOW_FAILED:
+    case UserActionTypes.TOGGLE_FOLLOWED_USER_FAILED:
       return {
         ...state,
         error: action.payload,

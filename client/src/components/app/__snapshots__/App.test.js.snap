@@ -6,14 +6,6 @@ exports[`App component should render 1`] = `
   <Background />
   <withRouter(Connect(Header)) />
   <Connect(Snackbar) duration={3500} type={[undefined]} text={[undefined]} isOpen={[undefined]} />
-  <Switch>
-    <Route path=\\"/about\\" exact={true} render={[Function: render]} />
-    <Route path=\\"/profile\\" component={[Function: C]} />
-    <Route path=\\"/event-create\\" exact={true} component={{...}} />
-    <Route path=\\"/event-edit\\" component={[Function: C]} />
-    <Route path=\\"/events-agenda\\" exact={true} component={{...}} />
-    <Route path=\\"/users\\" exact={true} component={{...}} />
-    <Route path=\\"/\\" component={{...}} />
-  </Switch>
+  <Spinner isLoading={true} />
 </Fragment>"
 `;

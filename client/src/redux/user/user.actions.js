@@ -5,7 +5,7 @@ import {
   signInWithGithub,
   signInWithGoogle
 } from "./user.utils";
-import { auth, firestore, getEnvironment, getCredentials } from "../../firebase/firebase.utils";
+import { auth, firestore, getEnvironment, getCredentials, deleteFieldValue } from "../../firebase/firebase.utils";
 import { openSnackbar } from "../snackbar/snackbar.actions";
 import { fetchUsersArray } from "./user.utils";
 
@@ -65,7 +65,7 @@ export const setUsers = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UserActionTypes.SET_USERS_FAILED,
-      payload: 'Fetch Users failed!'
+      payload: error
     });
     dispatch(openSnackbar("error", "Fetch Users failed!"));
   }
@@ -260,8 +260,18 @@ export const deleteUser = password => async dispatch => {
   }
 };
 
-export const followUser = userId => dispatch => {
+export const followUser = userId => async dispatch => {
   try {
+    const currentUser = auth.currentUser.uid;
+    const userRef = firestore.doc(`${getEnvironment()}/data/users/${currentUser}`);
+    const userSnap = await userRef.get();
+
+    if (userSnap.exists) {
+      await userRef.update({
+        [`following.${userId}`]: true
+      });
+    }
+
     dispatch({
       type: UserActionTypes.FOLLOW_SUCCESS,
       payload: userId
@@ -269,13 +279,23 @@ export const followUser = userId => dispatch => {
   } catch (err) {
     dispatch({
       type: UserActionTypes.FOLLOW_FAILED,
-      payload: userId
+      payload: err
     });
   }
 }
 
-export const unfollowUser = userId => dispatch => {
+export const unfollowUser = userId => async dispatch => {
   try {
+    const currentUser = auth.currentUser.uid;
+    const userRef = firestore.doc(`${getEnvironment()}/data/users/${currentUser}`);
+    const userSnap = await userRef.get();
+
+    if (userSnap.exists) {
+      await userRef.update({
+        [`following.${userId}`]: deleteFieldValue()
+      });
+    }
+
     dispatch({
       type: UserActionTypes.UNFOLLOW_SUCCESS,
       payload: userId
@@ -283,7 +303,21 @@ export const unfollowUser = userId => dispatch => {
   } catch (err) {
     dispatch({
       type: UserActionTypes.UNFOLLOW_FAILED,
+      payload: err
+    });
+  }
+}
+
+export const toggleFollowedUser = userId => async dispatch => {
+  try {
+    dispatch({
+      type: UserActionTypes.TOGGLE_FOLLOWED_USER_SUCCESS,
       payload: userId
+    });
+  } catch (err) {
+    dispatch({
+      type: UserActionTypes.TOGGLE_FOLLOWED_USER_FAILED,
+      payload: err
     });
   }
 }
