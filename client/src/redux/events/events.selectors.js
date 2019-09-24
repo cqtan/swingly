@@ -125,7 +125,7 @@ export const selectUpcomingFilteredEvents = createSelector(
 )
 
 export const selectEventsByUserId = createSelector(
-  [selectUpcomingEvents],
+  [selectUpcomingFilteredEvents],
   events => memoize(userId => {
     if (userId === null) {
       return events;

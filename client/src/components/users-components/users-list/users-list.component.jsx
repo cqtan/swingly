@@ -58,11 +58,13 @@ const UsersList = props => {
 
   return (
     <UsersListContainer>
-      <UsersHeader isFilter={isFilter}>
-        <HeaderItem />
-        <HeaderUsername>Users</HeaderUsername>
-        {showEventsCount && <HeaderItem>Upcoming<br />Events</HeaderItem>}
-      </UsersHeader>
+      {showEventsCount &&
+        <UsersHeader isFilter={isFilter}>
+          <HeaderItem />
+          <HeaderUsername>Users</HeaderUsername>
+          {showEventsCount && <HeaderItem>Upcoming<br />Events</HeaderItem>}
+        </UsersHeader>
+      }
       {UsersRows.length ? (
         UsersRows
       ) : (
