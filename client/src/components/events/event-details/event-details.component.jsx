@@ -72,7 +72,7 @@ export const EventDetails = (props) => {
               title="Guests"
               onClose={() => setGuestListOpen(false)}
               users={getUsersInList(guestList)}
-              isFilter={true}
+              isFilter={false}
               showEventsCount={false}
             />
           </>

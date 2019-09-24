@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ProfileStackContainer, 
   FirstUser,
@@ -6,12 +6,27 @@ import {
 import { connect } from 'react-redux';
 import ProfileImage from '../../../ui/profile-image/profile-image.component';
 import { createStructuredSelector } from 'reselect';
-import { selectUsers } from '../../../redux/user/user.selectors';
+import { selectUsers, selectUsersInList } from '../../../redux/user/user.selectors';
+import UsersModal from '../../users-components/users-modal/users-modal.component';
 
 const ProfileStack = (props) => {
-  const { hosts, users } = props;
+  const { hosts, users, getUsersInList } = props;
+  const [isHostListOpen, setHostListOpen] = useState(false);
 
-  const onClickHandler = () => {}
+  useEffect(() => {
+    if (document.getElementsByClassName("event-details-enter-done").length) {
+      if (isHostListOpen) {
+        document.getElementsByClassName("event-details-enter-done")[0].style.overflow = "hidden";
+      } else {
+        document.getElementsByClassName("event-details-enter-done")[0].style.overflow = "";
+      }
+    }
+  }, [isHostListOpen]);
+
+  const onClickHandler = () => {
+     setHostListOpen(true);
+  }
+
   let profileImages = [];
   let firstUserName = '';
 
@@ -28,15 +43,27 @@ const ProfileStack = (props) => {
   }
 
   return (
-    <ProfileStackContainer onClick={onClickHandler}>
-      <FirstUser>{firstUserName}</FirstUser>
-      {profileImages}
-    </ProfileStackContainer>
+    <>
+      <ProfileStackContainer onClick={onClickHandler}>
+        <FirstUser>{firstUserName}</FirstUser>
+        {profileImages}
+      </ProfileStackContainer>
+      <UsersModal
+        isOpen={isHostListOpen}
+        pageName="eventsPage"
+        title="Hosts"
+        onClose={() => setHostListOpen(false)}
+        users={getUsersInList(hosts)}
+        isFilter={false}
+        showEventsCount={false}
+      />
+    </>
   );
 }
 
 const mapStateToProps = createStructuredSelector({
   users: selectUsers,
+  getUsersInList: selectUsersInList
 });
 
 export default connect(mapStateToProps)(ProfileStack);
