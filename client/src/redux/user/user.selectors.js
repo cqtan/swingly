@@ -37,6 +37,15 @@ export const selectCurrentUserFollowing = createSelector(
   }
 );
 
+export const selectUsersInList = createSelector(
+  [selectUsers],
+  users => memoize(list => {
+    return list.map(userId => {
+      return users[userId];
+    });
+  })
+);
+
 export const selectFollowedUsersList = createSelector(
   [selectUsers, selectCurrentUser],
   (users, currentUser) => Object.values(users).filter(user => {

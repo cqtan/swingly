@@ -44,7 +44,13 @@ const ProfileBody = props => {
           </ProfileButton>
         </>
       ) : (
-        <UsersList users={users} />
+        <>
+          <UsersList users={users} showEventsCount={true} />
+          <ProfileButton onClick={() => history.push("/users")}>
+            <FontAwesomeIcon icon="users" />
+            Add Users
+          </ProfileButton>
+        </>
       )}
     </>
   );

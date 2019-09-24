@@ -9,10 +9,11 @@ import { selectGuestFilter } from "../../redux/events/events.selectors";
 import { setGuestFilter } from "../../redux/events/events.actions";
 import {
   selectCurrentUser,
-  selectHasActiveFollowedUser
+  selectHasActiveFollowedUser,
+  selectFollowedUsersList
 } from "../../redux/user/user.selectors";
 import { openSnackbar } from "../../redux/snackbar/snackbar.actions";
-import UsersFilter from "../users-components/users-filter/users-filter.component";
+import UsersModal from "../users-components/users-modal/users-modal.component";
 
 const Fab = props => {
   const {
@@ -22,10 +23,11 @@ const Fab = props => {
     setGuestFilter,
     currentUser,
     openSnackbar,
+    users,
     hasActiveFollowedUser
   } = props;
 
-  const [isUserFilterOpen, setUserFilterOpen] = useState(false);
+  const [isUserModalOpen, setUserModalOpen] = useState(false);
 
   const handleGuestFilterClick = filter => {
     setGuestFilter(filter);
@@ -44,7 +46,7 @@ const Fab = props => {
   };
 
   const handleHostFilter = () => {
-    setUserFilterOpen(true);
+    setUserModalOpen(true);
     setFabOpen(false);
   };
 
@@ -110,10 +112,14 @@ const Fab = props => {
             )}
           </FabMain>
         </FabContainer>
-        <UsersFilter 
-          isOpen={isUserFilterOpen}
+        <UsersModal
+          isOpen={isUserModalOpen}
           pageName="eventsPage"
-          onClose={() => setUserFilterOpen(false)}
+          title="Host Filter"
+          onClose={() => setUserModalOpen(false)}
+          users={users}
+          isFilter={true}
+          showEventsCount={true}
         />
       </>
     }
@@ -124,7 +130,8 @@ const Fab = props => {
 const mapStateToProps = createStructuredSelector({
   guestFilter: selectGuestFilter,
   currentUser: selectCurrentUser,
-  hasActiveFollowedUser: selectHasActiveFollowedUser
+  hasActiveFollowedUser: selectHasActiveFollowedUser,
+  users: selectFollowedUsersList
 });
 
 const mapDispatchToProps = {

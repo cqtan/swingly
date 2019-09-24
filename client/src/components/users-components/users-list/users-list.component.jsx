@@ -16,12 +16,14 @@ import ProfileImage from "../../../ui/profile-image/profile-image.component";
 import { toggleFollowedUser } from "../../../redux/user/user.actions";
 import { selectIsActiveFilterById } from "../../../redux/user/user.selectors";
 import { selectEventsByUserId } from "../../../redux/events/events.selectors";
+import { NoEventsMessage } from "../../events/events-view-agenda/events-view-agenda.styles";
 
 const UsersList = props => {
   const {
     users,
     history,
     isFilter = false,
+    showEventsCount = false,
     toggleFollowedUser,
     isActiveFilterById,
     getEvents
@@ -49,7 +51,7 @@ const UsersList = props => {
           <ProfileImage key={idx} sm />
         </RowItem>
         <RowUsername>{user.username}</RowUsername>
-        <RowItem>{eventsCount}</RowItem>
+        { showEventsCount && <RowItem>{eventsCount}</RowItem> }
       </UsersRow>
     );
   });
@@ -59,13 +61,15 @@ const UsersList = props => {
       <UsersHeader isFilter={isFilter}>
         <HeaderItem />
         <HeaderUsername>Users</HeaderUsername>
-        <HeaderItem>
-          Upcoming
-          <br />
-          Events
-        </HeaderItem>
+        {showEventsCount && <HeaderItem>Upcoming<br />Events</HeaderItem>}
       </UsersHeader>
-      {UsersRows}
+      {UsersRows.length ? (
+        UsersRows
+      ) : (
+        <NoEventsMessage>
+          No users to be displayed
+        </NoEventsMessage>
+      )}
     </UsersListContainer>
   );
 };

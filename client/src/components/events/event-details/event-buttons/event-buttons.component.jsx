@@ -25,6 +25,7 @@ const EventButtons = props => {
     setEventGuest,
     deleteEventGuest,
     history,
+    openGuestList
   } = props;
   const event = events[eventId];
 
@@ -65,7 +66,9 @@ const EventButtons = props => {
     <>
       <EventButtonsContainer>
         <ButtonItem>
-          <EventButton transparent>
+          <EventButton 
+            transparent
+            onClick={openGuestList}>
             <FontAwesomeIcon icon="list-ul" />
           </EventButton>
           <ButtonLabel>Guests</ButtonLabel>
@@ -112,7 +115,7 @@ const EventButtons = props => {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  events: selectAllEvents
+  events: selectAllEvents,
 });
 
 const mapDispatchToProps = {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   EventDetailsContainer,
   EventImageContainer,
@@ -15,21 +15,35 @@ import Backdrop from '../../../ui/backdrop/backdrop.component';
 import EventButtons from './event-buttons/event-buttons.component';
 import EventDescription from './event-description/event-description.component';
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentUser } from '../../../redux/user/user.selectors';
+import { selectCurrentUser, selectUsersInList } from '../../../redux/user/user.selectors';
+import UsersModal from '../../users-components/users-modal/users-modal.component';
 
 export const EventDetails = (props) => {
-  const { isOpen, onClose, event, currentUser, pageName } = props;
+  const { isOpen, onClose, event, currentUser, pageName, getUsersInList } = props;
+  const [isGuestListOpen, setGuestListOpen] = useState(false);
+  const guestList = event && Object.keys(event.guests);
+
+  useEffect(() => {
+    if (document.getElementsByClassName("event-details-enter-done").length) {
+      if (isGuestListOpen) {
+        document.getElementsByClassName("event-details-enter-done")[0].style.overflow = "hidden";
+      } else {
+        document.getElementsByClassName("event-details-enter-done")[0].style.overflow = "";
+      }
+    }
+  }, [isGuestListOpen]);
 
   return (
     <>
       <Backdrop isOpen={isOpen} onClick={onClose}/>
       <Modal
+        className="event-details-modal"
         isOpen={isOpen}
         pageName={pageName}
         transName="event-details">
         { event &&
           <>
-            <EventDetailsContainer>
+            <EventDetailsContainer >
               <CloseButton onClick={onClose} />
               <EventImageContainer>
                 <EventImage src='http://lorempixel.com/400/200/cats' />
@@ -42,13 +56,25 @@ export const EventDetails = (props) => {
               </DetailsContainer>
               { currentUser &&
                 <ButtonsContainer>
-                  <EventButtons eventId={event.id} onClose={onClose} />
+                  <EventButtons 
+                    eventId={event.id} 
+                    onClose={onClose}
+                    openGuestList={() => setGuestListOpen(true)} />
                 </ButtonsContainer>
               }
               { event.description && 
                 <EventDescription description={event.description} />
               }
             </EventDetailsContainer>
+            <UsersModal
+              isOpen={isGuestListOpen}
+              pageName="eventsPage"
+              title="Guests"
+              onClose={() => setGuestListOpen(false)}
+              users={getUsersInList(guestList)}
+              isFilter={true}
+              showEventsCount={false}
+            />
           </>
         }
       </Modal>
@@ -57,7 +83,8 @@ export const EventDetails = (props) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  getUsersInList: selectUsersInList
 });
 
 export default connect(mapStateToProps)(EventDetails);

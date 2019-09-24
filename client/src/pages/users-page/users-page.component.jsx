@@ -12,7 +12,7 @@ const UsersPage = (props) => {
 
   return (
     <UsersPageContainer>
-      <UsersList users={users} />
+      <UsersList users={users} showEventsCount={true} />
     </UsersPageContainer>
   );
 }

@@ -8,8 +8,6 @@ import ProfileImage from '../../../ui/profile-image/profile-image.component';
 import { createStructuredSelector } from 'reselect';
 import { selectUsers } from '../../../redux/user/user.selectors';
 
-
-// TODO: Add onClick to display Modal with list of hosts
 const ProfileStack = (props) => {
   const { hosts, users } = props;
 
