@@ -19,7 +19,7 @@ export const BackgroundSurface = styled.div`
   z-index: -100;
   background-color: ${props => props.theme.background.layer1};
   transition: background-color .2s ease-out;
-  background-image: ${setBgImage};
-  background-repeat: repeat;
+  /* background-image: ${setBgImage};
+  background-repeat: repeat; */
 `;
 BackgroundSurface.displayName = 'BackgroundSurface';

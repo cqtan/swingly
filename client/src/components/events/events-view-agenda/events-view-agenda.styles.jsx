@@ -23,7 +23,8 @@ EventsViewAgendaContainer.displayName = 'EventsViewAgendaContainer';
 export const MonthRow = styled.div`
   position: sticky;
   top: 6rem;
-  background-color: ${getBgColor};
+  /* background-color: ${getBgColor}; */
+  background-color: ${props => props.theme.background.layer2};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,7 +35,6 @@ export const MonthRow = styled.div`
   margin: ${props => props.theme.spacing(1)} auto;
   margin-top: ${props => props.theme.spacing(3)};
   padding: 0 0.8rem; 
-  box-shadow: ${props => props.theme.shadows[2]};
 `;
 MonthRow.displayName = 'MonthRow';
 
@@ -76,7 +76,8 @@ export const DayEvents = styled(Button)`
   flex: 1 1 80%;
   align-content: center;
   padding: 0.5rem 0.8rem;
-  background-color: ${getBgColor};
+  /* background-color: ${getBgColor}; */
+  background-color: ${props => props.theme.background.layer2};
   ${props => props.theme.mixins.defaultBorderRadius}; 
   border: ${props => props.isToday ? `1px solid ${props.theme.palette.primary.main}` : `none`};
   margin: 0;
