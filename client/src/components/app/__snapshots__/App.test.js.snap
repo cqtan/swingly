@@ -4,8 +4,10 @@ exports[`App component should render 1`] = `
 "<Fragment>
   <GlobalStyleComponent />
   <Background />
-  <withRouter(Connect(Header)) />
-  <Connect(Snackbar) duration={3500} type={[undefined]} text={[undefined]} isOpen={[undefined]} />
-  <Spinner isLoading={true} />
+  <ErrorBoundary>
+    <withRouter(Connect(Header)) />
+    <Connect(Snackbar) duration={3500} type={[undefined]} text={[undefined]} isOpen={[undefined]} />
+    <Spinner isLoading={true} />
+  </ErrorBoundary>
 </Fragment>"
 `;

@@ -75,6 +75,10 @@ export const Sidebar = props => {
           <FontAwesomeIcon icon="info-circle" />
           About
         </SidebarButton>
+        <SidebarButton onClick={() => setOpen(false)} as={Link} to="/error">
+          <FontAwesomeIcon icon="exclamation-circle" />
+          Error Page
+        </SidebarButton>
         <SidebarButton onClick={handleToggleTheme} transparent flat>
           {toggleThemeIcon}
           {toggleThemeText}

@@ -12,12 +12,14 @@ import { selectSnackbarState } from "../../redux/snackbar/snackbar.selectors";
 import { selectUserIsLoading, selectIsUsersFinishedLoading } from "../../redux/user/user.selectors";
 import { selectEventsIsLoading, selectIsEventsFinishedLoading } from "../../redux/events/events.selectors";
 import Spinner from "../../ui/spinner/spinner.component";
+import ErrorBoundary from "../error-boundary/error-boundary.component";
 const ExampleContainer = lazy(() => import("../../pages/example-container/example-container.component"));
 const Profile = lazy(() => import("../../pages/profile/profile.component"));
 const EventsPage = lazy(() => import("../../pages/events-page/events-page.component"));
 const EventEditPage = lazy(() => import("../../pages/event-edit-page/event-edit-page.component"));
 const EventCreatePage = lazy(() => import("../../pages/event-create-page/event-create-page.component"));
 const UsersPage = lazy(() => import("../../pages/users-page/users-page.component"));
+const ErrorPage = lazy(() => import("../../pages/error-page/error-page.component"));
 
 export const App = props => {
   const {
@@ -46,28 +48,33 @@ export const App = props => {
     <>
       <GlobalStyle />
       <Background />
-      <Header />
-      <Snackbar
-        duration={3500}
-        type={snackbar.type}
-        text={snackbar.text}
-        isOpen={snackbar.isOpen}
-      />
-      {isLoading || !isLoaded ? (
-        <Spinner isLoading={true} />
-      ) : (
-        <Switch>
-          <Suspense fallback={<Spinner isloading={true} />}>
-            <Route path="/about" exact component={ExampleContainer} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/event-create" exact component={EventCreatePage} />
-            <Route path="/event-edit" component={EventEditPage} />
-            <Route path="/events-agenda" exact component={EventsPage} />
-            <Route path="/users" exact component={UsersPage} />
-            <Route path="/" exact component={EventsPage} />
-          </Suspense>
-        </Switch>
-      )}
+      <ErrorBoundary>
+        <>
+          <Header />
+          <Snackbar
+            duration={3500}
+            type={snackbar.type}
+            text={snackbar.text}
+            isOpen={snackbar.isOpen}
+          />
+          {isLoading || !isLoaded ? (
+            <Spinner isLoading={true} />
+          ) : (
+            <Switch>
+              <Suspense fallback={<Spinner isloading={true} />}>
+                <Route path="/about" exact component={ExampleContainer} />
+                <Route path="/profile" component={Profile} />
+                <Route path="/event-create" exact component={EventCreatePage} />
+                <Route path="/event-edit" component={EventEditPage} />
+                <Route path="/events-agenda" exact component={EventsPage} />
+                <Route path="/users" exact component={UsersPage} />
+                <Route path="/error" exact component={ErrorPage} />              
+                <Route path="/" exact component={EventsPage} />
+              </Suspense>
+            </Switch>
+          )}
+        </>
+      </ErrorBoundary>
     </>
   );
 };
