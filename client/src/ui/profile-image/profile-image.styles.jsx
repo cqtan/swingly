@@ -73,7 +73,7 @@ export const ProfileImageContainer = styled.img.attrs(props => ({
   ${selectSize};
   border-radius: 50%;
   object-fit: cover;
-  border-color: ${props => props.theme.palette.divider};
+  border-color: ${selectBorderColor};
 `;
 ProfileImageContainer.displayName = 'ProfileImageContainer';
 

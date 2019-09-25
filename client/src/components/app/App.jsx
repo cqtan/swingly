@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { GlobalStyle } from "../../global.styles";
-import ExampleContainer from "../../pages/example-container/example-container.component";
-import Profile from "../../pages/profile/profile.component";
 import Background from "../../ui/background/background.component";
 import Header from "../../layout/header/header.component";
 import Snackbar from "../../ui/snackbar/snackbar.component";
@@ -11,13 +9,15 @@ import { setCurrentUser, setUsers } from "../../redux/user/user.actions";
 import { fetchEvents } from "../../redux/events/events.actions";
 import { createStructuredSelector } from "reselect";
 import { selectSnackbarState } from "../../redux/snackbar/snackbar.selectors";
-import EventsPage from "../../pages/events-page/events-page.component";
-import EventEditPage from "../../pages/event-edit-page/event-edit-page.component";
-import EventCreatePage from "../../pages/event-create-page/event-create-page.component";
-import UsersPage from "../../pages/users-page/users-page.component";
 import { selectUserIsLoading, selectIsUsersFinishedLoading } from "../../redux/user/user.selectors";
 import { selectEventsIsLoading, selectIsEventsFinishedLoading } from "../../redux/events/events.selectors";
 import Spinner from "../../ui/spinner/spinner.component";
+const ExampleContainer = lazy(() => import("../../pages/example-container/example-container.component"));
+const Profile = lazy(() => import("../../pages/profile/profile.component"));
+const EventsPage = lazy(() => import("../../pages/events-page/events-page.component"));
+const EventEditPage = lazy(() => import("../../pages/event-edit-page/event-edit-page.component"));
+const EventCreatePage = lazy(() => import("../../pages/event-create-page/event-create-page.component"));
+const UsersPage = lazy(() => import("../../pages/users-page/users-page.component"));
 
 export const App = props => {
   const {
@@ -57,13 +57,15 @@ export const App = props => {
         <Spinner isLoading={true} />
       ) : (
         <Switch>
-          <Route path="/about" exact render={() => <ExampleContainer hi />} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/event-create" exact component={EventCreatePage} />
-          <Route path="/event-edit" component={EventEditPage} />
-          <Route path="/events-agenda" exact component={EventsPage} />
-          <Route path="/users" exact component={UsersPage} />
-          <Route path="/" component={EventsPage} />
+          <Suspense fallback={<Spinner isloading={true} />}>
+            <Route path="/about" exact component={ExampleContainer} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/event-create" exact component={EventCreatePage} />
+            <Route path="/event-edit" component={EventEditPage} />
+            <Route path="/events-agenda" exact component={EventsPage} />
+            <Route path="/users" exact component={UsersPage} />
+            <Route path="/" exact component={EventsPage} />
+          </Suspense>
         </Switch>
       )}
     </>
