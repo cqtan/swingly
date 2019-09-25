@@ -28,11 +28,13 @@ const Modal = props => {
       if (document.body.style.position !== 'fixed') {
         saveScrollPosForPage(pageName);
         setBodyStyles();
+        console.log('modal opened', isOpen);
       }
     } else {
       if (document.body.style.position === 'fixed') {
         resetBodyStyles();
         setScrollPosForPage(pageName);
+        console.log('modal close', isOpen);
       }
     }
   }

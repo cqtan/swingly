@@ -9,7 +9,7 @@ export default {
   },
   background: {
     layer1: "#eceff1",
-    layer2: "#fff",
+    layer2: "#e8e8e8",
     layer3: '#fff',
     highlight: 'rgba(0,0,0,0.08)'
   }

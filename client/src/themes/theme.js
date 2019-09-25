@@ -15,6 +15,7 @@ export default (mode) => ({
     warning: "#ffa000",
     info: "#90caf9",
     success: "#43a047",
+    divider: '#4d4d4d',
     grey: {
       0: "#0b0b0b",
       1: "#212121",

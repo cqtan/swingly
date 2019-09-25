@@ -110,17 +110,21 @@ export const selectUpcomingEventsFilteredByGuestType = createSelector(
 )
 
 export const selectUpcomingFilteredEvents = createSelector(
-  [selectUpcomingEventsFilteredByGuestType, selectCurrentUserFollowing],
-  (events, following) => {
-    return events.filter(event => {
-      return event.hosts.some(host => {
-        if (following.hasOwnProperty(host)) {
-          return following[host]
-        } else {
-          return false;
-        }
-      }) 
-    })
+  [selectUpcomingEventsFilteredByGuestType, selectUpcomingEvents, selectCurrentUserFollowing],
+  (eventsFiltered, events, following) => {
+    if (following) {
+      return eventsFiltered.filter(event => {
+        return event.hosts.some(host => {
+          if (following.hasOwnProperty(host)) {
+            return following[host]
+          } else {
+            return false;
+          }
+        }) 
+      })
+    } else {
+      return events;
+    }
   }
 )
 
