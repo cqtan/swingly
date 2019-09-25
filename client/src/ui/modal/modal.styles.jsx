@@ -21,5 +21,6 @@ export const ModalTitle = styled.div`
   ${props => props.theme.typo.h4};
   text-align: center;
   color: ${props => props.theme.palette.primary.main};
+  margin-bottom: ${props => props.theme.spacing(2)};
 `;
 ModalTitle.displayName = 'ModalTitle';

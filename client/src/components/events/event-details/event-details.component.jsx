@@ -5,11 +5,11 @@ import {
   EventImage,
   EventTitle,
   DetailsContainer,
-  ButtonsContainer
+  ButtonsContainer,
+  CloseButton
 } from './event-details.styles';
 import { connect } from 'react-redux';
 import Modal from '../../../ui/modal/modal.component';
-import CloseButton from '../../../ui/button/button-close/button-close.component';
 import Details from './details/details.component';
 import Backdrop from '../../../ui/backdrop/backdrop.component';
 import EventButtons from './event-buttons/event-buttons.component';
@@ -17,6 +17,7 @@ import EventDescription from './event-description/event-description.component';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser, selectUsersInList } from '../../../redux/user/user.selectors';
 import UsersModal from '../../users-components/users-modal/users-modal.component';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const EventDetails = (props) => {
   const { isOpen, onClose, event, currentUser, pageName, getUsersInList } = props;
@@ -44,7 +45,9 @@ export const EventDetails = (props) => {
         { event &&
           <>
             <EventDetailsContainer >
-              <CloseButton onClick={onClose} />
+              <CloseButton onClick={onClose}>
+                <FontAwesomeIcon icon="times" />
+              </CloseButton>
               <EventImageContainer>
                 <EventImage src='http://lorempixel.com/400/200/cats' />
               </EventImageContainer>
@@ -68,7 +71,6 @@ export const EventDetails = (props) => {
             </EventDetailsContainer>
             <UsersModal
               isOpen={isGuestListOpen}
-              pageName="eventsPage"
               title="Guests"
               onClose={() => setGuestListOpen(false)}
               users={getUsersInList(guestList)}

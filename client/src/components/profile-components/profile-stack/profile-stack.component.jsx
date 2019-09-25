@@ -50,7 +50,6 @@ const ProfileStack = (props) => {
       </ProfileStackContainer>
       <UsersModal
         isOpen={isHostListOpen}
-        pageName="eventsPage"
         title="Hosts"
         onClose={() => setHostListOpen(false)}
         users={getUsersInList(hosts)}

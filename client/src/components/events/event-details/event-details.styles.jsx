@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ButtonCloseContainer } from '../../../ui/button/button-close/button-close.styles';
 
 export const EventDetailsContainer = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ export const EventImageContainer = styled.div`
   display: flex;
   height: 13rem;
   width: 120%;
-  margin: -6.5rem -2rem 0 -2rem;
+  margin: -8.5rem -2rem 0 -2rem;
   background-color: #fff;
   border-radius: 5px;
 `;
@@ -47,5 +48,10 @@ export const ButtonsContainer = styled.div`
   margin: 1rem 0 1rem 0;
 `;
 ButtonsContainer.displayName = 'ButtonsContainer';
+
+export const CloseButton = styled(ButtonCloseContainer)`
+  margin-top: -2rem;
+`;
+CloseButton.displayName = 'CloseButton';
 
 
