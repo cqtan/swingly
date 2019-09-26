@@ -8,7 +8,7 @@ export const UserDrawerContainer = styled.div`
   right: ${props => props.isOpen ? `0` : `-6rem`};
   display: flex;
   width: 12rem;
-  background-color: ${props => props.theme.background.layer2};
+  background-color: ${props => props.theme.background.layer1};
   top: 6rem;
   z-index: ${props => props.isOpen ? 500 : -500 }; 
   opacity: ${props => props.isOpen ? 1 : 0};
@@ -27,10 +27,10 @@ export const DrawerButton = styled(Button)`
   text-transform: none;
   justify-content: flex-start;
   margin: ${props => props.theme.spacing(1)} 0;
-  color: ${props => props.theme.palette.text.secondary};
+  color: ${props => props.theme.palette.text.primary};
 
   & > a {
-    color: ${props => props.theme.palette.text.secondary};
+    color: ${props => props.theme.palette.text.primary};
   }
 `;
 DrawerButton.displayName = 'DrawerButtons';

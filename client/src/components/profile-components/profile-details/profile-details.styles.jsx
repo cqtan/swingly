@@ -19,6 +19,7 @@ export const ProfileButton = styled(Button)`
   border-radius: 50%;
   padding: 1rem;
   color: ${props => props.theme.palette.text.secondary};
+  background-color: ${({ theme }) => theme.type === "dark" ? theme.palette.grey[4] : theme.palette.grey[7]};
 `;
 ProfileButton.displayName = 'ProfileButton';
 

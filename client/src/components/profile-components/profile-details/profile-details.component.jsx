@@ -35,7 +35,7 @@ const ProfileDetails = props => {
   let DetailsButton = null;
   if (currentUser === user.id) {
     DetailsButton = (
-      <ProfileButton transparent flat onClick={() => setEditFormOpen(true)}>
+      <ProfileButton flat onClick={() => setEditFormOpen(true)}>
         <FontAwesomeIcon icon="edit" />
       </ProfileButton>
     );
