@@ -24,8 +24,6 @@ const Modal = props => {
     children,
   } = props;
 
-  console.log('subtitle: ', subtitle);
-
   if (pageName) {
     if (isOpen) {
       if (document.body.style.position !== 'fixed') {

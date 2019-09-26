@@ -25,8 +25,8 @@ ProfileToggle.displayName = 'ProfileToggle';
 export const ToggleButton = styled(Button)`
   margin: 0;
   flex: 0 1 50%;
-  color: ${props => props.isActive ? props.theme.palette.primary.main : props.theme.buttons.disabled.text};
-  background-color: transparent;
+  color: ${props => props.isActive ? props.theme.palette.grey[1] : props.theme.palette.text.primary};
+  background-color: ${props => props.isActive ? props.theme.palette.primary.main :  props.theme.background.layer1};
   border-radius: 0;
   box-shadow: none;
 `;

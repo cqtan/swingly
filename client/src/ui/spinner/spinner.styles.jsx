@@ -6,6 +6,6 @@ export const SpinnerContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 80vh;
+  height: 100vh;
 `;
 SpinnerContainer.displayName = 'SpinnerContainer';
