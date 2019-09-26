@@ -20,10 +20,16 @@ const userReducer = (state = INITIAL_STATE, action) => {
         isLoading: false
       };
     case UserActionTypes.SET_CURRENT_USER_SUCCESS:
+        return {
+          ...state,
+          currentUser: action.payload,
+          error: null,
+        };
     case UserActionTypes.SIGNIN_SUCCESS:
       return {
         ...state,
         currentUser: action.payload,
+        isLoading: false,
         error: null,
       };
     case UserActionTypes.SET_USERS_SUCCESS:

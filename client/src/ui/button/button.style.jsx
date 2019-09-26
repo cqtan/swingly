@@ -22,7 +22,7 @@ const defaultButton = css`
   @media (hover: hover) {
     :hover {
       box-shadow: ${props => !props.disabled && props.theme.shadows[8]};
-      filter: ${props => !props.disabled && `brightness(105%)`};
+      filter: ${props => !props.disabled && `brightness(120%)`};
     }
   }
 
@@ -33,8 +33,11 @@ const defaultButton = css`
 
 const flatButton = css`
   border-radius: 0;
-  :hover {
-    background-color: ${props => props.theme.background.highlight};
+
+  @media (hover: hover) {
+    :hover {
+      filter: ${props => !props.disabled && `brightness(120%)`};
+    }
   }
 `;
 

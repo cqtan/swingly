@@ -45,15 +45,17 @@ export const SidebarButton = styled(Button)`
   padding: 1.5rem;
   ${props => props.theme.typo.button};
   border-radius: 0;
-  color: ${props => props.theme.palette.text.primary};
+  color: ${props => props.isactive === "true" ? props.theme.palette.grey[1] : props.theme.palette.text.primary};
+  transition: all .2s ease-out;
+  text-transform: none;
+  background-color: ${props => props.isactive === "true" ? props.theme.palette.primary.main : props.theme.background.layer2};
+
   @media(hover: hover) {
     :hover {
-      background-color: ${props => props.theme.background.highlight};
+      filter: ${props => !props.disabled && `brightness(120%)`};
       box-shadow: none
     }
   }
-  transition: all .2s ease-out;
-  text-transform: none;
 `;
 SidebarButton.displayName = 'SidebarButton';
 

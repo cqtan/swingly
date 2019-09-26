@@ -83,7 +83,8 @@ export const DayEvents = styled(Button)`
     :hover {
       box-shadow: none;
       border: ${props => !props.isToday && `1px solid ${props.theme.palette.primary.main}`};
-      background-color: ${props => props.isToday ? props.theme.palette.primary.light : props.theme.type === "light" && props.theme.background.layer1};
+      background-color: ${props => props.isToday ? props.theme.palette.primary.main : props.theme.background.layer3};
+      filter: ${props => !props.disabled && `brightness(120%)`};
     }
   }
 `;

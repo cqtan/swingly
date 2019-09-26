@@ -38,10 +38,12 @@ export const HeaderButtons = styled(Button)`
   margin: 0;
   box-shadow: none;
 
-  :hover {
-    background-color: none;
-    box-shadow: none;
-    filter: none;
+  @media (hover: hover) {
+    :hover {
+      background-color: none;
+      box-shadow: none;
+      filter: none;
+    }
   }
 
   :active {

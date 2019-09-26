@@ -26,6 +26,12 @@ export const Sidebar = props => {
     history
   } = props;
 
+  const homeRoute = "/";
+  const createEventRoute = "/event-create";
+  const usersRoute = "/users";
+  const aboutRoute = "/about";
+  const errorRoute = "/error";
+
   const toggleThemeIcon = isDarkMode ? (
     <FontAwesomeIcon icon="sun" />
   ) : (
@@ -37,14 +43,14 @@ export const Sidebar = props => {
   const handleToggleTheme = () => {
     toggleTheme();
     setOpen(false);
-  }
+  };
 
   const handleLinkClick = () => {
     if (!currentUser) {
-      openSnackbar('info', 'Please sign in to use this feature');
+      openSnackbar("info", "Please sign in to use this feature");
     }
     setOpen(false);
-  }
+  };
 
   return (
     <>
@@ -52,34 +58,43 @@ export const Sidebar = props => {
       <SidebarContainer isOpen={isOpen}>
         <SidebarHeader>Navigation</SidebarHeader>
         <SidebarButton
+          isactive={(history.location.pathname === homeRoute).toString()}
           onClick={() => setOpen(false)}
           as={Link}
-          to="/"
+          to={homeRoute}
         >
           <FontAwesomeIcon icon="calendar-week" />
           Agenda View
         </SidebarButton>
         <SidebarButton
+          isactive={(history.location.pathname === createEventRoute).toString()}
           onClick={handleLinkClick}
           as={Link}
-          to={currentUser ? '/event-create' : history.location.pathname}
+          to={currentUser ? createEventRoute : history.location.pathname}
         >
           <FontAwesomeIcon icon="calendar-plus" />
           Create Event
         </SidebarButton>
-        <SidebarButton 
-          onClick={handleLinkClick} 
-          as={Link} 
-          to={currentUser ? '/users' : history.location.pathname}>
+        <SidebarButton
+          isactive={(history.location.pathname === usersRoute).toString()}
+          onClick={handleLinkClick}
+          as={Link}
+          to={currentUser ? usersRoute : history.location.pathname}
+        >
           <FontAwesomeIcon icon="users" />
           Users
         </SidebarButton>
-        <SidebarButton onClick={() => setOpen(false)} as={Link} to="/about">
+        <SidebarButton
+          isactive={(history.location.pathname === aboutRoute).toString()}
+          onClick={() => setOpen(false)}
+          as={Link}
+          to={aboutRoute}
+        >
           <FontAwesomeIcon icon="info-circle" />
           About
         </SidebarButton>
-        <SidebarButton onClick={() => setOpen(false)} as={Link} to="/error">
-          <FontAwesomeIcon icon="exclamation-circle" />
+        <SidebarButton onClick={() => setOpen(false)} as={Link} to={errorRoute}>
+          <FontAwesomeIcon icon="exclamation-triangle" />
           Error Page
         </SidebarButton>
         <SidebarButton onClick={handleToggleTheme} transparent flat>
