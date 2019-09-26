@@ -4,7 +4,7 @@ import { ButtonCloseContainer } from '../../../ui/button/button-close/button-clo
 export const EventDetailsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 80vw;
+  width: 100%;
 `;
 EventDetailsContainer.displayName = 'EventDetailsContainer';
 

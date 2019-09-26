@@ -10,6 +10,7 @@ export const ExampleButton = styled(Button)`
 ExampleButton.displayName = 'ExampleButton';
 
 export const ExampleBgLogoContainer = styled.div`
+  margin: 0 auto;
   margin-top: 3rem;
   ${props => props.theme.mixins.absCentered};
   height: 30rem;
@@ -20,6 +21,10 @@ export const ExampleBgLogoContainer = styled.div`
   border-radius: 50%;
   background-color: ${props => props.theme.type === 'dark' ? props.theme.palette.grey[2] : props.theme.palette.grey[8]};
   ${props => fadeInOut(props.transName,'left')};
+
+  @media ${props => props.theme.media.device.tablet} {
+    max-width: ${props => props.theme.media.size.tablet};
+  }
 `;
 ExampleBgLogoContainer.displayName = 'ExampleBgLogoContainer';
 

@@ -110,7 +110,7 @@ const EventCreateForm = (props) => {
           helperText={touched.description ? errors.description : ''}
           error={touched.description && Boolean(errors.description)}
         />
-        <TextField 
+        {/* <TextField 
           name='currency'
           label='Currency'
           onChange={(e) => onChange('currency', e)}
@@ -118,7 +118,7 @@ const EventCreateForm = (props) => {
           value={values.currency}
           helperText={touched.currency ? errors.currency : ''}
           error={touched.currency && Boolean(errors.currency)}
-        />
+        /> */}
         <ButtonContainer>
           <FormButton 
             type='button'

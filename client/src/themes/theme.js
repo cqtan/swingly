@@ -113,7 +113,7 @@ export default (mode) => ({
   buttons: {
     disabled: {
       text: "rgba(255, 255, 255, 0.26)",
-      bg: "rgba(255, 255, 255, 0.12)",
+      bg: "#d2d2d2",
     }
   },
   spacing: (multiplier) => (`${10 * multiplier}px`),
@@ -135,5 +135,25 @@ export default (mode) => ({
     random_xl: 'http://lorempixel.com/640/480/cats',
     profile_md: '../static/images/profile_md.png', 
     placeholder_lg: '../static/images/placeholder-600x400.png'
+  },
+  media: {
+    size: {
+      mobileS: '320px',
+      mobileM: '375px',
+      mobileL: '425px',
+      tablet: '768px',
+      laptop: '1024px',
+      laptopL: '1440px',
+      desktop: '2560px'
+    },
+    device: {
+      mobileS: `(min-width: 320px)`,
+      mobileM: `(min-width: 375px)`,
+      mobileL: `(min-width: 425px)`,
+      tablet: `(min-width: 768px)`,
+      laptop: `(min-width: 1024px)`,
+      laptopL: `(min-width: 1440px)`,
+      desktop: `(min-width: 2560px)`,
+    }
   }
 });

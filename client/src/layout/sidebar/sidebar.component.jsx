@@ -60,14 +60,17 @@ export const Sidebar = props => {
           Agenda View
         </SidebarButton>
         <SidebarButton
-          onClick={() => handleLinkClick()}
+          onClick={handleLinkClick}
           as={Link}
           to={currentUser ? '/event-create' : history.location.pathname}
         >
           <FontAwesomeIcon icon="calendar-plus" />
           Create Event
         </SidebarButton>
-        <SidebarButton onClick={() => setOpen(false)} as={Link} to="/users">
+        <SidebarButton 
+          onClick={handleLinkClick} 
+          as={Link} 
+          to={currentUser ? '/users' : history.location.pathname}>
           <FontAwesomeIcon icon="users" />
           Users
         </SidebarButton>

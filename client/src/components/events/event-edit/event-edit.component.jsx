@@ -24,7 +24,7 @@ const EventEdit = props => {
     location: event.location,
     mapLink: event.mapLink,
     description: event.description,
-    currency: event.currency
+    // currency: event.currency
   };
 
   const validationSchema = Yup.object().shape({
@@ -42,7 +42,7 @@ const EventEdit = props => {
     description: Yup.string().required(
       "Please enter a description of the event"
     ),
-    currency: Yup.string().required("Please enter the currency of choice")
+    // currency: Yup.string().required("Please enter the currency of choice")
   });
 
   return (

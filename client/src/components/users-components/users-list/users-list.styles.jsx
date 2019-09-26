@@ -1,14 +1,6 @@
 import styled, { css } from 'styled-components';
 import { MonthRow, DayEvents } from '../../events/events-view-agenda/events-view-agenda.styles';
 
-const getBgColor = (props, alpha) => {
-  if (props.theme.type === 'dark') {
-    return `rgba(55,55,55, ${alpha})`;
-  } else {
-    return `rgba(232,232,232, ${alpha})`;
-  }
-}
-
 const setFilterStyles = (props) => {
   const { active, theme } = props;
   
@@ -16,6 +8,13 @@ const setFilterStyles = (props) => {
     ${theme.mixins.defaultBorderRadius};
     border: ${active ? `1px solid ${theme.palette.primary.main}` : `1px solid ${theme.palette.grey[7]}`};
     opacity: ${active ? 1 : 0.5};
+
+    @media (hover: hover) {
+      :hover {
+        border: ${props.active && `1px solid ${props.theme.palette.primary.main}`};
+        background-color: ${props.active ? props.theme.palette.primary.light : props.theme.type === "light" && props.theme.background.layer1};
+      }
+    }
   `;
 }
 
@@ -60,14 +59,19 @@ export const UsersRow = styled(DayEvents)`
   align-items: center;
   margin: 0.5rem 0;
   border-radius: 0;
-  background-color: ${props => getBgColor(props, 0.3)};
+  background-color: ${props => props.active ? props.theme.palette.primary.main : props.theme.background.layer3};
+  color: ${props => props.active ? props.theme.palette.grey[1] : props.theme.palette.text.primary};
   ${props => props.theme.typo.body};
   ${props => props.isFilter === true && setFilterStyles};
+  box-shadow: none;
+
+  @media ${props => props.theme.media.device.tablet} {
+    ${props => props.theme.mixins.defaultBorderRadius};
+  }
 
   @media (hover: hover) {
     :hover {
-      box-shadow: ${props => !props.disabled && props.theme.shadows[8]};
-      background-color: ${props => getBgColor(props, 1)};
+      background-color: ${props => props.theme.type === "light" && props.theme.background.layer1};
     }
   }
 `;

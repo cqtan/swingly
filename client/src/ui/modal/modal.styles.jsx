@@ -14,13 +14,18 @@ export const ModalContainer = styled.div`
   max-height: 90vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  width: 90%;
+
+  @media ${props => props.theme.media.device.tablet} {
+    max-width: 52rem;
+  }
 `;
 ModalContainer.displayName = 'ModalContainer';
 
 export const ModalTitle = styled.div`
   ${props => props.theme.typo.h4};
   text-align: center;
-  color: ${props => props.theme.palette.primary.main};
+  color: ${({ theme })=> theme.type === "dark" ? theme.palette.primary.main : theme.palette.text.primary};
   margin-bottom: ${props => props.theme.spacing(2)};
 `;
 ModalTitle.displayName = 'ModalTitle';

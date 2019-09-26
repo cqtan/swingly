@@ -9,7 +9,11 @@ export const ProfileDetailsContainer = styled.div`
   align-content: flex-start;
   flex-wrap: wrap;
   padding: ${props => props.theme.spacing(2)};
-  border-bottom: 2px solid ${props => props.theme.palette.text.secondary};
+
+  @media ${props => props.theme.media.device.tablet} {
+    max-width: 52rem;
+    margin: 0 auto;
+  }
 `;
 ProfileDetailsContainer.displayName = 'ProfileDetailsContainer';
 

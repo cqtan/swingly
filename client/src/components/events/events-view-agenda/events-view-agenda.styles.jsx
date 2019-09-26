@@ -1,14 +1,6 @@
 import styled from 'styled-components';
 import Button from '../../../ui/button/button.component';
 
-const getBgColor = props => {
-  if (props.theme.type === 'dark') {
-    return props.theme.palette.grey[2]
-  } else {
-    return props.theme.palette.grey[8]
-  }
-}
-
 export const EventsViewAgendaContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -23,7 +15,6 @@ EventsViewAgendaContainer.displayName = 'EventsViewAgendaContainer';
 export const MonthRow = styled.div`
   position: sticky;
   top: 6rem;
-  /* background-color: ${getBgColor}; */
   background-color: ${props => props.theme.background.layer3};
   display: flex;
   justify-content: center;
@@ -76,17 +67,24 @@ export const DayEvents = styled(Button)`
   flex: 1 1 80%;
   align-content: center;
   padding: 0.5rem 0.8rem;
-  /* background-color: ${getBgColor}; */
-  background-color: ${props => props.theme.background.layer3};
+  background-color: ${props => props.isToday ? props.theme.palette.primary.main : props.theme.background.layer3};
   ${props => props.theme.mixins.defaultBorderRadius}; 
-  border: ${props => props.isToday ? `1px solid ${props.theme.palette.primary.main}` : `none`};
+  border: 1px solid transparent;
   margin: 0;
-  color: ${props => props.theme.palette.text.primary};
+  color: ${props =>  props.isToday ? props.theme.palette.grey[1] : props.theme.palette.text.primary};
   ${props => props.theme.typo.subtitle};
   font-family: 'Lato', 'Roboto', 'Arial', sans-serif;
 
   & > div:first-of-type {
     line-height: 1.3;
+  }
+
+  @media (hover: hover) {
+    :hover {
+      box-shadow: none;
+      border: ${props => !props.isToday && `1px solid ${props.theme.palette.primary.main}`};
+      background-color: ${props => props.isToday ? props.theme.palette.primary.light : props.theme.type === "light" && props.theme.background.layer1};
+    }
   }
 `;
 DayEvents.displayName = 'DayEvents';

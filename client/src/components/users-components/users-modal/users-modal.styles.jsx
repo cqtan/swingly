@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { UsersListContainer, HeaderUsername } from '../users-list/users-list.styles';
 
 export const UsersFilterContainer = styled(UsersListContainer)`
-  width: 80vw;
+  width: 100%;
   flex-wrap: wrap;
 `;
 UsersFilterContainer.displayName = 'UsersFilterContainer';

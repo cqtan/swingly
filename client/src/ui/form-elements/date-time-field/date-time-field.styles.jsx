@@ -5,7 +5,7 @@ export const Label = styled.label`
   top: -1.5rem;
   color: ${props => props.error ? 
     props.theme.palette.error : 
-    props.theme.palette.primary.main
+    props.theme.type === "dark" ? props.theme.palette.primary.main : props.theme.palette.text.primary
   };
   font-size: ${props => props.theme.typo.subtitle};
   pointer-events: none;
