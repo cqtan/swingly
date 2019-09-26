@@ -92,7 +92,7 @@ const Fab = props => {
     <>
     {currentUser && 
       <>
-        <Backdrop isOpen={isOpen} onClick={() => setFabOpen(false)} />
+        <Backdrop isOpen={isOpen} onClick={() => setFabOpen(false)} zIndex={300} />
         <FabContainer isOpen={isOpen}>
           <CSSTransition
             in={isOpen}

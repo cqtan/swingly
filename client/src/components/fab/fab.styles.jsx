@@ -19,7 +19,7 @@ export const FabContainer = styled.div`
   justify-content: flex-end;
   bottom: 2rem;
   right: 2rem;
-  z-index: 500;
+  z-index: 350;
   opacity: ${props => props.isOpen ? 1 : 0.5}; 
   transition: all 0.2s ease-in .1s;
 `;

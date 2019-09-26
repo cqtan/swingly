@@ -5,7 +5,7 @@ import {
 import { CSSTransition } from 'react-transition-group';
 
 const Backdrop = (props) => {
-  const { onClick, isOpen } = props;
+  const { onClick, isOpen, zIndex = 400 } = props;
 
   return (
     <>
@@ -14,7 +14,7 @@ const Backdrop = (props) => {
         classNames='backdrop'
         timeout={300}
         unmountOnExit>
-        <BackdropContainer onClick={onClick} transName='backdrop' />
+        <BackdropContainer zIndex={zIndex} onClick={onClick} transName='backdrop' />
       </CSSTransition>
     </>
   );

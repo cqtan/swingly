@@ -7,7 +7,7 @@ export const BackdropContainer = styled.button`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 400;
+  z-index: ${props => props.zIndex};
   background-color: rgba(0, 0, 0, 0.3);
   transition: all .4s ease-out;
   ${props => fadeInOut(props.transName)};
