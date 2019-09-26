@@ -8,13 +8,13 @@ import EventsViewAgenda from '../../events/events-view-agenda/events-view-agenda
 import { selectEventsByUserId } from '../../../redux/events/events.selectors';
 
 const ProfileEvents = (props) => {
-  const { selectEventsByUserId, userId } = props;
+  const { selectEventsByUserId, userId, pageName } = props;
 
   const filteredEvents = selectEventsByUserId(userId);
 
   return (
     <ProfileEventsContainer>
-      <EventsViewAgenda events={filteredEvents} />
+      <EventsViewAgenda events={filteredEvents} pageName={pageName} />
     </ProfileEventsContainer>
   );
 }

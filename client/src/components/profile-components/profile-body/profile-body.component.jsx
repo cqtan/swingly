@@ -15,7 +15,7 @@ import UsersList from "../../users-components/users-list/users-list.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ProfileBody = props => {
-  const { userId, users, history, currentUser } = props;
+  const { userId, users, history, currentUser, pageName } = props;
   const [isShowingFollowing, setShowingFollowing] = useState(false);
 
 
@@ -37,7 +37,7 @@ const ProfileBody = props => {
       </ProfileToggle>
       {!isShowingFollowing ? (
         <>
-          <ProfileEvents userId={userId} />
+          <ProfileEvents userId={userId} pageName={pageName} />
           <ProfileButton onClick={() => history.push("/event-create")}>
             <FontAwesomeIcon icon="calendar-plus" />
             Create Event
@@ -56,7 +56,7 @@ const ProfileBody = props => {
   );
 
   if (userId !== currentUser) {
-    Body = <ProfileEvents userId={userId} />
+    Body = <ProfileEvents userId={userId} pageName={pageName}/>
   }
 
   return (
