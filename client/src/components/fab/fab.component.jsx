@@ -28,6 +28,7 @@ const Fab = props => {
   } = props;
 
   const [isUserModalOpen, setUserModalOpen] = useState(false);
+  const subtitleText = "Display events depending if the users you have followed are either enabled or disabled here";
 
   const handleGuestFilterClick = filter => {
     setGuestFilter(filter);
@@ -116,6 +117,7 @@ const Fab = props => {
           isOpen={isUserModalOpen}
           pageName="eventsPage"
           title="Host Filter"
+          subtitle={subtitleText}
           onClose={() => setUserModalOpen(false)}
           users={users}
           isFilter={true}

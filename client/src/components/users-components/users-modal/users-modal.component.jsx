@@ -9,6 +9,7 @@ const UsersModal = props => {
     isOpen,
     onClose,
     title,
+    subtitle,
     pageName,
     users,
     isFilter,
@@ -20,6 +21,7 @@ const UsersModal = props => {
       <Backdrop isOpen={isOpen} onClick={onClose} />
       <Modal
         title={title}
+        subtitle={subtitle}
         isOpen={isOpen}
         pageName={pageName}
         transName={`${title.trim()}`}

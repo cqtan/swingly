@@ -131,7 +131,7 @@ const EventsViewAgenda = props => {
           eventComponents
         ) : (
           <NoEventsMessage>
-            No events to be displayed
+            No events to be displayed. Please change the filter on the bottom right corner.
           </NoEventsMessage>
         )}
       </EventsViewAgendaContainer>

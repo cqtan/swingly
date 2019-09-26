@@ -24,3 +24,9 @@ export const ModalTitle = styled.div`
   margin-bottom: ${props => props.theme.spacing(2)};
 `;
 ModalTitle.displayName = 'ModalTitle';
+
+export const ModalSubtitle = styled(ModalTitle)`
+  ${props => props.theme.typo.subtitle};
+  color: ${props => props.theme.palette.text.primary};
+`;
+ModalSubtitle.displayName = 'ModalSubtitle';

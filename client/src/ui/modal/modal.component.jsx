@@ -1,5 +1,5 @@
 import React from "react";
-import { ModalContainer, ModalTitle } from "./modal.styles";
+import { ModalContainer, ModalTitle, ModalSubtitle} from "./modal.styles";
 import { connect } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import {
@@ -20,8 +20,11 @@ const Modal = props => {
     setScrollPosForPage,
     saveScrollPosForPage,
     title,
+    subtitle = "",
     children,
   } = props;
+
+  console.log('subtitle: ', subtitle);
 
   if (pageName) {
     if (isOpen) {
@@ -46,6 +49,7 @@ const Modal = props => {
     >
       <ModalContainer transName={transName} direction={direction}>
         <ModalTitle>{title}</ModalTitle>
+        {subtitle.length ? <ModalSubtitle>{subtitle}</ModalSubtitle> : <></>}
         {children}
       </ModalContainer>
     </CSSTransition>
