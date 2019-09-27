@@ -1,7 +1,7 @@
 import ThemeModeActionTypes from './theme-mode.types';
 
 const INITIAL_STATE = {
-  darkMode: false
+  darkMode: true
 };
 
 const themeModeReducer = (state = INITIAL_STATE, action) => {
