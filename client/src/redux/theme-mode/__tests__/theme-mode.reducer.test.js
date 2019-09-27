@@ -2,7 +2,7 @@ import ThemeModeActionTypes from '../theme-mode.types';
 import themeModeReducer from '../theme-mode.reducer';
 
 const initialState = {
-  darkMode: false
+  darkMode: true
 };
 
 describe('Theme Mode Reducer', () => {
@@ -16,7 +16,7 @@ describe('Theme Mode Reducer', () => {
       type: ThemeModeActionTypes.TOGGLE_THEME,
     };
 
-    expect(themeModeReducer(initialState, payload).darkMode).toBe(true);
+    expect(themeModeReducer(initialState, payload).darkMode).toBe(false);
   });
 
 });
