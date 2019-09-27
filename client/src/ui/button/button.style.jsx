@@ -22,7 +22,6 @@ const defaultButton = css`
   @media (hover: hover) {
     :hover {
       box-shadow: ${props => !props.disabled && props.theme.shadows[8]};
-      filter: ${props => !props.disabled && `brightness(120%)`};
     }
   }
 
@@ -33,12 +32,6 @@ const defaultButton = css`
 
 const flatButton = css`
   border-radius: 0;
-
-  @media (hover: hover) {
-    :hover {
-      filter: ${props => !props.disabled && `brightness(120%)`};
-    }
-  }
 `;
 
 export const CustomButton = styled.button`
@@ -53,6 +46,12 @@ export const CustomButton = styled.button`
   ${props => props.theme.typo.button};
   transition: all .2s ease-out;
   ${props => props.flat ? flatButton : defaultButton};
+
+  @media (hover: hover) {
+    :hover {
+      filter: ${props => !props.disabled && `brightness(120%)`};
+    }
+  }
 `;
 CustomButton.displayName = 'CustomButton';
 

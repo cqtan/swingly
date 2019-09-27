@@ -1,24 +1,27 @@
-import React, { useEffect } from "react";
-import { EventsPageContainer } from "./events-page.styles";
+import React, { useState, useEffect } from "react";
+import { EventsPageContainer, ShowOlderButton } from "./events-page.styles";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import EventsViewAgenda from "../../components/events/events-view-agenda/events-view-agenda.component";
-import { selectEventsByUserId } from "../../redux/events/events.selectors";
+import { selectUpcomingFilteredEventsByHost, selectFilteredEventsByHost } from "../../redux/events/events.selectors";
 import {
   saveScrollPosForPage,
   setScrollPosForPage,
   resetBodyStyles
 } from "../../redux/body-scroll/body-scroll.actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const EventsPage = props => {
   const {
-    selectEventsByUserId,
+    upcomingEvents,
+    allEvents,
     resetBodyStyles,
     setScrollPosForPage,
     saveScrollPosForPage
   } = props;
-  const filteredEvents = selectEventsByUserId(null);
   const pageName = "eventsPage";
+  const [showAll, setShowAll] = useState(false);
+  const events = showAll ? allEvents : upcomingEvents;
 
   useEffect(() => {
     resetBodyStyles();
@@ -33,14 +36,21 @@ const EventsPage = props => {
   return (
     <>
       <EventsPageContainer>
-        <EventsViewAgenda events={filteredEvents} pageName={pageName} />
+        {!showAll && 
+          <ShowOlderButton onClick={() => setShowAll(true)}>
+            <FontAwesomeIcon icon="history" />
+            Show Past Events
+          </ShowOlderButton>
+        }
+        <EventsViewAgenda events={events} pageName={pageName} />
       </EventsPageContainer>
     </>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
-  selectEventsByUserId,
+  upcomingEvents: selectUpcomingFilteredEventsByHost,
+  allEvents: selectFilteredEventsByHost
 });
 
 const mapDispatchToProps = {

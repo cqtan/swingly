@@ -84,7 +84,6 @@ export const DayEvents = styled(Button)`
       box-shadow: none;
       border: ${props => !props.isToday && `1px solid ${props.theme.palette.primary.main}`};
       background-color: ${props => props.isToday ? props.theme.palette.primary.main : props.theme.background.layer3};
-      filter: ${props => !props.disabled && `brightness(120%)`};
     }
   }
 `;

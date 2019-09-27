@@ -74,10 +74,14 @@ export const selectUpcomingEvents = createSelector(
 export const selectFilteredEvents = createSelector(
   [selectSortedEvents, selectFilter, selectCurrentUser],
   (events, filter, currentUser) => {
-    if ( !filter.guestFilter.includes("none") && currentUser) {
+    if (filter.guestFilter.length && currentUser) {
       return events.filter(event => {
         if (event.guests.hasOwnProperty(currentUser)) {
-          return filter.guestFilter.includes(event.guests[currentUser]) ? true : false;
+          if (filter.guestFilter.includes(event.guests[currentUser])) {
+            return true;
+          } else {
+            return false;
+          }
         } else {
           return false;
         }
@@ -109,11 +113,11 @@ export const selectUpcomingEventsFilteredByGuestType = createSelector(
   }
 )
 
-export const selectUpcomingFilteredEvents = createSelector(
-  [selectUpcomingEventsFilteredByGuestType, selectUpcomingEvents, selectCurrentUserFollowing],
-  (eventsFiltered, events, following) => {
+export const selectUpcomingFilteredEventsByHost = createSelector(
+  [selectUpcomingEventsFilteredByGuestType, selectCurrentUserFollowing],
+  (events, following) => {
     if (following) {
-      return eventsFiltered.filter(event => {
+      return events.filter(event => {
         return event.hosts.some(host => {
           if (following.hasOwnProperty(host)) {
             return following[host]
@@ -128,8 +132,27 @@ export const selectUpcomingFilteredEvents = createSelector(
   }
 )
 
+
+export const selectFilteredEventsByHost = createSelector(
+  [selectFilteredEvents, selectCurrentUserFollowing],
+  (eventsFiltered, following) => {
+    if (following) {
+      return eventsFiltered.filter(event => {
+        return event.hosts.some(host => {
+          if (following.hasOwnProperty(host)) {
+            return following[host]
+          } else {
+            return false;
+          }
+        }) 
+      })
+    } else {
+      return eventsFiltered;
+    }
+  }
+)
 export const selectEventsByUserId = createSelector(
-  [selectUpcomingFilteredEvents],
+  [selectUpcomingFilteredEventsByHost],
   events => memoize(userId => {
     if (userId === null) {
       return events;
