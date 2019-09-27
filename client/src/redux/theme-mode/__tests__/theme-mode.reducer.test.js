@@ -16,7 +16,7 @@ describe('Theme Mode Reducer', () => {
       type: ThemeModeActionTypes.TOGGLE_THEME,
     };
 
-    expect(themeModeReducer(initialState, payload).darkMode).toBe(false);
+    expect(themeModeReducer(initialState, payload).darkMode).toBe(!initialState.darkMode);
   });
 
 });
