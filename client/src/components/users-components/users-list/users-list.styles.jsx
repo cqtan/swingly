@@ -59,8 +59,8 @@ export const UsersRow = styled(DayEvents)`
   align-items: center;
   margin: 0.5rem 0;
   border-radius: 0;
-  background-color: ${props => props.active ? props.theme.palette.primary.main : props.theme.background.layer3};
-  color: ${props => props.active ? props.theme.palette.grey[1] : props.theme.palette.text.primary};
+  background-color: ${props => props.active && props.isFilter ? props.theme.palette.primary.main : props.theme.background.layer3};
+  color: ${props => props.active && props.isFilter ? props.theme.palette.grey[1] : props.theme.palette.text.primary};
   ${props => props.theme.typo.body};
   ${props => props.isFilter === true && setFilterStyles};
   box-shadow: none;

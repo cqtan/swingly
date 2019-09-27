@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const chooseColor = props => {
-  const { secondary, disabled, transparent, deleteStyle, theme } = props;
+  const { secondary, disabled, transparent, deleteStyle, theme, outlined } = props;
   if (disabled) {
     return theme.buttons.disabled.bg;
   } else if (transparent) {
@@ -34,6 +34,15 @@ const flatButton = css`
   border-radius: 0;
 `;
 
+const outlinedButton = css`
+  background-color: ${props => props.theme.background.layer1};
+  border: ${props => props.deleteStyle ? `1px solid ${props.theme.palette.error}` : `1px solid ${props.theme.palette.primary.main}`};
+  color: ${props => props.theme.type === "light" ? props.theme.palette.grey[1] : props.theme.palette.primary.main};
+  ${props => props.deleteStyle && css`
+    color: ${props.theme.palette.error};
+  `};
+`;
+
 export const CustomButton = styled.button`
   display: flex;
   width: ${props => props.stretch ? `100%` : `auto`};
@@ -46,10 +55,14 @@ export const CustomButton = styled.button`
   ${props => props.theme.typo.button};
   transition: all .2s ease-out;
   ${props => props.flat ? flatButton : defaultButton};
+  ${props => props.outlined && outlinedButton};
 
   @media (hover: hover) {
     :hover {
       filter: ${props => !props.disabled && `brightness(120%)`};
+      ${props => props.outlined && props.theme.type === "light" && css`
+        color: ${props => props.deleteStyle ? props.theme.palette.error : props.theme.palette.grey[1]};
+      `}
     }
   }
 `;

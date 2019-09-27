@@ -37,7 +37,7 @@ const EventsPage = props => {
     <>
       <EventsPageContainer>
         {!showAll && 
-          <ShowOlderButton onClick={() => setShowAll(true)}>
+          <ShowOlderButton outlined onClick={() => setShowAll(true)}>
             <FontAwesomeIcon icon="history" />
             Show Past Events
           </ShowOlderButton>

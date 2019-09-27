@@ -41,13 +41,13 @@ const ProfileDetails = props => {
     );
   } else if (following.hasOwnProperty(userId)) {
     DetailsButton = (
-      <FormButton deleteStyle onClick={() => unfollowUser(userId)}>
+      <FormButton outlined deleteStyle onClick={() => unfollowUser(userId)}>
         <FontAwesomeIcon icon="minus" /> Unfollow
       </FormButton>
     );
   } else {
     DetailsButton = (
-      <FormButton onClick={() => followUser(userId)}>
+      <FormButton outlined onClick={() => followUser(userId)}>
         <FontAwesomeIcon icon="plus" /> Follow
       </FormButton>
     );
