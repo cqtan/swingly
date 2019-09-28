@@ -114,12 +114,14 @@ export const selectUpcomingEventsFilteredByGuestType = createSelector(
 )
 
 export const selectUpcomingFilteredEventsByHost = createSelector(
-  [selectUpcomingEventsFilteredByGuestType, selectCurrentUserFollowing],
-  (events, following) => {
+  [selectUpcomingEventsFilteredByGuestType, selectCurrentUserFollowing, selectCurrentUser],
+  (events, following, currentUser) => {
     if (following) {
       return events.filter(event => {
         return event.hosts.some(host => {
-          if (following.hasOwnProperty(host)) {
+          if (host === currentUser) {
+            return true;
+          } else if (following.hasOwnProperty(host)) {
             return following[host]
           } else {
             return false;
@@ -134,12 +136,14 @@ export const selectUpcomingFilteredEventsByHost = createSelector(
 
 
 export const selectFilteredEventsByHost = createSelector(
-  [selectFilteredEvents, selectCurrentUserFollowing],
-  (eventsFiltered, following) => {
+  [selectFilteredEvents, selectCurrentUserFollowing, selectCurrentUser],
+  (eventsFiltered, following, currentUser) => {
     if (following) {
       return eventsFiltered.filter(event => {
         return event.hosts.some(host => {
-          if (following.hasOwnProperty(host)) {
+          if (host === currentUser) {
+            return true;
+          } else if (following.hasOwnProperty(host)) {
             return following[host]
           } else {
             return false;

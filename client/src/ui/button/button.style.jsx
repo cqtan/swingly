@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const chooseColor = props => {
-  const { secondary, disabled, transparent, deleteStyle, theme, outlined } = props;
+  const { secondary, disabled, transparent, deleteStyle, theme } = props;
   if (disabled) {
     return theme.buttons.disabled.bg;
   } else if (transparent) {
