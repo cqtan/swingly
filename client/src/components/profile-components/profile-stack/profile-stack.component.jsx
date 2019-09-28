@@ -37,7 +37,7 @@ const ProfileStack = (props) => {
 
     hosts.forEach((host, idx) => {      
       profileImages.push(
-        <ProfileImage key={idx} xs src='http://lorempixel.com/400/200/cats' />
+        <ProfileImage key={idx} xs />
       )
     });
   }

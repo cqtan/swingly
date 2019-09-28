@@ -129,7 +129,8 @@ export default (mode) => ({
     }
   },
   images: {
-    random_sm: 'http://lorempixel.com/50/50/cats',
+    random_xs: 'http://lorempixel.com/50/50/cats',
+    random_sm: 'http://lorempixel.com/100/100/cats',
     random_md: 'http://lorempixel.com/200/100/cats',
     random_lg: 'http://lorempixel.com/400/200/cats',
     random_xl: 'http://lorempixel.com/640/480/cats',

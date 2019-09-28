@@ -1,7 +1,5 @@
 [![CircleCI](https://circleci.com/gh/CouchCat/swingly/tree/master.svg?style=svg&circle-token=72febdd0a06420c0363a830a2fa10f0fd265c4f3)](https://circleci.com/gh/CouchCat/swingly/tree/master)
 
-[![Heroku](https://heroku-badge.herokuapp.com/?app=swingly)]
-
 
 # 🎷 Swingly | Swing Dance Calendar 💃
 
@@ -11,11 +9,11 @@
 * **PWA**: While accessible on the Desktop, it is really much meant for mobile use (Especially as a Progressive Web App).
 * **Heroku (Free tier)**: Initial load takes a couple seconds (patience required but it's worth it!).
 * **Firebase (Free tier)**: Because of the limited amount of requests I can make to the Firebase services, the app only serves events of the current month instead of multiple months.
-* **Cats**: Contains a lot of random cat images as placeholders because why not?!
+* **Dogs**: Contains a lot of random dog images as placeholders because why not?!
 
 # Summary
   
-The Swingly app is an alternative calendar as a prototype to the one found on the **SwingInBerlin** calendar (http://www.swinginberlin.de) for swing social/dance events in Berlin. It has two main purposes. On the one hand, it aims to provide a more modern UI with additional features such as:
+The Swingly app is a prototype and alternative to the calendar found on the **SwingInBerlin** website (http://www.swinginberlin.de) for local swing social/dance events in Berlin. It has two main purposes. On the one hand, it aims to provide a more modern UI with additional features such as:
 
 * authentication
 * managing own profile
@@ -27,13 +25,13 @@ The Swingly app is an alternative calendar as a prototype to the one found on th
 On the other hand, it is simply for me to familiarize myself more with the React ecosystem by focusing on the following technologies, concepts and patterns to create this prototype:
 
 * React (Hooks) + Redux: Use only functional components instead of class based ones (except the Error-Boundary component).
-* [Firebase](https://firebase.google.com/): Use Firebase services as the backend
+* [Firebase](https://firebase.google.com/): Use Firebase services as the backend to make quick prototypes such as this one.
 * [Styled Components](https://www.styled-components.com): Use CSS-in-JS
 * [Reselect](https://github.com/reduxjs/reselect): To memoize expensive tasks and to simply create selectors
 * [Puppeteer](https://github.com/GoogleChrome/puppeteer): For scraping data from the original website (permission asked, of course)
 * NodeJS + Express: For puppeteer since there were some issues when using it with Firebase Cloud Functions
 * No [Material-UI](https://material-ui.com): Simply to learn how to apply the Material Design approach from scratch (except the date-time-picker).
-* Deployment: Automating tests through [Circle-CI](https://circleci.com) and hosting on [Heroku](https://dashboard.heroku.com/apps).
+* Deployment: Automated testing through [Circle-CI](https://circleci.com) and hosting on [Heroku](https://dashboard.heroku.com/apps).
 
 # Features
 
@@ -67,3 +65,4 @@ A user who has signed in is now able to perform additional actions with the app.
 * Able to add course details for users wishing to create an event for a workshop or to simply add drop-in courses to a social event
 * Notification for events that the user has set as either "interested" or "going" and that are about to happen soon.
 * Add more event data (e.g. events of other months) and to paginate through them
+

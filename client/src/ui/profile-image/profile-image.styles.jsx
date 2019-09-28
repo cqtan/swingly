@@ -55,13 +55,15 @@ const selectSize = props => {
 }
 
 const selectRandomImage = props => {
-  const { lg, md, sm, theme } = props;
+  const { lg, md, sm, xs, theme } = props;
   if (lg) {
     return theme.images.random_lg
   } else if (md) {
     return theme.images.random_md
   } else if (sm) {
     return theme.images.random_sm
+  } else if (xs) {
+    return theme.images.random_xs
   } else {
     return null
   }
@@ -74,6 +76,7 @@ export const ProfileImageContainer = styled.img.attrs(props => ({
   border-radius: 50%;
   object-fit: cover;
   border-color: ${selectBorderColor};
+  background-color: rgba(0, 0, 0, 0.20);
 `;
 ProfileImageContainer.displayName = 'ProfileImageContainer';
 
