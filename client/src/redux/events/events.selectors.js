@@ -155,6 +155,7 @@ export const selectFilteredEventsByHost = createSelector(
     }
   }
 )
+
 export const selectEventsByUserId = createSelector(
   [selectUpcomingFilteredEventsByHost],
   events => memoize(userId => {
@@ -168,6 +169,25 @@ export const selectEventsByUserId = createSelector(
           return false;
         }
       });
+    }
+  })
+);
+
+export const selectUpcomingEventsCountByUserId = createSelector(
+  [selectUpcomingEvents],
+  events => memoize(userId => {
+    if (userId === null) {
+      return 0;
+    } else {
+      const filteredEvents = events.filter(event => {
+        if (event.hosts.includes(userId)) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      return filteredEvents.length;
     }
   })
 );

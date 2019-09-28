@@ -15,7 +15,7 @@ import { withRouter } from "react-router-dom";
 import ProfileImage from "../../../ui/profile-image/profile-image.component";
 import { toggleFollowedUser } from "../../../redux/user/user.actions";
 import { selectIsActiveFilterById } from "../../../redux/user/user.selectors";
-import { selectEventsByUserId } from "../../../redux/events/events.selectors";
+import { selectUpcomingEventsCountByUserId } from "../../../redux/events/events.selectors";
 import { NoEventsMessage } from "../../events/events-view-agenda/events-view-agenda.styles";
 
 const UsersList = props => {
@@ -26,7 +26,7 @@ const UsersList = props => {
     showEventsCount = false,
     toggleFollowedUser,
     isActiveFilterById,
-    getEvents
+    getEventsCount
   } = props;
 
   const handleUserRowClick = async userId => {
@@ -38,7 +38,7 @@ const UsersList = props => {
   };
 
   const UsersRows = users.map((user, idx) => {
-    const eventsCount = getEvents(user.id).length;
+    const eventsCount = getEventsCount(user.id);
 
     return (
       <UsersRow
@@ -78,7 +78,7 @@ const UsersList = props => {
 
 const mapStateToProps = createStructuredSelector({
   isActiveFilterById: selectIsActiveFilterById,
-  getEvents: selectEventsByUserId
+  getEventsCount: selectUpcomingEventsCountByUserId
 });
 
 const mapDispatchToProps = {
