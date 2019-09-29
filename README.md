@@ -8,6 +8,7 @@
 
 * **Live Demo**: https://swingly.herokuapp.com/
 * **PWA**: While accessible on the Desktop, it is really much meant for mobile use (Especially as a Progressive Web App).
+* **Sign Up**: No Email Verification! So you could actually also use a fake email. This is simply to make playing around with the app less tedious.
 * **Heroku (Free tier)**: Initial load takes a couple seconds (patience required but it's worth it!).
 * **Firebase (Free tier)**: Because of the limited amount of requests I can make to the Firebase services, the app only serves events of the current month instead of multiple months.
 * **Cats**: Contains a lot of random cat images as placeholders because why not?!
@@ -73,4 +74,5 @@ A user who has signed in is now able to perform additional actions with the app.
 * View not only local social events in the SwingInBerlin Calendar but also from the https://www.swingplanit.com website for international swing festivals
 * Able to add course details for users wishing to create an event for a workshop or to simply add drop-in courses to a social event
 * Notification for events that the user has set as either "interested" or "going" and that are about to happen soon.
+* Add an emailing service to the pipeline.
 * Add more event data (e.g. events of other months) and to paginate through them

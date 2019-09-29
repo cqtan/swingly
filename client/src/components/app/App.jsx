@@ -13,7 +13,8 @@ import { selectUserIsLoading, selectIsUsersFinishedLoading } from "../../redux/u
 import { selectEventsIsLoading, selectIsEventsFinishedLoading } from "../../redux/events/events.selectors";
 import Spinner from "../../ui/spinner/spinner.component";
 import ErrorBoundary from "../error-boundary/error-boundary.component";
-const ExampleContainer = lazy(() => import("../../pages/example-container/example-container.component"));
+const AboutPage = lazy(() => import("../../pages/about-page/about-page.component"));
+// const ExampleContainer = lazy(() => import("../../pages/example-container/example-container.component"));
 const Profile = lazy(() => import("../../pages/profile/profile.component"));
 const EventsPage = lazy(() => import("../../pages/events-page/events-page.component"));
 const EventEditPage = lazy(() => import("../../pages/event-edit-page/event-edit-page.component"));
@@ -62,7 +63,7 @@ export const App = props => {
           ) : (
             <Switch>
               <Suspense fallback={<Spinner isloading={true} />}>
-                <Route path="/about" exact component={ExampleContainer} />
+                <Route path="/about" exact component={AboutPage} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/event-create" exact component={EventCreatePage} />
                 <Route path="/event-edit" component={EventEditPage} />
