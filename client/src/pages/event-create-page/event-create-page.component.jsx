@@ -13,7 +13,6 @@ const EventCreatePage = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log('called!!!');
   }, []);
 
   return (

@@ -23,7 +23,8 @@
   "homepage": "https://github.com/CouchCat/swingly#readme",
   "engines": {
     "node": "12.4.0",
-    "npm": "6.9.0"
+    "npm": "6.9.0",
+    "yarn" : "1.17.3"
   },
   "dependencies": {
     "concurrently": "^4.1.2",
