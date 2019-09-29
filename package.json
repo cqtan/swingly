@@ -21,6 +21,10 @@
     "url": "https://github.com/CouchCat/swingly/issues"
   },
   "homepage": "https://github.com/CouchCat/swingly#readme",
+  "engines": {
+    "node": "12.4.0",
+    "npm": "6.9.0"
+  },
   "dependencies": {
     "concurrently": "^4.1.2",
     "cors": "^2.8.5",
