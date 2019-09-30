@@ -25,7 +25,7 @@ const AboutPage = props => {
           <Icon icon="caret-right" />
           <ContentColumn>
             <b>PWA:</b> While accessible on the Desktop, it is really much meant
-            for mobile use (Especially as a Progressive Web App).
+            for mobile use (it aims to be Progressive Web App).
           </ContentColumn>
           <Icon icon="caret-right" />
           <ContentColumn>
@@ -45,8 +45,8 @@ const AboutPage = props => {
           </ContentColumn>
           <Icon icon="caret-right" />
           <ContentColumn>
-            <b>Cats:</b> Contains a lot of random cat images as placeholders
-            because it's still a work-in-progress and why not?!
+            <b>Cats:</b> Contains a lot of random cat images as placeholders because it is still 
+            a work-in-progress and why not?!
           </ContentColumn>
         </Content>
         <H2>Summary</H2>
@@ -182,6 +182,10 @@ const AboutPage = props => {
           <ContentColumn>
             Add more event data (e.g. events of other months) and to paginate
             through them
+          </ContentColumn>
+          <Icon icon="caret-right" />
+          <ContentColumn>
+            Fulfill requirements of a PWA on Lighthouse
           </ContentColumn>
         </Content>
         <AboutButtonContainer 
