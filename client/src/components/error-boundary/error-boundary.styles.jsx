@@ -23,3 +23,8 @@ export const ErrorImageText = styled.div`
   color: ${props => props.theme.palette.text.primary};
   padding: ${props => props.theme.spacing(4)};
 `;
+
+export const ButtonContainer = styled.div`
+
+`;
+ButtonContainer.displayName = 'ButtonContainer';

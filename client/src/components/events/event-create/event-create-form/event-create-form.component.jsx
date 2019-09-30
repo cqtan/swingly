@@ -122,7 +122,8 @@ const EventCreateForm = (props) => {
         <ButtonContainer>
           <FormButton 
             type='button'
-            onClick={handleReset}>          
+            onClick={handleReset}
+            deleteStyle>          
             Reset
           </FormButton>
           <FormButton 

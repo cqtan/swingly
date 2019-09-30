@@ -3,8 +3,12 @@ import React, { Component } from 'react';
 import {
   ErrorImageOverlay,
   ErrorImageContainer,
-  ErrorImageText
+  ErrorImageText,
+  ButtonContainer
 } from './error-boundary.styles';
+import FormButton from '../../ui/form-elements/form-button/form-button.component';
+import { withRouter } from "react-router-dom";
+
 
 class ErrorBoundary extends Component {
   constructor() {
@@ -31,6 +35,12 @@ class ErrorBoundary extends Component {
         <ErrorImageOverlay>
           <ErrorImageContainer imageUrl='https://i.imgur.com/lKJiT77.png' />
           <ErrorImageText>Sorry this page is broken</ErrorImageText>
+          <ButtonContainer>
+            <FormButton
+              onClick={() => this.props.history.push("/")}>
+              Go Home
+            </FormButton>
+          </ButtonContainer>
         </ErrorImageOverlay>
       );
     }
@@ -39,4 +49,4 @@ class ErrorBoundary extends Component {
   }
 }
 
-export default ErrorBoundary;
+export default withRouter(ErrorBoundary);

@@ -45,6 +45,7 @@ export const TextFieldInput = styled.input`
   color: ${props => props.theme.palette.text.primary};
   padding: 1rem 0;
   letter-spacing: ${props => props.type === 'password' && `0.3rem`};
+  font-family: 'Lato', 'Roboto', 'Arial', sans-serif;
 
   &:focus {
     ~ ${TextFieldLabel} {
@@ -75,7 +76,8 @@ export const TextAreaInput = styled.textarea`
   color: ${props => props.theme.palette.text.primary};
   padding: 1rem 0;
   letter-spacing: ${props => props.type === 'password' && `0.3rem`};
-  transition: all 0.2s ease-out; 
+  transition: all 0.2s ease-out;
+  font-family: 'Lato', 'Roboto', 'Arial', sans-serif;
 
   :focus {
     ~ ${TextFieldLabel} {

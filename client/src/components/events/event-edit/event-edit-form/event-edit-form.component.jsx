@@ -124,7 +124,8 @@ const EventEditForm = (props) => {
         <ButtonContainer>
           <FormButton 
             type='button'
-            onClick={handleReset}>          
+            onClick={handleReset}
+            deleteStyle>          
             Reset
           </FormButton>
           <FormButton 
@@ -134,14 +135,14 @@ const EventEditForm = (props) => {
           </FormButton>
           <FormButton 
             type='button'
-            onClick={onClose}>          
-            Back
-          </FormButton>
-          <FormButton 
-            type='button'
             deleteStyle
             onClick={onDelete}>          
             Delete
+          </FormButton>
+          <FormButton 
+            type='button'
+            onClick={onClose}>          
+            Back
           </FormButton>
         </ButtonContainer>
       </Form>

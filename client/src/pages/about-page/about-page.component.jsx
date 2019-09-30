@@ -29,6 +29,11 @@ const AboutPage = props => {
           </ContentColumn>
           <Icon icon="caret-right" />
           <ContentColumn>
+            <b>Sign Up:</b> No Email Verification! So you could actually also use a fake email. 
+            This is simply to make playing around with the app less tedious.
+          </ContentColumn>
+          <Icon icon="caret-right" />
+          <ContentColumn>
             <b>Heroku (Free tier):</b> Initial load takes a couple seconds
             (patience required but it's worth it!).
           </ContentColumn>
@@ -41,7 +46,7 @@ const AboutPage = props => {
           <Icon icon="caret-right" />
           <ContentColumn>
             <b>Cats:</b> Contains a lot of random cat images as placeholders
-            because why not?!
+            because it's still a work-in-progress and why not?!
           </ContentColumn>
         </Content>
         <H2>Summary</H2>
@@ -168,6 +173,10 @@ const AboutPage = props => {
           <ContentColumn>
             Notification for events that the user has set as either "interested"
             or "going" and that are about to happen soon.
+          </ContentColumn>
+          <Icon icon="caret-right" />
+          <ContentColumn>
+            Add an emailing service to the pipeline.
           </ContentColumn>
           <Icon icon="caret-right" />
           <ContentColumn>

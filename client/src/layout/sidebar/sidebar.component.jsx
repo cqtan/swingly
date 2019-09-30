@@ -64,7 +64,7 @@ export const Sidebar = props => {
           to={homeRoute}
         >
           <FontAwesomeIcon icon="calendar-week" />
-          Agenda View
+          All Events
         </SidebarButton>
         <SidebarButton
           isactive={(history.location.pathname === createEventRoute).toString()}
