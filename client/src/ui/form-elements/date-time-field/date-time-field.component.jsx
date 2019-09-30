@@ -7,12 +7,12 @@ import {
 import { DateTimePicker } from '@material-ui/pickers';
 
 const DateTimeField = (props) => {
-  const { label, helperText, ...otherProps } = props;
+  const { label, helperText } = props;
 
   return (
     <DateTimeFieldContainer>       
       <DateTimePicker 
-        {...otherProps}
+        {...props}
         format='ddd Do MMMM YYYY, HH:mm'
         ampm={false}
       />

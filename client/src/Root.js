@@ -93,7 +93,7 @@ export default (props) => {
     faPlus,
     faMinus,
     faHistory,
-    faCaretRight
+    faCaretRight,
   );
 
   return (

@@ -8,12 +8,12 @@ import {
 } from './text-field.styles';
 
 const TextField = (props) => {
-  const { label, helperText, textarea, ...otherProps } = props;
+  const { label, helperText, textarea } = props;
   return (
     <TextFieldContainer>
       { textarea ?
-        <TextAreaInput {...otherProps} /> :
-        <TextFieldInput {...otherProps} />
+        <TextAreaInput {...props} /> :
+        <TextFieldInput {...props} />
       }
       <TextFieldLabel>{label}</TextFieldLabel>
       <HelperText>{helperText}</HelperText>

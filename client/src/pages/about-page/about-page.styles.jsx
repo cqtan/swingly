@@ -84,9 +84,12 @@ export const Icon = styled(FontAwesomeIcon)`
 `;
 Icon.displayName = 'Icon';
 
-export const AboutButton = styled.div`
+export const AboutButtonContainer = styled.a`
   ${({ theme }) => css`
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
   `}
 `;
-AboutButton.displayName = 'AboutButton';
+AboutButtonContainer.displayName = 'AboutButtonContainer';
