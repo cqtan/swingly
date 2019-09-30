@@ -1,12 +1,14 @@
-[![CircleCI](https://circleci.com/gh/CouchCat/swingly/tree/master.svg?style=svg&circle-token=72febdd0a06420c0363a830a2fa10f0fd265c4f3)](https://circleci.com/gh/CouchCat/swingly/tree/master)
 
 # 🎷 Swingly | Swing Dance Calendar 💃
 
-![gh-showcase-swingly-banner2](https://user-images.githubusercontent.com/33485290/65823485-7be2bd00-e257-11e9-910c-2a934b5a308f.png)
+[![CircleCI](https://img.shields.io/circleci/build/github/CouchCat/swingly/master?token=72febdd0a06420c0363a830a2fa10f0fd265c4f3)](https://circleci.com/gh/CouchCat/swingly/tree/master)
+[![HerokuDemo](https://img.shields.io/badge/demo-heroku-brightgreen)](https://swingly.herokuapp.com)
+![DavidDependencies](https://img.shields.io/david/CouchCat/swingly)
+![LicenseMIT](https://img.shields.io/github/license/CouchCat/swingly?color=brightgreen)
 
 ## Quick Notes
 
-* **Live Demo**: https://swingly.herokuapp.com/
+* **Live Demo**: <https://swingly.herokuapp.com/>
 * **PWA**: While accessible on the Desktop, it is really much meant for mobile use (Especially as a Progressive Web App).
 * **Sign Up**: No Email Verification! So you could actually also use a fake email. This is simply to make playing around with the app less tedious.
 * **Heroku (Free tier)**: Initial load takes a couple seconds (patience required but it's worth it!).
@@ -15,7 +17,7 @@
 
 # Summary
   
-The Swingly app is a prototype and alternative to the calendar found on the **SwingInBerlin** website (http://www.swinginberlin.de) for local swing social/dance events in Berlin. It has two main purposes. On the one hand, it aims to provide a more modern UI with additional features such as:
+The Swingly app is a prototype and alternative to the calendar found on the **SwingInBerlin** website (<http://www.swinginberlin.de)> for local swing social/dance events in Berlin. It has two main purposes. On the one hand, it aims to provide a more modern UI with additional features such as:
 
 * authentication
 * managing own profile
@@ -39,7 +41,7 @@ On the other hand, it is simply for me to familiarize myself more with the React
 
 ## Anonymous User
 
-This type of user is able to mainly perform read tasks with the app, e.g., 
+This type of user is able to mainly perform read tasks with the app, e.g.,
 
 * View the upcoming events of the SwingInBerlin Calendar as a list.
 * Optionally being able to view past events on the list.
@@ -48,8 +50,6 @@ This type of user is able to mainly perform read tasks with the app, e.g.,
 If the user wishes to use additional features of the app, then logging in after having previously signed up is required. To streamline to this prototype experience, email verification has been omitted. Simply login after successfully submitting the sign up form.
 
 ![gh-showcase-swingly-123](https://user-images.githubusercontent.com/33485290/65823137-11c71980-e251-11e9-9b86-cf06d992ce4c.png)
-
-
 
 ## Signed User
 
@@ -71,7 +71,7 @@ A user who has signed in is now able to perform additional actions with the app.
 
 ## Future Features
 
-* View not only local social events in the SwingInBerlin Calendar but also from the https://www.swingplanit.com website for international swing festivals
+* View not only local social events in the SwingInBerlin Calendar but also from the <https://www.swingplanit.com> website for international swing festivals
 * Able to add course details for users wishing to create an event for a workshop or to simply add drop-in courses to a social event
 * Notification for events that the user has set as either "interested" or "going" and that are about to happen soon.
 * Add an emailing service to the pipeline.
