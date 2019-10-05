@@ -29,6 +29,11 @@ class ErrorBoundary extends Component {
     console.log('Info: ', info);
   }
 
+  handleClick = () => {
+    this.props.history.push("/");
+    window.location.reload();
+  }
+
   render() {
     if (this.state.hasErrored) {
       return (
@@ -37,7 +42,7 @@ class ErrorBoundary extends Component {
           <ErrorImageText>Sorry this page is broken</ErrorImageText>
           <ButtonContainer>
             <FormButton
-              onClick={() => this.props.history.push("/")}>
+              onClick={this.handleClick}>
               Go Home
             </FormButton>
           </ButtonContainer>
