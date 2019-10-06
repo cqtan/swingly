@@ -41,7 +41,8 @@ import {
   faMinus,
   faHistory,
   faCaretRight,
-  faTrash
+  faTrash,
+  faQuestion
 } from '@fortawesome/free-solid-svg-icons';
 import ThemeManager from './themes/ThemeManager';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -95,7 +96,8 @@ export default (props) => {
     faMinus,
     faHistory,
     faCaretRight,
-    faTrash
+    faTrash,
+    faQuestion
   );
 
   return (

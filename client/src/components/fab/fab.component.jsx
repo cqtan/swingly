@@ -14,6 +14,7 @@ import {
 } from "../../redux/user/user.selectors";
 import { openSnackbar } from "../../redux/snackbar/snackbar.actions";
 import UsersModal from "../users-components/users-modal/users-modal.component";
+import FabHelper from "./fab-helper/fab-helper.component";
 
 const Fab = props => {
   const {
@@ -28,11 +29,13 @@ const Fab = props => {
   } = props;
 
   const [isUserModalOpen, setUserModalOpen] = useState(false);
+  const [isHelperOpen, setHelperOpen] = useState(false);
+
   const subtitleText = "Display events depending if the users you have followed are either enabled or disabled here";
 
   const handleGuestFilterClick = filter => {
     setGuestFilter(filter);
-    setFabOpen(false);
+    closeFab();
   };
 
   const handleCalendarDayClick = () => {
@@ -43,13 +46,18 @@ const Fab = props => {
       openSnackbar("info", "No events today with given filter");
     }
 
-    setFabOpen(false);
+    closeFab();
   };
 
   const handleHostFilter = () => {
     setUserModalOpen(true);
-    setFabOpen(false);
+    closeFab();
   };
+
+  const closeFab = () => {
+    setFabOpen(false);
+    setHelperOpen(false);
+  }
 
   const fabSubData = {
     interested: {
@@ -75,6 +83,12 @@ const Fab = props => {
       func: handleCalendarDayClick,
       isSelected: false,
       isRendered: true
+    },
+    helper: {
+      icon: <FontAwesomeIcon icon="question" />,
+      func: () => setHelperOpen(!isHelperOpen),
+      isSelected: isHelperOpen,
+      isRendered: true
     }
   };
 
@@ -93,7 +107,7 @@ const Fab = props => {
     <>
     {currentUser && 
       <>
-        <Backdrop isOpen={isOpen} onClick={() => setFabOpen(false)} zIndex={300} />
+        <Backdrop isOpen={isOpen} onClick={closeFab} zIndex={300} />
         <FabContainer isOpen={isOpen}>
           <CSSTransition
             in={isOpen}
@@ -101,9 +115,12 @@ const Fab = props => {
             timeout={300}
             unmountOnExit
           >
-            <FabSubContainer isOpen={isOpen} itemsLength={FabSubs.length}>
-              {FabSubs}
-            </FabSubContainer>
+            <>
+              <FabSubContainer isOpen={isOpen} itemsLength={FabSubs.length}>
+                {FabSubs}
+              </FabSubContainer>
+              { isHelperOpen && <FabHelper /> }
+            </>
           </CSSTransition>
           <FabMain onClick={() => setFabOpen(!isOpen)}>
             {isOpen ? (
