@@ -7,6 +7,7 @@ import { Form } from 'formik';
 import TextField from '../../../../ui/form-elements/text-field/text-field.component';
 import FormButton from '../../../../ui/form-elements/form-button/form-button.component';
 import DateTimeField from '../../../../ui/form-elements/date-time-field/date-time-field.component';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const EventEditForm = (props) => {
   const {
@@ -124,8 +125,7 @@ const EventEditForm = (props) => {
         <ButtonContainer>
           <FormButton 
             type='button'
-            onClick={handleReset}
-            deleteStyle>          
+            onClick={handleReset}>          
             Reset
           </FormButton>
           <FormButton 
@@ -133,16 +133,20 @@ const EventEditForm = (props) => {
             disabled={!isValid}>
             Save
           </FormButton>
+          </ButtonContainer>
+          <ButtonContainer>
           <FormButton 
             type='button'
-            deleteStyle
-            onClick={onDelete}>          
-            Delete
+            onClick={onClose}>
+            <FontAwesomeIcon icon="chevron-left" /> 
+            Back
           </FormButton>
           <FormButton 
             type='button'
-            onClick={onClose}>          
-            Back
+            deleteStyle
+            onClick={onDelete}>      
+            <FontAwesomeIcon icon="trash" />    
+            Delete
           </FormButton>
         </ButtonContainer>
       </Form>
