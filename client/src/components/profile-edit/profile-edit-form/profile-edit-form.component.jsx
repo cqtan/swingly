@@ -6,7 +6,7 @@ import {
 import { Form } from 'formik';
 import TextField from '../../../ui/form-elements/text-field/text-field.component';
 import FormButton from '../../../ui/form-elements/form-button/form-button.component';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ProfileEditForm = (props) => {
   const {
@@ -16,7 +16,9 @@ const ProfileEditForm = (props) => {
     isValid,
     handleReset,
     handleChange,
-    setFieldTouched
+    setFieldTouched,
+    onClose,
+    confirmDelete
   } = props;
   
   const onChange = (inputLabel, event) => {
@@ -54,14 +56,29 @@ const ProfileEditForm = (props) => {
           />
           <ButtonContainer>
             <FormButton 
+              type='button'
+              onClick={handleReset}>          
+              Reset
+            </FormButton>
+            <FormButton 
               type='submit'
               disabled={!isValid}>
               Save
             </FormButton>
+          </ButtonContainer>
+          <ButtonContainer>
             <FormButton 
-              type='button'
-              onClick={handleReset}>          
-              Reset
+              onClick={onClose}
+              type="button">
+              <FontAwesomeIcon icon="chevron-left" />
+              Back
+            </FormButton>
+            <FormButton 
+              onClick={confirmDelete}
+              type="button" 
+              deleteStyle>
+              <FontAwesomeIcon icon="user-slash" />
+              Delete
             </FormButton>
           </ButtonContainer>
         </Form>

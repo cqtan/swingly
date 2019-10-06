@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import {
   ProfileEditContainer,
-  ButtonContainer,
-  ProfileEditButton
 } from "./profile-edit.styles";
 import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import ProfileEditFrom from "./profile-edit-form/profile-edit-form.component";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Backdrop from "../../ui/backdrop/backdrop.component";
 import { editUser, deleteUser } from "../../redux/user/user.actions";
 import Modal from "../../ui/modal/modal.component";
@@ -50,18 +47,8 @@ const ProfileEdit = props => {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
-            render={formikBag => <ProfileEditFrom {...formikBag} />}
+            render={formikBag => <ProfileEditFrom {...formikBag} onClose={onClose} confirmDelete={() => setDeleteOpen(true) }/>}
           />
-          <ButtonContainer>
-            <ProfileEditButton onClick={onClose}>
-              <FontAwesomeIcon icon="chevron-left" />
-              Back
-            </ProfileEditButton>
-            <ProfileEditButton onClick={() => setDeleteOpen(true)} deleteStyle>
-              <FontAwesomeIcon icon="user-slash" />
-              Delete
-            </ProfileEditButton>
-          </ButtonContainer>
         </ProfileEditContainer>
         <ConfirmDelete
           isOpen={isDeleteOpen}
