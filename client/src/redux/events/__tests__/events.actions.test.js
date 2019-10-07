@@ -2,7 +2,11 @@ import {
   fetchEvents,
   setEventGuest,
   deleteEventGuest,
-  createEvent
+  createEvent,
+  editEvent,
+  deleteEvent,
+  setGuestFilter,
+  setHostFilter
 } from '../events.actions';
 import {
   firestore,
@@ -10,6 +14,7 @@ import {
 } from '../../../firebase/firebase.utils';
 import * as firebaseUtils from "../../../firebase/firebase.utils";
 import * as eventsUtils from '../events.utils';
+import axios from 'axios';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { EventsActionTypes } from '../events.types';
@@ -27,29 +32,25 @@ describe('Events Actions', () => {
   describe('fetchEvents', () => {
     let mockEventsSnap = null;
     let mockCollection = null;
+    let mockRes = null;
+    let mockFormatMockEvents = null;
     let mockGetEnvironment = firebaseUtils.getEnvironment();
-    const mockOrderedCollection = { get: () => mockEventsSnap }
+    const mockOrderedCollection = { get: () => mockEventsSnap };
 
     const applyMocks = () => {
       jest.spyOn(firestore, 'collection').mockImplementation(() => mockCollection);
       jest.spyOn(eventsUtils, 'eventsToObject').mockImplementation((events) => events);
+      jest.spyOn(eventsUtils, "formatMockEvents").mockImplementation(mockFormatMockEvents);
       jest.spyOn(firebaseUtils, "getEnvironment").mockImplementation(() => mockGetEnvironment);
+      jest.spyOn(axios, "get").mockImplementation(() => mockRes);
     }
 
     afterEach(() => {
       mockEventsSnap = null;
       mockCollection = null;
+      mockRes = null;
+      mockFormatMockEvents = null;
       mockGetEnvironment = firebaseUtils.getEnvironment();
-    });
-
-    it('FETCH_EVENTS_SUCCESS: should fetch all events from DB', async () => {
-      mockEventsSnap = { docs: ['test'] };
-      mockCollection = { orderBy: () => mockOrderedCollection };
-      applyMocks();
-      
-      await store.dispatch(fetchEvents());
-      
-      expect(store.getActions()[1].type).toBe(EventsActionTypes.FETCH_EVENTS_SUCCESS);
     });
   
     it('FETCH_EVENTS_FAILED: should fail on failed to fetch collection snapshot', async () => {
@@ -79,6 +80,28 @@ describe('Events Actions', () => {
 
       expect(store.getActions()[0].type).toBe(EventsActionTypes.EVENTS_IS_LOADING);
       expect(store.getActions()[1].type).toBe(EventsActionTypes.FETCH_EVENTS_FAILED);
+    });
+
+    it("FETCH_EVENTS_FAILED: should fail to format events fetched for dev environemnt", async () => {
+      mockGetEnvironment = "development";
+      mockRes = { data: null };
+      mockFormatMockEvents = () => { throw Error("test_message") };
+      applyMocks();
+
+      await store.dispatch(fetchEvents());
+
+      expect(store.getActions()[1].type).toBe(EventsActionTypes.FETCH_EVENTS_FAILED);
+    });
+
+    it('FETCH_EVENTS_SUCCESS: should fetch all events from DB', async () => {
+      mockGetEnvironment = "test";
+      mockEventsSnap = { docs: ['test'] };
+      mockCollection = { orderBy: () => mockOrderedCollection };
+      applyMocks();
+      
+      await store.dispatch(fetchEvents());
+      
+      expect(store.getActions()[1].type).toBe(EventsActionTypes.FETCH_EVENTS_SUCCESS);
     });
   });
 
@@ -288,7 +311,134 @@ describe('Events Actions', () => {
         event: mockExpected
       });
     });
-
   });
 
+  describe("editEvent", () => {
+    let mockEventRef = null;
+    let mockEventSnap = null;
+    let mockBatch = null;
+    let mockParamEvent = null;
+    let mockParamValues = null;
+
+    const applyMocks = () => {
+      jest.spyOn(firestore, "doc").mockImplementation(() => mockEventRef);
+      jest.spyOn(firestore, "batch").mockImplementation(() => mockBatch);
+      jest.spyOn(firebaseUtils, "dateToTimestamp").mockImplementation((date) => date);
+    };
+
+    afterEach(() => {
+      mockEventRef = null;
+      mockEventSnap = null;
+      mockBatch = null;
+      mockParamEvent = null;
+      mockParamValues = null;
+    });
+
+    it("EDIT_EVENT_FAILED: when event does not exist", async () => {
+      mockParamEvent = { id: "1234" };
+      mockParamValues = { name: "asdf" };
+      mockEventSnap = { exists: false };
+      mockEventRef = { get: () => mockEventSnap };
+      applyMocks();
+
+      await store.dispatch(editEvent(mockParamEvent, mockParamValues));
+
+      expect(store.getActions()[0].type).toBe(EventsActionTypes.EDIT_EVENT_FAILED);
+    });
+
+    it("EDIT_EVENT_FAILED: when failing to persist to DB", async () => {
+      mockParamEvent = { id: "1234" };
+      mockParamValues = { name: "asdf" };
+      mockBatch = { 
+        update: () => null,
+        commit: () => { throw Error("test_error") } 
+      };
+      mockEventSnap = { exists: true };
+      mockEventRef = { get: () => mockEventSnap };
+      applyMocks();
+
+      await store.dispatch(editEvent(mockParamEvent, mockParamValues));
+
+      expect(store.getActions()[0].type).toBe(EventsActionTypes.EDIT_EVENT_FAILED);
+    });
+
+    it("EDIT_EVENT_SUCCESS: when payload matches expected", async () => {
+      mockParamEvent = { id: "1234" };
+      mockParamValues = { 
+        name: "event_name",
+        start: new Date('April 1, 2020 01:23:45'),
+        end: new Date('April 1, 2020 01:23:45')
+      };
+      mockBatch = { 
+        update: () => null,
+        commit: () => null 
+      };
+      mockEventSnap = { exists: true };
+      mockEventRef = { get: () => mockEventSnap };
+      const mockExpected = {
+        eventId: mockParamEvent.id,
+        values: mockParamValues
+      }
+      applyMocks();
+
+      await store.dispatch(editEvent(mockParamEvent, mockParamValues));
+
+      expect(store.getActions()[0].type).toBe(EventsActionTypes.EDIT_EVENT_SUCCESS);
+      expect(store.getActions()[0].payload).toEqual(mockExpected);
+    });
+  });
+
+  describe("deleteEvent", () => {
+    let mockParamEventId = null;
+    let mockEventRef = null;
+
+    const applyMocks = () => {
+      jest.spyOn(firestore, "doc").mockImplementation(() => mockEventRef);
+    }
+
+    afterEach(() => {
+      mockParamEventId = null;
+      mockEventRef = null;
+    });
+
+    it("DELETE_EVENT_FAILED: when there is no event to delete", async () => {
+      mockParamEventId = "1234";
+      applyMocks();
+
+      await store.dispatch(deleteEvent(mockParamEventId));
+
+      expect(store.getActions()[0].type).toBe(EventsActionTypes.DELETE_EVENT_FAILED);
+    });
+
+    it("DELETE_EVENT_SUCCESS: when deletion does not error", async () => {
+      mockParamEventId = "1234";
+      mockEventRef = { delete: () => null };
+      applyMocks();
+
+      await store.dispatch(deleteEvent(mockParamEventId));
+
+      expect(store.getActions()[0].type).toBe(EventsActionTypes.DELETE_EVENT_SUCCESS);
+      expect(store.getActions()[0].payload).toEqual(mockParamEventId);
+    });
+  });
+
+  describe("setGuestFilter", () => {
+    it("SET_GUEST_FILTER: should dispatch this action", async () => {
+      const mockParamGuestFilter = "interested";
+      await store.dispatch(setGuestFilter(mockParamGuestFilter));
+      
+      expect(store.getActions()[0].type).toBe(EventsActionTypes.SET_GUEST_FILTER);
+      expect(store.getActions()[0].payload).toBe(mockParamGuestFilter);
+    });
+  });
+
+  describe("setHostFilter", () => {
+    it("SET_HOST_FILTER: should dispatch this action", async () => {
+      const mockParamUserId = "1234";
+      await store.dispatch(setHostFilter(mockParamUserId));
+      
+      expect(store.getActions()[0].type).toBe(EventsActionTypes.SET_HOST_FILTER);
+      expect(store.getActions()[0].payload).toBe(mockParamUserId);
+    });
+  });
 });

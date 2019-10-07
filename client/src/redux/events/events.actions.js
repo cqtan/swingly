@@ -11,27 +11,18 @@ export const fetchEvents = () => async dispatch => {
     if (getEnvironment() === 'development') {
       const res = await axios.get('/api/data/mockevents');
       eventsObj = formatMockEvents(res.data);
-      console.log('Using Local Events Data!', eventsObj);
     } else if (getEnvironment() === 'production' || getEnvironment() === 'test') {
       const eventsSnap = await firestore.collection(`${getEnvironment()}/data/events`).orderBy('start').get();
 
       if (eventsSnap.docs.length) {
         eventsObj = eventsToObject(eventsSnap.docs);
       } else {
-        throw new Error('No Documents found');
+        throw Error('No Documents found');
       }
     } else {
-      throw new Error('Environement not set!');
+      throw Error('Environement not set!');
     }
     
-    // const eventsSnap = await firestore.collection(`${getEnvironment()}/data/events`).orderBy('start').get();
-
-    // if (eventsSnap.docs.length) {
-    //   eventsObj = eventsToObject(eventsSnap.docs);
-    // } else {
-    //   throw new Error('No Documents found');
-    // }
-
     dispatch({
       type: EventsActionTypes.FETCH_EVENTS_SUCCESS,
       payload: eventsObj
@@ -170,12 +161,15 @@ export const editEvent = (event, values) => async dispatch => {
         }
       })
       dispatch(openSnackbar("success", "Event successfully modified!"));
+    } else {
+      throw Error("Event does not exist!");
     }
   } catch (err) {
     dispatch({
       type: EventsActionTypes.EDIT_EVENT_FAILED,
       payload: err
     })
+
     openSnackbar("error", "Event failed to modify!");
   }
 }
