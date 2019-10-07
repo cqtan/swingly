@@ -1,5 +1,5 @@
 import { EventsActionTypes } from './events.types';
-import { firestore, getEnvironment, deleteFieldValue, dateToTimestamp, auth } from '../../firebase/firebase.utils';
+import { firestore, getEnvironment, deleteFieldValue, dateToTimestamp, firebaseService } from '../../firebase/firebase.utils';
 import { openSnackbar } from '../snackbar/snackbar.actions';
 import { eventsToObject, formatMockEvents } from './events.utils';
 import axios from 'axios';
@@ -101,7 +101,7 @@ export const deleteEventGuest = (userId, event) => async dispatch => {
 
 export const createEvent = values => async dispatch => {
   try {
-    const currentUser = await auth.currentUser.uid;
+    const currentUser = firebaseService.auth().currentUser.uid;
     
     const defaultValues = {
       cancelled: false,

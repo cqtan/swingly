@@ -1,10 +1,12 @@
 import {
   fetchEvents,
   setEventGuest,
-  deleteEventGuest
+  deleteEventGuest,
+  createEvent
 } from '../events.actions';
 import {
-  firestore
+  firestore,
+  firebaseService
 } from '../../../firebase/firebase.utils';
 import * as firebaseUtils from "../../../firebase/firebase.utils";
 import * as eventsUtils from '../events.utils';
@@ -189,6 +191,104 @@ describe('Events Actions', () => {
       expect(store.getActions()[0].type).toBe(EventsActionTypes.DELETE_EVENT_GUEST_SUCCESS);
       expect(store.getActions()[0].payload).toEqual(mockExpected);
     });
+  });
+
+  describe("createEvent", () => {
+    let mockCurrentUser = {
+      currentUser: {
+        uid: null
+      }
+    };
+    
+    let mockEventRef = null;
+
+    const applyMocks = () => {
+      jest.spyOn(firebaseService, "auth").mockImplementation(() => mockCurrentUser);
+      jest.spyOn(firebaseUtils, "dateToTimestamp").mockImplementation((date) => date);
+      jest.spyOn(firestore, "collection").mockImplementation(() => mockEventRef);
+    }
+
+    afterEach(() => {
+      mockCurrentUser = {
+        currentUser: {
+          uid: null
+        }
+      };
+      mockEventRef = null;
+    });
+
+    it("CREATE_EVENT_FAILED: when the user is not signed in", async () => {
+      mockCurrentUser = {
+        currentUser: null
+      }
+      applyMocks();
+
+      await store.dispatch(createEvent({ test: "test" }));
+
+      expect(store.getActions()[0].type).toBe(EventsActionTypes.CREATE_EVENT_FAILED);
+    });
+
+    it("CREATE_EVENT_FAILED: when failed to persist to DB", async () => {
+      mockEventRef = {
+        doc: () => ({
+          set: () => { throw Error("error_message") }
+        })
+      }
+      applyMocks();
+
+      await store.dispatch(createEvent({ test: "test" }));
+
+      expect(store.getActions()[0].type).toBe(EventsActionTypes.CREATE_EVENT_FAILED);
+    });
+
+    it("CREATE_EVENT_SUCCESS: when payload matches expected", async () => {      
+      mockCurrentUser = {
+        currentUser: {
+          uid: "test_uid"
+        }
+      }
+
+      mockEventRef = {
+        doc: () => ({
+          id: "event_id",
+          set: () => null
+        })
+      }
+
+      const mockValues = {
+        name: "event_name",
+        start: new Date('April 1, 2020 01:23:45'),
+        end: new Date('April 1, 2020 01:23:45')
+      }
+
+      const currentUser = "test_uid";
+
+      const defaultValues = {
+        cancelled: false,
+        courses: [],
+        guests: { [currentUser]: true },
+        images: [],
+        otherFees: [],
+        type: 'social'
+      }      
+
+      const mockExpected = {
+        id: mockEventRef.doc().id,
+        ...defaultValues,
+        ...mockValues,
+      }
+
+      applyMocks();
+
+      await store.dispatch(createEvent(mockValues));
+
+      expect(store.getActions()[0].type).toBe(EventsActionTypes.CREATE_EVENT_SUCCESS);
+      expect(store.getActions()[0].payload).toEqual({
+        eventId: mockExpected.id,
+        event: mockExpected
+      });
+    });
+
   });
 
 });

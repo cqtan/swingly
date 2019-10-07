@@ -59,6 +59,6 @@ export const getMainHost = () => {
 export const deleteFieldValue = () => firebase.firestore.FieldValue.delete();
 export const dateToTimestamp = firebase.firestore.Timestamp.fromDate;
 export const getCredentials = firebase.auth.EmailAuthProvider.credential;
-
+export const firebaseService = firebase;
 export default firebase;
 
