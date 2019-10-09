@@ -26,6 +26,7 @@
     "npm": "6.9.0"
   },
   "dependencies": {
+    "D": "^1.0.0",
     "concurrently": "^4.1.2",
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
@@ -38,5 +39,8 @@
     "moment": "^2.24.0",
     "nodemon": "^1.19.2",
     "puppeteer": "^1.19.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18"
   }
 }

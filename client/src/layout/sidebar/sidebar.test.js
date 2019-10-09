@@ -1,84 +1,137 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow, mount } from "enzyme";
+import toJson from "enzyme-to-json";
 import ConnectedSidebar, { Sidebar } from './sidebar.component';
 import Root from '../../Root';
 import { MemoryRouter } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+import * as snackBarActions from "../../redux/snackbar/snackbar.actions";
 
 describe('Sidebar component', () => {
-  let wrapper = null;
-  let mockProps = null;
-  let mockSetOpen = null;
-  let mockToggleTheme = null;
-  let mockIsDarkMode = null;
-  let mockCurrentUser = null;
-  let mockOpenSnackbar = null;
-  let mockHistory = null;
+  let mockSetOpen = jest.fn();
+  let mockIsOpen = true;
+  let mockIsDarkMode = false;
+  let mockCurrentUser = "asdf";
+  let mockInitialEntries = "/";
+  let mockOpenSnackbar = jest.fn();
+
+  const mockHistory = createMemoryHistory({ initialEntries: [mockInitialEntries] });
+  const mockProps = {
+    isOpen: mockIsOpen,
+    setOpen: mockSetOpen,
+    currentUser: mockCurrentUser,
+    history: mockHistory,
+    openSnackbar: mockOpenSnackbar
+  };
   
-  beforeEach(() => {
-    mockSetOpen = jest.fn();
-    mockToggleTheme = jest.fn();
-    mockHistory = {
-      location: {
-        pathname: '/'
-      }
-    }
-
-    mockProps = {
-      isOpen: true,
-      setOpen: mockSetOpen,
-      toggleTheme: mockToggleTheme,
-      history: mockHistory
-    };
-
+  const mountComponent = () => {
     const initialState = {
-      themeMode: { darkMode: false }
+      themeMode: { 
+        darkMode: mockIsDarkMode,
+      },
+      user: {
+        currentUser: mockCurrentUser
+      },
     }
     
-    wrapper = mount(
+    return mount(
       <Root initialState={initialState}>
-        <MemoryRouter initialEntries={['/']}>
+        <MemoryRouter initialEntries={[mockInitialEntries]}>
           <ConnectedSidebar {...mockProps} />
         </MemoryRouter>
       </Root>
     );
-  });
+  }
 
   afterEach(() => {
-    wrapper.unmount();
+    mockIsOpen = true;
+    mockIsDarkMode = false;
+    mockCurrentUser = "asdf";
+    mockInitialEntries = "/";
+
+    jest.clearAllMocks();
   });
 
   it('should render the Sidebar component', () => {
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = shallow(<Sidebar {...mockProps} />);
+
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should call the setOpen function on Backdrop click event', () => {
-    wrapper.find('Backdrop').simulate('click');
-    expect(mockSetOpen).toHaveBeenCalled();
+  it("should close the Sidebar on 'All Events' click", () => {
+    const wrapper = mountComponent().findWhere(el => el.text() === "All Events").first();
+
+    wrapper.simulate("click");
+
+    expect(mockSetOpen).toHaveBeenCalledTimes(1);
   });
 
-  it('should call the setOpen function on all SideButton (exept last one) click events.', () => {
-    const sidebarButtons = wrapper.find('SidebarButton');
+  it("should close the Sidebar on 'Create Event' click", () => {
+    const wrapper = mountComponent().findWhere(el => el.text() === "Create Event").first();
 
-    sidebarButtons.forEach(btn => {
-      btn.simulate('click');
-    })
+    wrapper.simulate("click");
 
-    expect(mockSetOpen).toHaveBeenCalledTimes(sidebarButtons.length);     
+    expect(mockSetOpen).toHaveBeenCalledTimes(1);
   });
 
-  it('should call the toggleTheme function on last SideButton click event.', () => {
-    wrapper = shallow(<Sidebar {...mockProps} />);
-    wrapper.find('SidebarButton').last().simulate('click');
-    expect(mockToggleTheme).toHaveBeenCalled();
+  it("should close the Sidebar on 'Users' click", () => {
+    const wrapper = mountComponent().findWhere(el => el.text() === "Users").first();
+
+    wrapper.simulate("click");
+
+    expect(mockSetOpen).toHaveBeenCalledTimes(1);
   });
 
-  it('should change text of theme button from "Light Mode" to "Dark Mode".', () => {
-    const lastButton = wrapper.find('SidebarButton').last();
-    expect(lastButton.text()).toContain('Dark Mode');
+  it("should close the Sidebar on 'About' click", () => {
+    const wrapper = mountComponent().findWhere(el => el.text() === "About").first();
+
+    wrapper.simulate("click");
+
+    expect(mockSetOpen).toHaveBeenCalledTimes(1);
+  });
+
+  it("should close the Sidebar on 'Error Page' click", () => {
+    const wrapper = mountComponent().findWhere(el => el.text() === "Error Page").first();
+
+    wrapper.simulate("click");
+
+    expect(mockSetOpen).toHaveBeenCalledTimes(1);
+  });
+
+  it("should close the Sidebar on Backdrop component click", () => {
+    const backdrop = mountComponent().find("Backdrop");;
+
+    backdrop.simulate('click');    
+
+    expect(mockSetOpen).toHaveBeenCalledTimes(1);
+  });
+
+  it("should change text of theme button from 'Dark Mode' to 'Light Mode'.", () => {
+    const lastButton = mountComponent().findWhere(el => el.text() === "Dark Mode").first();
   
     lastButton.simulate('click');
-    expect(lastButton.text()).toContain('Light Mode');    
-  });
-  
 
+    expect(lastButton.text()).toBe("Light Mode");    
+  });
+
+  it("should call the openSnackbar function when user has not signed in", () => {
+    const mockProps = {
+      currentUser: null,
+      openSnackbar: mockOpenSnackbar,
+      isOpen: mockIsOpen,
+      setOpen: mockSetOpen,
+      history: mockHistory,
+    }
+    const wrapper = shallow(<Sidebar {...mockProps} />);
+    // const component = wrapper.find("SidebarButton").at(1);
+    // const component = wrapper.find("SidebarButton").filterWhere(el => el.prop("data-testid") === "create-event").at(0);
+    const component = wrapper.findWhere(el => el.prop("data-testid") === "create-event").first();
+    // const component = wrapper.findWhere(el => el.text() === "Create Event").first();
+
+    // console.log("comp: ", component.debug());
+    
+    component.simulate("click");    
+
+    expect(mockOpenSnackbar).toHaveBeenCalledTimes(1);
+  });
 });

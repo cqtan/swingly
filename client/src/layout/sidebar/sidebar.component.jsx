@@ -54,8 +54,8 @@ export const Sidebar = props => {
 
   return (
     <>
-      <Backdrop onClick={() => setOpen(false)} isOpen={isOpen} />
-      <SidebarContainer isOpen={isOpen}>
+      <Backdrop onClick={() => setOpen(false)} isOpen={isOpen} data-testid="backdrop" />
+      <SidebarContainer isOpen={isOpen} data-testid="sidebar-container">
         <SidebarHeader>Navigation</SidebarHeader>
         <SidebarButton
           isactive={(history.location.pathname === homeRoute).toString()}
@@ -71,6 +71,7 @@ export const Sidebar = props => {
           onClick={handleLinkClick}
           as={Link}
           to={currentUser ? createEventRoute : history.location.pathname}
+          data-testid="create-event"
         >
           <FontAwesomeIcon icon="calendar-plus" />
           Create Event
