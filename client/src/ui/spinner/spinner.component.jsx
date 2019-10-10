@@ -8,7 +8,7 @@ const Spinner = (props) => {
   const { loading, size } = props;
 
   return (
-    <SpinnerContainer>
+    <SpinnerContainer data-testid="spinner">
       <PropagateLoader 
         sizeUnit={"px"}
         size={size}

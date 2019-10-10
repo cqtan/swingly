@@ -1,70 +1,114 @@
 import React from 'react';
-import { App } from './App';
-import { shallow, mount } from 'enzyme';
+import ConnectedApp, { App } from './App';
+import { render } from "@testing-library/react";
 import Root from '../../Root';
+import * as mockUserActions from "../../redux/user/user.actions";
+import * as mockEventsActions from "../../redux/events/events.actions";
+
+jest.mock("../../redux/user/user.actions", () => {
+  return {
+    setUsers: jest.fn(() =>  () => Promise.resolve(null)),
+    setCurrentUser: jest.fn(() =>  () => Promise.resolve(null)),
+  }
+});
+
+jest.mock("../../redux/events/events.actions", () => {
+  return {
+    fetchEvents: jest.fn(() =>  () => Promise.resolve(null)),
+  }
+});
+
+// jest.mock("../../redux/user/user.actions");
+// jest.mock("../../redux/events/events.actions");
 
 describe('App component', () => {
-  let wrapper;
-  let mockSetCurrentUser = () => undefined;
-  let mockSetUsers = () => undefined;
-  let mockfetchEvents = () => undefined;
+  let mockSnackbar = {
+    type: null,
+    text: null,
+    isOpen: false
+  };
+  let mockIsLoadingUsers = null;
+  let mockIsLoadingEvents = null;
+  let mockIsUsersFinishedLoading = null;
+  let mockIsEventsFinishedLoading = null;
+  let mockProps = null;
 
-  const mountComponent = () => {
-    const mockProps = {
-      snackbar: {},
-      setCurrentUser: mockSetCurrentUser,
-      fetchEvents: mockfetchEvents,
-      setUsers: mockSetUsers
-    };
+  const applyMockProps = () => {
+    mockProps = {
+      setCurrentUser: jest.fn(),
+      setUsers: jest.fn(),
+      fetchEvents: jest.fn(),
+      snackbar: mockSnackbar,
+      isLoadingUsers: mockIsLoadingUsers,
+      isLoadingEvents: mockIsLoadingEvents,
+      isUsersFinishedLoading: mockIsUsersFinishedLoading,
+      isEventsFinishedLoading: mockIsEventsFinishedLoading,
+    }
+  }
 
-    wrapper = mount(
+  const renderComponent = () => {
+    return render(
       <Root>
-        <App {...mockProps} />
+        <ConnectedApp {...mockProps} />
       </Root>
     )
   };
 
   afterEach(() => {
-    mockSetCurrentUser = () => undefined;
-    mockfetchEvents = () => undefined;
-    mockSetUsers = () => undefined;
+    mockSnackbar = {
+      type: null,
+      text: null,
+      isOpen: false
+    };    
+    mockIsLoadingUsers = null;
+    mockIsLoadingEvents = null;
+    mockIsUsersFinishedLoading = null;
+    mockIsEventsFinishedLoading = null;
+
+    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
-  it('should render', () => {
-    const mockProps = {
-      snackbar: {},
-      setCurrentUser: mockSetCurrentUser,
-      fetchEvents: mockfetchEvents
-    };
+  it("should render", () => {
+    applyMockProps();
+    const renderResult = renderComponent();
 
-    wrapper = shallow(<App {...mockProps} /> );
-
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(renderResult).toMatchSnapshot();
   });
 
-  it('should call setCurrentUser on mount only', () => {
-    mockSetCurrentUser = jest.fn();
-    
-    mountComponent();
+  it('should call fetchEvents on mount only', async () => {
+    applyMockProps();
 
-    expect(mockSetCurrentUser).toHaveBeenCalledTimes(1);
+    await renderComponent();
+    
+    expect(mockEventsActions.fetchEvents).toHaveBeenCalledTimes(1);
   });
 
-  xit('should call fetchEvents on mount only', () => {
-    mockfetchEvents = jest.fn();
-    
-    mountComponent();
-    
-    expect(mockfetchEvents).toHaveBeenCalledTimes(1);
+  it('should call setCurrentUser on mount only', async () => {
+    applyMockProps();
+
+    await renderComponent();
+
+    expect(mockUserActions.setCurrentUser).toHaveBeenCalledTimes(1);
   });
 
-  xit('should call setUsers on mount only', () => {
-    mockSetUsers = jest.fn();
+  it('should render the routes section if either user or event data is not currently loading', () => {
+    mockIsLoadingUsers = false;
+    mockIsLoadingEvents = false;
+    mockIsUsersFinishedLoading = true;
+    mockIsEventsFinishedLoading = true;
+    applyMockProps();
+
+    const renderResult = render(<Root><App {...mockProps} /></Root>);    
     
-    mountComponent();
-    
-    expect(mockSetUsers).toHaveBeenCalledTimes(1);
+    expect(renderResult.queryByTestId("routes-section")).not.toBeNull();
   });
+
+  it("should display the Spinner component while loading", () => {
+    applyMockProps();
+
+    const { queryByTestId } = renderComponent();
+
+    expect(queryByTestId("spinner")).not.toBeNull();
+  })
 });
-
-

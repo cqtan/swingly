@@ -14,7 +14,6 @@ import { selectEventsIsLoading, selectIsEventsFinishedLoading } from "../../redu
 import Spinner from "../../ui/spinner/spinner.component";
 import ErrorBoundary from "../error-boundary/error-boundary.component";
 const AboutPage = lazy(() => import("../../pages/about-page/about-page.component"));
-// const ExampleContainer = lazy(() => import("../../pages/example-container/example-container.component"));
 const Profile = lazy(() => import("../../pages/profile/profile.component"));
 const EventsPage = lazy(() => import("../../pages/events-page/events-page.component"));
 const EventEditPage = lazy(() => import("../../pages/event-edit-page/event-edit-page.component"));
@@ -36,7 +35,7 @@ export const App = props => {
 
   const isLoading = isLoadingUsers || isLoadingEvents;
   const isLoaded = isUsersFinishedLoading || isEventsFinishedLoading;
-
+  
   useEffect(() => {
     (async () => {
       await setCurrentUser();
@@ -61,18 +60,20 @@ export const App = props => {
           {isLoading || !isLoaded ? (
             <Spinner isLoading={true} />
           ) : (
-            <Switch>
-              <Suspense fallback={<Spinner isloading={true} />}>
-                <Route path="/about" exact component={AboutPage} />
-                <Route path="/profile" component={Profile} />
-                <Route path="/event-create" exact component={EventCreatePage} />
-                <Route path="/event-edit" component={EventEditPage} />
-                <Route path="/events-agenda" exact component={EventsPage} />
-                <Route path="/users" exact component={UsersPage} />
-                <Route path="/error" exact component={ErrorPage} />              
-                <Route path="/" exact component={EventsPage} />
-              </Suspense>
-            </Switch>
+            <div data-testid="routes-section">
+              <Switch>
+                <Suspense fallback={<Spinner isloading={true} />} >
+                  <Route path="/about" exact component={AboutPage} />
+                  <Route path="/profile" component={Profile} />
+                  <Route path="/event-create" exact component={EventCreatePage} />
+                  <Route path="/event-edit" component={EventEditPage} />
+                  <Route path="/events-agenda" exact component={EventsPage} />
+                  <Route path="/users" exact component={UsersPage} />
+                  <Route path="/error" exact component={ErrorPage} />              
+                  <Route path="/" exact component={EventsPage} />
+                </Suspense>
+              </Switch>
+            </div>
           )}
         </>
       </ErrorBoundary>

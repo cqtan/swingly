@@ -3,7 +3,7 @@ import { render, fireEvent } from "../../test-utils";
 import ConnectedSidebar, { Sidebar } from './sidebar.component';
 import { createMemoryHistory } from 'history';
 
-xdescribe("Sidebar component", () => {
+describe("Sidebar component", () => {
   let mockIsOpen = true;
   let mockSetOpen = jest.fn();
   let mockIsDarkMode = null;
@@ -17,7 +17,6 @@ xdescribe("Sidebar component", () => {
       isOpen: mockIsOpen,
       setOpen: mockSetOpen,
       currentUser: mockCurrentUser,
-      isDarkMode: mockIsDarkMode,
     }
 
     if (withConnectedProps) {
@@ -25,7 +24,9 @@ xdescribe("Sidebar component", () => {
         ...mockProps,
         history: createMemoryHistory({ initialEntries: ["/"] }),
         toggleTheme: mockToggleTheme,
-        openSnackbar: mockOpenSnackbar
+        openSnackbar: mockOpenSnackbar,
+        isDarkMode: mockIsDarkMode,
+        currentUser: mockCurrentUser
       }
     }
   }
