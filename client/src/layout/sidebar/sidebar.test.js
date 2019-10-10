@@ -3,19 +3,15 @@ import { shallow, mount } from "enzyme";
 import toJson from "enzyme-to-json";
 import ConnectedSidebar, { Sidebar } from './sidebar.component';
 import Root from '../../Root';
-import { MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import * as snackBarActions from "../../redux/snackbar/snackbar.actions";
 
 describe('Sidebar component', () => {
   let mockSetOpen = jest.fn();
   let mockIsOpen = true;
-  let mockIsDarkMode = false;
-  let mockCurrentUser = "asdf";
-  let mockInitialEntries = "/";
+  let mockCurrentUser = null;
   let mockOpenSnackbar = jest.fn();
 
-  const mockHistory = createMemoryHistory({ initialEntries: [mockInitialEntries] });
+  const mockHistory = createMemoryHistory({ initialEntries: ["/"] });
   const mockProps = {
     isOpen: mockIsOpen,
     setOpen: mockSetOpen,
@@ -25,29 +21,16 @@ describe('Sidebar component', () => {
   };
   
   const mountComponent = () => {
-    const initialState = {
-      themeMode: { 
-        darkMode: mockIsDarkMode,
-      },
-      user: {
-        currentUser: mockCurrentUser
-      },
-    }
-    
     return mount(
-      <Root initialState={initialState}>
-        <MemoryRouter initialEntries={[mockInitialEntries]}>
-          <ConnectedSidebar {...mockProps} />
-        </MemoryRouter>
+      <Root>
+        <ConnectedSidebar {...mockProps} />
       </Root>
     );
   }
 
   afterEach(() => {
     mockIsOpen = true;
-    mockIsDarkMode = false;
-    mockCurrentUser = "asdf";
-    mockInitialEntries = "/";
+    mockCurrentUser = null;
 
     jest.clearAllMocks();
   });
@@ -107,16 +90,16 @@ describe('Sidebar component', () => {
   });
 
   it("should change text of theme button from 'Dark Mode' to 'Light Mode'.", () => {
-    const lastButton = mountComponent().findWhere(el => el.text() === "Dark Mode").first();
+    const lastButton = mountComponent().findWhere(el => el.text() === "Light Mode").first();
   
     lastButton.simulate('click');
 
-    expect(lastButton.text()).toBe("Light Mode");    
+    expect(lastButton.text()).toBe("Dark Mode");    
   });
 
   it("should call the openSnackbar function when user has not signed in", () => {
     const mockProps = {
-      currentUser: null,
+      currentUser: "test_user",
       openSnackbar: mockOpenSnackbar,
       isOpen: mockIsOpen,
       setOpen: mockSetOpen,
@@ -130,8 +113,8 @@ describe('Sidebar component', () => {
 
     // console.log("comp: ", component.debug());
     
-    component.simulate("click");    
+    component.simulate("click");
 
-    expect(mockOpenSnackbar).toHaveBeenCalledTimes(1);
+    expect(mockOpenSnackbar).toHaveBeenCalledTimes(0);
   });
 });

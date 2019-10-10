@@ -54,7 +54,7 @@ export const Sidebar = props => {
 
   return (
     <>
-      <Backdrop onClick={() => setOpen(false)} isOpen={isOpen} data-testid="backdrop" />
+      <Backdrop onClick={() => setOpen(false)} isOpen={isOpen} />
       <SidebarContainer isOpen={isOpen} data-testid="sidebar-container">
         <SidebarHeader>Navigation</SidebarHeader>
         <SidebarButton

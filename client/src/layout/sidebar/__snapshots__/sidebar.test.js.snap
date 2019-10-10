@@ -3,7 +3,6 @@
 exports[`Sidebar component should render the Sidebar component 1`] = `
 <Fragment>
   <Backdrop
-    data-testid="backdrop"
     isOpen={true}
     onClick={[Function]}
   />
@@ -72,7 +71,7 @@ exports[`Sidebar component should render the Sidebar component 1`] = `
       data-testid="create-event"
       isactive="false"
       onClick={[Function]}
-      to="/event-create"
+      to="/"
     >
       <FontAwesomeIcon
         border={false}
@@ -112,7 +111,7 @@ exports[`Sidebar component should render the Sidebar component 1`] = `
       }
       isactive="false"
       onClick={[Function]}
-      to="/users"
+      to="/"
     >
       <FontAwesomeIcon
         border={false}

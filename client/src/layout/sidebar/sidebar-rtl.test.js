@@ -2,109 +2,119 @@ import React from "react";
 import { render, fireEvent } from "../../test-utils";
 import ConnectedSidebar, { Sidebar } from './sidebar.component';
 import { createMemoryHistory } from 'history';
-import { MemoryRouter } from 'react-router-dom';
 
 xdescribe("Sidebar component", () => {
   let mockIsOpen = true;
   let mockSetOpen = jest.fn();
-  let mockToggleTheme = jest.fn();
   let mockIsDarkMode = null;
   let mockCurrentUser = null;
+  let mockToggleTheme = jest.fn();
   let mockOpenSnackbar = jest.fn();
-  let mockInitialEntries = "/";
-  
+  let mockProps = null;
 
-  // TODO: Use Connected and check if text changed
-  const renderComponent = () => {
-    const mockHistory = createMemoryHistory({ initialEntries: [mockInitialEntries] });
-
-    const mockProps = {
+  const applyMockProps = withConnectedProps => {
+    mockProps = {
       isOpen: mockIsOpen,
       setOpen: mockSetOpen,
-      toggleTheme: mockToggleTheme,
       currentUser: mockCurrentUser,
       isDarkMode: mockIsDarkMode,
-      openSnackbar: mockOpenSnackbar,
-      history: mockHistory
     }
 
-    return render(<ConnectedSidebar {...mockProps} />);
-  };
+    if (withConnectedProps) {
+      mockProps = {
+        ...mockProps,
+        history: createMemoryHistory({ initialEntries: ["/"] }),
+        toggleTheme: mockToggleTheme,
+        openSnackbar: mockOpenSnackbar
+      }
+    }
+  }
 
   afterEach(() => {
     mockIsOpen = true;
     mockIsDarkMode = null;
     mockCurrentUser = null;
-    mockInitialEntries = "/";
 
     jest.clearAllMocks();
   });
 
   it("should render", () => {
-    const renderResult = renderComponent();
+    applyMockProps();
+    const renderResult = render(<ConnectedSidebar  {...mockProps} />);
 
     expect(renderResult).toMatchSnapshot();
   });
 
   it("should close the Sidebar on 'All Events' click", () => {
-    const renderResult = renderComponent();
+    applyMockProps();
+    const { getByText } = render(<ConnectedSidebar  {...mockProps} />);
 
-    fireEvent.click(renderResult.getByText("All Events"));
+    fireEvent.click(getByText("All Events"));
 
     expect(mockSetOpen).toHaveBeenCalledTimes(1);
   });
 
   it("should close the Sidebar on 'Create Event' click", () => {
-    const renderResult = renderComponent();
+    applyMockProps();
+    const { getByText } = render(<ConnectedSidebar  {...mockProps} />);
 
-    fireEvent.click(renderResult.getByText("Create Event"));
+    fireEvent.click(getByText("Create Event"));
 
     expect(mockSetOpen).toHaveBeenCalledTimes(1);
   });
 
   it("should close the Sidebar on 'Users' click", () => {
-    const renderResult = renderComponent();
+    applyMockProps();
+    const { getByText } = render(<ConnectedSidebar  {...mockProps} />);
  
-    fireEvent.click(renderResult.getByText("Users"));
+    fireEvent.click(getByText("Users"));
 
     expect(mockSetOpen).toHaveBeenCalledTimes(1);
   });
 
   it("should close the Sidebar on 'About' click", () => {
-    const renderResult = renderComponent();
+    applyMockProps();
+    const { getByText } = render(<ConnectedSidebar  {...mockProps} />);
 
-    fireEvent.click(renderResult.getByText("About"));
+    fireEvent.click(getByText("About"));
 
     expect(mockSetOpen).toHaveBeenCalledTimes(1);
   });
 
   it("should close the Sidebar on 'Error Page' click", () => {
-    const renderResult = renderComponent();
+    applyMockProps();
+    const { getByText } = render(<ConnectedSidebar  {...mockProps} />);
 
-    fireEvent.click(renderResult.getByText("Error Page"));
+    fireEvent.click(getByText("Error Page"));
 
     expect(mockSetOpen).toHaveBeenCalledTimes(1);
   });
 
-  it("should call the toggleTheme function", () => {
-    mockIsDarkMode = true;
-    const renderResult = renderComponent();
+  it("should set SideBarContainer and Backdrop isOpen property to false", () => {
+    applyMockProps();
+    const { getByTestId } = render(<ConnectedSidebar {...mockProps} />);
 
+    fireEvent.click(getByTestId("backdrop"));
+        
+    expect(mockSetOpen).toHaveBeenCalledTimes(1);
+  });
+
+  it("should change text of theme button from 'Dark Mode' to 'Light Mode'.", () => {
+    applyMockProps();
+    const renderResult = render(<ConnectedSidebar  {...mockProps} />);    
+    
     fireEvent.click(renderResult.getByText("Light Mode"));
 
-    expect(mockToggleTheme).toHaveBeenCalledTimes(1);
+    expect(renderResult.queryByText("Dark Mode")).toBeDefined();
   });
 
-  it("should set SideBarContainer and Backdrop isOpen property to false", () => {
-    const renderResult = renderComponent();
+  it("should not call the openSnackbar function when user has signed in", () => {
+    mockCurrentUser = "test_user";
+    applyMockProps(true);
+    const { getByText } = render(<Sidebar {...mockProps} />);
 
-    const sidebarContainer = renderResult.getByTestId("sidebar-container");
-    const backdrop = renderResult.getByTestId("backdrop");
-    fireEvent.click(backdrop);
+    fireEvent.click(getByText("Create Event"));
         
-    expect(backdrop.getAttribute("isOpen")).toBe(false);
-    expect(sidebarContainer.getAttribute("isOpen")).toBe(false);
+    expect(mockOpenSnackbar).toHaveBeenCalledTimes(0);
   });
-
-
 });
