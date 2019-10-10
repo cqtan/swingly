@@ -9,7 +9,7 @@ Object {
         class="sc-ifAKCX kBgFxs"
         data-testid="backdrop"
       />
-      <div
+      <nav
         class="sc-bwzfXH gQKwuU"
         data-testid="sidebar-container"
       >
@@ -148,7 +148,7 @@ Object {
           </svg>
           Light Mode
         </button>
-      </div>
+      </nav>
     </div>
   </body>,
   "container": <div>
@@ -156,7 +156,7 @@ Object {
       class="sc-ifAKCX kBgFxs"
       data-testid="backdrop"
     />
-    <div
+    <nav
       class="sc-bwzfXH gQKwuU"
       data-testid="sidebar-container"
     >
@@ -295,7 +295,7 @@ Object {
         </svg>
         Light Mode
       </button>
-    </div>
+    </nav>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

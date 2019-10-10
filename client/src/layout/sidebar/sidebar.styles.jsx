@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Button from '../../ui/button/button.component';
 
-export const SidebarContainer = styled.div`
+export const SidebarContainer = styled.nav`
   position: fixed;
   display: flex;
   top: 0;

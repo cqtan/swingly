@@ -59,7 +59,7 @@ const SignIn = props => {
       transName="sign-in"
       title='Login'
       timeout={500}>
-      <SignInContainer>
+      <SignInContainer data-testid="sign-in">
         <TextField
           label="Email Address"
           type="text"

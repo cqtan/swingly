@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Button from '../../ui/button/button.component';
 import { Link } from 'react-router-dom';
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.header`
   position: fixed;
   top: 0;
   left: 0;
