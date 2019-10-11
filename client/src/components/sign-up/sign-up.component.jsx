@@ -53,7 +53,7 @@ const SignUp = props => {
       isOpen={isOpen}
       transName="sign-up" 
       title="Register">
-      <SignUpContainer>
+      <SignUpContainer data-testid="sign-up">
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}

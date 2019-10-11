@@ -33,22 +33,35 @@ describe('Header', () => {
     it("should display the navigation Button instead", () => {
       applyMockProps();
       const { container } = render(<ConnectedHeader {...mockProps} />);
-      expect(container.querySelector("[aria-label='navigation button']")).not.toBeNull();
+      expect(container.querySelector("[aria-label='navigation button']")).toBeTruthy();
     });
 
-    it("should display a 'Back' Button instead of", () => {
+    it("should display a 'Back' Button instead of navigation button", () => {
       initialEntries = "/profile";
       applyMockProps();
-      const { getByText } = render(
+      const { queryByText } = render(
         <MemoryRouter initialEntries={[initialEntries]}>
           <ConnectedHeader {...mockProps} />
         </MemoryRouter>
       );
       
-      expect(getByText("Back")).not.toBeNull();
+      expect(queryByText("Back")).toBeTruthy();
     });
 
-    it("should display a 'Back' Button instead of", () => {
+    it("should not display a 'Back' Button if user matches url query", () => {
+      currentUserMock = "test_user";
+      initialEntries = "/profile?user_id=test_user";
+      applyMockProps();
+      const { queryByText } = render(
+        <MemoryRouter initialEntries={[initialEntries]}>
+          <Header {...mockProps} />
+        </MemoryRouter>
+      );
+      
+      expect(queryByText("Back")).toBeFalsy();
+    });
+
+    it("should display a 'Events' Button instead of navigation button", () => {
       initialEntries = "/event-edit";
       applyMockProps();
       const { getByText } = render(
@@ -57,7 +70,7 @@ describe('Header', () => {
         </MemoryRouter>
       );
       
-      expect(getByText("Events")).not.toBeNull();
+      expect(getByText("Events")).toBeTruthy();
     });
 
     it("should set navigation state to open on navigation button click", () => {
@@ -84,7 +97,7 @@ describe('Header', () => {
       applyMockProps();
       const { getByAltText } = render(<Header {...mockProps} />);
   
-      expect(getByAltText("profile image")).not.toBeNull();
+      expect(getByAltText("profile image")).toBeTruthy();
     });
 
     it("should display the Sign in component on click if user has not signed in", () => {
@@ -108,5 +121,26 @@ describe('Header', () => {
       expect(queryByTestId("sign-in")).toBeFalsy();
     });
 
+    it("should display the register component", () => {
+      applyMockProps();
+      const { container, queryByTestId, getByText } = render(<Header {...mockProps} />);
+      const profileButton = container.querySelector("[aria-label='profile button']"); 
+
+      fireEvent.click(profileButton);
+      fireEvent.click(getByText("Register"));
+
+      expect(queryByTestId("sign-up")).toBeTruthy();
+    });
+
+    it("should sign-up components on backdrop click", () => {
+      applyMockProps();
+      const { container, queryByTestId, getByTestId } = render(<Header {...mockProps} />);
+      const profileButton = container.querySelector("[aria-label='profile button']"); 
+
+      fireEvent.click(profileButton);
+      fireEvent.click(getByTestId("backdrop"));
+
+      expect(queryByTestId("sign-up")).toBeFalsy();
+    });
   });
 });
