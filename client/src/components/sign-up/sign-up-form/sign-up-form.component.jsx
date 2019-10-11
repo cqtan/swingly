@@ -36,7 +36,7 @@ const SignUpForm = (props) => {
 
   return (
     <SignUpFormContainer>
-      <Form>
+      <Form data-testid="sign-up-form">
         <TextField
           name='username'
           label='Username'
@@ -77,9 +77,10 @@ const SignUpForm = (props) => {
         />
         <ButtonConatainer>
           <SignUpButton
-            type='submit'
+            type='button'
             onClick={handleSubmit}
-            disabled={!isValid}>
+            disabled={!isValid}
+            data-testid="submit-button">
             Submit
           </SignUpButton>
           <SignUpButton 

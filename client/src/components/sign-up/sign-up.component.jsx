@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signUp } from "../../redux/user/user.actions";
 import Modal from "../../ui/modal/modal.component";
 
-const SignUp = props => {
+export const SignUp = props => {
   const { isOpen, setOpen, openSignIn, signUp } = props;
 
   const handleOpenSignIn = () => {
@@ -20,10 +20,9 @@ const SignUp = props => {
     openSignIn(true);
   };
 
-  const onSubmit = values => {
-    console.log("submit: ", values);
-    signUp(values);
+  const onSubmit = (values) => {
     handleOpenSignIn();
+    signUp(values);    
   };
 
   const initialValues = {
@@ -57,6 +56,7 @@ const SignUp = props => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
+          onSubmit={onSubmit}
           render={formikBag => <SignUpForm {...formikBag} onSubmit={onSubmit} />}
         />
         <ButtonConatainer>

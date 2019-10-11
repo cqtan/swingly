@@ -1,0 +1,358 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sign up component Rendering the component should render 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="sc-VigVT hoGEhl"
+        direction=""
+      >
+        <div
+          class="sc-jTzLTM hlpuqw"
+        >
+          Register
+        </div>
+        <div
+          class="sc-htpNat IDNFI"
+          data-testid="sign-up"
+        >
+          <div
+            class="sc-EHOje edRFCv"
+          >
+            <form
+              data-testid="sign-up-form"
+            >
+              <div
+                class="sc-htoDjs jwAKoT"
+              >
+                <input
+                  class="sc-iwsKbI ffGOFQ"
+                  id="username"
+                  label="Username"
+                  name="username"
+                  value=""
+                />
+                <label
+                  class="sc-dnqmqq dIwYQT"
+                  for="username"
+                >
+                  Username
+                </label>
+                <div
+                  class="sc-gqjmRU dNgXmx"
+                />
+              </div>
+              <div
+                class="sc-htoDjs jwAKoT"
+              >
+                <input
+                  class="sc-iwsKbI ffGOFQ"
+                  id="email"
+                  label="Email"
+                  name="email"
+                  value=""
+                />
+                <label
+                  class="sc-dnqmqq dIwYQT"
+                  for="email"
+                >
+                  Email
+                </label>
+                <div
+                  class="sc-gqjmRU dNgXmx"
+                />
+              </div>
+              <div
+                class="sc-htoDjs jwAKoT"
+              >
+                <input
+                  class="sc-iwsKbI irafpo"
+                  id="password"
+                  label="Password"
+                  name="password"
+                  type="password"
+                  value=""
+                />
+                <label
+                  class="sc-dnqmqq dIwYQT"
+                  for="password"
+                >
+                  Password
+                </label>
+                <div
+                  class="sc-gqjmRU dNgXmx"
+                />
+              </div>
+              <div
+                class="sc-htoDjs jwAKoT"
+              >
+                <input
+                  class="sc-iwsKbI irafpo"
+                  id="confirmPassword"
+                  label="Confirm Password"
+                  name="confirmPassword"
+                  type="password"
+                  value=""
+                />
+                <label
+                  class="sc-dnqmqq dIwYQT"
+                  for="confirmPassword"
+                >
+                  Confirm Password
+                </label>
+                <div
+                  class="sc-gqjmRU dNgXmx"
+                />
+              </div>
+              <div
+                class="sc-bZQynM haTaOE"
+              >
+                <button
+                  class="sc-bdVaJa ickuCg sc-bwzfXH dEZBwm sc-gzVnrw kWMqOl"
+                  data-testid="submit-button"
+                  disabled=""
+                  type="button"
+                >
+                  Submit
+                </button>
+                <button
+                  class="sc-bdVaJa jsLivE sc-bwzfXH dEZBwm sc-gzVnrw kWMqOl"
+                  type="button"
+                >
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div>
+          <div
+            class="sc-ifAKCX kgfWhF"
+          >
+            <button
+              class="sc-bdVaJa jsLivE sc-bwzfXH dEZBwm sc-bxivhb lcNDmV"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-chevron-left fa-w-10 fa-null fa-rotate-null fa-pull-null "
+                data-icon="chevron-left"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                viewBox="0 0 320 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"
+                  fill="currentColor"
+                />
+              </svg>
+              Back
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="sc-VigVT hoGEhl"
+      direction=""
+    >
+      <div
+        class="sc-jTzLTM hlpuqw"
+      >
+        Register
+      </div>
+      <div
+        class="sc-htpNat IDNFI"
+        data-testid="sign-up"
+      >
+        <div
+          class="sc-EHOje edRFCv"
+        >
+          <form
+            data-testid="sign-up-form"
+          >
+            <div
+              class="sc-htoDjs jwAKoT"
+            >
+              <input
+                class="sc-iwsKbI ffGOFQ"
+                id="username"
+                label="Username"
+                name="username"
+                value=""
+              />
+              <label
+                class="sc-dnqmqq dIwYQT"
+                for="username"
+              >
+                Username
+              </label>
+              <div
+                class="sc-gqjmRU dNgXmx"
+              />
+            </div>
+            <div
+              class="sc-htoDjs jwAKoT"
+            >
+              <input
+                class="sc-iwsKbI ffGOFQ"
+                id="email"
+                label="Email"
+                name="email"
+                value=""
+              />
+              <label
+                class="sc-dnqmqq dIwYQT"
+                for="email"
+              >
+                Email
+              </label>
+              <div
+                class="sc-gqjmRU dNgXmx"
+              />
+            </div>
+            <div
+              class="sc-htoDjs jwAKoT"
+            >
+              <input
+                class="sc-iwsKbI irafpo"
+                id="password"
+                label="Password"
+                name="password"
+                type="password"
+                value=""
+              />
+              <label
+                class="sc-dnqmqq dIwYQT"
+                for="password"
+              >
+                Password
+              </label>
+              <div
+                class="sc-gqjmRU dNgXmx"
+              />
+            </div>
+            <div
+              class="sc-htoDjs jwAKoT"
+            >
+              <input
+                class="sc-iwsKbI irafpo"
+                id="confirmPassword"
+                label="Confirm Password"
+                name="confirmPassword"
+                type="password"
+                value=""
+              />
+              <label
+                class="sc-dnqmqq dIwYQT"
+                for="confirmPassword"
+              >
+                Confirm Password
+              </label>
+              <div
+                class="sc-gqjmRU dNgXmx"
+              />
+            </div>
+            <div
+              class="sc-bZQynM haTaOE"
+            >
+              <button
+                class="sc-bdVaJa ickuCg sc-bwzfXH dEZBwm sc-gzVnrw kWMqOl"
+                data-testid="submit-button"
+                disabled=""
+                type="button"
+              >
+                Submit
+              </button>
+              <button
+                class="sc-bdVaJa jsLivE sc-bwzfXH dEZBwm sc-gzVnrw kWMqOl"
+                type="button"
+              >
+                Reset
+              </button>
+            </div>
+          </form>
+        </div>
+        <div
+          class="sc-ifAKCX kgfWhF"
+        >
+          <button
+            class="sc-bdVaJa jsLivE sc-bwzfXH dEZBwm sc-bxivhb lcNDmV"
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-chevron-left fa-w-10 fa-null fa-rotate-null fa-pull-null "
+              data-icon="chevron-left"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 320 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"
+                fill="currentColor"
+              />
+            </svg>
+            Back
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

@@ -12,10 +12,10 @@ const TextField = (props) => {
   return (
     <TextFieldContainer>
       { textarea ?
-        <TextAreaInput {...props} /> :
-        <TextFieldInput {...props} />
+        <TextAreaInput {...props} id={props.name}/> :
+        <TextFieldInput {...props} id={props.name}/>
       }
-      <TextFieldLabel>{label}</TextFieldLabel>
+      <TextFieldLabel htmlFor={props.name}>{label}</TextFieldLabel>
       <HelperText>{helperText}</HelperText>
     </TextFieldContainer>
   );
