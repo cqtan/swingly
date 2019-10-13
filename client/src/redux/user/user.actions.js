@@ -5,7 +5,13 @@ import {
   signInWithGithub,
   signInWithGoogle
 } from "./user.utils";
-import { auth, firestore, getEnvironment, getCredentials, deleteFieldValue } from "../../firebase/firebase.utils";
+import {
+  auth,
+  firestore,
+  getEnvironment,
+  getCredentials,
+  deleteFieldValue
+} from "../../firebase/firebase.utils";
 import { openSnackbar } from "../snackbar/snackbar.actions";
 import { fetchUsers } from "./user.utils";
 
@@ -16,7 +22,9 @@ const getUserWithProvider = async signInMethod => {
     case "github":
       return await signInWithGithub();
     default:
-      return Error("Invalid provider!");
+      return () => {
+        throw Error("Invalid provider!");
+      };
   }
 };
 
@@ -45,7 +53,7 @@ export const setCurrentUser = () => async dispatch => {
   }
 };
 
-export const setUsers = () => async (dispatch) => {
+export const setUsers = () => async dispatch => {
   try {
     dispatch({ type: UserActionTypes.USER_LOADING });
 
@@ -59,7 +67,7 @@ export const setUsers = () => async (dispatch) => {
     } else {
       dispatch({
         type: UserActionTypes.SET_USERS_FAILED,
-        payload: 'No users in DB!'
+        payload: "No users in DB!"
       });
     }
   } catch (error) {
@@ -69,7 +77,7 @@ export const setUsers = () => async (dispatch) => {
     });
     dispatch(openSnackbar("error", "Fetch Users failed!"));
   }
-}
+};
 
 export const signInWithProvider = signInMethod => async dispatch => {
   try {
@@ -112,7 +120,9 @@ export const signOut = () => async dispatch => {
 };
 
 export const signUp = values => async dispatch => {
-  const usersSnap = await firestore.collection(`${getEnvironment()}/data/users`).get();
+  const usersSnap = await firestore
+    .collection(`${getEnvironment()}/data/users`)
+    .get();
   let userExists = null;
   if (usersSnap) {
     usersSnap.forEach(doc => {
@@ -201,7 +211,9 @@ export const editUser = (values, currentUser) => async dispatch => {
   }
 
   if (Object.keys(newValues).length !== 0) {
-    const userRef = firestore.doc(`${getEnvironment()}/data/users/${currentUser.id}`);
+    const userRef = firestore.doc(
+      `${getEnvironment()}/data/users/${currentUser.id}`
+    );
     const userSnap = await userRef.get();
 
     if (userSnap.exists) {
@@ -237,25 +249,29 @@ export const editUser = (values, currentUser) => async dispatch => {
 
 export const deleteUser = password => async dispatch => {
   const user = await auth.currentUser;
-  
+
   if (user) {
     try {
       const credential = await getCredentials(auth.currentUser.email, password);
       await auth.currentUser.reauthenticateWithCredential(credential);
-      await firestore.doc(`${getEnvironment()}/data/users/${user.uid}`).delete();
+      await firestore
+        .doc(`${getEnvironment()}/data/users/${user.uid}`)
+        .delete();
       await auth.currentUser.delete();
       await auth.signOut();
       dispatch({ type: UserActionTypes.DELETE_SUCCESS });
       dispatch(openSnackbar("success", "Delete successful!"));
     } catch (error) {
-      dispatch({ 
+      dispatch({
         type: UserActionTypes.DELETE_FAILED,
         payload: error
       });
-      dispatch(openSnackbar("error", "Deletion failed! Please check your password"));
+      dispatch(
+        openSnackbar("error", "Deletion failed! Please check your password")
+      );
     }
   } else {
-    dispatch({ type: UserActionTypes.DELETE_FAILED });    
+    dispatch({ type: UserActionTypes.DELETE_FAILED });
     dispatch(openSnackbar("error", "Deletion failed! User not signed in"));
   }
 };
@@ -263,7 +279,9 @@ export const deleteUser = password => async dispatch => {
 export const followUser = userId => async dispatch => {
   try {
     const currentUser = auth.currentUser.uid;
-    const userRef = firestore.doc(`${getEnvironment()}/data/users/${currentUser}`);
+    const userRef = firestore.doc(
+      `${getEnvironment()}/data/users/${currentUser}`
+    );
     const userSnap = await userRef.get();
 
     if (userSnap.exists) {
@@ -282,12 +300,14 @@ export const followUser = userId => async dispatch => {
       payload: err
     });
   }
-}
+};
 
 export const unfollowUser = userId => async dispatch => {
   try {
     const currentUser = auth.currentUser.uid;
-    const userRef = firestore.doc(`${getEnvironment()}/data/users/${currentUser}`);
+    const userRef = firestore.doc(
+      `${getEnvironment()}/data/users/${currentUser}`
+    );
     const userSnap = await userRef.get();
 
     if (userSnap.exists) {
@@ -306,7 +326,7 @@ export const unfollowUser = userId => async dispatch => {
       payload: err
     });
   }
-}
+};
 
 export const toggleFollowedUser = userId => async dispatch => {
   try {
@@ -320,4 +340,4 @@ export const toggleFollowedUser = userId => async dispatch => {
       payload: err
     });
   }
-}
+};
