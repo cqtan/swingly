@@ -6,6 +6,8 @@
 ![DavidDependencies](https://img.shields.io/david/CouchCat/swingly)
 ![LicenseMIT](https://img.shields.io/github/license/CouchCat/swingly?color=brightgreen)
 
+![gh-showcase-swingly-banner2](https://user-images.githubusercontent.com/33485290/65823485-7be2bd00-e257-11e9-910c-2a934b5a308f.png)
+
 ## Quick Notes
 
 * **Live Demo**: <https://swingly.herokuapp.com/>
